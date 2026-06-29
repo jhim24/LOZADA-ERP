@@ -880,3 +880,96 @@ font-weight:700;
 color:#64748B;
 
 }
+/* ===========================
+   KITCHEN DISPLAY
+=========================== */
+
+.kitchen-section{
+
+margin-top:25px;
+
+}
+
+.kitchen-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+}
+
+.kitchen-order{
+
+background:#F8FAFC;
+
+border-radius:15px;
+
+padding:18px;
+
+border-left:6px solid #2563EB;
+
+}
+
+.kitchen-order.preparing{
+
+border-color:#F59E0B;
+
+}
+
+.kitchen-order.cooking{
+
+border-color:#2563EB;
+
+}
+
+.kitchen-order.ready{
+
+border-color:#10B981;
+
+}
+
+.kitchen-order.waiting{
+
+border-color:#EF4444;
+
+}
+
+.order-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:10px;
+
+}
+
+.kitchen-order ul{
+
+margin:15px 0;
+
+padding-left:20px;
+
+}
+
+.kitchen-order li{
+
+margin-bottom:6px;
+
+}
+
+.timer{
+
+margin-top:15px;
+
+font-weight:700;
+
+text-align:right;
+
+color:#1E3A8A;
+
+}

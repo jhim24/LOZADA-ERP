@@ -1,26 +1,24 @@
-// SALES CHART
+const sales=document.getElementById("salesChart");
 
-const salesChart = document.getElementById('salesChart');
+if(sales){
 
-if(salesChart){
+new Chart(sales,{
 
-new Chart(salesChart,{
-
-type:'line',
+type:"line",
 
 data:{
 
-labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
 
 datasets:[{
 
-label:'Sales',
+label:"Sales",
 
-data:[12000,18500,14000,22000,26000,31000,45680],
+data:[12000,18000,15000,24000,29000,34000,45680],
 
-borderColor:'#2563EB',
+borderColor:"#2563EB",
 
-backgroundColor:'rgba(37,99,235,.15)',
+backgroundColor:"rgba(37,99,235,.15)",
 
 fill:true,
 
@@ -50,43 +48,31 @@ display:false
 
 }
 
-// CATEGORY CHART
+const category=document.getElementById("categoryChart");
 
-const categoryChart=document.getElementById('categoryChart');
+if(category){
 
-if(categoryChart){
+new Chart(category,{
 
-new Chart(categoryChart,{
-
-type:'doughnut',
+type:"doughnut",
 
 data:{
 
-labels:[
-
-'Meals',
-
-'Drinks',
-
-'Desserts',
-
-'Snacks'
-
-],
+labels:["Meals","Drinks","Desserts","Snacks"],
 
 datasets:[{
 
-data:[45,25,15,15],
+data:[45,25,18,12],
 
 backgroundColor:[
 
-'#2563EB',
+"#2563EB",
 
-'#F59E0B',
+"#10B981",
 
-'#10B981',
+"#F59E0B",
 
-'#EF4444'
+"#EF4444"
 
 ]
 
@@ -96,17 +82,7 @@ backgroundColor:[
 
 options:{
 
-responsive:true,
-
-plugins:{
-
-legend:{
-
-position:'bottom'
-
-}
-
-}
+responsive:true
 
 }
 

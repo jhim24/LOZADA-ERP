@@ -1,149 +1,43 @@
-/* ===========================
-   NAVBAR V2
-=========================== */
-
-.topbar{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-background:#fff;
-
-padding:20px 25px;
-
-border-radius:18px;
-
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-margin-bottom:25px;
-
-}
-
-.top-center{
-
-flex:1;
-
-display:flex;
-
-justify-content:center;
-
-padding:0 30px;
-
-}
-
-.search-box{
-
-width:100%;
-
-max-width:420px;
-
-display:flex;
-
-align-items:center;
-
-background:#F1F5F9;
-
-padding:12px 18px;
-
-border-radius:12px;
-
-}
-
-.search-box input{
-
-width:100%;
-
-border:none;
-
-background:none;
-
-outline:none;
-
-margin-left:10px;
-
-}
-
-.icon-btn{
-
-position:relative;
-
-width:45px;
-
-height:45px;
-
-border:none;
-
-background:#F8FAFC;
-
-border-radius:50%;
-
-margin-left:10px;
-
-cursor:pointer;
-
-}
-
-.badge-count{
-
-position:absolute;
-
-top:-4px;
-
-right:-2px;
-
-background:#EF4444;
-
-color:white;
-
-font-size:10px;
-
-padding:2px 6px;
-
-border-radius:50px;
-
-}
-
-.profile{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-margin-left:15px;
-
-}
-
-.profile img{
-
-width:45px;
-
-height:45px;
-
-border-radius:50%;
-
-}
-
-.page-title{
-
-margin-bottom:25px;
-
-}
-
-.page-title h2{
-
-font-weight:700;
-
-margin-bottom:5px;
-
-}
-
-.page-title p{
-
-color:#64748B;
-
-}
+<section class="cards-grid">
+
+    <div class="dashboard-card">
+        <div class="card-icon blue">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+        <div class="card-info">
+            <small>TODAY'S SALES</small>
+            <h3>₱45,680</h3>
+        </div>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="card-icon green">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+        <div class="card-info">
+            <small>ORDERS TODAY</small>
+            <h3>128</h3>
+        </div>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="card-icon orange">
+            <i class="fa-solid fa-chart-line"></i>
+        </div>
+        <div class="card-info">
+            <small>PROFIT</small>
+            <h3>₱18,750</h3>
+        </div>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="card-icon red">
+            <i class="fa-solid fa-box"></i>
+        </div>
+        <div class="card-info">
+            <small>LOW STOCK</small>
+            <h3>15</h3>
+        </div>
+    </div>
+
+</section>

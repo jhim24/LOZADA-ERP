@@ -1,294 +1,269 @@
 /* ==========================================
    LOZADA ERP
-   Dashboard CSS Part 1
+   Dashboard CSS v2
 ========================================== */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"Poppins",sans-serif;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
-    background:#f5f7fb;
-    color:#1f2937;
+    background:#F5F7FB;
+    color:#1F2937;
 }
 
-/* WRAPPER */
+/* ===========================
+   LAYOUT
+=========================== */
 
 .wrapper{
     display:flex;
-    width:100%;
     min-height:100vh;
 }
 
-/* SIDEBAR */
+/* ===========================
+   SIDEBAR
+=========================== */
 
 .sidebar{
-
     width:280px;
-
     background:#0F172A;
-
     color:#fff;
-
     position:fixed;
-
     top:0;
-
     left:0;
-
     bottom:0;
-
     overflow-y:auto;
-
-    transition:.3s;
-
 }
 
 .logo{
-
+    padding:30px 20px;
     text-align:center;
-
-    padding:30px;
-
     border-bottom:1px solid rgba(255,255,255,.08);
-
 }
 
 .logo i{
-
-    font-size:60px;
-
+    font-size:55px;
     color:#F59E0B;
-
+    margin-bottom:15px;
 }
 
 .logo h2{
-
-    margin-top:15px;
-
     font-size:28px;
-
     font-weight:700;
-
 }
 
 .logo small{
-
     color:#94A3B8;
-
 }
 
+/* ===========================
+   MENU
+=========================== */
+
 .menu{
-
     list-style:none;
-
     padding:20px;
-
 }
 
 .menu li{
-
     margin-bottom:10px;
-
 }
 
 .menu li a{
-
     display:flex;
-
     align-items:center;
-
     gap:15px;
-
-    padding:15px 18px;
-
-    color:white;
-
     text-decoration:none;
-
+    color:#fff;
+    padding:15px 18px;
     border-radius:12px;
-
     transition:.3s;
-
 }
 
 .menu li a:hover{
-
     background:#1E3A8A;
-
 }
 
 .menu li.active a{
-
     background:#F59E0B;
-
     color:#111827;
-
     font-weight:600;
-
 }
 
-.menu i{
-
-    width:24px;
-
+.menu li i{
+    width:22px;
     text-align:center;
-
 }
 
-/* MAIN */
+/* ===========================
+   MAIN
+=========================== */
 
 .main{
-
     margin-left:280px;
-
     width:calc(100% - 280px);
-
     padding:30px;
-
 }
 
-/* NAVBAR */
+/* ===========================
+   TOPBAR
+=========================== */
 
 .topbar{
-
-    background:white;
-
+    height:75px;
+    background:#fff;
     border-radius:18px;
-
-    padding:18px 25px;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
+    padding:0 25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
 .top-left{
-
     display:flex;
-
     align-items:center;
-
     gap:20px;
-
 }
 
 .menu-btn{
-
     border:none;
-
     background:none;
-
     font-size:22px;
-
     cursor:pointer;
+}
 
+.top-left h3{
+    margin:0;
+}
+
+.top-left small{
+    color:#6B7280;
 }
 
 .top-right{
-
     display:flex;
-
     align-items:center;
-
-    gap:20px;
-
+    gap:15px;
 }
 
 .search-box{
-
     display:flex;
-
     align-items:center;
-
-    background:#F4F7FB;
-
+    background:#EEF2F7;
     border-radius:12px;
-
     padding:10px 15px;
-
 }
 
 .search-box input{
-
     border:none;
-
     background:none;
-
     outline:none;
-
     margin-left:10px;
-
+    width:180px;
 }
 
 .icon-btn{
-
     width:45px;
-
     height:45px;
-
     border:none;
-
-    background:#F4F7FB;
-
+    background:#EEF2F7;
     border-radius:50%;
-
     cursor:pointer;
+    transition:.3s;
+}
 
+.icon-btn:hover{
+    background:#1E3A8A;
+    color:#fff;
 }
 
 .profile{
-
     display:flex;
-
     align-items:center;
-
     gap:12px;
-
 }
 
 .profile img{
-
     width:45px;
-
     height:45px;
-
     border-radius:50%;
-
 }
 
 .profile small{
-
     display:block;
-
-    color:#64748B;
-
+    color:#6B7280;
 }
 
-/* PAGE TITLE */
+/* ===========================
+   PAGE TITLE
+=========================== */
 
 .page-title{
-
-    margin-top:25px;
-
+    margin-top:30px;
 }
 
 .page-title h2{
-
     font-weight:700;
-
 }
 
 .page-title p{
+    color:#6B7280;
+}
 
-    color:#64748B;
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+.sidebar{
+    width:80px;
+}
+
+.logo h2,
+.logo small,
+.menu span{
+    display:none;
+}
+
+.menu li a{
+    justify-content:center;
+}
+
+.main{
+    margin-left:80px;
+    width:calc(100% - 80px);
+}
+
+.search-box{
+    display:none;
+}
+
+}
+
+@media(max-width:768px){
+
+.sidebar{
+    display:none;
+}
+
+.main{
+    margin-left:0;
+    width:100%;
+    padding:15px;
+}
+
+.topbar{
+    border-radius:0;
+}
+
+.profile div{
+    display:none;
+}
 
 }

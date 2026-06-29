@@ -41,3 +41,14 @@ alert("Product added to cart.");
 });
 
 });
+// CART BUTTONS (Demo)
+
+document.querySelectorAll(".qty-box button").forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+console.log("Quantity changed");
+
+});
+
+});

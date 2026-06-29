@@ -73,3 +73,14 @@ document.getElementById("changeAmount").value=change.toFixed(2);
 });
 
 }
+// ======================================
+// RECEIPT DATE
+// ======================================
+
+const receiptDate=document.getElementById("receiptDate");
+
+if(receiptDate){
+
+receiptDate.innerHTML=new Date().toLocaleString();
+
+}

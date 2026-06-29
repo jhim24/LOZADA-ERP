@@ -1,89 +1,47 @@
-// SALES CHART
+// ======================================
+// LOZADA ERP Dashboard Loader
+// ======================================
 
-const salesCanvas=document.getElementById("salesChart");
+async function loadComponent(id, file) {
 
-if(salesCanvas){
+    try {
 
-new Chart(salesCanvas,{
+        const response = await fetch(file);
 
-type:"line",
+        if (!response.ok) {
+            throw new Error("Cannot load " + file);
+        }
 
-data:{
+        const html = await response.text();
 
-labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+        document.getElementById(id).innerHTML = html;
 
-datasets:[{
+    } catch (error) {
 
-label:"Sales",
+        console.error(error);
 
-data:[20000,32000,28000,42000,31000,47000,35000],
-
-borderColor:"#2563EB",
-
-backgroundColor:"rgba(37,99,235,.15)",
-
-fill:true,
-
-tension:.4
-
-}]
-
-},
-
-options:{
-
-responsive:true,
-
-plugins:{
-
-legend:{
-
-display:false
+        document.getElementById(id).innerHTML =
+            `<div style="padding:20px;color:red;">
+                Failed to load: ${file}
+             </div>`;
+    }
 
 }
 
-}
+// Load all dashboard components
 
-}
+loadComponent("sidebar", "components/sidebar.html");
 
-});
+loadComponent("navbar", "components/navbar.html");
 
-}
+loadComponent("dashboard-cards", "components/dashboard-cards.html");
 
-// CATEGORY
+loadComponent("dashboard-charts", "components/dashboard-charts.html");
 
-const categoryCanvas=document.getElementById("categoryChart");
+loadComponent("dashboard-orders", "components/dashboard-orders.html");
 
-if(categoryCanvas){
+loadComponent("dashboard-kitchen", "components/dashboard-kitchen.html");
 
-new Chart(categoryCanvas,{
+loadComponent("dashboard-inventory", "components/dashboard-inventory.html");
 
-type:"doughnut",
-
-data:{
-
-labels:["Main","Drinks","Desserts","Snacks"],
-
-datasets:[{
-
-data:[35,25,20,20],
-
-backgroundColor:[
-
-"#2563EB",
-
-"#10B981",
-
-"#F59E0B",
-
-"#EF4444"
-
-]
-
-}]
-
-}
-
-});
-
-}
+loadComponent("dashboard-summary", "components/dashboard-summary.html");

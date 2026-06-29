@@ -1,17 +1,21 @@
-document.querySelector("form").addEventListener("submit", function(e){
+const loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", function (e) {
 
     e.preventDefault();
 
-    const email = document.querySelector('input[type="email"]').value;
-    const password = document.querySelector('input[type="password"]').value;
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    if(email === "admin" && password === "admin123"){
+    if (username === "admin" && password === "admin123") {
+
+        alert("Login Successful!");
 
         window.location.href = "pages/dashboard/dashboard.html";
 
-    }else{
+    } else {
 
-        alert("Invalid Username or Password");
+        alert("Invalid Username or Password!");
 
     }
 

@@ -772,3 +772,24 @@ background:#2563EB;
 background:#EF4444;
 
 }
+/* ===========================
+   INVENTORY
+=========================== */
+
+.inventory-section{
+
+margin-top:25px;
+
+}
+
+.inventory-section table{
+
+margin-bottom:0;
+
+}
+
+.inventory-section .dashboard-card{
+
+height:100%;
+
+}

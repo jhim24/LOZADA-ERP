@@ -1,21 +1,95 @@
-document.getElementById("loginForm").addEventListener("submit", function(e){
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | LOZADA ERP</title>
 
-e.preventDefault();
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 
-const username=document.getElementById("username").value;
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+</head>
+<body>
 
-const password=document.getElementById("password").value;
+<div class="sidebar">
 
-if(username==="admin" && password==="123456"){
+    <h2>LOZADA ERP</h2>
 
-localStorage.setItem("loggedIn","true");
+    <ul>
 
-window.location.href="dashboard.html";
+        <li><i class="fa-solid fa-chart-line"></i> Dashboard</li>
 
-}else{
+        <li><i class="fa-solid fa-cash-register"></i> POS</li>
 
-alert("Invalid Username or Password");
+        <li><i class="fa-solid fa-utensils"></i> Menu</li>
 
-}
+        <li><i class="fa-solid fa-box"></i> Inventory</li>
 
-});
+        <li><i class="fa-solid fa-cart-shopping"></i> Purchasing</li>
+
+        <li><i class="fa-solid fa-users"></i> CRM</li>
+
+        <li><i class="fa-solid fa-user-group"></i> HR</li>
+
+        <li><i class="fa-solid fa-calculator"></i> Accounting</li>
+
+        <li><i class="fa-solid fa-chart-column"></i> Reports</li>
+
+        <li><i class="fa-solid fa-gear"></i> Settings</li>
+
+    </ul>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+
+        <h1>Dashboard</h1>
+
+        <button onclick="logout()">Logout</button>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>Sales Today</h3>
+
+            <h2>₱0.00</h2>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Orders</h3>
+
+            <h2>0</h2>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Inventory</h3>
+
+            <h2>0 Items</h2>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Employees</h3>
+
+            <h2>0</h2>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="assets/js/dashboard.js"></script>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 /* ==========================================
-   LOZADA ERP DASHBOARD
+   LOZADA ERP Dashboard CSS v1.0
 ========================================== */
 
 *{
@@ -13,259 +13,190 @@ body{
     background:#F4F7FC;
 }
 
-/* WRAPPER */
+/* =======================
+   WRAPPER
+======================= */
 
 .wrapper{
     display:flex;
+    width:100%;
     min-height:100vh;
 }
 
-/* ================= SIDEBAR ================= */
+/* =======================
+   SIDEBAR
+======================= */
 
 .sidebar{
-
     width:270px;
-
     background:#0F172A;
-
-    color:white;
-
+    color:#fff;
     position:fixed;
-
     top:0;
-
     left:0;
-
     bottom:0;
-
     overflow-y:auto;
-
 }
 
 .logo{
-
     text-align:center;
-
-    padding:30px;
-
+    padding:30px 20px;
     border-bottom:1px solid rgba(255,255,255,.08);
-
 }
 
 .logo i{
-
     font-size:55px;
-
     color:#F59E0B;
-
 }
 
 .logo h2{
-
     margin-top:15px;
-
     font-size:24px;
-
+    font-weight:700;
 }
 
 .sidebar ul{
-
     list-style:none;
-
     padding:20px;
-
 }
 
 .sidebar li{
-
     display:flex;
-
     align-items:center;
-
     gap:15px;
-
-    padding:16px;
-
+    padding:15px 18px;
     margin-bottom:10px;
-
     border-radius:12px;
-
     cursor:pointer;
-
     transition:.3s;
-
 }
 
 .sidebar li:hover{
-
     background:#1E3A8A;
-
 }
 
 .sidebar li.active{
-
     background:#F59E0B;
-
     color:#111827;
-
     font-weight:bold;
-
 }
 
 .sidebar i{
-
     width:25px;
-
     text-align:center;
-
+    font-size:18px;
 }
 
-/* ================= MAIN ================= */
+/* =======================
+   MAIN CONTENT
+======================= */
 
 .main{
-
     margin-left:270px;
-
     width:calc(100% - 270px);
-
     padding:25px;
-
 }
 
-/* NAVBAR */
+/* =======================
+   NAVBAR
+======================= */
 
 .navbar{
-
-    background:white;
-
-    padding:18px 25px;
-
+    background:#fff;
     border-radius:15px;
-
+    padding:18px 25px;
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     box-shadow:0 10px 25px rgba(0,0,0,.08);
-
 }
 
 .profile{
-
     display:flex;
-
     align-items:center;
-
     gap:20px;
-
 }
 
 .profile i{
-
     font-size:22px;
-
     cursor:pointer;
-
 }
 
 .profile img{
-
     width:42px;
-
     height:42px;
-
     border-radius:50%;
-
 }
 
-/* ================= CARDS ================= */
+/* =======================
+   DASHBOARD CARDS
+======================= */
 
 .cards{
-
     margin-top:30px;
-
     display:grid;
-
     grid-template-columns:repeat(4,1fr);
-
     gap:20px;
-
 }
 
 .card{
-
-    background:white;
-
+    background:#fff;
     border:none;
-
     border-radius:18px;
-
     padding:25px;
-
-    box-shadow:0 12px 25px rgba(0,0,0,.08);
-
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
     transition:.3s;
-
 }
 
 .card:hover{
-
-    transform:translateY(-6px);
-
+    transform:translateY(-5px);
 }
 
 .card h5{
-
     color:#777;
-
+    font-size:15px;
 }
 
 .card h2{
-
     margin-top:15px;
-
-    color:#0F172A;
-
+    font-size:30px;
     font-weight:700;
-
+    color:#0F172A;
 }
 
-/* ================= MOBILE ================= */
+/* =======================
+   RESPONSIVE
+======================= */
+
+@media(max-width:1200px){
+
+.cards{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
 
 @media(max-width:992px){
 
 .sidebar{
-
-width:80px;
-
+    width:80px;
 }
 
 .logo h2{
-
-display:none;
-
+    display:none;
 }
 
 .sidebar span{
+    display:none;
+}
 
-display:none;
-
+.sidebar li{
+    justify-content:center;
 }
 
 .main{
-
-margin-left:80px;
-
-width:calc(100% - 80px);
-
-}
-
-.cards{
-
-grid-template-columns:repeat(2,1fr);
-
+    margin-left:80px;
+    width:calc(100% - 80px);
 }
 
 }
@@ -273,29 +204,21 @@ grid-template-columns:repeat(2,1fr);
 @media(max-width:768px){
 
 .sidebar{
-
-display:none;
-
+    display:none;
 }
 
 .main{
-
-margin-left:0;
-
-width:100%;
-
-}
-
-.cards{
-
-grid-template-columns:1fr;
-
+    margin-left:0;
+    width:100%;
+    padding:15px;
 }
 
 .navbar{
+    border-radius:0;
+}
 
-border-radius:0;
-
+.cards{
+    grid-template-columns:1fr;
 }
 
 }

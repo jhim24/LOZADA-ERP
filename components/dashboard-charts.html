@@ -1,1 +1,103 @@
+<!-- ==========================================
+     SALES CHARTS
+========================================== -->
 
+<section class="charts-section">
+
+<div class="row">
+
+    <!-- SALES OVERVIEW -->
+
+    <div class="col-lg-8 mb-4">
+
+        <div class="widget">
+
+            <div class="widget-header">
+
+                <h4>
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Sales Overview
+
+                </h4>
+
+                <select class="form-select">
+
+                    <option>This Week</option>
+                    <option>This Month</option>
+                    <option>This Year</option>
+
+                </select>
+
+            </div>
+
+            <div class="widget-body">
+
+                <canvas id="salesChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SALES CATEGORY -->
+
+    <div class="col-lg-4 mb-4">
+
+        <div class="widget">
+
+            <div class="widget-header">
+
+                <h4>
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    Sales by Category
+
+                </h4>
+
+            </div>
+
+            <div class="widget-body">
+
+                <canvas id="categoryChart"></canvas>
+
+                <div class="category-list">
+
+                    <div>
+                        <span class="dot blue"></span>
+                        Main Course
+                        <strong>35%</strong>
+                    </div>
+
+                    <div>
+                        <span class="dot green"></span>
+                        Beverages
+                        <strong>25%</strong>
+                    </div>
+
+                    <div>
+                        <span class="dot orange"></span>
+                        Desserts
+                        <strong>20%</strong>
+                    </div>
+
+                    <div>
+                        <span class="dot red"></span>
+                        Snacks
+                        <strong>20%</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>

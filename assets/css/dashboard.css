@@ -283,3 +283,88 @@ body{
 }
 
 }
+.dashboard-card{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:25px;
+
+border-radius:18px;
+
+background:#fff;
+
+box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.dashboard-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.dashboard-card small{
+
+font-weight:600;
+
+color:#777;
+
+}
+
+.dashboard-card h3{
+
+margin-top:10px;
+
+font-weight:700;
+
+}
+
+.dashboard-card span{
+
+font-size:13px;
+
+color:#16a34a;
+
+}
+
+.dashboard-card i{
+
+font-size:45px;
+
+padding:18px;
+
+border-radius:15px;
+
+color:white;
+
+}
+
+.sales i{
+
+background:#2563EB;
+
+}
+
+.orders i{
+
+background:#10B981;
+
+}
+
+.profit i{
+
+background:#F59E0B;
+
+}
+
+.expense i{
+
+background:#8B5CF6;
+
+}

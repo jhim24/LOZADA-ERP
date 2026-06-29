@@ -1,0 +1,56 @@
+/* ==========================================
+   LOZADA ERP
+   Design System Variables
+   Version 1.0
+========================================== */
+
+:root{
+
+    /* ========= COLORS ========= */
+
+    --primary:#1E3A8A;
+    --primary-dark:#0F172A;
+    --secondary:#2563EB;
+
+    --gold:#F59E0B;
+    --gold-dark:#D97706;
+
+    --success:#10B981;
+    --danger:#EF4444;
+    --warning:#F97316;
+    --info:#06B6D4;
+
+    --white:#FFFFFF;
+    --light:#F8FAFC;
+    --gray:#E5E7EB;
+
+    --text:#1F2937;
+    --text-light:#6B7280;
+
+    /* ========= SIDEBAR ========= */
+
+    --sidebar-width:270px;
+
+    /* ========= HEADER ========= */
+
+    --header-height:70px;
+
+    /* ========= RADIUS ========= */
+
+    --radius-sm:8px;
+    --radius:12px;
+    --radius-lg:18px;
+
+    /* ========= SHADOW ========= */
+
+    --shadow-sm:0 2px 5px rgba(0,0,0,.08);
+
+    --shadow:0 10px 25px rgba(0,0,0,.12);
+
+    --shadow-lg:0 20px 40px rgba(0,0,0,.15);
+
+    /* ========= TRANSITION ========= */
+
+    --transition:.30s;
+
+}

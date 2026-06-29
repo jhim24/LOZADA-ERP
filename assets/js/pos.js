@@ -30,3 +30,14 @@ button.classList.add("active");
 });
 
 });
+// ADD TO CART (Temporary)
+
+document.querySelectorAll(".add-cart").forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+alert("Product added to cart.");
+
+});
+
+});

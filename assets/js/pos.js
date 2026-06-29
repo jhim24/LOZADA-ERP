@@ -52,3 +52,24 @@ console.log("Quantity changed");
 });
 
 });
+// ======================================
+// COMPUTE CHANGE
+// ======================================
+
+const btnCompute=document.getElementById("btnCompute");
+
+if(btnCompute){
+
+btnCompute.addEventListener("click",()=>{
+
+const total=parseFloat(document.getElementById("totalAmount").value);
+
+const cash=parseFloat(document.getElementById("cashReceived").value)||0;
+
+const change=cash-total;
+
+document.getElementById("changeAmount").value=change.toFixed(2);
+
+});
+
+}

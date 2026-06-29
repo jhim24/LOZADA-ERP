@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>LOZADA ERP</title>
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#D71920">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="loading-container">
+
+        <div class="spinner"></div>
+
+        <h1>LOZADA ERP</h1>
+
+        <p>Enterprise Restaurant Management System</p>
+
+    </div>
+
+    <script>
+        setTimeout(() => {
+
+            const loggedIn = localStorage.getItem("loggedIn");
+
+            if (loggedIn === "true") {
+
+                window.location.href = "dashboard.html";
+
+            } else {
+
+                window.location.href = "login.html";
+
+            }
+
+        }, 2000);
+    </script>
+
+</body>
+</html>

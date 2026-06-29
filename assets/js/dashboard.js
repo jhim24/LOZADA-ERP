@@ -1,8 +1,10 @@
-const sales=document.getElementById("salesChart");
+// SALES CHART
 
-if(sales){
+const salesCanvas=document.getElementById("salesChart");
 
-new Chart(sales,{
+if(salesCanvas){
+
+new Chart(salesCanvas,{
 
 type:"line",
 
@@ -14,7 +16,7 @@ datasets:[{
 
 label:"Sales",
 
-data:[12000,18000,15000,24000,29000,34000,45680],
+data:[20000,32000,28000,42000,31000,47000,35000],
 
 borderColor:"#2563EB",
 
@@ -48,21 +50,23 @@ display:false
 
 }
 
-const category=document.getElementById("categoryChart");
+// CATEGORY
 
-if(category){
+const categoryCanvas=document.getElementById("categoryChart");
 
-new Chart(category,{
+if(categoryCanvas){
+
+new Chart(categoryCanvas,{
 
 type:"doughnut",
 
 data:{
 
-labels:["Meals","Drinks","Desserts","Snacks"],
+labels:["Main","Drinks","Desserts","Snacks"],
 
 datasets:[{
 
-data:[45,25,18,12],
+data:[35,25,20,20],
 
 backgroundColor:[
 
@@ -77,12 +81,6 @@ backgroundColor:[
 ]
 
 }]
-
-},
-
-options:{
-
-responsive:true
 
 }
 

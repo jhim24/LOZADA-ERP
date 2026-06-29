@@ -21,95 +21,57 @@
         }
 
         body{
-
-            background:linear-gradient(135deg,#0F172A,#1E3A8A);
-
             height:100vh;
-
             display:flex;
-
             justify-content:center;
-
             align-items:center;
-
+            background:linear-gradient(135deg,#081120,#1E3A8A);
             overflow:hidden;
-
-            color:white;
-
         }
 
         .loader{
-
             text-align:center;
-
+            color:#fff;
         }
 
         .logo{
-
-            width:120px;
-
-            height:120px;
-
-            margin:auto;
-
+            width:130px;
+            height:130px;
             border-radius:50%;
-
             background:#F59E0B;
-
             display:flex;
-
             justify-content:center;
-
             align-items:center;
-
-            margin-bottom:30px;
-
-            animation:pop .8s ease;
-
+            margin:auto;
+            margin-bottom:25px;
+            box-shadow:0 10px 30px rgba(0,0,0,.35);
         }
 
         .logo i{
-
-            font-size:55px;
-
-            color:white;
-
+            font-size:60px;
+            color:#fff;
         }
 
         h1{
-
-            font-size:48px;
-
+            font-size:50px;
             font-weight:700;
-
             margin-bottom:10px;
-
         }
 
-        p{
-
-            opacity:.8;
-
+        h5{
+            font-weight:400;
+            opacity:.9;
             margin-bottom:40px;
-
         }
 
         .spinner{
-
             width:70px;
-
             height:70px;
-
-            border:7px solid rgba(255,255,255,.2);
-
-            border-top:7px solid #F59E0B;
-
+            border:8px solid rgba(255,255,255,.15);
+            border-top:8px solid #F59E0B;
             border-radius:50%;
-
             margin:auto;
-
             animation:spin 1s linear infinite;
-
         }
 
         @keyframes spin{
@@ -122,31 +84,9 @@
 
         }
 
-        @keyframes pop{
-
-            from{
-
-                transform:scale(.5);
-
-                opacity:0;
-
-            }
-
-            to{
-
-                transform:scale(1);
-
-                opacity:1;
-
-            }
-
-        }
-
         .version{
 
-            margin-top:30px;
-
-            font-size:14px;
+            margin-top:35px;
 
             opacity:.6;
 
@@ -168,7 +108,7 @@
 
     <h1>LOZADA ERP</h1>
 
-    <p>Restaurant & Business Management System</p>
+    <h5>Restaurant & Business Management System</h5>
 
     <div class="spinner"></div>
 
@@ -188,13 +128,14 @@ window.location.href="dashboard.html";
 
 },2000);
 
-if('serviceWorker' in navigator){
+if("serviceWorker" in navigator){
 
-navigator.serviceWorker.register('sw.js');
+navigator.serviceWorker.register("sw.js");
 
 }
 
 </script>
 
 </body>
+
 </html>

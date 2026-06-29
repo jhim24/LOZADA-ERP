@@ -267,3 +267,152 @@ body{
 }
 
 }
+/* ===========================
+   KPI CARDS
+=========================== */
+
+.cards-grid{
+
+margin-top:30px;
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+}
+
+.cards-grid .card{
+
+border:none;
+
+border-radius:18px;
+
+padding:25px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.cards-grid .card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.cards-grid h6{
+
+font-size:14px;
+
+color:#64748B;
+
+margin-bottom:12px;
+
+}
+
+.cards-grid h2{
+
+font-size:30px;
+
+font-weight:700;
+
+margin-bottom:8px;
+
+}
+
+.cards-grid small{
+
+color:#94A3B8;
+
+}
+
+.cards-grid i{
+
+font-size:40px;
+
+padding:18px;
+
+border-radius:15px;
+
+color:white;
+
+}
+
+/* COLORS */
+
+.sales i{
+
+background:#2563EB;
+
+}
+
+.orders i{
+
+background:#10B981;
+
+}
+
+.inventory i{
+
+background:#F59E0B;
+
+}
+
+.customers i{
+
+background:#EC4899;
+
+}
+
+.tables i{
+
+background:#0EA5E9;
+
+}
+
+.kitchen i{
+
+background:#EF4444;
+
+}
+
+.expenses i{
+
+background:#8B5CF6;
+
+}
+
+.profit i{
+
+background:#14B8A6;
+
+}
+
+@media(max-width:1200px){
+
+.cards-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.cards-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}

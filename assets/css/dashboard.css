@@ -719,3 +719,56 @@ background:#F59E0B;
 background:#EF4444;
 
 }
+/* ===========================
+   ORDERS & KITCHEN
+=========================== */
+
+.orders-section{
+
+margin-bottom:30px;
+
+}
+
+.kitchen-card{
+
+padding:15px;
+
+border-radius:12px;
+
+margin-bottom:15px;
+
+color:#fff;
+
+}
+
+.kitchen-card h5{
+
+margin-bottom:5px;
+
+font-weight:700;
+
+}
+
+.kitchen-card p{
+
+margin-bottom:5px;
+
+}
+
+.preparing{
+
+background:#F59E0B;
+
+}
+
+.cooking{
+
+background:#2563EB;
+
+}
+
+.waiting{
+
+background:#EF4444;
+
+}

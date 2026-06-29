@@ -1,11 +1,20 @@
+/* ==========================================
+   LOGIN PAGE
+========================================== */
+
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+
 }
 
 body{
+
+font-family:'Poppins',sans-serif;
+
+background:linear-gradient(135deg,#0F172A,#1E3A8A);
 
 height:100vh;
 
@@ -15,21 +24,33 @@ justify-content:center;
 
 align-items:center;
 
-background:#111827;
+overflow:hidden;
 
 }
 
-.login-box{
+.login-container{
 
-width:400px;
+width:100%;
 
-background:#1f2937;
+height:100vh;
 
-padding:40px;
+display:grid;
 
-border-radius:15px;
+grid-template-columns:1fr 500px;
 
-box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+.login-left{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+color:white;
+
+padding:60px;
 
 }
 
@@ -37,126 +58,132 @@ box-shadow:0 10px 30px rgba(0,0,0,.5);
 
 text-align:center;
 
-margin-bottom:30px;
-
-color:white;
-
 }
 
 .logo i{
 
-font-size:60px;
+font-size:90px;
 
-color:#FFD700;
+color:#F59E0B;
 
-margin-bottom:10px;
+margin-bottom:20px;
 
 }
 
 .logo h1{
 
-color:#FFD700;
+font-size:60px;
+
+font-weight:700;
 
 }
 
 .logo p{
 
-margin-top:10px;
+margin-top:15px;
 
-color:#bbb;
+font-size:20px;
 
-font-size:14px;
+opacity:.8;
 
 }
 
-.input-group{
+.login-right{
 
 display:flex;
+
+justify-content:center;
 
 align-items:center;
 
-background:#374151;
-
-padding:12px;
-
-border-radius:8px;
-
-margin-bottom:20px;
+background:white;
 
 }
 
-.input-group i{
+.login-card{
 
-color:#FFD700;
+width:420px;
 
-margin-right:10px;
+padding:45px;
+
+border-radius:20px;
+
+background:white;
+
+box-shadow:0 20px 60px rgba(0,0,0,.15);
 
 }
 
-.input-group input{
+.login-card h2{
 
-width:100%;
+font-weight:700;
 
-background:none;
+margin-bottom:5px;
+
+}
+
+.login-card p{
+
+color:#888;
+
+margin-bottom:30px;
+
+}
+
+.input-group-text{
+
+background:#F8FAFC;
+
+}
+
+.form-control{
+
+height:50px;
+
+}
+
+.btn-primary{
+
+height:52px;
+
+background:#1E3A8A;
 
 border:none;
 
-outline:none;
-
-color:white;
-
-font-size:15px;
+font-weight:600;
 
 }
 
-.options{
+.btn-primary:hover{
 
-display:flex;
-
-justify-content:space-between;
-
-margin-bottom:20px;
-
-font-size:14px;
-
-color:white;
+background:#F59E0B;
 
 }
 
-.options a{
-
-color:#FFD700;
+a{
 
 text-decoration:none;
 
 }
 
-button{
+@media(max-width:991px){
 
-width:100%;
+.login-container{
 
-padding:15px;
-
-background:#D71920;
-
-border:none;
-
-color:white;
-
-font-size:16px;
-
-border-radius:8px;
-
-cursor:pointer;
-
-transition:.3s;
+grid-template-columns:1fr;
 
 }
 
-button:hover{
+.login-left{
 
-background:#FFD700;
+display:none;
 
-color:black;
+}
+
+.login-card{
+
+width:95%;
+
+}
 
 }

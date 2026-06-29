@@ -793,3 +793,90 @@ margin-bottom:0;
 height:100%;
 
 }
+/* ===========================
+   SUMMARY
+=========================== */
+
+.summary-section{
+
+margin-top:30px;
+
+}
+
+.summary-card{
+
+background:#fff;
+
+border-radius:18px;
+
+padding:20px;
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+height:100%;
+
+}
+
+.summary-icon{
+
+width:60px;
+
+height:60px;
+
+border-radius:15px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:24px;
+
+color:#fff;
+
+}
+
+.summary-icon.blue{
+
+background:#2563EB;
+
+}
+
+.summary-icon.green{
+
+background:#10B981;
+
+}
+
+.summary-icon.orange{
+
+background:#F59E0B;
+
+}
+
+.summary-icon.red{
+
+background:#EF4444;
+
+}
+
+.summary-card h3{
+
+margin:5px 0;
+
+font-weight:700;
+
+}
+
+.summary-card small{
+
+color:#64748B;
+
+}

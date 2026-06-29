@@ -1,21 +1,21 @@
 /* ==========================================
-   LOZADA ERP Dashboard CSS v1.0
+   LOZADA ERP
+   Dashboard CSS Part 1
 ========================================== */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    font-family:"Poppins",sans-serif;
 }
 
 body{
-    background:#F4F7FC;
+    background:#f5f7fb;
+    color:#1f2937;
 }
 
-/* =======================
-   WRAPPER
-======================= */
+/* WRAPPER */
 
 .wrapper{
     display:flex;
@@ -23,202 +23,272 @@ body{
     min-height:100vh;
 }
 
-/* =======================
-   SIDEBAR
-======================= */
+/* SIDEBAR */
 
 .sidebar{
-    width:270px;
+
+    width:280px;
+
     background:#0F172A;
+
     color:#fff;
+
     position:fixed;
+
     top:0;
+
     left:0;
+
     bottom:0;
+
     overflow-y:auto;
+
+    transition:.3s;
+
 }
 
 .logo{
+
     text-align:center;
-    padding:30px 20px;
+
+    padding:30px;
+
     border-bottom:1px solid rgba(255,255,255,.08);
+
 }
 
 .logo i{
-    font-size:55px;
+
+    font-size:60px;
+
     color:#F59E0B;
+
 }
 
 .logo h2{
+
     margin-top:15px;
-    font-size:24px;
+
+    font-size:28px;
+
     font-weight:700;
+
 }
 
-.sidebar ul{
+.logo small{
+
+    color:#94A3B8;
+
+}
+
+.menu{
+
     list-style:none;
+
     padding:20px;
+
 }
 
-.sidebar li{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:15px 18px;
+.menu li{
+
     margin-bottom:10px;
+
+}
+
+.menu li a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px 18px;
+
+    color:white;
+
+    text-decoration:none;
+
     border-radius:12px;
-    cursor:pointer;
+
     transition:.3s;
+
 }
 
-.sidebar li:hover{
+.menu li a:hover{
+
     background:#1E3A8A;
+
 }
 
-.sidebar li.active{
+.menu li.active a{
+
     background:#F59E0B;
+
     color:#111827;
-    font-weight:bold;
+
+    font-weight:600;
+
 }
 
-.sidebar i{
-    width:25px;
+.menu i{
+
+    width:24px;
+
     text-align:center;
-    font-size:18px;
+
 }
 
-/* =======================
-   MAIN CONTENT
-======================= */
+/* MAIN */
 
 .main{
-    margin-left:270px;
-    width:calc(100% - 270px);
-    padding:25px;
+
+    margin-left:280px;
+
+    width:calc(100% - 280px);
+
+    padding:30px;
+
 }
 
-/* =======================
-   NAVBAR
-======================= */
+/* NAVBAR */
 
-.navbar{
-    background:#fff;
-    border-radius:15px;
+.topbar{
+
+    background:white;
+
+    border-radius:18px;
+
     padding:18px 25px;
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.top-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.menu-btn{
+
+    border:none;
+
+    background:none;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+}
+
+.top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.search-box{
+
+    display:flex;
+
+    align-items:center;
+
+    background:#F4F7FB;
+
+    border-radius:12px;
+
+    padding:10px 15px;
+
+}
+
+.search-box input{
+
+    border:none;
+
+    background:none;
+
+    outline:none;
+
+    margin-left:10px;
+
+}
+
+.icon-btn{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    background:#F4F7FB;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
 }
 
 .profile{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
 
-.profile i{
-    font-size:22px;
-    cursor:pointer;
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
 }
 
 .profile img{
-    width:42px;
-    height:42px;
+
+    width:45px;
+
+    height:45px;
+
     border-radius:50%;
+
 }
 
-/* =======================
-   DASHBOARD CARDS
-======================= */
+.profile small{
 
-.cards{
-    margin-top:30px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    display:block;
+
+    color:#64748B;
+
 }
 
-.card{
-    background:#fff;
-    border:none;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.3s;
+/* PAGE TITLE */
+
+.page-title{
+
+    margin-top:25px;
+
 }
 
-.card:hover{
-    transform:translateY(-5px);
-}
+.page-title h2{
 
-.card h5{
-    color:#777;
-    font-size:15px;
-}
-
-.card h2{
-    margin-top:15px;
-    font-size:30px;
     font-weight:700;
-    color:#0F172A;
-}
-
-/* =======================
-   RESPONSIVE
-======================= */
-
-@media(max-width:1200px){
-
-.cards{
-    grid-template-columns:repeat(2,1fr);
-}
 
 }
 
-@media(max-width:992px){
+.page-title p{
 
-.sidebar{
-    width:80px;
-}
-
-.logo h2{
-    display:none;
-}
-
-.sidebar span{
-    display:none;
-}
-
-.sidebar li{
-    justify-content:center;
-}
-
-.main{
-    margin-left:80px;
-    width:calc(100% - 80px);
-}
-
-}
-
-@media(max-width:768px){
-
-.sidebar{
-    display:none;
-}
-
-.main{
-    margin-left:0;
-    width:100%;
-    padding:15px;
-}
-
-.navbar{
-    border-radius:0;
-}
-
-.cards{
-    grid-template-columns:1fr;
-}
+    color:#64748B;
 
 }

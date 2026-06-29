@@ -1,86 +1,28 @@
-// LIVE CLOCK
+// ======================================
+// LOZADA ERP POS Loader
+// ======================================
 
-function updateClock(){
+async function loadComponent(id, file) {
+    try {
+        const response = await fetch(file);
 
-const now=new Date();
+        if (!response.ok) throw new Error(file);
 
-document.getElementById("currentDate").innerHTML=
-now.toLocaleDateString();
+        document.getElementById(id).innerHTML =
+            await response.text();
 
-document.getElementById("currentTime").innerHTML=
-now.toLocaleTimeString();
-
+    } catch (err) {
+        console.error(err);
+    }
 }
 
-setInterval(updateClock,1000);
+// LOAD COMPONENTS
 
-updateClock();
-// CATEGORY BUTTONS
-
-const categoryButtons=document.querySelectorAll(".category-btn");
-
-categoryButtons.forEach(button=>{
-
-button.addEventListener("click",()=>{
-
-categoryButtons.forEach(btn=>btn.classList.remove("active"));
-
-button.classList.add("active");
-
-});
-
-});
-// ADD TO CART (Temporary)
-
-document.querySelectorAll(".add-cart").forEach(button=>{
-
-button.addEventListener("click",()=>{
-
-alert("Product added to cart.");
-
-});
-
-});
-// CART BUTTONS (Demo)
-
-document.querySelectorAll(".qty-box button").forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-console.log("Quantity changed");
-
-});
-
-});
-// ======================================
-// COMPUTE CHANGE
-// ======================================
-
-const btnCompute=document.getElementById("btnCompute");
-
-if(btnCompute){
-
-btnCompute.addEventListener("click",()=>{
-
-const total=parseFloat(document.getElementById("totalAmount").value);
-
-const cash=parseFloat(document.getElementById("cashReceived").value)||0;
-
-const change=cash-total;
-
-document.getElementById("changeAmount").value=change.toFixed(2);
-
-});
-
-}
-// ======================================
-// RECEIPT DATE
-// ======================================
-
-const receiptDate=document.getElementById("receiptDate");
-
-if(receiptDate){
-
-receiptDate.innerHTML=new Date().toLocaleString();
-
-}
+loadComponent("sidebar","../components/sidebar.html");
+loadComponent("navbar","../components/navbar.html");
+loadComponent("pos-header","../components/pos-header.html");
+loadComponent("pos-categories","../components/pos-categories.html");
+loadComponent("pos-products","../components/pos-products.html");
+loadComponent("pos-cart","../components/pos-cart.html");
+loadComponent("pos-payment","../components/pos-payment.html");
+loadComponent("receipt-modal","../components/receipt-modal.html");

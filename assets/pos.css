@@ -460,3 +460,46 @@ font-weight:bold;
 color:#F59E0B;
 
 }
+/* ==========================================
+   PAYMENT PANEL
+========================================== */
+
+.payment-panel{
+
+background:#fff;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+overflow:hidden;
+
+margin-top:20px;
+
+}
+
+.payment-header{
+
+padding:18px;
+
+border-bottom:1px solid #eee;
+
+font-weight:700;
+
+}
+
+.payment-body{
+
+padding:20px;
+
+}
+
+.payment-body label{
+
+font-weight:600;
+
+margin-bottom:6px;
+
+display:block;
+
+}

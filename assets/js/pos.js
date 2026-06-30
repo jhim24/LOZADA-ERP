@@ -182,13 +182,19 @@ document.addEventListener("click",function(e){
 
 function renderCart(){
 
-    const cartItems=document.getElementById("cartItems");
+    const cartItems = document.getElementById("cartItems");
 
     if(!cartItems) return;
 
     if(cart.length===0){
 
-        cartItems.innerHTML="<div class='empty-cart'>Cart is Empty</div>";
+        cartItems.innerHTML=`
+            <tr>
+                <td colspan="4" class="text-center text-muted">
+                    Cart is Empty
+                </td>
+            </tr>
+        `;
 
         updateTotals(0);
 
@@ -200,33 +206,45 @@ function renderCart(){
 
     let subtotal=0;
 
-    cart.forEach(item=>{
+    cart.forEach((item,index)=>{
 
-        subtotal+=item.price*item.qty;
+        const total=item.price*item.qty;
+
+        subtotal+=total;
 
         html+=`
 
-        <div class="cart-row">
+        <tr>
 
-            <div>
+            <td>
 
-                <h6>${item.name}</h6>
+                <strong>${item.name}</strong>
 
-                <small>
+            </td>
 
-                    ₱${item.price.toFixed(2)} x ${item.qty}
+            <td class="text-center">
 
-                </small>
+                ${item.qty}
 
-            </div>
+            </td>
 
-            <strong>
+            <td class="text-end">
 
-                ₱${(item.price*item.qty).toFixed(2)}
+                ₱${item.price.toFixed(2)}
 
-            </strong>
+            </td>
 
-        </div>
+            <td class="text-end">
+
+                <strong>
+
+                    ₱${total.toFixed(2)}
+
+                </strong>
+
+            </td>
+
+        </tr>
 
         `;
 
@@ -237,12 +255,11 @@ function renderCart(){
     updateTotals(subtotal);
 
 }
-
 // ---------- TOTALS ----------
 
 function updateTotals(subtotal){
 
-    const vat=subtotal*.12;
+    const vat=subtotal*0.12;
 
     const total=subtotal+vat;
 
@@ -263,7 +280,6 @@ function updateTotals(subtotal){
     }
 
 }
-
 // ===============================================
 // COMPUTE CHANGE
 // ===============================================
@@ -276,8 +292,14 @@ document.addEventListener("click",function(e){
 
     const cash=parseFloat(document.getElementById("cashReceived").value)||0;
 
-    const change=cash-total;
+   let change=0;
 
-    document.getElementById("changeAmount").value=change.toFixed(2);
+if(cash>=total){
+
+    change=cash-total;
+
+}
+
+document.getElementById("changeAmount").value=change.toFixed(2);
 
 });

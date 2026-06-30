@@ -3,6 +3,13 @@
 // PRODUCT MANAGEMENT
 // ===============================================
 
+// ===============================================
+// PRODUCT DATA
+// ===============================================
+
+let products = JSON.parse(localStorage.getItem("products")) || [];
+
+let editProductIndex = -1;
 // ---------- COMPONENT LOADER ----------
 
 async function loadComponent(id,file){
@@ -42,6 +49,8 @@ document.addEventListener("DOMContentLoaded", async()=>{
     await loadComponent("product-table","../components/product-table.html");
 
     loadCategoryDropdown();
+
+generateProductCode();
 
 });
 // ===============================================
@@ -93,5 +102,126 @@ function loadCategoryDropdown(){
         }
 
     });
+
+}
+// ===============================================
+// SAVE PRODUCT
+// ===============================================
+
+document.addEventListener("click",function(e){
+
+    const btn=e.target.closest("#btnSaveProduct");
+
+    if(!btn) return;
+
+    const code=document.getElementById("productCode").value;
+
+    const category=document.getElementById("productCategory").value;
+
+    const name=document.getElementById("productName").value.trim();
+
+    const sellingPrice=parseFloat(document.getElementById("sellingPrice").value)||0;
+
+    const costPrice=parseFloat(document.getElementById("costPrice").value)||0;
+
+    const barcode=document.getElementById("barcode").value.trim();
+
+    const description=document.getElementById("productDescription").value.trim();
+
+    const status=document.getElementById("productStatus").value;
+
+    if(category===""){
+
+        alert("Please select category.");
+
+        return;
+
+    }
+
+    if(name===""){
+
+        alert("Please enter product name.");
+
+        return;
+
+    }
+
+    products.push({
+
+        code,
+
+        category,
+
+        name,
+
+        sellingPrice,
+
+        costPrice,
+
+        barcode,
+
+        description,
+
+        status,
+
+        image:""
+
+    });
+
+    localStorage.setItem(
+
+        "products",
+
+        JSON.stringify(products)
+
+    );
+
+    alert("Product saved successfully.");
+
+    loadProductTable();
+
+    clearProductForm();
+
+});
+// ===============================================
+// PRODUCT CODE
+// ===============================================
+
+function generateProductCode(){
+
+    const products=JSON.parse(localStorage.getItem("products")) || [];
+
+    const next=products.length+1;
+
+    document.getElementById("productCode").value=
+
+        "PRD-"+String(next).padStart(4,"0");
+
+}
+// ===============================================
+// CLEAR PRODUCT FORM
+// ===============================================
+
+function clearProductForm(){
+
+    editProductIndex=-1;
+
+    document.getElementById("productCategory").value="";
+
+    document.getElementById("productName").value="";
+
+    document.getElementById("sellingPrice").value="";
+
+    document.getElementById("costPrice").value="";
+
+    document.getElementById("barcode").value="";
+
+    document.getElementById("productDescription").value="";
+
+    document.getElementById("productStatus").value="Active";
+
+    document.getElementById("productImage").value="";
+
+    generateProductCode();
 
 }

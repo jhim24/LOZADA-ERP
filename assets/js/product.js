@@ -31,7 +31,7 @@ async function loadComponent(id,file){
 
 // ---------- INITIALIZE ----------
 
-document.addEventListener("DOMContentLoaded",async()=>{
+document.addEventListener("DOMContentLoaded", async()=>{
 
     await loadComponent("sidebar","../components/sidebar.html");
 
@@ -41,4 +41,57 @@ document.addEventListener("DOMContentLoaded",async()=>{
 
     await loadComponent("product-table","../components/product-table.html");
 
+    loadCategoryDropdown();
+
 });
+// ===============================================
+// LOAD CATEGORY DROPDOWN
+// ===============================================
+
+function loadCategoryDropdown(){
+
+    const categorySelect = document.getElementById("productCategory");
+
+    if(!categorySelect) return;
+
+    const categories = JSON.parse(localStorage.getItem("categories")) || [];
+
+    categorySelect.innerHTML = "";
+
+    if(categories.length===0){
+
+        categorySelect.innerHTML = `
+            <option value="">
+                No Category Available
+            </option>
+        `;
+
+        return;
+
+    }
+
+    categorySelect.innerHTML = `
+        <option value="">
+            -- Select Category --
+        </option>
+    `;
+
+    categories.forEach(category=>{
+
+        if(category.status==="Active"){
+
+            categorySelect.innerHTML += `
+
+                <option value="${category.name}">
+
+                    ${category.name}
+
+                </option>
+
+            `;
+
+        }
+
+    });
+
+}

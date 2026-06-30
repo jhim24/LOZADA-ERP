@@ -178,3 +178,18 @@ function loadCategoryTable(){
     });
 
 }
+// ===============================================
+// AUTO CATEGORY CODE
+// ===============================================
+
+function generateCategoryCode(){
+
+    const categories = JSON.parse(localStorage.getItem("categories")) || [];
+
+    const nextNumber = categories.length + 1;
+
+    const code = "CAT-" + String(nextNumber).padStart(4,"0");
+
+    document.getElementById("categoryCode").value = code;
+
+}

@@ -864,3 +864,58 @@ font-size:30px;
 font-weight:800;
 
 }
+/* ===========================
+QTY BUTTONS
+=========================== */
+
+.qty-control{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+.qty-control button{
+
+width:30px;
+
+height:30px;
+
+border:none;
+
+border-radius:6px;
+
+background:#C1121F;
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.qty-control button:hover{
+
+background:#8B0E18;
+
+}
+
+.qty-control span{
+
+font-size:18px;
+
+font-weight:700;
+
+min-width:25px;
+
+text-align:center;
+
+}

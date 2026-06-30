@@ -312,3 +312,34 @@ function loadProductTable(){
     });
 
 }
+// ===============================================
+// EDIT PRODUCT
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-edit-product");
+
+    if(!btn) return;
+
+    editProductIndex = Number(btn.dataset.index);
+
+    const product = products[editProductIndex];
+
+    document.getElementById("productCode").value = product.code;
+
+    document.getElementById("productCategory").value = product.category;
+
+    document.getElementById("productName").value = product.name;
+
+    document.getElementById("sellingPrice").value = product.sellingPrice;
+
+    document.getElementById("costPrice").value = product.costPrice;
+
+    document.getElementById("barcode").value = product.barcode;
+
+    document.getElementById("productDescription").value = product.description;
+
+    document.getElementById("productStatus").value = product.status;
+
+});

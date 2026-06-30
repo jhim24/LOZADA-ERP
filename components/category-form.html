@@ -1,0 +1,144 @@
+<!-- ==========================================
+     CATEGORY FORM
+========================================== -->
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-primary text-white">
+
+        <h5 class="mb-0">
+
+            <i class="fa-solid fa-layer-group"></i>
+
+            Category Management
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <!-- CATEGORY CODE -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Category Code
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="categoryCode"
+                value="CAT-0001"
+                readonly>
+
+        </div>
+
+        <!-- CATEGORY NAME -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Category Name
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="categoryName"
+                placeholder="Enter Category Name">
+
+        </div>
+
+        <!-- DESCRIPTION -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Description
+
+            </label>
+
+            <textarea
+                class="form-control"
+                rows="3"
+                id="categoryDescription"
+                placeholder="Category Description"></textarea>
+
+        </div>
+
+        <!-- STATUS -->
+
+        <div class="mb-4">
+
+            <label class="form-label">
+
+                Status
+
+            </label>
+
+            <select
+                class="form-select"
+                id="categoryStatus">
+
+                <option value="Active">
+
+                    Active
+
+                </option>
+
+                <option value="Inactive">
+
+                    Inactive
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="d-grid gap-2">
+
+            <button
+                class="btn btn-primary"
+                id="btnSaveCategory">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Category
+
+            </button>
+
+            <button
+                class="btn btn-warning"
+                id="btnUpdateCategory">
+
+                <i class="fa-solid fa-pen"></i>
+
+                Update
+
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                id="btnClearCategory">
+
+                <i class="fa-solid fa-rotate"></i>
+
+                Clear
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

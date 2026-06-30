@@ -164,16 +164,19 @@ document.addEventListener("click",function(e){
 
     }else{
 
-        cart.push({
+       const image = card.querySelector("img").src;
 
-            name:name,
+cart.push({
 
-            price:price,
+    name: name,
 
-            qty:1
+    price: price,
 
-        });
+    qty: 1,
 
+    image: image
+
+});
     }
 
     renderCart();
@@ -223,8 +226,9 @@ function renderCart(){
                 <div class="cart-product">
 
                     <img
-                    src="https://via.placeholder.com/55x55?text=Food"
-                    class="cart-image">
+src="${item.image}"
+class="cart-image"
+alt="${item.name}">
 
                     <div>
 

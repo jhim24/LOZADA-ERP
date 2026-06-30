@@ -306,6 +306,14 @@ box-shadow:0 10px 25px rgba(0,0,0,.08);
 
 transition:.3s;
 
+display:flex;
+
+flex-direction:column;
+
+height:100%;
+
+min-height:390px;
+
 }
 
 .product-card:hover{
@@ -318,9 +326,11 @@ transform:translateY(-6px);
 
 width:100%;
 
-height:170px;
+height:180px;
 
 object-fit:cover;
+
+display:block;
 
 }
 
@@ -328,13 +338,17 @@ object-fit:cover;
 
 padding:15px;
 
-text-align:center;
-
 display:flex;
 
 flex-direction:column;
 
+justify-content:space-between;
+
 align-items:center;
+
+flex:1;
+
+text-align:center;
 
 }
 .product-info h5{
@@ -1008,5 +1022,44 @@ font-weight:700;
 width:100%;
 
 margin-top:8px;
+
+}
+/* ==========================================
+PRODUCT CARD BUTTON
+========================================== */
+
+.product-info .btn{
+
+margin-top:auto;
+
+font-weight:700;
+
+border-radius:10px;
+
+height:42px;
+
+}
+
+.product-info h5{
+
+min-height:55px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.price{
+
+min-height:40px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
 
 }

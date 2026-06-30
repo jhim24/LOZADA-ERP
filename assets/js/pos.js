@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadComponent("pos-payment", "../components/pos-payment.html");
    await loadComponent("receipt-modal", "../components/receipt-modal.html");
 
+loadPOSCategories();
+
 loadPOSProducts();
 
 updateClock();
@@ -516,7 +518,23 @@ function loadPOSProducts(){
 
     }
 
-    products.forEach(product=>{
+   products.forEach(product=>{
+
+    if(product.status!=="Active") return;
+
+    if(window.currentCategory){
+
+        if(window.currentCategory!=="All"){
+
+            if(product.category!==window.currentCategory){
+
+                return;
+
+            }
+
+        }
+
+    }
 
         if(product.status!=="Active") return;
 
@@ -564,3 +582,69 @@ function loadPOSProducts(){
     });
 
 }
+// ===============================================
+// LOAD POS CATEGORIES
+// ===============================================
+
+function loadPOSCategories(){
+
+    const container=document.getElementById("categoryButtons");
+
+    if(!container) return;
+
+    const categories=JSON.parse(localStorage.getItem("categories"))||[];
+
+    container.innerHTML=`
+        <button
+        class="btn btn-dark category-btn active"
+        data-category="All">
+
+            All
+
+        </button>
+    `;
+
+    categories.forEach(category=>{
+
+        if(category.status!=="Active") return;
+
+        container.innerHTML+=`
+
+        <button
+        class="btn btn-outline-dark category-btn"
+        data-category="${category.name}">
+
+            ${category.name}
+
+        </button>
+
+        `;
+
+    });
+
+}
+// ===============================================
+// CATEGORY FILTER
+// ===============================================
+
+window.currentCategory="All";
+
+document.addEventListener("click",function(e){
+
+    const btn=e.target.closest(".category-btn");
+
+    if(!btn) return;
+
+    document.querySelectorAll(".category-btn").forEach(button=>{
+
+        button.classList.remove("active");
+
+    });
+
+    btn.classList.add("active");
+
+    window.currentCategory=btn.dataset.category;
+
+    loadPOSProducts();
+
+});

@@ -180,115 +180,89 @@ document.addEventListener("click",function(e){
 
 // ---------- RENDER CART ----------
 
-function renderCart(){
+cart.forEach((item,index)=>{
 
-    const cartItems=document.getElementById("cartItems");
+    const lineTotal=item.price*item.qty;
 
-    if(!cartItems) return;
+    subtotal+=lineTotal;
 
-    if(cart.length===0){
+    html+=`
 
-        cartItems.innerHTML=`
-        <tr>
-            <td colspan="4" class="text-center text-muted">
-                Cart is Empty
-            </td>
-        </tr>
-        `;
+    <tr>
 
-        updateTotals(0);
+        <td>
 
-        return;
+            <div class="cart-product">
 
-    }
+                <img
+                src="https://via.placeholder.com/55x55?text=Food"
+                class="cart-image">
 
-    let html="";
+                <div>
 
-    let subtotal=0;
+                    <strong>${item.name}</strong>
 
-    cart.forEach((item,index)=>{
+                    <br>
 
-        const lineTotal=item.price*item.qty;
+                    <small class="text-muted">
 
-        subtotal+=lineTotal;
+                        Special Instructions
 
-        html+=`
-
-        <tr>
-
-            <td>
-
-                <strong>${item.name}</strong>
-
-            </td>
-
-            <td class="text-center">
-
-                <div class="qty-control">
-
-                    <button
-                        class="qty-minus"
-                        data-index="${index}">
-
-                        -
-
-                    </button>
-
-                    <span>
-
-                        ${item.qty}
-
-                    </span>
-
-                    <button
-                        class="qty-plus"
-                        data-index="${index}">
-
-                        +
-
-                    </button>
+                    </small>
 
                 </div>
 
-            </td>
+            </div>
 
-            <td class="text-end">
+        </td>
 
-                ₱${item.price.toFixed(2)}
+        <td>
 
-            </td>
+            <div class="qty-control">
 
-            <td class="text-end">
+                <button class="qty-minus" data-index="${index}">-</button>
 
-                <strong>
+                <span>${item.qty}</span>
 
-                    ₱${lineTotal.toFixed(2)}
+                <button class="qty-plus" data-index="${index}">+</button>
 
-                </strong>
+            </div>
 
-                <br>
+        </td>
 
-                <button
-                    class="btn btn-sm btn-danger mt-2 remove-item"
-                    data-index="${index}">
+        <td class="text-end">
 
-                    <i class="fa-solid fa-trash"></i>
+            ₱${item.price.toFixed(2)}
 
-                </button>
+        </td>
 
-            </td>
+        <td class="text-end">
 
-        </tr>
+            <strong>
 
-        `;
+                ₱${lineTotal.toFixed(2)}
 
-    });
+            </strong>
 
-    cartItems.innerHTML=html;
+        </td>
 
-    updateTotals(subtotal);
+        <td class="text-center">
 
-}
+            <button
+            class="btn btn-danger btn-sm remove-item"
+            data-index="${index}">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </button>
+
+        </td>
+
+    </tr>
+
+    `;
+
+});
 // ---------- TOTALS ----------
 
 function updateTotals(subtotal){

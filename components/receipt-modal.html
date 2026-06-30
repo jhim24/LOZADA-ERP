@@ -1,5 +1,5 @@
 <!-- ==========================================
-     RECEIPT MODAL
+     THERMAL RECEIPT MODAL
 ========================================== -->
 
 <div class="modal fade" id="receiptModal" tabindex="-1">
@@ -8,170 +8,104 @@
 
         <div class="modal-content">
 
-            <div class="modal-header">
+            <div class="modal-body" id="receiptContent">
 
-                <h5>
-
-                    <i class="fa-solid fa-receipt"></i>
-
-                    Sales Receipt
-
-                </h5>
-
-                <button
-                    class="btn-close"
-                    data-bs-dismiss="modal">
-                </button>
-
-            </div>
-
-            <div class="modal-body receipt">
-
-                <div class="text-center">
+                <div class="receipt">
 
                     <h3>LOZADA ERP</h3>
 
-                    <strong>Restaurant POS</strong>
+                    <p>Restaurant Management System</p>
+
+                    <hr>
 
                     <p>
-                        Main Branch
+                        Receipt No :
+                        <span id="receiptNo">000001</span>
+                    </p>
+
+                    <p>
+                        Date :
+                        <span id="receiptDate"></span>
+                    </p>
+
+                    <p>
+                        Cashier :
+                        John Admin
                     </p>
 
                     <hr>
 
-                </div>
+                    <table class="receipt-table">
 
-                <table class="table table-borderless">
+                        <thead>
 
-                    <tr>
+                            <tr>
 
-                        <td>Receipt No.</td>
+                                <th>Item</th>
 
-                        <td class="text-end">000001</td>
+                                <th>Qty</th>
 
-                    </tr>
+                                <th>Total</th>
 
-                    <tr>
+                            </tr>
 
-                        <td>Date</td>
+                        </thead>
 
-                        <td class="text-end" id="receiptDate"></td>
+                        <tbody id="receiptItems">
 
-                    </tr>
+                        </tbody>
 
-                    <tr>
+                    </table>
 
-                        <td>Cashier</td>
+                    <hr>
 
-                        <td class="text-end">John Admin</td>
+                    <div class="receipt-total">
 
-                    </tr>
+                        <p>
 
-                </table>
+                            Subtotal
 
-                <hr>
+                            <span id="receiptSubtotal">
+                                ₱0.00
+                            </span>
 
-                <table class="table table-sm">
+                        </p>
 
-                    <thead>
+                        <p>
 
-                        <tr>
+                            VAT
 
-                            <th>Item</th>
+                            <span id="receiptVat">
+                                ₱0.00
+                            </span>
 
-                            <th class="text-center">Qty</th>
+                        </p>
 
-                            <th class="text-end">Amount</th>
+                        <h4>
 
-                        </tr>
+                            TOTAL
 
-                    </thead>
+                            <span id="receiptGrandTotal">
+                                ₱0.00
+                            </span>
 
-                    <tbody id="receiptItems">
+                        </h4>
 
-                        <tr>
+                    </div>
 
-                            <td>Bulalo Solo</td>
+                    <hr>
 
-                            <td class="text-center">1</td>
+                    <p class="text-center">
 
-                            <td class="text-end">185.00</td>
+                        THANK YOU!
 
-                        </tr>
+                    </p>
 
-                        <tr>
+                    <p class="text-center">
 
-                            <td>Pork Sisig</td>
+                        PLEASE COME AGAIN
 
-                            <td class="text-center">2</td>
-
-                            <td class="text-end">630.00</td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-                <hr>
-
-                <table class="table table-borderless">
-
-                    <tr>
-
-                        <td>Subtotal</td>
-
-                        <td class="text-end">935.00</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>VAT</td>
-
-                        <td class="text-end">112.20</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td><strong>Total</strong></td>
-
-                        <td class="text-end">
-
-                            <strong>1047.20</strong>
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Cash</td>
-
-                        <td class="text-end">1100.00</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>Change</td>
-
-                        <td class="text-end">52.80</td>
-
-                    </tr>
-
-                </table>
-
-                <hr>
-
-                <div class="text-center">
-
-                    Thank you for dining with us!
-
-                    <br>
-
-                    Please come again.
+                    </p>
 
                 </div>
 
@@ -188,8 +122,8 @@
                 </button>
 
                 <button
-                    class="btn btn-success"
-                    onclick="window.print()">
+                    class="btn btn-primary"
+                    id="btnPrintReceipt">
 
                     <i class="fa-solid fa-print"></i>
 

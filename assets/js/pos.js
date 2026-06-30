@@ -182,18 +182,18 @@ document.addEventListener("click",function(e){
 
 function renderCart(){
 
-    const cartItems = document.getElementById("cartItems");
+    const cartItems=document.getElementById("cartItems");
 
     if(!cartItems) return;
 
     if(cart.length===0){
 
         cartItems.innerHTML=`
-            <tr>
-                <td colspan="4" class="text-center text-muted">
-                    Cart is Empty
-                </td>
-            </tr>
+        <tr>
+            <td colspan="4" class="text-center text-muted">
+                Cart is Empty
+            </td>
+        </tr>
         `;
 
         updateTotals(0);
@@ -208,9 +208,9 @@ function renderCart(){
 
     cart.forEach((item,index)=>{
 
-        const total=item.price*item.qty;
+        const lineTotal=item.price*item.qty;
 
-        subtotal+=total;
+        subtotal+=lineTotal;
 
         html+=`
 
@@ -224,7 +224,31 @@ function renderCart(){
 
             <td class="text-center">
 
-                ${item.qty}
+                <div class="qty-control">
+
+                    <button
+                        class="qty-minus"
+                        data-index="${index}">
+
+                        -
+
+                    </button>
+
+                    <span>
+
+                        ${item.qty}
+
+                    </span>
+
+                    <button
+                        class="qty-plus"
+                        data-index="${index}">
+
+                        +
+
+                    </button>
+
+                </div>
 
             </td>
 
@@ -238,9 +262,19 @@ function renderCart(){
 
                 <strong>
 
-                    ₱${total.toFixed(2)}
+                    ₱${lineTotal.toFixed(2)}
 
                 </strong>
+
+                <br>
+
+                <button
+                    class="btn btn-sm btn-danger mt-2 remove-item"
+                    data-index="${index}">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
 
             </td>
 
@@ -301,5 +335,54 @@ if(cash>=total){
 }
 
 document.getElementById("changeAmount").value=change.toFixed(2);
+
+});
+// ======================================
+// PLUS / MINUS / DELETE
+// ======================================
+
+document.addEventListener("click",function(e){
+
+    // PLUS
+
+    if(e.target.classList.contains("qty-plus")){
+
+        const index=e.target.dataset.index;
+
+        cart[index].qty++;
+
+        renderCart();
+
+    }
+
+    // MINUS
+
+    if(e.target.classList.contains("qty-minus")){
+
+        const index=e.target.dataset.index;
+
+        cart[index].qty--;
+
+        if(cart[index].qty<=0){
+
+            cart.splice(index,1);
+
+        }
+
+        renderCart();
+
+    }
+
+    // DELETE
+
+    if(e.target.closest(".remove-item")){
+
+        const index=e.target.closest(".remove-item").dataset.index;
+
+        cart.splice(index,1);
+
+        renderCart();
+
+    }
 
 });

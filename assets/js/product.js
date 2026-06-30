@@ -268,74 +268,76 @@ function loadProductTable(){
 
     }
 
-  tableBody.innerHTML += `
+ products.forEach((product,index)=>{
 
-<tr>
+    tableBody.innerHTML += `
 
-    <td>
+    <tr>
 
-        <img
-        src="${product.image || 'https://via.placeholder.com/55x55?text=No+Image'}"
-        style="
-            width:55px;
-            height:55px;
-            object-fit:cover;
-            border-radius:8px;
-            border:1px solid #ddd;
-        ">
+        <td>
 
-    </td>
+            <img
+            src="${product.image || 'https://via.placeholder.com/55x55?text=No+Image'}"
+            style="
+                width:55px;
+                height:55px;
+                object-fit:cover;
+                border-radius:8px;
+                border:1px solid #ddd;">
 
-    <td>${product.code}</td>
+        </td>
 
-    <td>${product.category}</td>
+        <td>${product.code}</td>
 
-    <td>
+        <td>${product.category}</td>
 
-        <strong>${product.name}</strong>
+        <td>
 
-    </td>
+            <strong>${product.name}</strong>
 
-    <td class="text-end">
+        </td>
 
-        ₱${Number(product.sellingPrice).toFixed(2)}
+        <td class="text-end">
 
-    </td>
+            ₱${Number(product.sellingPrice).toFixed(2)}
 
-    <td>
+        </td>
 
-        <span class="badge ${product.status==="Active" ? "bg-success" : "bg-secondary"}">
+        <td>
 
-            ${product.status}
+            <span class="badge ${product.status==="Active" ? "bg-success" : "bg-secondary"}">
 
-        </span>
+                ${product.status}
 
-    </td>
+            </span>
 
-    <td>
+        </td>
 
-        <button
+        <td>
+
+            <button
             class="btn btn-warning btn-sm btn-edit-product"
             data-index="${index}">
 
-            <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-pen"></i>
 
-        </button>
+            </button>
 
-        <button
+            <button
             class="btn btn-danger btn-sm btn-delete-product"
             data-index="${index}">
 
-            <i class="fa-solid fa-trash"></i>
+                <i class="fa-solid fa-trash"></i>
 
-        </button>
+            </button>
 
-    </td>
+        </td>
 
-</tr>
+    </tr>
 
-`;
-    });
+    `;
+
+});
 
 }
 // ===============================================

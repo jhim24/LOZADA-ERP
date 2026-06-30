@@ -204,3 +204,26 @@ function generateCategoryCode(){
     document.getElementById("categoryCode").value = code;
 
 }
+// ===============================================
+// EDIT CATEGORY
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-edit");
+
+    if(!btn) return;
+
+    editIndex = Number(btn.dataset.index);
+
+    const category = categories[editIndex];
+
+    document.getElementById("categoryCode").value = category.code;
+
+    document.getElementById("categoryName").value = category.name;
+
+    document.getElementById("categoryDescription").value = category.description;
+
+    document.getElementById("categoryStatus").value = category.status;
+
+});

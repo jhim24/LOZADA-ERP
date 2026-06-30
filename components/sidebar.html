@@ -1,6 +1,6 @@
-<!-- ==========================================
-     LOZADA ERP SIDEBAR
-========================================== -->
+<!-- ===========================
+     SIDEBAR
+=========================== -->
 
 <aside class="sidebar">
 
@@ -10,122 +10,118 @@
 
         <i class="fa-solid fa-utensils"></i>
 
-        <div>
+        <h2>LOZADA ERP</h2>
 
-            <h2>LOZADA ERP</h2>
-
-            <small>Restaurant ERP</small>
-
-        </div>
+        <small>Restaurant ERP</small>
 
     </div>
 
     <!-- Menu -->
 
-    <ul class="sidebar-menu">
+    <ul class="menu">
 
-        <li>
+        <li class="active">
             <a href="dashboard.html">
                 <i class="fa-solid fa-house"></i>
-                <span>Dashboard</span>
+                Dashboard
             </a>
         </li>
 
         <li>
             <a href="pos.html">
                 <i class="fa-solid fa-cash-register"></i>
-                <span>POS</span>
+                POS
             </a>
         </li>
 
         <li>
             <a href="orders.html">
                 <i class="fa-solid fa-receipt"></i>
-                <span>Orders</span>
+                Orders
             </a>
         </li>
 
         <li>
             <a href="kitchen.html">
                 <i class="fa-solid fa-utensils"></i>
-                <span>Kitchen Display</span>
+                Kitchen Display
             </a>
         </li>
 
         <li>
             <a href="tables.html">
                 <i class="fa-solid fa-chair"></i>
-                <span>Table Management</span>
+                Table Management
             </a>
         </li>
 
         <li>
             <a href="menu.html">
                 <i class="fa-solid fa-book-open"></i>
-                <span>Menu</span>
+                Menu
             </a>
         </li>
 
         <li>
             <a href="inventory.html">
                 <i class="fa-solid fa-boxes-stacked"></i>
-                <span>Inventory</span>
+                Inventory
             </a>
         </li>
 
         <li>
             <a href="purchasing.html">
                 <i class="fa-solid fa-cart-shopping"></i>
-                <span>Purchasing</span>
+                Purchasing
             </a>
         </li>
 
         <li>
             <a href="suppliers.html">
                 <i class="fa-solid fa-truck"></i>
-                <span>Suppliers</span>
+                Suppliers
             </a>
         </li>
 
         <li>
             <a href="customers.html">
                 <i class="fa-solid fa-users"></i>
-                <span>Customers</span>
+                Customers
             </a>
         </li>
 
         <li>
             <a href="hr.html">
                 <i class="fa-solid fa-user-tie"></i>
-                <span>HR</span>
+                HR
             </a>
         </li>
 
         <li>
             <a href="payroll.html">
                 <i class="fa-solid fa-money-check-dollar"></i>
-                <span>Payroll</span>
+                Payroll
             </a>
         </li>
 
         <li>
             <a href="accounting.html">
                 <i class="fa-solid fa-calculator"></i>
-                <span>Accounting</span>
+                Accounting
             </a>
         </li>
 
         <li>
             <a href="reports.html">
                 <i class="fa-solid fa-chart-line"></i>
-                <span>Reports</span>
+                Reports
             </a>
         </li>
 
         <li>
             <a href="settings.html">
                 <i class="fa-solid fa-gear"></i>
-                <span>Settings</span>
+                Settings
             </a>
         </li>
 
@@ -135,9 +131,7 @@
 
     <div class="sidebar-footer">
 
-        <img
-            src="https://ui-avatars.com/api/?name=John+Admin&background=1E3A8A&color=fff"
-            alt="Admin">
+        <img src="https://ui-avatars.com/api/?name=John+Admin&background=1E3A8A&color=fff" alt="Admin">
 
         <div>
 
@@ -150,21 +144,3 @@
     </div>
 
 </aside>
-
-<script>
-
-const currentPage =
-window.location.pathname.split("/").pop();
-
-document.querySelectorAll(".sidebar-menu a")
-.forEach(link=>{
-
-    if(link.getAttribute("href")===currentPage){
-
-        link.classList.add("active");
-
-    }
-
-});
-
-</script>

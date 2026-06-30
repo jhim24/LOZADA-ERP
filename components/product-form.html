@@ -1,0 +1,228 @@
+<!-- ==========================================
+     PRODUCT FORM
+========================================== -->
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-primary text-white">
+
+        <h5 class="mb-0">
+
+            <i class="fa-solid fa-box"></i>
+
+            Product Management
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <!-- PRODUCT CODE -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Product Code
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="productCode"
+                value="PRD-0001"
+                readonly>
+
+        </div>
+
+        <!-- CATEGORY -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Category
+
+            </label>
+
+            <select
+                class="form-select"
+                id="productCategory">
+
+                <option value="">Loading Categories...</option>
+
+            </select>
+
+        </div>
+
+        <!-- PRODUCT NAME -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Product Name
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="productName"
+                placeholder="Enter Product Name">
+
+        </div>
+
+        <!-- SELLING PRICE -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Selling Price
+
+            </label>
+
+            <input
+                type="number"
+                class="form-control"
+                id="sellingPrice"
+                placeholder="0.00">
+
+        </div>
+
+        <!-- COST -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Cost Price
+
+            </label>
+
+            <input
+                type="number"
+                class="form-control"
+                id="costPrice"
+                placeholder="0.00">
+
+        </div>
+
+        <!-- BARCODE -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Barcode
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="barcode"
+                placeholder="Barcode">
+
+        </div>
+
+        <!-- PRODUCT IMAGE -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Product Image
+
+            </label>
+
+            <input
+                type="file"
+                class="form-control"
+                id="productImage"
+                accept="image/*">
+
+        </div>
+
+        <!-- DESCRIPTION -->
+
+        <div class="mb-3">
+
+            <label class="form-label">
+
+                Description
+
+            </label>
+
+            <textarea
+                class="form-control"
+                rows="3"
+                id="productDescription"
+                placeholder="Product Description"></textarea>
+
+        </div>
+
+        <!-- STATUS -->
+
+        <div class="mb-4">
+
+            <label class="form-label">
+
+                Status
+
+            </label>
+
+            <select
+                class="form-select"
+                id="productStatus">
+
+                <option value="Active">Active</option>
+
+                <option value="Inactive">Inactive</option>
+
+            </select>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="d-grid gap-2">
+
+            <button
+                class="btn btn-primary"
+                id="btnSaveProduct">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Product
+
+            </button>
+
+            <button
+                class="btn btn-warning"
+                id="btnUpdateProduct">
+
+                <i class="fa-solid fa-pen"></i>
+
+                Update Product
+
+            </button>
+
+            <button
+                class="btn btn-secondary"
+                id="btnClearProduct">
+
+                <i class="fa-solid fa-rotate"></i>
+
+                Clear
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

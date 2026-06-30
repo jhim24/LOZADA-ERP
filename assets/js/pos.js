@@ -180,89 +180,121 @@ document.addEventListener("click",function(e){
 
 // ---------- RENDER CART ----------
 
-cart.forEach((item,index)=>{
+function renderCart(){
 
-    const lineTotal=item.price*item.qty;
+    const cartItems = document.getElementById("cartItems");
 
-    subtotal+=lineTotal;
+    if(!cartItems) return;
 
-    html+=`
+    if(cart.length===0){
 
-    <tr>
+        cartItems.innerHTML=`
+        <tr>
+            <td colspan="5" class="text-center text-muted">
+                Cart is Empty
+            </td>
+        </tr>
+        `;
 
-        <td>
+        updateTotals(0);
 
-            <div class="cart-product">
+        return;
 
-                <img
-                src="https://via.placeholder.com/55x55?text=Food"
-                class="cart-image">
+    }
 
-                <div>
+    let html="";
 
-                    <strong>${item.name}</strong>
+    let subtotal=0;
 
-                    <br>
+    cart.forEach((item,index)=>{
 
-                    <small class="text-muted">
+        const lineTotal=item.price*item.qty;
 
-                        Special Instructions
+        subtotal+=lineTotal;
 
-                    </small>
+        html+=`
+
+        <tr>
+
+            <td>
+
+                <div class="cart-product">
+
+                    <img
+                    src="https://via.placeholder.com/55x55?text=Food"
+                    class="cart-image">
+
+                    <div>
+
+                        <strong>${item.name}</strong>
+
+                        <br>
+
+                        <small class="text-muted">
+
+                            Special Instructions
+
+                        </small>
+
+                    </div>
 
                 </div>
 
-            </div>
+            </td>
 
-        </td>
+            <td>
 
-        <td>
+                <div class="qty-control">
 
-            <div class="qty-control">
+                    <button class="qty-minus" data-index="${index}">-</button>
 
-                <button class="qty-minus" data-index="${index}">-</button>
+                    <span>${item.qty}</span>
 
-                <span>${item.qty}</span>
+                    <button class="qty-plus" data-index="${index}">+</button>
 
-                <button class="qty-plus" data-index="${index}">+</button>
+                </div>
 
-            </div>
+            </td>
 
-        </td>
+            <td class="text-end">
 
-        <td class="text-end">
+                ₱${item.price.toFixed(2)}
 
-            ₱${item.price.toFixed(2)}
+            </td>
 
-        </td>
+            <td class="text-end">
 
-        <td class="text-end">
+                <strong>
 
-            <strong>
+                    ₱${lineTotal.toFixed(2)}
 
-                ₱${lineTotal.toFixed(2)}
+                </strong>
 
-            </strong>
+            </td>
 
-        </td>
+            <td class="text-center">
 
-        <td class="text-center">
+                <button
+                    class="btn btn-danger btn-sm remove-item"
+                    data-index="${index}">
 
-            <button
-            class="btn btn-danger btn-sm remove-item"
-            data-index="${index}">
+                    <i class="fa-solid fa-trash"></i>
 
-                <i class="fa-solid fa-trash"></i>
+                </button>
 
-            </button>
+            </td>
 
-        </td>
+        </tr>
 
-    </tr>
+        `;
 
-    `;
+    });
 
-});
+    cartItems.innerHTML=html;
+
+    updateTotals(subtotal);
+
+}
 // ---------- TOTALS ----------
 
 function updateTotals(subtotal){

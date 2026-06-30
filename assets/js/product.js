@@ -48,7 +48,9 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
     await loadComponent("product-table","../components/product-table.html");
 
-    loadCategoryDropdown();
+   loadCategoryDropdown();
+
+loadProductTable();
 
 generateProductCode();
 

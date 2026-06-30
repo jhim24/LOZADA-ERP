@@ -1,0 +1,167 @@
+/* ==========================================
+   LOZADA ERP
+   THERMAL RECEIPT (80mm)
+========================================== */
+
+.receipt{
+
+    width:80mm;
+
+    margin:auto;
+
+    background:#fff;
+
+    color:#000;
+
+    font-family:'Courier New',monospace;
+
+    font-size:13px;
+
+    padding:15px;
+
+}
+
+.receipt h3{
+
+    text-align:center;
+
+    margin:0;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+}
+
+.receipt p{
+
+    margin:3px 0;
+
+    font-size:13px;
+
+}
+
+.receipt hr{
+
+    border:none;
+
+    border-top:1px dashed #000;
+
+    margin:10px 0;
+
+}
+
+.receipt-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.receipt-table th{
+
+    text-align:left;
+
+    font-size:12px;
+
+    border-bottom:1px dashed #000;
+
+    padding-bottom:5px;
+
+}
+
+.receipt-table td{
+
+    padding:5px 0;
+
+    font-size:12px;
+
+}
+
+.receipt-table th:nth-child(2),
+.receipt-table td:nth-child(2){
+
+    text-align:center;
+
+}
+
+.receipt-table th:nth-child(3),
+.receipt-table td:nth-child(3){
+
+    text-align:right;
+
+}
+
+.receipt-total{
+
+    margin-top:10px;
+
+}
+
+.receipt-total p{
+
+    display:flex;
+
+    justify-content:space-between;
+
+}
+
+.receipt-total h4{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    margin-top:10px;
+
+}
+
+.modal-footer{
+
+    justify-content:center;
+
+}
+
+@media print{
+
+    body *{
+
+        visibility:hidden;
+
+    }
+
+    #receiptContent,
+    #receiptContent *{
+
+        visibility:visible;
+
+    }
+
+    #receiptContent{
+
+        position:absolute;
+
+        left:0;
+
+        top:0;
+
+        width:80mm;
+
+        margin:0;
+
+        padding:0;
+
+    }
+
+    .modal-footer{
+
+        display:none;
+
+    }
+
+}

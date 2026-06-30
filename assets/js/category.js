@@ -94,17 +94,11 @@ document.addEventListener("click", function(e){
 
     );
 
-   alert("Category saved successfully.");
-
-document.getElementById("categoryName").value="";
-
-document.getElementById("categoryDescription").value="";
-
-document.getElementById("categoryStatus").value="Active";
+ alert("Category saved successfully.");
 
 loadCategoryTable();
 
-generateCategoryCode();
+clearCategoryForm();
 });
 // ===============================================
 // LOAD CATEGORY TABLE

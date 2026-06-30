@@ -1,37 +1,70 @@
-<!-- ==========================
+<!-- ==========================================
      SHOPPING CART
-========================== -->
+========================================== -->
 
-<div class="cart-container">
+<div class="widget">
 
-    <div class="cart-header">
+    <div class="widget-header">
 
         <h4>
+
             <i class="fa-solid fa-cart-shopping"></i>
+
             Shopping Cart
+
         </h4>
 
-        <span id="cartCount">0 Item(s)</span>
+        <span class="cart-badge" id="cartCount">
+
+            0 Item(s)
+
+        </span>
 
     </div>
 
-    <div id="cartItems">
+    <div class="table-responsive">
 
-        <div class="empty-cart">
+        <table class="table cart-table align-middle">
 
-            Cart is Empty
+            <thead>
 
-        </div>
+                <tr>
+
+                    <th width="45%">ITEMS</th>
+
+                    <th width="15%">QTY</th>
+
+                    <th width="20%">AMOUNT</th>
+
+                    <th width="20%">TOTAL</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="cartItems">
+
+                <tr>
+
+                    <td colspan="4" class="text-center text-muted">
+
+                        Cart is Empty
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
 
     </div>
 
-    <hr>
-
-    <div class="cart-total">
+    <div class="cart-summary">
 
         <div>
 
-            <span>Subtotal</span>
+            <strong>SUBTOTAL</strong>
 
             <strong id="subtotal">₱0.00</strong>
 
@@ -39,17 +72,17 @@
 
         <div>
 
-            <span>VAT (12%)</span>
+            <strong>VAT (12%)</strong>
 
             <strong id="vat">₱0.00</strong>
 
         </div>
 
-        <div class="grand">
+        <div class="grand-total">
 
-            <span>Total</span>
+            <span>TOTAL</span>
 
-            <strong id="grandTotal">₱0.00</strong>
+            <span id="grandTotal">₱0.00</span>
 
         </div>
 

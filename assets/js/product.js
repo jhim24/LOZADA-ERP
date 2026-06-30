@@ -10,6 +10,9 @@
 let products = JSON.parse(localStorage.getItem("products")) || [];
 
 let editProductIndex = -1;
+
+let selectedImage = "";
+
 // ---------- COMPONENT LOADER ----------
 
 async function loadComponent(id,file){
@@ -148,27 +151,27 @@ document.addEventListener("click",function(e){
 
     }
 
-    products.push({
+  products.push({
 
-        code,
+    code,
 
-        category,
+    category,
 
-        name,
+    name,
 
-        sellingPrice,
+    sellingPrice,
 
-        costPrice,
+    costPrice,
 
-        barcode,
+    barcode,
 
-        description,
+    description,
 
-        status,
+    status,
 
-        image:""
+    image:selectedImage
 
-    });
+});
 
     localStorage.setItem(
 
@@ -205,7 +208,11 @@ function generateProductCode(){
 // ===============================================
 
 function clearProductForm(){
+selectedImage="";
 
+document.getElementById("imagePreview").src=
+
+"https://via.placeholder.com/180x180?text=No+Image";
     editProductIndex = -1;
 
     document.getElementById("productCategory").value = "";
@@ -341,7 +348,11 @@ document.addEventListener("click", function(e){
     document.getElementById("productDescription").value = product.description;
 
     document.getElementById("productStatus").value = product.status;
+selectedImage = product.image || "";
 
+document.getElementById("imagePreview").src =
+    selectedImage ||
+    "https://via.placeholder.com/180x180?text=No+Image";
 });
 // ===============================================
 // UPDATE PRODUCT
@@ -377,20 +388,27 @@ document.addEventListener("click", function(e){
 
     const status = document.getElementById("productStatus").value;
 
-    products[editProductIndex] = {
+   products[editProductIndex] = {
 
-        ...products[editProductIndex],
+    code,
 
-        code,
-        category,
-        name,
-        sellingPrice,
-        costPrice,
-        barcode,
-        description,
-        status
+    category,
 
-    };
+    name,
+
+    sellingPrice,
+
+    costPrice,
+
+    barcode,
+
+    description,
+
+    status,
+
+    image:selectedImage
+
+};
 
     localStorage.setItem("products", JSON.stringify(products));
 
@@ -454,5 +472,31 @@ document.addEventListener("input", function(e){
             : "none";
 
     });
+
+});
+
+// ===============================================
+// IMAGE PREVIEW
+// ===============================================
+
+document.addEventListener("change",function(e){
+
+    if(e.target.id!=="productImage") return;
+
+    const file=e.target.files[0];
+
+    if(!file) return;
+
+    const reader=new FileReader();
+
+    reader.onload=function(event){
+
+        selectedImage=event.target.result;
+
+        document.getElementById("imagePreview").src=selectedImage;
+
+    };
+
+    reader.readAsDataURL(file);
 
 });

@@ -42,14 +42,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadComponent("pos-products", "../components/pos-products.html");
     await loadComponent("pos-cart", "../components/pos-cart.html");
     await loadComponent("pos-payment", "../components/pos-payment.html");
-    await loadComponent("receipt-modal", "../components/receipt-modal.html");
+   await loadComponent("receipt-modal", "../components/receipt-modal.html");
 
-    updateClock();
+loadPOSProducts();
 
-    setInterval(updateClock,1000);
+updateClock();
 
-    setReceiptDate();
+setInterval(updateClock,1000);
 
+setReceiptDate();
 });
 
 // ---------- LIVE CLOCK ----------
@@ -483,5 +484,83 @@ function generateReceipt(){
     );
 
     modal.show();
+
+}
+// ===============================================
+// LOAD PRODUCTS FROM PRODUCT MODULE
+// ===============================================
+
+function loadPOSProducts(){
+
+    const grid = document.getElementById("productsGrid");
+
+    if(!grid) return;
+
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+
+    grid.innerHTML = "";
+
+    if(products.length===0){
+
+        grid.innerHTML = `
+
+        <div class="alert alert-warning">
+
+            No Products Available
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+    products.forEach(product=>{
+
+        if(product.status!=="Active") return;
+
+        const image = product.image && product.image!=="" ?
+            product.image :
+            "https://via.placeholder.com/300x220?text=No+Image";
+
+        grid.innerHTML += `
+
+        <div class="product-card">
+
+            <img src="${image}" alt="${product.name}">
+
+            <div class="product-info">
+
+                <span class="badge bg-primary">
+
+                    ${product.category}
+
+                </span>
+
+                <h5>${product.name}</h5>
+
+                <p class="price">
+
+                    ₱${Number(product.sellingPrice).toFixed(2)}
+
+                </p>
+
+                <button
+                    class="btn btn-warning w-100 add-cart">
+
+                    <i class="fa-solid fa-cart-plus"></i>
+
+                    Add to Cart
+
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
 
 }

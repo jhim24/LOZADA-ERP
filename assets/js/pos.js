@@ -398,3 +398,22 @@ document.addEventListener("click",function(e){
     }
 
 });
+// ======================================
+// COMPLETE SALE
+// ======================================
+
+document.addEventListener("click", function(e){
+
+    if(e.target.id !== "btnCompleteSale") return;
+
+    if(cart.length===0){
+
+        alert("Shopping Cart is empty.");
+
+        return;
+
+    }
+
+    generateReceipt();
+
+});

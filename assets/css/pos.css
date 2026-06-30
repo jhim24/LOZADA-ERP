@@ -328,25 +328,42 @@ object-fit:cover;
 
 padding:15px;
 
-}
+text-align:center;
 
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+}
 .product-info h5{
 
 margin:12px 0 8px;
 
 font-weight:700;
 
+font-size:24px;
+
+text-align:center;
+
+width:100%;
+
 }
 
 .price{
 
-font-size:22px;
+font-size:30px;
 
-font-weight:700;
+font-weight:800;
 
 color:#F59E0B;
 
 margin-bottom:15px;
+
+text-align:center;
+
+width:100%;
 
 }
 /* ==========================================
@@ -960,5 +977,36 @@ font-weight:700;
 font-size:13px;
 
 color:#777;
+
+}
+/* ==========================================
+   PRODUCT CARD CENTER
+========================================== */
+
+.product-card img{
+
+display:block;
+
+margin:auto;
+
+}
+
+.product-info .badge{
+
+display:inline-block;
+
+margin:0 auto 10px;
+
+font-size:11px;
+
+font-weight:700;
+
+}
+
+.product-info .btn{
+
+width:100%;
+
+margin-top:8px;
 
 }

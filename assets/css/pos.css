@@ -919,3 +919,46 @@ min-width:25px;
 text-align:center;
 
 }
+/* ===========================
+PRODUCT INSIDE CART
+=========================== */
+
+.cart-product{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.cart-image{
+
+width:55px;
+
+height:55px;
+
+border-radius:10px;
+
+object-fit:cover;
+
+border:1px solid #ddd;
+
+}
+
+.cart-product strong{
+
+font-size:17px;
+
+font-weight:700;
+
+}
+
+.cart-product small{
+
+font-size:13px;
+
+color:#777;
+
+}

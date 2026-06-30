@@ -299,3 +299,40 @@ function clearCategoryForm(){
     generateCategoryCode();
 
 }
+// ===============================================
+// DELETE CATEGORY
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-delete");
+
+    if(!btn) return;
+
+    const index = Number(btn.dataset.index);
+
+    const confirmDelete = confirm(
+
+        "Are you sure you want to delete this category?"
+
+    );
+
+    if(!confirmDelete) return;
+
+    categories.splice(index,1);
+
+    localStorage.setItem(
+
+        "categories",
+
+        JSON.stringify(categories)
+
+    );
+
+    loadCategoryTable();
+
+    generateCategoryCode();
+
+    alert("Category deleted successfully.");
+
+});

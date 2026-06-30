@@ -225,3 +225,88 @@ function clearProductForm(){
     generateProductCode();
 
 }
+// ===============================================
+// LOAD PRODUCT TABLE
+// ===============================================
+
+function loadProductTable(){
+
+    const tableBody = document.getElementById("productTableBody");
+
+    if(!tableBody) return;
+
+    products = JSON.parse(localStorage.getItem("products")) || [];
+
+    tableBody.innerHTML = "";
+
+    if(products.length===0){
+
+        tableBody.innerHTML = `
+
+        <tr>
+
+            <td colspan="6" class="text-center text-muted">
+
+                No Products Found
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+    products.forEach((product,index)=>{
+
+        tableBody.innerHTML += `
+
+        <tr>
+
+            <td>${product.code}</td>
+
+            <td>${product.category}</td>
+
+            <td>${product.name}</td>
+
+            <td>₱${product.sellingPrice.toFixed(2)}</td>
+
+            <td>
+
+                <span class="badge ${product.status==="Active"?"bg-success":"bg-secondary"}">
+
+                    ${product.status}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <button
+                    class="btn btn-warning btn-sm btn-edit-product"
+                    data-index="${index}">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </button>
+
+                <button
+                    class="btn btn-danger btn-sm btn-delete-product"
+                    data-index="${index}">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}

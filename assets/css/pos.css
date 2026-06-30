@@ -555,3 +555,104 @@ display:none;
 }
 
 }
+/* ==========================
+SHOPPING CART
+========================== */
+
+.cart-container{
+
+background:white;
+
+padding:20px;
+
+border-radius:20px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.cart-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+.cart-items{
+
+min-height:300px;
+
+max-height:500px;
+
+overflow:auto;
+
+}
+
+.cart-row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:12px 0;
+
+border-bottom:1px solid #eee;
+
+}
+
+.cart-row h6{
+
+margin:0;
+
+font-size:15px;
+
+}
+
+.cart-row small{
+
+color:#888;
+
+}
+
+.cart-summary{
+
+margin-top:20px;
+
+}
+
+.cart-summary div{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:12px;
+
+}
+
+.grand-total{
+
+font-size:22px;
+
+font-weight:bold;
+
+color:#F59E0B;
+
+}
+
+.empty-cart{
+
+text-align:center;
+
+padding:50px;
+
+color:#999;
+
+}

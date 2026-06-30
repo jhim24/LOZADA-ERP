@@ -227,3 +227,64 @@ document.addEventListener("click", function(e){
     document.getElementById("categoryStatus").value = category.status;
 
 });
+// ===============================================
+// UPDATE CATEGORY
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnUpdateCategory");
+
+    if(!btn) return;
+
+    if(editIndex === -1){
+
+        alert("Please select a category first.");
+
+        return;
+
+    }
+
+    const code = document.getElementById("categoryCode").value.trim();
+
+    const name = document.getElementById("categoryName").value.trim();
+
+    const description = document.getElementById("categoryDescription").value.trim();
+
+    const status = document.getElementById("categoryStatus").value;
+
+    if(name===""){
+
+        alert("Category Name is required.");
+
+        return;
+
+    }
+
+    categories[editIndex] = {
+
+        code,
+
+        name,
+
+        description,
+
+        status
+
+    };
+
+    localStorage.setItem(
+
+        "categories",
+
+        JSON.stringify(categories)
+
+    );
+
+    alert("Category updated successfully.");
+
+    loadCategoryTable();
+
+    clearCategoryForm();
+
+});

@@ -42,3 +42,54 @@ document.addEventListener("DOMContentLoaded", async()=>{
     await loadComponent("category-table","../components/category-table.html");
 
 });
+// ===============================================
+// SAVE CATEGORY (LOCAL STORAGE)
+// ===============================================
+
+let categories = JSON.parse(localStorage.getItem("categories")) || [];
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnSaveCategory");
+
+    if(!btn) return;
+
+    const code = document.getElementById("categoryCode").value.trim();
+
+    const name = document.getElementById("categoryName").value.trim();
+
+    const description = document.getElementById("categoryDescription").value.trim();
+
+    const status = document.getElementById("categoryStatus").value;
+
+    if(name===""){
+
+        alert("Category Name is required.");
+
+        return;
+
+    }
+
+    categories.push({
+
+        code,
+
+        name,
+
+        description,
+
+        status
+
+    });
+
+    localStorage.setItem(
+
+        "categories",
+
+        JSON.stringify(categories)
+
+    );
+
+    alert("Category saved successfully.");
+
+});

@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
     loadCategoryTable();
 
+    generateCategoryCode();
+
 });
 // ===============================================
 // SAVE CATEGORY (LOCAL STORAGE)
@@ -92,8 +94,17 @@ document.addEventListener("click", function(e){
 
     );
 
-    alert("Category saved successfully.");
+   alert("Category saved successfully.");
+
+document.getElementById("categoryName").value="";
+
+document.getElementById("categoryDescription").value="";
+
+document.getElementById("categoryStatus").value="Active";
+
 loadCategoryTable();
+
+generateCategoryCode();
 });
 // ===============================================
 // LOAD CATEGORY TABLE

@@ -288,3 +288,20 @@ document.addEventListener("click", function(e){
     clearCategoryForm();
 
 });
+// ===============================================
+// CLEAR CATEGORY FORM
+// ===============================================
+
+function clearCategoryForm(){
+
+    editIndex = -1;
+
+    document.getElementById("categoryName").value = "";
+
+    document.getElementById("categoryDescription").value = "";
+
+    document.getElementById("categoryStatus").value = "Active";
+
+    generateCategoryCode();
+
+}

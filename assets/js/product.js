@@ -206,23 +206,23 @@ function generateProductCode(){
 
 function clearProductForm(){
 
-    editProductIndex=-1;
+    editProductIndex = -1;
 
-    document.getElementById("productCategory").value="";
+    document.getElementById("productCategory").value = "";
 
-    document.getElementById("productName").value="";
+    document.getElementById("productName").value = "";
 
-    document.getElementById("sellingPrice").value="";
+    document.getElementById("sellingPrice").value = "";
 
-    document.getElementById("costPrice").value="";
+    document.getElementById("costPrice").value = "";
 
-    document.getElementById("barcode").value="";
+    document.getElementById("barcode").value = "";
 
-    document.getElementById("productDescription").value="";
+    document.getElementById("productDescription").value = "";
 
-    document.getElementById("productStatus").value="Active";
+    document.getElementById("productStatus").value = "Active";
 
-    document.getElementById("productImage").value="";
+    document.getElementById("productImage").value = "";
 
     generateProductCode();
 
@@ -341,5 +341,63 @@ document.addEventListener("click", function(e){
     document.getElementById("productDescription").value = product.description;
 
     document.getElementById("productStatus").value = product.status;
+
+});
+// ===============================================
+// UPDATE PRODUCT
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnUpdateProduct");
+
+    if(!btn) return;
+
+    if(editProductIndex === -1){
+
+        alert("Please select a product first.");
+
+        return;
+
+    }
+
+    const code = document.getElementById("productCode").value;
+
+    const category = document.getElementById("productCategory").value;
+
+    const name = document.getElementById("productName").value.trim();
+
+    const sellingPrice = parseFloat(document.getElementById("sellingPrice").value) || 0;
+
+    const costPrice = parseFloat(document.getElementById("costPrice").value) || 0;
+
+    const barcode = document.getElementById("barcode").value.trim();
+
+    const description = document.getElementById("productDescription").value.trim();
+
+    const status = document.getElementById("productStatus").value;
+
+    products[editProductIndex] = {
+
+        ...products[editProductIndex],
+
+        code,
+        category,
+        name,
+        sellingPrice,
+        costPrice,
+        barcode,
+        description,
+        status
+
+    };
+
+    localStorage.setItem("products", JSON.stringify(products));
+
+    loadProductTable();
+
+    clearProductForm();
+
+    alert("Product updated successfully.");
 
 });

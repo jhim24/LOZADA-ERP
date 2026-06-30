@@ -94,13 +94,11 @@ function setReceiptDate(){
 // CATEGORY ACTIVE
 // ===============================================
 
-document.addEventListener("click",function(e){
+document.addEventListener("click", function(e){
 
-    const button = e.target.closest(".add-cart");
+    const button = e.target.closest(".category-btn");
 
     if(!button) return;
-
-    console.log("ADD TO CART CLICKED");
 
     document.querySelectorAll(".category-btn").forEach(btn=>{
 

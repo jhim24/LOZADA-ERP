@@ -401,3 +401,58 @@ document.addEventListener("click", function(e){
     alert("Product updated successfully.");
 
 });
+// ===============================================
+// DELETE PRODUCT
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-delete-product");
+
+    if(!btn) return;
+
+    const index = Number(btn.dataset.index);
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this product?"
+    );
+
+    if(!confirmDelete) return;
+
+    products.splice(index,1);
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+
+    loadProductTable();
+
+    clearProductForm();
+
+    alert("Product deleted successfully.");
+
+});
+// ===============================================
+// SEARCH PRODUCT
+// ===============================================
+
+document.addEventListener("input", function(e){
+
+    if(e.target.id !== "searchProduct") return;
+
+    const keyword = e.target.value.toLowerCase();
+
+    const rows = document.querySelectorAll("#productTableBody tr");
+
+    rows.forEach(row=>{
+
+        const text = row.innerText.toLowerCase();
+
+        row.style.display = text.includes(keyword)
+            ? ""
+            : "none";
+
+    });
+
+});

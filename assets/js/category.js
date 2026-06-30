@@ -93,3 +93,86 @@ document.addEventListener("click", function(e){
     alert("Category saved successfully.");
 
 });
+// ===============================================
+// LOAD CATEGORY TABLE
+// ===============================================
+
+function loadCategoryTable(){
+
+    const tableBody = document.getElementById("categoryTableBody");
+
+    if(!tableBody) return;
+
+    categories = JSON.parse(localStorage.getItem("categories")) || [];
+
+    tableBody.innerHTML = "";
+
+    if(categories.length===0){
+
+        tableBody.innerHTML=`
+
+        <tr>
+
+            <td colspan="5" class="text-center text-muted">
+
+                No Category Found
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+    categories.forEach((category,index)=>{
+
+        tableBody.innerHTML += `
+
+        <tr>
+
+            <td>${category.code}</td>
+
+            <td>${category.name}</td>
+
+            <td>${category.description}</td>
+
+            <td>
+
+                <span class="badge ${category.status==="Active"?"bg-success":"bg-secondary"}">
+
+                    ${category.status}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <button
+                    class="btn btn-warning btn-sm btn-edit"
+                    data-index="${index}">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </button>
+
+                <button
+                    class="btn btn-danger btn-sm btn-delete"
+                    data-index="${index}">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}

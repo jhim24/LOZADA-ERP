@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
 // ===============================================
 
 let categories = JSON.parse(localStorage.getItem("categories")) || [];
-
+let editIndex = -1;
 document.addEventListener("click", function(e){
 
     const btn = e.target.closest("#btnSaveCategory");

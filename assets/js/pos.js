@@ -96,9 +96,11 @@ function setReceiptDate(){
 
 document.addEventListener("click",function(e){
 
-    const button=e.target.closest(".category-btn");
+    const button = e.target.closest(".add-cart");
 
     if(!button) return;
+
+    console.log("ADD TO CART CLICKED");
 
     document.querySelectorAll(".category-btn").forEach(btn=>{
 

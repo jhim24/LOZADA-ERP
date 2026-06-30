@@ -20,28 +20,168 @@ async function loadComponent(id, file) {
 
         console.error(error);
 
-        document.getElementById(id).innerHTML =
-            `<div style="padding:20px;color:red;">
-                Failed to load: ${file}
-             </div>`;
+        const element = document.getElementById(id);
+
+        if (element) {
+
+            element.innerHTML = `
+                <div style="padding:20px;color:red;">
+                    Failed to load: ${file}
+                </div>
+            `;
+
+        }
+
     }
 
 }
 
-// Load all dashboard components
+// ======================================
+// LOAD COMPONENTS
+// ======================================
 
-loadComponent("sidebar", "components/sidebar.html");
+window.addEventListener("DOMContentLoaded", () => {
 
-loadComponent("navbar", "components/navbar.html");
+    loadComponent("sidebar", "../components/sidebar.html");
 
-loadComponent("dashboard-cards", "components/dashboard-cards.html");
+    loadComponent("navbar", "../components/navbar.html");
 
-loadComponent("dashboard-charts", "components/dashboard-charts.html");
+    loadComponent("dashboard-cards", "../components/dashboard-cards.html");
 
-loadComponent("dashboard-orders", "components/dashboard-orders.html");
+    loadComponent("dashboard-charts", "../components/dashboard-charts.html");
 
-loadComponent("dashboard-kitchen", "components/dashboard-kitchen.html");
+    loadComponent("dashboard-orders", "../components/dashboard-orders.html");
 
-loadComponent("dashboard-inventory", "components/dashboard-inventory.html");
+    loadComponent("dashboard-kitchen", "../components/dashboard-kitchen.html");
 
-loadComponent("dashboard-summary", "components/dashboard-summary.html");
+    loadComponent("dashboard-inventory", "../components/dashboard-inventory.html");
+
+    loadComponent("dashboard-summary", "../components/dashboard-summary.html");
+
+});
+
+// ======================================
+// CHART.JS
+// ======================================
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        // SALES CHART
+
+        const salesCanvas = document.getElementById("salesChart");
+
+        if (salesCanvas) {
+
+            new Chart(salesCanvas, {
+
+                type: "line",
+
+                data: {
+
+                    labels: [
+
+                        "Mon",
+                        "Tue",
+                        "Wed",
+                        "Thu",
+                        "Fri",
+                        "Sat",
+                        "Sun"
+
+                    ],
+
+                    datasets: [{
+
+                        label: "Sales",
+
+                        data: [
+
+                            20000,
+                            35000,
+                            28000,
+                            45000,
+                            32000,
+                            48000,
+                            38000
+
+                        ],
+
+                        borderColor: "#1E3A8A",
+
+                        backgroundColor: "rgba(30,58,138,.15)",
+
+                        fill: true,
+
+                        tension: .4
+
+                    }]
+
+                }
+
+            });
+
+        }
+
+        // CATEGORY CHART
+
+        const categoryCanvas = document.getElementById("categoryChart");
+
+        if (categoryCanvas) {
+
+            new Chart(categoryCanvas, {
+
+                type: "doughnut",
+
+                data: {
+
+                    labels: [
+
+                        "Main Course",
+
+                        "Beverages",
+
+                        "Desserts",
+
+                        "Snacks"
+
+                    ],
+
+                    datasets: [{
+
+                        data: [
+
+                            35,
+
+                            25,
+
+                            20,
+
+                            20
+
+                        ],
+
+                        backgroundColor: [
+
+                            "#2563EB",
+
+                            "#10B981",
+
+                            "#F59E0B",
+
+                            "#EF4444"
+
+                        ]
+
+                    }]
+
+                }
+
+            });
+
+        }
+
+    },500);
+
+});

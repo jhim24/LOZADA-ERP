@@ -158,21 +158,21 @@ function loadCategoryTable(){
 
             <td>
 
-                <button
-                    class="btn btn-warning btn-sm btn-edit"
-                    data-index="${index}">
+               <button
+class="btn btn-warning btn-sm btn-edit"
+data-index="${index}">
 
-                    <i class="fa-solid fa-pen"></i>
+<i class="fa-solid fa-pen"></i>
 
-                </button>
+</button>
 
-                <button
-                    class="btn btn-danger btn-sm btn-delete"
-                    data-index="${index}">
+<button
+class="btn btn-danger btn-sm btn-delete"
+data-index="${index}">
 
-                    <i class="fa-solid fa-trash"></i>
+<i class="fa-solid fa-trash"></i>
 
-                </button>
+</button>
 
             </td>
 

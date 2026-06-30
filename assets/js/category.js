@@ -41,6 +41,8 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
     await loadComponent("category-table","../components/category-table.html");
 
+    loadCategoryTable();
+
 });
 // ===============================================
 // SAVE CATEGORY (LOCAL STORAGE)
@@ -91,7 +93,7 @@ document.addEventListener("click", function(e){
     );
 
     alert("Category saved successfully.");
-
+loadCategoryTable();
 });
 // ===============================================
 // LOAD CATEGORY TABLE

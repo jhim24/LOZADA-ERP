@@ -417,3 +417,71 @@ document.addEventListener("click", function(e){
     generateReceipt();
 
 });
+// ======================================
+// GENERATE RECEIPT
+// ======================================
+
+function generateReceipt(){
+
+    const receiptItems=document.getElementById("receiptItems");
+
+    receiptItems.innerHTML="";
+
+    let subtotal=0;
+
+    cart.forEach(item=>{
+
+        const total=item.price*item.qty;
+
+        subtotal+=total;
+
+        receiptItems.innerHTML+=`
+
+        <tr>
+
+            <td>${item.name}</td>
+
+            <td>${item.qty}</td>
+
+            <td style="text-align:right;">
+
+                ₱${total.toFixed(2)}
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    const vat=subtotal*0.12;
+
+    const grandTotal=subtotal+vat;
+
+    document.getElementById("receiptSubtotal").innerHTML=
+    "₱"+subtotal.toFixed(2);
+
+    document.getElementById("receiptVat").innerHTML=
+    "₱"+vat.toFixed(2);
+
+    document.getElementById("receiptGrandTotal").innerHTML=
+    "₱"+grandTotal.toFixed(2);
+
+    document.getElementById("receiptDate").innerHTML=
+    new Date().toLocaleString();
+
+    const receiptNo=Math.floor(Math.random()*900000)+100000;
+
+    document.getElementById("receiptNo").innerHTML=
+    receiptNo;
+
+    const modal=new bootstrap.Modal(
+
+        document.getElementById("receiptModal")
+
+    );
+
+    modal.show();
+
+}

@@ -130,53 +130,6 @@ document.addEventListener("input",function(e){
 
 });
 
-// ===============================================
-// SHOPPING CART
-// ===============================================
-
-let cart=[];
-
-document.addEventListener("click",function(e){
-
-    const button=e.target.closest(".add-cart");
-
-    if(!button) return;
-
-    const card=button.closest(".product-card");
-
-    const name=card.querySelector("h5").innerText;
-
-    const price=parseFloat(
-
-        card.querySelector(".price")
-        .innerText
-        .replace("₱","")
-
-    );
-
-    const item=cart.find(p=>p.name===name);
-
-    if(item){
-
-        item.qty++;
-
-    }else{
-
-        cart.push({
-
-            name:name,
-
-            price:price,
-
-            qty:1
-
-        });
-
-    }
-
-    renderCart();
-
-});
 
 // ---------- RENDER CART ----------
 

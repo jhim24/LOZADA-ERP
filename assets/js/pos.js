@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadComponent("pos-cart", "../components/pos-cart.html");
     await loadComponent("pos-payment", "../components/pos-payment.html");
    await loadComponent("receipt-modal", "../components/receipt-modal.html");
-
+loadPOSProducts();
 loadPOSCategories();
 
 loadPOSProducts();
@@ -488,6 +488,7 @@ function generateReceipt(){
     modal.show();
 
 }
+
 // ===============================================
 // LOAD PRODUCTS FROM PRODUCT MODULE
 // ===============================================

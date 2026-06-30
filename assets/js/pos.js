@@ -402,7 +402,9 @@ document.addEventListener("click",function(e){
 
 document.addEventListener("click", function(e){
 
-    if(e.target.id !== "btnCompleteSale") return;
+    const btn = e.target.closest("#btnCompleteSale");
+
+    if(!btn) return;
 
     if(cart.length===0){
 

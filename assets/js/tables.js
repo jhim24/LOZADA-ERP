@@ -181,7 +181,7 @@ function loadTables(floor){
 
         clone.querySelector(".table-status").innerHTML =
             table.status;
-const card = clone.querySelector(".table-card");
+ clone.querySelector(".table-card");
 
 const badge = clone.querySelector(".table-status");
 
@@ -220,14 +220,11 @@ switch(table.status){
         break;
 
 }
-       const card = clone.querySelector(".table-card");
-
-card.dataset.index = index;
+      card.dataset.index = index;
 
 card.style.cursor = "pointer";
 
 grid.appendChild(clone);
-
     });
 
 }

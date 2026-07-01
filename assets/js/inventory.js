@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
     await loadComponent("inventory-modal","../components/inventory-modal.html");
 
+    loadInventory();
+
 });
 // ===============================================
 // OPEN INVENTORY MODAL
@@ -165,3 +167,182 @@ document.getElementById("inventoryModal")
 ).hide();
     
 }
+// ===============================================
+// LOAD INVENTORY
+// ===============================================
+
+function loadInventory(){
+
+    const tbody = document.getElementById("inventoryTableBody");
+
+    if(!tbody) return;
+
+    const items = JSON.parse(
+
+        localStorage.getItem("inventory")
+
+    ) || [];
+
+    tbody.innerHTML = "";
+
+    if(items.length===0){
+
+        tbody.innerHTML = `
+
+        <tr>
+
+            <td colspan="10" class="text-center text-muted">
+
+                No Inventory Items
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+    items.forEach((item,index)=>{
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${item.code}</td>
+
+            <td>${item.name}</td>
+
+            <td>${item.category}</td>
+
+            <td>${item.unit}</td>
+
+            <td class="text-center">${item.stock}</td>
+
+            <td class="text-center">${item.minStock}</td>
+
+            <td class="text-end">
+
+                ₱${item.cost.toFixed(2)}
+
+            </td>
+
+            <td>${item.supplier}</td>
+
+            <td class="text-center">
+
+                In Stock
+
+            </td>
+
+           <td class="text-center">
+
+    <button
+    class="btn btn-primary btn-sm btn-edit-item"
+    data-index="${index}">
+
+        <i class="fa-solid fa-pen"></i>
+
+    </button>
+
+    <button
+    class="btn btn-danger btn-sm btn-delete-item"
+    data-index="${index}">
+
+        <i class="fa-solid fa-trash"></i>
+
+    </button>
+
+</td>
+        </tr>
+
+        `;
+
+    });
+updateInventorySummary(items);
+}
+// ===============================================
+// INVENTORY SUMMARY
+// ===============================================
+
+function updateInventorySummary(items){
+
+    let totalItems = items.length;
+
+    let inStock = 0;
+
+    let lowStock = 0;
+
+    let outStock = 0;
+
+    items.forEach(item=>{
+
+        if(item.stock <= 0){
+
+            outStock++;
+
+        }
+        else if(item.stock <= item.minStock){
+
+            lowStock++;
+
+        }
+        else{
+
+            inStock++;
+
+        }
+
+    });
+
+    document.getElementById("totalItems").innerHTML = totalItems;
+
+    document.getElementById("stockAvailable").innerHTML = inStock;
+
+    document.getElementById("lowStock").innerHTML = lowStock;
+
+    document.getElementById("outStock").innerHTML = outStock;
+
+}
+// ===============================================
+// EDIT INVENTORY ITEM
+// ===============================================
+
+let editInventoryIndex = -1;
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-edit-item");
+
+    if(!btn) return;
+
+    const index = Number(btn.dataset.index);
+
+    const items = JSON.parse(localStorage.getItem("inventory")) || [];
+
+    const item = items[index];
+
+    editInventoryIndex = index;
+
+    document.getElementById("itemCode").value = item.code;
+    document.getElementById("itemName").value = item.name;
+    document.getElementById("itemCategory").value = item.category;
+    document.getElementById("itemUnit").value = item.unit;
+    document.getElementById("itemStock").value = item.stock;
+    document.getElementById("itemMinStock").value = item.minStock;
+    document.getElementById("itemCost").value = item.cost;
+    document.getElementById("itemSupplier").value = item.supplier;
+    document.getElementById("itemBarcode").value = item.barcode;
+    document.getElementById("itemRemarks").value = item.remarks;
+
+    const modal = new bootstrap.Modal(
+
+        document.getElementById("inventoryModal")
+
+    );
+
+    modal.show();
+
+});

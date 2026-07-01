@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     await loadComponent("tables-content","../components/tables-content.html");
 
     await loadComponent("tables-card","../components/tables-card.html");
+    await loadComponent("table-details-modal","../components/table-details-modal.html");
 initializeTables();
 
 loadTables("Rooftop");
@@ -219,7 +220,13 @@ switch(table.status){
         break;
 
 }
-        grid.appendChild(clone);
+       const card = clone.querySelector(".table-card");
+
+card.dataset.index = index;
+
+card.style.cursor = "pointer";
+
+grid.appendChild(clone);
 
     });
 
@@ -246,5 +253,117 @@ document.addEventListener("click", function(e){
 
     // Load selected floor
     loadTables(btn.dataset.floor);
+
+});
+// ===============================================
+// OPEN TABLE DETAILS
+// ===============================================
+
+document.addEventListener("click",function(e){
+
+    const card = e.target.closest(".table-card");
+
+    if(!card) return;
+
+    const index = Number(card.dataset.index);
+
+    const floor = document.querySelector(".floor-tab.active").dataset.floor;
+
+    const tables = JSON.parse(
+
+        localStorage.getItem("restaurantTables")
+
+    ) || [];
+
+    const table = tables.filter(t=>t.floor===floor)[index];
+
+    document.getElementById("modalTableName").innerHTML =
+        table.name;
+
+    document.getElementById("modalFloor").innerHTML =
+        table.floor;
+
+    document.getElementById("modalSeats").innerHTML =
+        table.seats;
+
+    document.getElementById("modalStatus").innerHTML =
+        table.status;
+
+    document.getElementById("modalCustomer").innerHTML =
+        table.customer || "Walk-in";
+
+    document.getElementById("modalOrder").innerHTML =
+        table.orderNo || "-";
+
+    const modal = new bootstrap.Modal(
+
+        document.getElementById("tableDetailsModal")
+
+    );
+
+    modal.show();
+
+});
+// ===============================================
+// OPEN TABLE
+// ===============================================
+
+document.addEventListener("click",function(e){
+
+    const btn = e.target.closest("#btnOpenTable");
+
+    if(!btn) return;
+
+    const tableName = document.getElementById("modalTableName").innerHTML;
+
+    const floor = document.getElementById("modalFloor").innerHTML;
+
+    let tables = JSON.parse(
+
+        localStorage.getItem("restaurantTables")
+
+    ) || [];
+
+    const index = tables.findIndex(table=>
+
+        table.name===tableName &&
+
+        table.floor===floor
+
+    );
+
+    if(index<0) return;
+
+    tables[index].status = "Occupied";
+
+    localStorage.setItem(
+
+        "restaurantTables",
+
+        JSON.stringify(tables)
+
+    );
+
+    localStorage.setItem(
+
+        "selectedTable",
+
+        JSON.stringify({
+
+            floor:floor,
+
+            table:tableName
+
+        })
+
+    );
+
+    bootstrap.Modal.getInstance(
+
+        document.getElementById("tableDetailsModal")
+
+    ).hide();
+
+    window.location.href="pos.html";
 
 });

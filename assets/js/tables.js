@@ -180,7 +180,45 @@ function loadTables(floor){
 
         clone.querySelector(".table-status").innerHTML =
             table.status;
+const card = clone.querySelector(".table-card");
 
+const badge = clone.querySelector(".table-status");
+
+switch(table.status){
+
+    case "Available":
+
+        card.classList.add("table-available");
+
+        badge.className = "badge bg-success table-status";
+
+        break;
+
+    case "Occupied":
+
+        card.classList.add("table-occupied");
+
+        badge.className = "badge bg-danger table-status";
+
+        break;
+
+    case "Reserved":
+
+        card.classList.add("table-reserved");
+
+        badge.className = "badge bg-warning text-dark table-status";
+
+        break;
+
+    case "Cleaning":
+
+        card.classList.add("table-cleaning");
+
+        badge.className = "badge bg-secondary table-status";
+
+        break;
+
+}
         grid.appendChild(clone);
 
     });

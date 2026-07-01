@@ -37,12 +37,13 @@ document.addEventListener("DOMContentLoaded",async()=>{
 
     await loadComponent("navbar","../components/navbar.html");
 
-    await loadComponent("orders-header","../components/orders-header.html");
+   await loadComponent("orders-header","../components/orders-header.html");
 
-    await loadComponent("orders-table","../components/orders-table.html");
+await loadComponent("orders-table","../components/orders-table.html");
 
-    loadOrders();
+await loadComponent("order-view-modal","../components/order-view-modal.html");
 
+loadOrders();
 });
 
 // ===============================================

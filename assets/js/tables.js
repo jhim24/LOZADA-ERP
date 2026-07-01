@@ -370,3 +370,52 @@ const startModal = new bootstrap.Modal(
 startModal.show();
 
 });
+// ===============================================
+// START ORDER
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnStartOrder");
+
+    if(!btn) return;
+
+    const customer = document.getElementById("customerName").value || "Walk-in";
+
+    const guests = document.getElementById("numberGuests").value;
+
+    const server = document.getElementById("serverName").value;
+
+    const notes = document.getElementById("tableNotes").value;
+
+    let selectedTable = JSON.parse(
+
+        localStorage.getItem("selectedTable")
+
+    ) || {};
+
+    selectedTable.customer = customer;
+
+    selectedTable.guests = guests;
+
+    selectedTable.server = server;
+
+    selectedTable.notes = notes;
+
+    localStorage.setItem(
+
+        "selectedTable",
+
+        JSON.stringify(selectedTable)
+
+    );
+
+    bootstrap.Modal.getInstance(
+
+        document.getElementById("startOrderModal")
+
+    ).hide();
+
+    window.location.href = "pos.html";
+
+});

@@ -41,4 +41,79 @@ document.addEventListener("DOMContentLoaded",async()=>{
 
     await loadComponent("settings-content","../components/settings-content.html");
 
+    loadCompanyProfile();
+
 });
+// ===============================================
+// SAVE COMPANY SETTINGS
+// ===============================================
+
+document.addEventListener("click",function(e){
+
+    const btn = e.target.closest("#btnSaveSettings");
+
+    if(!btn) return;
+
+    const company = {
+
+        name: document.getElementById("companyName").value,
+
+        address: document.getElementById("companyAddress").value,
+
+        contact: document.getElementById("companyContact").value,
+
+        email: document.getElementById("companyEmail").value,
+
+        website: document.getElementById("companyWebsite").value,
+
+        tin: document.getElementById("companyTIN").value,
+
+        vat: document.getElementById("companyVAT").value
+
+    };
+
+    localStorage.setItem(
+
+        "companyProfile",
+
+        JSON.stringify(company)
+
+    );
+
+    alert("Company Profile saved successfully.");
+
+});
+// ===============================================
+// LOAD COMPANY SETTINGS
+// ===============================================
+
+function loadCompanyProfile(){
+
+    const company = JSON.parse(
+
+        localStorage.getItem("companyProfile")
+
+    ) || {};
+
+    document.getElementById("companyName").value =
+        company.name || "";
+
+    document.getElementById("companyAddress").value =
+        company.address || "";
+
+    document.getElementById("companyContact").value =
+        company.contact || "";
+
+    document.getElementById("companyEmail").value =
+        company.email || "";
+
+    document.getElementById("companyWebsite").value =
+        company.website || "";
+
+    document.getElementById("companyTIN").value =
+        company.tin || "";
+
+    document.getElementById("companyVAT").value =
+        company.vat || "";
+
+}

@@ -486,7 +486,7 @@ function generateReceipt(){
     );
 
     modal.show();
-
+saveOrder(receiptNo, grandTotal);
 }
 
 // ===============================================
@@ -649,3 +649,40 @@ document.addEventListener("click",function(e){
     loadPOSProducts();
 
 });
+// ===============================================
+// SAVE ORDER
+// ===============================================
+
+function saveOrder(receiptNo,total){
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    const order={
+
+        receiptNo:receiptNo,
+
+        date:new Date().toLocaleString(),
+
+        items:[...cart],
+
+        total:total,
+
+        status:"Pending",
+
+        payment:"Cash",
+
+        cashier:"Administrator"
+
+    };
+
+    orders.push(order);
+
+    localStorage.setItem(
+
+        "orders",
+
+        JSON.stringify(orders)
+
+    );
+
+}

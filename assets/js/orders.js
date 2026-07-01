@@ -231,11 +231,9 @@ document.addEventListener("click",function(e){
 
     );
 
-    modal.show();
-
+   modal.show();
+updateOrderSummary();
 });
-
-}
 // ===============================================
 // UPDATE ORDER STATUS
 // ===============================================

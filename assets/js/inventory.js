@@ -84,3 +84,77 @@ function generateItemCode(){
     "INV-" + String(next).padStart(6,"0");
 
 }
+// ===============================================
+// SAVE INVENTORY ITEM
+// ===============================================
+
+document.addEventListener("click",function(e){
+
+    const btn = e.target.closest("#btnSaveInventory");
+
+    if(!btn) return;
+
+    saveInventoryItem();
+
+});
+// ===============================================
+// SAVE ITEM FUNCTION
+// ===============================================
+
+function saveInventoryItem(){
+
+    let items = JSON.parse(
+
+        localStorage.getItem("inventory")
+
+    ) || [];
+
+    const item = {
+
+        code: document.getElementById("itemCode").value,
+
+        name: document.getElementById("itemName").value,
+
+        category: document.getElementById("itemCategory").value,
+
+        unit: document.getElementById("itemUnit").value,
+
+        stock: Number(
+
+            document.getElementById("itemStock").value
+
+        ),
+
+        minStock: Number(
+
+            document.getElementById("itemMinStock").value
+
+        ),
+
+        cost: Number(
+
+            document.getElementById("itemCost").value
+
+        ),
+
+        supplier: document.getElementById("itemSupplier").value,
+
+        barcode: document.getElementById("itemBarcode").value,
+
+        remarks: document.getElementById("itemRemarks").value
+
+    };
+
+    items.push(item);
+
+    localStorage.setItem(
+
+        "inventory",
+
+        JSON.stringify(items)
+
+    );
+
+    alert("Inventory Item Saved.");
+
+}

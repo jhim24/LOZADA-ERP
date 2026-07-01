@@ -156,5 +156,12 @@ function saveInventoryItem(){
     );
 
     alert("Inventory Item Saved.");
+loadInventory();
 
+bootstrap.Modal.getInstance(
+
+document.getElementById("inventoryModal")
+
+).hide();
+    
 }

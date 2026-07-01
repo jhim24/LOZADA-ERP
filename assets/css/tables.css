@@ -61,3 +61,38 @@ font-weight:bold;
 font-weight:600;
 
 }
+/* ==========================================
+   TABLE STATUS COLORS
+========================================== */
+
+.table-available{
+
+background:#ECFDF5;
+
+border:2px solid #10B981;
+
+}
+
+.table-occupied{
+
+background:#FEF2F2;
+
+border:2px solid #EF4444;
+
+}
+
+.table-reserved{
+
+background:#FFFBEB;
+
+border:2px solid #F59E0B;
+
+}
+
+.table-cleaning{
+
+background:#F3F4F6;
+
+border:2px solid #6B7280;
+
+}

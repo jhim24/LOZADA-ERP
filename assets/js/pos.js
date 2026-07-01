@@ -44,9 +44,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadComponent("pos-payment", "../components/pos-payment.html");
    await loadComponent("receipt-modal", "../components/receipt-modal.html");
 loadPOSProducts();
-loadPOSCategories();
 
-loadPOSProducts();
+loadPOSCategories();
 
 updateClock();
 
@@ -92,27 +91,7 @@ function setReceiptDate(){
     }
 
 }
-// ===============================================
-// COMPANY PROFILE
-// ===============================================
 
-const company = JSON.parse(
-
-    localStorage.getItem("companyProfile")
-
-) || {};
-
-document.getElementById("receiptCompanyName").innerHTML =
-company.name || "LOZADA ERP";
-
-document.getElementById("receiptCompanyAddress").innerHTML =
-company.address || "";
-
-document.getElementById("receiptCompanyContact").innerHTML =
-company.contact || "";
-
-document.getElementById("receiptCompanyTIN").innerHTML =
-company.tin ? "TIN : " + company.tin : "";
 // ===============================================
 // CATEGORY ACTIVE
 // ===============================================
@@ -491,8 +470,30 @@ function generateReceipt(){
     document.getElementById("receiptGrandTotal").innerHTML=
     "₱"+grandTotal.toFixed(2);
 
-    document.getElementById("receiptDate").innerHTML=
-    new Date().toLocaleString();
+   document.getElementById("receiptDate").innerHTML =
+new Date().toLocaleString();
+
+// ===============================================
+// COMPANY PROFILE
+// ===============================================
+
+const company = JSON.parse(
+
+    localStorage.getItem("companyProfile")
+
+) || {};
+
+document.getElementById("receiptCompanyName").innerHTML =
+company.name || "LOZADA ERP";
+
+document.getElementById("receiptCompanyAddress").innerHTML =
+company.address || "";
+
+document.getElementById("receiptCompanyContact").innerHTML =
+company.contact || "";
+
+document.getElementById("receiptCompanyTIN").innerHTML =
+company.tin ? "TIN : " + company.tin : "";
 
     const receiptNo=Math.floor(Math.random()*900000)+100000;
 

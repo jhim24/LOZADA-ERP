@@ -147,15 +147,29 @@ function saveInventoryItem(){
 
     };
 
+  // ===============================================
+// ADD OR UPDATE
+// ===============================================
+
+if(editInventoryIndex >= 0){
+
+    items[editInventoryIndex] = item;
+
+    editInventoryIndex = -1;
+
+}else{
+
     items.push(item);
 
-    localStorage.setItem(
+}
 
-        "inventory",
+localStorage.setItem(
 
-        JSON.stringify(items)
+    "inventory",
 
-    );
+    JSON.stringify(items)
+
+);
 
     alert("Inventory Item Saved.");
 loadInventory();

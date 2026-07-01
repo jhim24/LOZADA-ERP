@@ -102,15 +102,55 @@ function loadOrders(){
 
             </td>
 
-            <td>
+           <td>
 
-                <span class="badge bg-warning">
+<select
+class="form-select form-select-sm order-status"
+data-index="${index}">
 
-                    ${order.status}
+<option
+value="Pending"
+${order.status==="Pending"?"selected":""}>
 
-                </span>
+Pending
 
-            </td>
+</option>
+
+<option
+value="Preparing"
+${order.status==="Preparing"?"selected":""}>
+
+Preparing
+
+</option>
+
+<option
+value="Ready"
+${order.status==="Ready"?"selected":""}>
+
+Ready
+
+</option>
+
+<option
+value="Served"
+${order.status==="Served"?"selected":""}>
+
+Served
+
+</option>
+
+<option
+value="Cancelled"
+${order.status==="Cancelled"?"selected":""}>
+
+Cancelled
+
+</option>
+
+</select>
+
+</td>
 
             <td>${order.payment}</td>
 

@@ -360,3 +360,94 @@ document.addEventListener("click", function(e){
     modal.show();
 
 });
+// ===============================================
+// DELETE INVENTORY ITEM
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-delete-item");
+
+    if(!btn) return;
+
+    const index = Number(btn.dataset.index);
+
+    if(!confirm("Are you sure you want to delete this item?")){
+
+        return;
+
+    }
+
+    let items = JSON.parse(
+
+        localStorage.getItem("inventory")
+
+    ) || [];
+
+    items.splice(index,1);
+
+    localStorage.setItem(
+
+        "inventory",
+
+        JSON.stringify(items)
+
+    );
+
+    loadInventory();
+
+});
+// ===============================================
+// SEARCH INVENTORY
+// ===============================================
+
+document.addEventListener("input", function(e){
+
+    if(e.target.id !== "searchInventory") return;
+
+    const keyword = e.target.value.toLowerCase();
+
+    document.querySelectorAll("#inventoryTableBody tr").forEach(row=>{
+
+        const text = row.innerText.toLowerCase();
+
+        row.style.display = text.includes(keyword)
+
+            ? ""
+
+            : "none";
+
+    });
+
+});
+// ===============================================
+// CATEGORY FILTER
+// ===============================================
+
+document.addEventListener("change", function(e){
+
+    if(e.target.id !== "filterCategory") return;
+
+    const category = e.target.value;
+
+    document.querySelectorAll("#inventoryTableBody tr").forEach(row=>{
+
+        if(category === "All"){
+
+            row.style.display = "";
+
+            return;
+
+        }
+
+        const rowCategory = row.cells[2].innerText;
+
+        row.style.display = rowCategory === category
+
+            ? ""
+
+            : "none";
+
+    });
+
+});

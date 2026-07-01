@@ -1,0 +1,121 @@
+<!-- ==========================================
+     INVENTORY TABLE
+========================================== -->
+
+<div class="card shadow-sm border-0">
+
+    <div class="card-body">
+
+        <div class="row mb-3">
+
+            <div class="col-lg-4">
+
+                <input
+                type="text"
+                class="form-control"
+                id="searchInventory"
+                placeholder="Search Item...">
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <select
+                class="form-select"
+                id="filterCategory">
+
+                    <option value="All">
+
+                        All Categories
+
+                    </option>
+
+                    <option value="Meat">
+
+                        Meat
+
+                    </option>
+
+                    <option value="Vegetables">
+
+                        Vegetables
+
+                    </option>
+
+                    <option value="Beverages">
+
+                        Beverages
+
+                    </option>
+
+                    <option value="Dry Goods">
+
+                        Dry Goods
+
+                    </option>
+
+                    <option value="Condiments">
+
+                        Condiments
+
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Item Code</th>
+
+                        <th>Item Name</th>
+
+                        <th>Category</th>
+
+                        <th>Unit</th>
+
+                        <th class="text-center">Stock</th>
+
+                        <th class="text-center">Min Stock</th>
+
+                        <th class="text-end">Cost</th>
+
+                        <th>Supplier</th>
+
+                        <th class="text-center">Status</th>
+
+                        <th class="text-center">Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="inventoryTableBody">
+
+                    <tr>
+
+                        <td colspan="10" class="text-center text-muted">
+
+                            No Inventory Items
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

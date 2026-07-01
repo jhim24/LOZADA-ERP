@@ -741,5 +741,12 @@ function loadSelectedTable(){
 
     document.getElementById("selectedTable").innerHTML =
         table.table;
+document.getElementById("selectedCustomer").innerHTML =
+table.customer || "Walk-in";
 
+document.getElementById("selectedGuests").innerHTML =
+table.guests || 1;
+
+document.getElementById("selectedServer").innerHTML =
+table.server || "-";
 }

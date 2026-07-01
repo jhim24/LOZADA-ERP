@@ -44,6 +44,7 @@ await loadComponent("orders-table","../components/orders-table.html");
 await loadComponent("order-view-modal","../components/order-view-modal.html");
 
 loadOrders();
+setInterval(loadOrders,2000);
 });
 
 // ===============================================

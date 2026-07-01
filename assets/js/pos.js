@@ -92,7 +92,27 @@ function setReceiptDate(){
     }
 
 }
+// ===============================================
+// COMPANY PROFILE
+// ===============================================
 
+const company = JSON.parse(
+
+    localStorage.getItem("companyProfile")
+
+) || {};
+
+document.getElementById("receiptCompanyName").innerHTML =
+company.name || "LOZADA ERP";
+
+document.getElementById("receiptCompanyAddress").innerHTML =
+company.address || "";
+
+document.getElementById("receiptCompanyContact").innerHTML =
+company.contact || "";
+
+document.getElementById("receiptCompanyTIN").innerHTML =
+company.tin ? "TIN : " + company.tin : "";
 // ===============================================
 // CATEGORY ACTIVE
 // ===============================================

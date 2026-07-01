@@ -133,5 +133,61 @@ function loadOrders(){
         `;
 
     });
+    // ===============================================
+// VIEW ORDER
+// ===============================================
+
+document.addEventListener("click",function(e){
+
+    const btn = e.target.closest(".btn-view-order");
+
+    if(!btn) return;
+
+    const index = Number(btn.dataset.index);
+
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    const order = orders[index];
+
+    document.getElementById("viewReceiptNo").innerHTML = order.receiptNo;
+
+    document.getElementById("viewDate").innerHTML = order.date;
+
+    const tbody = document.getElementById("viewOrderItems");
+
+    tbody.innerHTML = "";
+
+    order.items.forEach(item=>{
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${item.name}</td>
+
+            <td>${item.qty}</td>
+
+            <td>₱${Number(item.price).toFixed(2)}</td>
+
+            <td>₱${Number(item.price * item.qty).toFixed(2)}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+    document.getElementById("viewGrandTotal").innerHTML =
+        "₱" + Number(order.total).toFixed(2);
+
+    const modal = new bootstrap.Modal(
+
+        document.getElementById("orderViewModal")
+
+    );
+
+    modal.show();
+
+});
 
 }

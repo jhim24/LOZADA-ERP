@@ -172,7 +172,12 @@ Cancelled
 
         `;
 
-    });
+   });
+
+updateOrderSummary();
+
+}
+
     // ===============================================
 // VIEW ORDER
 // ===============================================
@@ -258,3 +263,46 @@ document.addEventListener("change",function(e){
     loadOrders();
 
 });
+// ===============================================
+// ORDER SUMMARY
+// ===============================================
+
+function updateOrderSummary(){
+
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    let pending = 0;
+    let preparing = 0;
+    let ready = 0;
+    let served = 0;
+
+    orders.forEach(order=>{
+
+        switch(order.status){
+
+            case "Pending":
+                pending++;
+                break;
+
+            case "Preparing":
+                preparing++;
+                break;
+
+            case "Ready":
+                ready++;
+                break;
+
+            case "Served":
+                served++;
+                break;
+
+        }
+
+    });
+
+    document.getElementById("pendingCount").innerHTML = pending;
+    document.getElementById("preparingCount").innerHTML = preparing;
+    document.getElementById("readyCount").innerHTML = ready;
+    document.getElementById("servedCount").innerHTML = served;
+
+}

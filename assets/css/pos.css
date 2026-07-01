@@ -1090,3 +1090,223 @@ color:#F59E0B;
 line-height:1;
 
 }
+/* ==========================================
+   MOBILE RESPONSIVE
+========================================== */
+
+@media (max-width: 992px){
+
+    .main{
+
+        padding:15px;
+
+    }
+
+    .row{
+
+        --bs-gutter-x:15px;
+
+    }
+
+    .products-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:15px;
+
+    }
+
+    .product-card{
+
+        border-radius:15px;
+
+    }
+
+    .product-card img{
+
+        aspect-ratio:1/1;
+
+        object-fit:contain;
+
+        padding:8px;
+
+    }
+
+    .pos-header{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        gap:15px;
+
+    }
+
+    .pos-search{
+
+        min-width:100%;
+
+    }
+
+    .pos-info{
+
+        justify-content:space-between;
+
+    }
+
+    .payment-panel{
+
+        margin-top:20px;
+
+    }
+
+}
+/* ==========================================
+   PHONE RESPONSIVE
+========================================== */
+
+@media (max-width:768px){
+
+    /* HEADER */
+
+    .pos-header{
+
+        padding:15px;
+
+        border-radius:15px;
+
+    }
+
+    .pos-logo h2{
+
+        font-size:22px;
+
+    }
+
+    .pos-search{
+
+        width:100%;
+
+        min-width:100%;
+
+    }
+
+    .pos-info{
+
+        width:100%;
+
+        display:grid;
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:10px;
+
+    }
+
+    .info-card{
+
+        min-width:unset;
+
+        width:100%;
+
+    }
+
+    /* CATEGORY */
+
+    .pos-categories{
+
+        gap:10px;
+
+    }
+
+    .category-btn{
+
+        min-width:90px;
+
+        height:70px;
+
+        font-size:13px;
+
+    }
+
+    /* PRODUCTS */
+
+    .products-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:12px;
+
+    }
+
+    .product-card{
+
+        border-radius:15px;
+
+    }
+
+    .product-card img{
+
+        aspect-ratio:1/1;
+
+        object-fit:contain;
+
+        padding:6px;
+
+    }
+
+    .product-info{
+
+        padding:10px;
+
+    }
+
+    .product-info h5{
+
+        font-size:16px;
+
+        margin:5px 0;
+
+    }
+
+    .price{
+
+        font-size:22px;
+
+        margin:5px 0 10px;
+
+    }
+
+    .product-info .btn{
+
+        font-size:13px;
+
+        height:40px;
+
+    }
+
+    /* CART */
+
+    .cart-container{
+
+        margin-top:20px;
+
+        overflow-x:auto;
+
+    }
+
+    .cart-table{
+
+        min-width:700px;
+
+    }
+
+    /* PAYMENT */
+
+    .payment-panel{
+
+        margin-top:20px;
+
+    }
+
+}

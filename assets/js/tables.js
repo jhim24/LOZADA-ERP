@@ -181,10 +181,9 @@ function loadTables(floor){
 
         clone.querySelector(".table-status").innerHTML =
             table.status;
- clone.querySelector(".table-card");
+const card = clone.querySelector(".table-card");
 
 const badge = clone.querySelector(".table-status");
-
 switch(table.status){
 
     case "Available":

@@ -117,3 +117,31 @@ function loadCompanyProfile(){
         company.vat || "";
 
 }
+// ===============================================
+// COMPANY LOGO PREVIEW
+// ===============================================
+
+let companyLogoBase64 = "";
+
+document.addEventListener("change",function(e){
+
+    if(e.target.id!=="companyLogo") return;
+
+    const file = e.target.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+
+        companyLogoBase64 = event.target.result;
+
+        document.getElementById("companyLogoPreview").src =
+            companyLogoBase64;
+
+    };
+
+    reader.readAsDataURL(file);
+
+});

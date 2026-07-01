@@ -53,25 +53,31 @@ document.addEventListener("click",function(e){
     const btn = e.target.closest("#btnSaveSettings");
 
     if(!btn) return;
+const oldCompany = JSON.parse(
 
-    const company = {
+    localStorage.getItem("companyProfile")
 
-        name: document.getElementById("companyName").value,
+) || {};
 
-        address: document.getElementById("companyAddress").value,
+const company = {
 
-        contact: document.getElementById("companyContact").value,
+    name: document.getElementById("companyName").value,
 
-        email: document.getElementById("companyEmail").value,
+    address: document.getElementById("companyAddress").value,
 
-        website: document.getElementById("companyWebsite").value,
+    contact: document.getElementById("companyContact").value,
 
-        tin: document.getElementById("companyTIN").value,
+    email: document.getElementById("companyEmail").value,
 
-        vat: document.getElementById("companyVAT").value
+    website: document.getElementById("companyWebsite").value,
 
-    };
+    tin: document.getElementById("companyTIN").value,
 
+    vat: document.getElementById("companyVAT").value,
+
+    logo: companyLogoBase64 || oldCompany.logo || ""
+
+};
     localStorage.setItem(
 
         "companyProfile",

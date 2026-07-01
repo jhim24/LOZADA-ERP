@@ -52,6 +52,7 @@ updateClock();
 setInterval(updateClock,1000);
 
 setReceiptDate();
+loadSelectedTable();
 });
 
 // ---------- LIVE CLOCK ----------
@@ -709,5 +710,36 @@ function saveOrder(receiptNo,total){
         JSON.stringify(orders)
 
     );
+
+}
+// ===============================================
+// LOAD SELECTED TABLE
+// ===============================================
+
+function loadSelectedTable(){
+
+    const info = document.getElementById("selectedTableInfo");
+
+    if(!info) return;
+
+    const table = JSON.parse(
+
+        localStorage.getItem("selectedTable")
+
+    );
+
+    if(!table){
+
+        return;
+
+    }
+
+    info.classList.remove("d-none");
+
+    document.getElementById("selectedFloor").innerHTML =
+        table.floor;
+
+    document.getElementById("selectedTable").innerHTML =
+        table.table;
 
 }

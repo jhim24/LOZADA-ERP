@@ -494,7 +494,11 @@ company.contact || "";
 
 document.getElementById("receiptCompanyTIN").innerHTML =
 company.tin ? "TIN : " + company.tin : "";
+document.getElementById("receiptCompanyLogo").src =
 
+company.logo ||
+
+"https://via.placeholder.com/120x120?text=LOGO";
     const receiptNo=Math.floor(Math.random()*900000)+100000;
 
     document.getElementById("receiptNo").innerHTML=

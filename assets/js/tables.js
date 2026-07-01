@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
 
     await loadComponent("tables-card","../components/tables-card.html");
     await loadComponent("table-details-modal","../components/table-details-modal.html");
+    await loadComponent("start-order-modal","../components/start-order-modal.html");
 initializeTables();
 
 loadTables("Rooftop");
@@ -354,12 +355,18 @@ document.addEventListener("click",function(e){
 
     );
 
-    bootstrap.Modal.getInstance(
+  bootstrap.Modal.getInstance(
 
-        document.getElementById("tableDetailsModal")
+    document.getElementById("tableDetailsModal")
 
-    ).hide();
+).hide();
 
-    window.location.href="pos.html";
+const startModal = new bootstrap.Modal(
+
+    document.getElementById("startOrderModal")
+
+);
+
+startModal.show();
 
 });

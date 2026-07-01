@@ -231,3 +231,30 @@ document.addEventListener("click",function(e){
 });
 
 }
+// ===============================================
+// UPDATE ORDER STATUS
+// ===============================================
+
+document.addEventListener("change",function(e){
+
+    const select = e.target.closest(".order-status");
+
+    if(!select) return;
+
+    const index = Number(select.dataset.index);
+
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    orders[index].status = select.value;
+
+    localStorage.setItem(
+
+        "orders",
+
+        JSON.stringify(orders)
+
+    );
+
+    loadOrders();
+
+});

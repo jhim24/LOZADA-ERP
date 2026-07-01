@@ -1,0 +1,211 @@
+<!-- ==========================================
+     INVENTORY MODAL
+========================================== -->
+
+<div class="modal fade"
+id="inventoryModal"
+tabindex="-1">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+<div class="modal-header bg-success text-white">
+
+<h5 class="modal-title">
+
+<i class="fa-solid fa-box"></i>
+
+Inventory Item
+
+</h5>
+
+<button
+type="button"
+class="btn-close btn-close-white"
+data-bs-dismiss="modal">
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="row">
+
+<div class="col-md-4 mb-3">
+
+<label>Item Code</label>
+
+<input
+type="text"
+class="form-control"
+id="itemCode"
+readonly>
+
+</div>
+
+<div class="col-md-8 mb-3">
+
+<label>Item Name</label>
+
+<input
+type="text"
+class="form-control"
+id="itemName">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Category</label>
+
+<select
+class="form-select"
+id="itemCategory">
+
+<option>Meat</option>
+
+<option>Vegetables</option>
+
+<option>Beverages</option>
+
+<option>Dry Goods</option>
+
+<option>Condiments</option>
+
+<option>Dairy</option>
+
+<option>Seafood</option>
+
+</select>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Unit</label>
+
+<select
+class="form-select"
+id="itemUnit">
+
+<option>kg</option>
+
+<option>g</option>
+
+<option>pcs</option>
+
+<option>pack</option>
+
+<option>bottle</option>
+
+<option>liter</option>
+
+<option>box</option>
+
+<option>tray</option>
+
+</select>
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Beginning Stock</label>
+
+<input
+type="number"
+class="form-control"
+id="itemStock"
+value="0">
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Minimum Stock</label>
+
+<input
+type="number"
+class="form-control"
+id="itemMinStock"
+value="10">
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Cost Price</label>
+
+<input
+type="number"
+class="form-control"
+id="itemCost"
+step="0.01">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Supplier</label>
+
+<input
+type="text"
+class="form-control"
+id="itemSupplier">
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Barcode</label>
+
+<input
+type="text"
+class="form-control"
+id="itemBarcode">
+
+</div>
+
+<div class="col-md-12 mb-3">
+
+<label>Remarks</label>
+
+<textarea
+class="form-control"
+rows="3"
+id="itemRemarks"></textarea>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Cancel
+
+</button>
+
+<button
+class="btn btn-success"
+id="btnSaveInventory">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Save Item
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>

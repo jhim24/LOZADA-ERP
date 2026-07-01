@@ -1,0 +1,99 @@
+<!-- ==========================================
+     START ORDER MODAL
+========================================== -->
+
+<div class="modal fade" id="startOrderModal" tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header bg-success text-white">
+
+                <h5 class="modal-title">
+
+                    <i class="fa-solid fa-utensils"></i>
+
+                    Start Dine-In Order
+
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="mb-3">
+
+                    <label class="form-label">Customer Name</label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="customerName"
+                        placeholder="Walk-in Customer">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">Number of Guests</label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="numberGuests"
+                        value="1"
+                        min="1">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">Server / Waiter</label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="serverName"
+                        placeholder="Server Name">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">Notes</label>
+
+                    <textarea
+                        class="form-control"
+                        id="tableNotes"
+                        rows="3"></textarea>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-success"
+                    id="btnStartOrder">
+
+                    <i class="fa-solid fa-play"></i>
+
+                    Start Order
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

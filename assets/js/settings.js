@@ -121,8 +121,15 @@ function loadCompanyProfile(){
 
     document.getElementById("companyVAT").value =
         company.vat || "";
+companyLogoBase64 = company.logo || "";
 
+document.getElementById("companyLogoPreview").src =
+
+company.logo ||
+
+"https://via.placeholder.com/180x180?text=LOGO";
 }
+
 // ===============================================
 // COMPANY LOGO PREVIEW
 // ===============================================

@@ -351,6 +351,9 @@ document.addEventListener("click",function(e){
     const tableName = document.getElementById("modalTableName").innerHTML;
 
     const floor = document.getElementById("modalFloor").innerHTML;
+    
+    const currentStatus =
+    document.getElementById("modalStatus").innerHTML;
 
     let tables = JSON.parse(
 
@@ -367,6 +370,38 @@ document.addEventListener("click",function(e){
     );
 
     if(index<0) return;
+
+    // ===============================================
+// SMART BUTTON ACTION
+// ===============================================
+
+if(currentStatus === "Occupied"){
+
+    bootstrap.Modal.getInstance(
+
+        document.getElementById("tableDetailsModal")
+
+    ).hide();
+
+    window.location.href = "pos.html";
+
+    return;
+
+}
+
+if(currentStatus === "Bill Requested"){
+
+    bootstrap.Modal.getInstance(
+
+        document.getElementById("tableDetailsModal")
+
+    ).hide();
+
+    window.location.href = "pos.html";
+
+    return;
+
+}
 
     tables[index].status = "Occupied";
 

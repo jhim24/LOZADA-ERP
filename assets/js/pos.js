@@ -513,13 +513,6 @@ document.getElementById("receiptServer").innerHTML =
 
 selectedTable.server || "-";
     
-    // ===============================================
-// PAYMENT PANEL TABLE INFORMATION
-// ===============================================
-
-const paymentFloor = document.getElementById("paymentFloor");
-if(paymentFloor){
-    paymentFloor.innerHTML = table.floor || "-";
 }
 
 const paymentTable = document.getElementById("paymentTable");
@@ -832,6 +825,50 @@ table.guests || 1;
 
 document.getElementById("selectedServer").innerHTML =
 table.server || "-";
+    
+}
+// ===============================================
+// PAYMENT PANEL TABLE INFORMATION
+// ===============================================
+
+const paymentFloor = document.getElementById("paymentFloor");
+
+if(paymentFloor){
+
+    paymentFloor.innerHTML = table.floor;
+
+}
+
+const paymentTable = document.getElementById("paymentTable");
+
+if(paymentTable){
+
+    paymentTable.innerHTML = table.table;
+
+}
+
+const paymentCustomer = document.getElementById("paymentCustomer");
+
+if(paymentCustomer){
+
+    paymentCustomer.innerHTML = table.customer || "Walk-in";
+
+}
+
+const paymentGuests = document.getElementById("paymentGuests");
+
+if(paymentGuests){
+
+    paymentGuests.innerHTML = table.guests || 1;
+
+}
+
+const paymentServer = document.getElementById("paymentServer");
+
+if(paymentServer){
+
+    paymentServer.innerHTML = table.server || "-";
+
 }
 // ======================================
 // RECEIVE PAYMENT

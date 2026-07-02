@@ -513,8 +513,6 @@ document.getElementById("receiptServer").innerHTML =
 
 selectedTable.server || "-";
     
-}
-
 // ===============================================
 // COMPANY PROFILE
 // ===============================================

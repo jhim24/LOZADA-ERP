@@ -404,7 +404,7 @@ document.addEventListener("click", function(e){
     const btn = e.target.closest("#btnSendKitchen");
 
     if(!btn) return;
-
+console.log("STEP 1 - Send to Kitchen button clicked");
     if(cart.length===0){
 
         alert("Shopping Cart is empty.");
@@ -418,9 +418,9 @@ document.addEventListener("click", function(e){
     const grandTotal = parseFloat(
         document.getElementById("totalAmount").value
     ) || 0;
-
+console.log("STEP 2 - About to save order");
    saveOrder(receiptNo, grandTotal);
-
+console.log("STEP 3 - Order saved");
 alert("Order sent to Kitchen.");
 
 // Huwag muna i-clear ang cart.

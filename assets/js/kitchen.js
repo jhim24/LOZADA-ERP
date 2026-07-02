@@ -270,7 +270,23 @@ function updateKitchenStatus(receiptNo,status){
     if(index===-1) return;
 
     orders[index].status = status;
+// Notify Cashier
 
+localStorage.setItem(
+
+    "kitchenNotification",
+
+    JSON.stringify({
+
+        receiptNo: receiptNo,
+
+        status: status,
+
+        time: new Date().toLocaleTimeString()
+
+    })
+
+);
     localStorage.setItem(
 
         "orders",

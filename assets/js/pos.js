@@ -53,6 +53,7 @@ setInterval(updateClock,1000);
 
 setReceiptDate();
 loadSelectedTable();
+checkPaymentMode();
 });
 
 // ---------- LIVE CLOCK ----------
@@ -911,7 +912,9 @@ document.addEventListener("click", function(e){
 
     }
 
-    generateReceipt();
+   generateReceipt();
+
+completePayment();
 
 });
 // ===============================================
@@ -1032,3 +1035,93 @@ document.addEventListener("change", function(e){
     updateTotals(subtotal);
 
 });
+// ===============================================
+// PAYMENT MODE
+// ===============================================
+
+function checkPaymentMode(){
+
+    const paymentMode = localStorage.getItem("paymentMode");
+
+    if(paymentMode !== "true") return;
+
+    localStorage.removeItem("paymentMode");
+
+    const paymentPanel = document.querySelector(".payment-panel");
+
+    if(paymentPanel){
+
+        paymentPanel.scrollIntoView({
+
+            behavior:"smooth",
+
+            block:"start"
+
+        });
+
+    }
+
+    document.getElementById("cashReceived")?.focus();
+
+}
+// ===============================================
+// COMPLETE PAYMENT
+// ===============================================
+
+function completePayment(){
+
+    const selectedTable = JSON.parse(
+
+        localStorage.getItem("selectedTable")
+
+    );
+
+    if(!selectedTable) return;
+
+    let tables = JSON.parse(
+
+        localStorage.getItem("restaurantTables")
+
+    ) || [];
+
+    const index = tables.findIndex(table=>
+
+        table.floor === selectedTable.floor &&
+
+        table.name === selectedTable.table
+
+    );
+
+    if(index >= 0){
+
+        tables[index].status = "Available";
+
+        tables[index].customer = "";
+
+        tables[index].guests = "";
+
+        tables[index].server = "";
+
+        tables[index].orderNo = "";
+
+    }
+
+    localStorage.setItem(
+
+        "restaurantTables",
+
+        JSON.stringify(tables)
+
+    );
+
+    cart = [];
+
+    renderCart();
+
+    localStorage.removeItem("selectedTable");
+
+    alert("Payment completed successfully!");
+
+    window.location.href = "tables.html";
+
+}

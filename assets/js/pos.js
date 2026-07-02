@@ -853,7 +853,7 @@ const order = {
 
     status: "Pending",
 
-    payment: "Cash",
+   payment: document.getElementById("paymentMethod").value,
 
     cashier: "Administrator",
 

@@ -401,7 +401,7 @@ document.addEventListener("click",function(e){
 });
 document.addEventListener("click", function(e){
 
-    const btn = e.target.closest("#btnCompleteSale");
+    const btn = e.target.closest("#btnSendKitchen");
 
     if(!btn) return;
 
@@ -414,6 +414,8 @@ document.addEventListener("click", function(e){
     }
 
     generateReceipt();
+
+alert("Order sent to Kitchen.");
 
 });
 // ======================================

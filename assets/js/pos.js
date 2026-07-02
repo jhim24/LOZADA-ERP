@@ -323,7 +323,23 @@ if(discountSelect){
 const discountAmount = total * (discountPercent / 100);
 
 total = total - discountAmount;
+// ===============================================
+// SERVICE CHARGE
+// ===============================================
 
+const serviceSelect = document.getElementById("serviceCharge");
+
+let servicePercent = 0;
+
+if(serviceSelect){
+
+    servicePercent = Number(serviceSelect.value);
+
+}
+
+const serviceAmount = total * (servicePercent / 100);
+
+total += serviceAmount;
     document.getElementById("subtotal").innerHTML="₱"+subtotal.toFixed(2);
 
     document.getElementById("vat").innerHTML="₱"+vat.toFixed(2);
@@ -905,6 +921,25 @@ document.addEventListener("click", function(e){
 document.addEventListener("change", function(e){
 
     if(e.target.id !== "discountType") return;
+
+    let subtotal = 0;
+
+    cart.forEach(item=>{
+
+        subtotal += item.price * item.qty;
+
+    });
+
+    updateTotals(subtotal);
+
+});
+// ===============================================
+// SERVICE CHARGE CHANGE
+// ===============================================
+
+document.addEventListener("change", function(e){
+
+    if(e.target.id !== "serviceCharge") return;
 
     let subtotal = 0;
 

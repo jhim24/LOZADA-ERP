@@ -151,3 +151,48 @@ document.addEventListener("input", function(e){
     });
 
 });
+// ===============================================
+// DATE FILTER
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    if(e.target.id !== "btnFilter") return;
+
+    const from = document.getElementById("fromDate").value;
+
+    const to = document.getElementById("toDate").value;
+
+    const rows = document.querySelectorAll("#salesTableBody tr");
+
+    rows.forEach(row=>{
+
+        if(row.children.length < 2) return;
+
+        const dateText = row.children[1].innerText;
+
+        const saleDate = new Date(dateText);
+
+        let show = true;
+
+        if(from){
+
+            show = show && saleDate >= new Date(from);
+
+        }
+
+        if(to){
+
+            const endDate = new Date(to);
+
+            endDate.setHours(23,59,59,999);
+
+            show = show && saleDate <= endDate;
+
+        }
+
+        row.style.display = show ? "" : "none";
+
+    });
+
+});

@@ -53,10 +53,42 @@ function loadSalesReport(){
     let cashSales = 0;
     let cardSales = 0;
     let digitalSales = 0;
+    let dailySales = 0;
+    let weeklySales = 0;
+    let monthlySales = 0;
 
     orders.forEach(order=>{
 
         totalSales += Number(order.total);
+        
+        const orderDate = new Date(order.date);
+
+const today = new Date();
+
+const weekAgo = new Date();
+
+weekAgo.setDate(today.getDate() - 7);
+
+if(orderDate.toDateString() === today.toDateString()){
+
+    dailySales += Number(order.total);
+
+}
+
+if(orderDate >= weekAgo){
+
+    weeklySales += Number(order.total);
+
+}
+
+if(
+    orderDate.getMonth() === today.getMonth() &&
+    orderDate.getFullYear() === today.getFullYear()
+){
+
+    monthlySales += Number(order.total);
+
+}
         
         switch(order.payment){
 
@@ -122,6 +154,14 @@ document.getElementById("digitalSales").innerHTML =
 
 document.getElementById("totalTransactions").innerHTML =
 orders.length;
+    document.getElementById("dailySales").innerHTML =
+"₱" + dailySales.toFixed(2);
+
+document.getElementById("weeklySales").innerHTML =
+"₱" + weeklySales.toFixed(2);
+
+document.getElementById("monthlySales").innerHTML =
+"₱" + monthlySales.toFixed(2);
 
 }
 // ===============================================

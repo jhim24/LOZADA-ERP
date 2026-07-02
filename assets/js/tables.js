@@ -401,6 +401,14 @@ if(currentStatus === "Occupied"){
 
 if(currentStatus === "Bill Requested"){
 
+    localStorage.setItem(
+
+        "paymentMode",
+
+        "true"
+
+    );
+
     bootstrap.Modal.getInstance(
 
         document.getElementById("tableDetailsModal")

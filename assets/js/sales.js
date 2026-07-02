@@ -19,15 +19,23 @@ async function loadComponent(id,file){
 
 document.addEventListener("DOMContentLoaded", async()=>{
 
-    await loadComponent("sidebar","../components/sidebar.html");
+    try{
 
-    await loadComponent("navbar","../components/navbar.html");
+        await loadComponent("sidebar","../components/sidebar.html");
 
-    await loadComponent("sales-header","../components/sales-header.html");
+        await loadComponent("navbar","../components/navbar.html");
 
-    await loadComponent("sales-content","../components/sales-content.html");
+        await loadComponent("sales-header","../components/sales-header.html");
 
-    loadSales();
+        await loadComponent("sales-content","../components/sales-content.html");
+
+        loadSales();
+
+    }catch(error){
+
+        console.error(error);
+
+    }
 
 });
 // ===============================================

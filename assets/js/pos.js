@@ -419,13 +419,15 @@ document.addEventListener("click", function(e){
         document.getElementById("totalAmount").value
     ) || 0;
 
-    saveOrder(receiptNo, grandTotal);
+   saveOrder(receiptNo, grandTotal);
 
-    alert("Order sent to Kitchen.");
+alert("Order sent to Kitchen.");
 
-    cart = [];
+// Huwag muna i-clear ang cart.
+// Ika-clear natin ito pagkatapos ng successful payment.
 
-    renderCart();
+// cart = [];
+// renderCart();
 
 });
 // ======================================

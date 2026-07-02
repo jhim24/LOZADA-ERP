@@ -1065,6 +1065,43 @@ function checkPaymentMode(){
 
 }
 // ===============================================
+// LOAD ORDER FOR PAYMENT
+// ===============================================
+
+const paymentTable = JSON.parse(
+
+    localStorage.getItem("paymentTable")
+
+);
+
+if(paymentTable){
+
+    const orders = JSON.parse(
+
+        localStorage.getItem("orders")
+
+    ) || [];
+
+    const order = orders.find(order =>
+
+        order.floor === paymentTable.floor &&
+
+        order.table === paymentTable.table &&
+
+        order.status === "Bill Requested"
+
+    );
+
+    if(order){
+
+        cart = [...order.items];
+
+        renderCart();
+
+    }
+
+}
+// ===============================================
 // COMPLETE PAYMENT
 // ===============================================
 

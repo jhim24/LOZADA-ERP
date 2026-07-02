@@ -159,14 +159,25 @@ Cancelled
 
             <td class="text-center">
 
-                <button
-                class="btn btn-primary btn-sm btn-view-order"
-                data-index="${index}">
+               <div class="d-flex justify-content-center gap-1">
 
-                    <i class="fa-solid fa-eye"></i>
+    <button
+    class="btn btn-primary btn-sm btn-view-order"
+    data-index="${index}">
 
-                </button>
+        <i class="fa-solid fa-eye"></i>
 
+    </button>
+
+    <button
+    class="btn btn-danger btn-sm btn-delete-order"
+    data-index="${index}">
+
+        <i class="fa-solid fa-trash"></i>
+
+    </button>
+
+</div>
             </td>
 
         </tr>

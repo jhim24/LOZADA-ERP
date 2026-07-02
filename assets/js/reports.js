@@ -50,6 +50,9 @@ function loadSalesReport(){
     let html = "";
 
     let totalSales = 0;
+    let cashSales = 0;
+    let cardSales = 0;
+    let digitalSales = 0;
 
     orders.forEach(order=>{
 

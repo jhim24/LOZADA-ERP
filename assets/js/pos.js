@@ -825,42 +825,22 @@ table.guests || 1;
 
 document.getElementById("selectedServer").innerHTML =
 table.server || "-";
-    
-}
-// ===============================================
-// PAYMENT PANEL TABLE INFORMATION
-// ===============================================
+// PAYMENT PANEL
 
-const paymentFloor = document.getElementById("paymentFloor");
+document.getElementById("paymentFloor").innerHTML =
+table.floor || "-";
 
-if(paymentFloor){
+document.getElementById("paymentTable").innerHTML =
+table.table || "-";
 
-    paymentFloor.innerHTML = table.floor;
+document.getElementById("paymentCustomer").innerHTML =
+table.customer || "Walk-in";
 
-}
+document.getElementById("paymentGuests").innerHTML =
+table.guests || 1;
 
-const paymentTable = document.getElementById("paymentTable");
-
-if(paymentTable){
-
-    paymentTable.innerHTML = table.table;
-
-}
-
-const paymentCustomer = document.getElementById("paymentCustomer");
-
-if(paymentCustomer){
-
-    paymentCustomer.innerHTML = table.customer || "Walk-in";
-
-}
-
-const paymentGuests = document.getElementById("paymentGuests");
-
-if(paymentGuests){
-
-    paymentGuests.innerHTML = table.guests || 1;
-
+document.getElementById("paymentServer").innerHTML =
+table.server || "-";
 }
 
 const paymentServer = document.getElementById("paymentServer");

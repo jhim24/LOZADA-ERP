@@ -491,3 +491,44 @@ document.addEventListener("click", function(e){
     window.location.href = "pos.html";
 
 });
+// ===============================================
+// BILL OUT
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnBillOut");
+
+    if(!btn) return;
+
+    const tableName = document.getElementById("modalTableName").innerHTML;
+
+    const floor = document.getElementById("modalFloor").innerHTML;
+
+    let tables = JSON.parse(
+        localStorage.getItem("restaurantTables")
+    ) || [];
+
+    const index = tables.findIndex(table=>
+
+        table.name === tableName &&
+        table.floor === floor
+
+    );
+
+    if(index < 0) return;
+
+    tables[index].status = "Bill Requested";
+
+    localStorage.setItem(
+        "restaurantTables",
+        JSON.stringify(tables)
+    );
+
+    bootstrap.Modal.getInstance(
+        document.getElementById("tableDetailsModal")
+    ).hide();
+
+    loadTables(floor);
+
+});

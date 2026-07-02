@@ -1,48 +1,21 @@
 // ===============================================
 // LOZADA ERP
-// SALES REPORT
+// REPORTS MODULE
 // ===============================================
-
-// ---------- COMPONENT LOADER ----------
-
-async function loadComponent(id,file){
-
-    const response = await fetch(file);
-
-    const html = await response.text();
-
-    document.getElementById(id).innerHTML = html;
-
-}
 
 // ---------- INITIALIZE ----------
 
-document.addEventListener("DOMContentLoaded", async()=>{
+document.addEventListener("DOMContentLoaded", function(){
 
-    try{
-
-        await loadComponent("sidebar","../components/sidebar.html");
-
-        await loadComponent("navbar","../components/navbar.html");
-
-        await loadComponent("sales-header","../components/sales-header.html");
-
-        await loadComponent("sales-content","../components/sales-content.html");
-
-        loadSales();
-
-    }catch(error){
-
-        console.error(error);
-
-    }
+    loadSalesReport();
 
 });
+
 // ===============================================
-// LOAD SALES
+// LOAD SALES REPORT
 // ===============================================
 
-function loadSales(){
+function loadSalesReport(){
 
     const tbody = document.getElementById("salesTableBody");
 
@@ -54,13 +27,13 @@ function loadSales(){
 
     ) || [];
 
-    if(orders.length===0){
+    if(orders.length === 0){
 
-        tbody.innerHTML=`
+        tbody.innerHTML = `
 
         <tr>
 
-            <td colspan="7" class="text-center text-muted">
+            <td colspan="6" class="text-center">
 
                 No Sales Record
 
@@ -74,9 +47,9 @@ function loadSales(){
 
     }
 
-    let html="";
+    let html = "";
 
-    let totalSales=0;
+    let totalSales = 0;
 
     orders.forEach(order=>{
 
@@ -96,22 +69,7 @@ function loadSales(){
 
             <td>${order.payment}</td>
 
-            <td>
-
-                ₱${Number(order.total).toFixed(2)}
-
-            </td>
-
-            <td>
-
-                <button
-                class="btn btn-sm btn-primary">
-
-                    View
-
-                </button>
-
-            </td>
+            <td>₱${Number(order.total).toFixed(2)}</td>
 
         </tr>
 
@@ -122,19 +80,15 @@ function loadSales(){
     tbody.innerHTML = html;
 
     document.getElementById("todaySales").innerHTML =
-
     "₱" + totalSales.toFixed(2);
 
     document.getElementById("todayOrders").innerHTML =
-
     orders.length;
 
     document.getElementById("todayCustomers").innerHTML =
-
     orders.length;
 
     document.getElementById("averageSale").innerHTML =
-
     "₱" + (totalSales/orders.length).toFixed(2);
 
 }

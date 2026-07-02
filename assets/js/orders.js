@@ -316,3 +316,40 @@ function updateOrderSummary(){
     document.getElementById("servedCount").innerHTML = served;
 
 }
+// ===============================================
+// DELETE ORDER
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-delete-order");
+
+    if(!btn) return;
+
+    const index = Number(btn.dataset.index);
+
+    if(!confirm("Are you sure you want to delete this order?")){
+
+        return;
+
+    }
+
+    let orders = JSON.parse(
+
+        localStorage.getItem("orders")
+
+    ) || [];
+
+    orders.splice(index,1);
+
+    localStorage.setItem(
+
+        "orders",
+
+        JSON.stringify(orders)
+
+    );
+
+    loadOrders();
+
+});

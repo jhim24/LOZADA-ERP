@@ -408,7 +408,22 @@ if(currentStatus === "Bill Requested"){
         "true"
 
     );
+    
+// SAVE TABLE FOR PAYMENT
 
+localStorage.setItem(
+
+    "paymentTable",
+
+    JSON.stringify({
+
+        floor: floor,
+
+        table: tableName
+
+    })
+
+);
     bootstrap.Modal.getInstance(
 
         document.getElementById("tableDetailsModal")

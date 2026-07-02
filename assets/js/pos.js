@@ -515,21 +515,6 @@ selectedTable.server || "-";
     
 }
 
-const paymentTable = document.getElementById("paymentTable");
-if(paymentTable){
-    paymentTable.innerHTML = table.table || "-";
-}
-
-const paymentCustomer = document.getElementById("paymentCustomer");
-if(paymentCustomer){
-    paymentCustomer.innerHTML = table.customer || "Walk-in";
-}
-
-const paymentGuests = document.getElementById("paymentGuests");
-if(paymentGuests){
-    paymentGuests.innerHTML = table.guests || 1;
-}
-    
 // ===============================================
 // COMPANY PROFILE
 // ===============================================

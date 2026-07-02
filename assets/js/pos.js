@@ -1229,8 +1229,6 @@ document.addEventListener("click", function(e){
 
     printReceipt();
 
-completePayment();
-
     setTimeout(function(){
 
         completePayment();
@@ -1287,3 +1285,14 @@ completePayment();
     window.location.href = "tables.html";
 
 }
+// ===============================================
+// RECEIPT CLOSED
+// ===============================================
+
+document.addEventListener("hidden.bs.modal", function(e){
+
+    if(e.target.id !== "receiptModal") return;
+
+    completePayment();
+
+});

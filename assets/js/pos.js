@@ -914,9 +914,8 @@ document.addEventListener("click", function(e){
 
    generateReceipt();
 
-completePayment();
-
 });
+
 // ===============================================
 // PRINT BILL
 // ===============================================

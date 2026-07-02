@@ -791,3 +791,24 @@ table.guests || 1;
 document.getElementById("selectedServer").innerHTML =
 table.server || "-";
 }
+// ======================================
+// RECEIVE PAYMENT
+// ======================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnReceivePayment");
+
+    if(!btn) return;
+
+    if(cart.length===0){
+
+        alert("Shopping Cart is empty.");
+
+        return;
+
+    }
+
+    generateReceipt();
+
+});

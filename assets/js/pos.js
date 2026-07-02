@@ -399,10 +399,6 @@ document.addEventListener("click",function(e){
     }
 
 });
-// ======================================
-// COMPLETE SALE
-// ======================================
-
 document.addEventListener("click", function(e){
 
     const btn = e.target.closest("#btnCompleteSale");

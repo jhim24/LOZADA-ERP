@@ -1,6 +1,155 @@
 <!-- ==========================================
      THERMAL RECEIPT MODAL
 ========================================== -->
+<!-- ==========================================
+     BILLING SLIP MODAL
+========================================== -->
+
+<div class="modal fade" id="billModal" tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5>
+
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                    Customer Bill
+
+                </h5>
+
+                <button
+                class="btn-close"
+                data-bs-dismiss="modal"></button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div id="billContent">
+
+                    <div class="text-center">
+
+                        <h3 id="billCompanyName">
+
+                            LOZADA ERP
+
+                        </h3>
+
+                        <p>
+
+                            BILLING SLIP
+
+                        </p>
+
+                    </div>
+
+                    <hr>
+
+                    <p>
+
+                        Table :
+                        <span id="billTable">-</span>
+
+                    </p>
+
+                    <p>
+
+                        Customer :
+                        <span id="billCustomer">Walk-in</span>
+
+                    </p>
+
+                    <p>
+
+                        Date :
+                        <span id="billDate"></span>
+
+                    </p>
+
+                    <hr>
+
+                    <table class="table table-sm">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Item</th>
+
+                                <th>Qty</th>
+
+                                <th class="text-end">Total</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="billItems">
+
+                        </tbody>
+
+                    </table>
+
+                    <hr>
+
+                    <h4 class="text-end">
+
+                        Total :
+                        <span id="billGrandTotal">
+
+                            ₱0.00
+
+                        </span>
+
+                    </h4>
+
+                    <hr>
+
+                    <div class="text-center text-muted">
+
+                        <strong>
+
+                            THIS IS NOT AN OFFICIAL RECEIPT
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                class="btn btn-secondary"
+                data-bs-dismiss="modal">
+
+                    Close
+
+                </button>
+
+                <button
+                class="btn btn-primary"
+                id="btnPrintBillNow">
+
+                    <i class="fa-solid fa-print"></i>
+
+                    Print Bill
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 <div class="modal fade" id="receiptModal" tabindex="-1">
 

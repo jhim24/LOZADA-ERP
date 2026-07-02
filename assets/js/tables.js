@@ -424,6 +424,19 @@ localStorage.setItem(
     })
 
 );
+
+const tableInfo = tables[index];
+
+localStorage.setItem(
+    "selectedTable",
+    JSON.stringify({
+        floor: tableInfo.floor,
+        table: tableInfo.name,
+        customer: tableInfo.customer,
+        guests: tableInfo.guests,
+        server: tableInfo.server
+    })
+);
     bootstrap.Modal.getInstance(
 
         document.getElementById("tableDetailsModal")
@@ -552,7 +565,30 @@ document.addEventListener("click", function(e){
     if(index < 0) return;
 
     tables[index].status = "Bill Requested";
+    
+// UPDATE LATEST ORDER STATUS
 
+let orders = JSON.parse(
+    localStorage.getItem("orders")
+) || [];
+
+const orderIndex = orders
+    .map(order =>
+        order.floor === floor &&
+        order.table === tableName
+    )
+    .lastIndexOf(true);
+
+if(orderIndex >= 0){
+
+    orders[orderIndex].status = "Bill Requested";
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
+}
     localStorage.setItem(
         "restaurantTables",
         JSON.stringify(tables)

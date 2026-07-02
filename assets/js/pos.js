@@ -413,9 +413,19 @@ document.addEventListener("click", function(e){
 
     }
 
-    generateReceipt();
+    const receiptNo = Math.floor(Math.random() * 900000) + 100000;
 
-alert("Order sent to Kitchen.");
+    const grandTotal = parseFloat(
+        document.getElementById("totalAmount").value
+    ) || 0;
+
+    saveOrder(receiptNo, grandTotal);
+
+    alert("Order sent to Kitchen.");
+
+    cart = [];
+
+    renderCart();
 
 });
 // ======================================

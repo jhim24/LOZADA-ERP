@@ -1105,6 +1105,25 @@ function completePayment(){
 
     );
 
+    // ===============================================
+// PRINT OFFICIAL RECEIPT
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnPrintReceipt");
+
+    if(!btn) return;
+
+    window.print();
+
+    setTimeout(function(){
+
+        completePayment();
+
+    },500);
+
+});
     if(!selectedTable) return;
 
     let tables = JSON.parse(

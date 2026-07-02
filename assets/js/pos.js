@@ -325,7 +325,49 @@ function updateTotals(subtotal){
         totalInput.value=total.toFixed(2);
 
     }
+// ===============================================
+// ORDER SUMMARY
+// ===============================================
 
+const summaryItems = document.getElementById("summaryItems");
+
+if(summaryItems){
+
+    summaryItems.innerHTML = cart.reduce((sum,item)=>sum + item.qty,0);
+
+}
+
+const summarySubtotal = document.getElementById("summarySubtotal");
+
+if(summarySubtotal){
+
+    summarySubtotal.innerHTML = "₱" + subtotal.toFixed(2);
+
+}
+
+const summaryVat = document.getElementById("summaryVat");
+
+if(summaryVat){
+
+    summaryVat.innerHTML = "₱" + vat.toFixed(2);
+
+}
+
+const summaryDiscount = document.getElementById("summaryDiscount");
+
+if(summaryDiscount){
+
+    summaryDiscount.innerHTML = "₱0.00";
+
+}
+
+const summaryGrandTotal = document.getElementById("summaryGrandTotal");
+
+if(summaryGrandTotal){
+
+    summaryGrandTotal.innerHTML = "₱" + total.toFixed(2);
+
+}
 }
 // ===============================================
 // COMPUTE CHANGE

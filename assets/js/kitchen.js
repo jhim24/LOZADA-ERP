@@ -143,7 +143,33 @@ function loadKitchenOrders(){
                         ${itemsHTML}
 
                     </ul>
+<div class="mb-2">
 
+    <strong>Table:</strong>
+
+    ${order.floor} - ${order.table}
+
+    <br>
+
+    <strong>Customer:</strong>
+
+    ${order.customer}
+
+    <br>
+
+    <strong>Guests:</strong>
+
+    ${order.guests}
+
+    <br>
+
+    <strong>Server:</strong>
+
+    ${order.server}
+
+</div>
+
+<hr>
                     <hr>
 
                    <div class="d-flex justify-content-between align-items-center mt-3">

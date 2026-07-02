@@ -473,7 +473,35 @@ function generateReceipt(){
 
    document.getElementById("receiptDate").innerHTML =
 new Date().toLocaleString();
+// ===============================================
+// RECEIPT TABLE INFORMATION
+// ===============================================
 
+const selectedTable = JSON.parse(
+
+    localStorage.getItem("selectedTable")
+
+) || {};
+
+document.getElementById("receiptFloor").innerHTML =
+
+selectedTable.floor || "-";
+
+document.getElementById("receiptTable").innerHTML =
+
+selectedTable.table || "-";
+
+document.getElementById("receiptCustomer").innerHTML =
+
+selectedTable.customer || "Walk-in";
+
+document.getElementById("receiptGuests").innerHTML =
+
+selectedTable.guests || "1";
+
+document.getElementById("receiptServer").innerHTML =
+
+selectedTable.server || "-";
 // ===============================================
 // COMPANY PROFILE
 // ===============================================
@@ -683,24 +711,39 @@ function saveOrder(receiptNo,total){
 
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-    const order={
+   const table = JSON.parse(
 
-        receiptNo:receiptNo,
+    localStorage.getItem("selectedTable")
 
-        date:new Date().toLocaleString(),
+) || {};
 
-        items:[...cart],
+const order = {
 
-        total:total,
+    receiptNo: receiptNo,
 
-        status:"Pending",
+    date: new Date().toLocaleString(),
 
-        payment:"Cash",
+    items: [...cart],
 
-        cashier:"Administrator"
+    total: total,
 
-    };
+    status: "Pending",
 
+    payment: "Cash",
+
+    cashier: "Administrator",
+
+    floor: table.floor || "",
+
+    table: table.table || "",
+
+    customer: table.customer || "Walk-in",
+
+    guests: table.guests || 1,
+
+    server: table.server || ""
+
+};
     orders.push(order);
 
     localStorage.setItem(

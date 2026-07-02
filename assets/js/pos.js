@@ -529,11 +529,6 @@ const paymentGuests = document.getElementById("paymentGuests");
 if(paymentGuests){
     paymentGuests.innerHTML = table.guests || 1;
 }
-
-const paymentServer = document.getElementById("paymentServer");
-if(paymentServer){
-    paymentServer.innerHTML = table.server || "-";
-}
     
 // ===============================================
 // COMPANY PROFILE
@@ -843,13 +838,6 @@ document.getElementById("paymentServer").innerHTML =
 table.server || "-";
 }
 
-const paymentServer = document.getElementById("paymentServer");
-
-if(paymentServer){
-
-    paymentServer.innerHTML = table.server || "-";
-
-}
 // ======================================
 // RECEIVE PAYMENT
 // ======================================

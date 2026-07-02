@@ -291,6 +291,43 @@ document.addEventListener("click",function(e){
 
     document.getElementById("modalOrder").innerHTML =
         table.orderNo || "-";
+    // ===============================================
+// CHANGE PRIMARY BUTTON
+// ===============================================
+
+const btn = document.getElementById("btnOpenTable");
+
+if(table.status === "Available"){
+
+    btn.innerHTML = "Open Table";
+
+    btn.className = "btn btn-success";
+
+}
+
+else if(table.status === "Occupied"){
+
+    btn.innerHTML = "Add Order";
+
+    btn.className = "btn btn-primary";
+
+}
+
+else if(table.status === "Bill Requested"){
+
+    btn.innerHTML = "Receive Payment";
+
+    btn.className = "btn btn-warning";
+
+}
+
+else if(table.status === "Paid"){
+
+    btn.innerHTML = "Close Table";
+
+    btn.className = "btn btn-secondary";
+
+}
 
     const modal = new bootstrap.Modal(
 

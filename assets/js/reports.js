@@ -57,7 +57,25 @@ function loadSalesReport(){
     orders.forEach(order=>{
 
         totalSales += Number(order.total);
+        
+        switch(order.payment){
 
+    case "Cash":
+        cashSales += Number(order.total);
+        break;
+
+    case "Credit Card":
+    case "Debit Card":
+        cardSales += Number(order.total);
+        break;
+
+    case "GCash":
+    case "Maya":
+    case "Bank Transfer":
+        digitalSales += Number(order.total);
+        break;
+
+}
         html += `
 
         <tr>
@@ -93,5 +111,16 @@ function loadSalesReport(){
 
     document.getElementById("averageSale").innerHTML =
     "₱" + (totalSales/orders.length).toFixed(2);
+    document.getElementById("cashSales").innerHTML =
+"₱" + cashSales.toFixed(2);
+
+document.getElementById("cardSales").innerHTML =
+"₱" + cardSales.toFixed(2);
+
+document.getElementById("digitalSales").innerHTML =
+"₱" + digitalSales.toFixed(2);
+
+document.getElementById("totalTransactions").innerHTML =
+orders.length;
 
 }

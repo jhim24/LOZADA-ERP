@@ -124,3 +124,30 @@ document.getElementById("totalTransactions").innerHTML =
 orders.length;
 
 }
+// ===============================================
+// SEARCH SALES
+// ===============================================
+
+document.addEventListener("input", function(e){
+
+    if(e.target.id !== "searchSales") return;
+
+    const keyword = e.target.value.toLowerCase();
+
+    const rows = document.querySelectorAll("#salesTableBody tr");
+
+    rows.forEach(row=>{
+
+        if(row.innerText.toLowerCase().includes(keyword)){
+
+            row.style.display = "";
+
+        }else{
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+});

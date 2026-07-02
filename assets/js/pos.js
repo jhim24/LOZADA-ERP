@@ -1144,7 +1144,79 @@ function completePayment(){
         localStorage.getItem("selectedTable")
 
     );
+// ===============================================
+// PRINT RECEIPT
+// ===============================================
 
+function printReceipt(){
+
+    const receipt = document.getElementById("receiptContent").innerHTML;
+
+    const printWindow = window.open("", "", "width=400,height=700");
+
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>Official Receipt</title>
+
+            <style>
+
+                body{
+
+                    font-family:Arial,sans-serif;
+
+                    padding:15px;
+
+                    font-size:12px;
+
+                }
+
+                table{
+
+                    width:100%;
+
+                    border-collapse:collapse;
+
+                }
+
+                th,td{
+
+                    padding:4px;
+
+                    font-size:12px;
+
+                }
+
+                .receipt{
+
+                    width:80mm;
+
+                    margin:auto;
+
+                }
+
+            </style>
+
+        </head>
+
+        <body>
+
+            ${receipt}
+
+        </body>
+
+        </html>
+    `);
+
+    printWindow.document.close();
+
+    printWindow.focus();
+
+    printWindow.print();
+
+    printWindow.close();
+
+}
     // ===============================================
 // PRINT OFFICIAL RECEIPT
 // ===============================================
@@ -1155,7 +1227,9 @@ document.addEventListener("click", function(e){
 
     if(!btn) return;
 
-    window.print();
+    printReceipt();
+
+completePayment();
 
     setTimeout(function(){
 

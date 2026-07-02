@@ -624,7 +624,7 @@ company.logo ||
     );
 
     modal.show();
-saveOrder(receiptNo, grandTotal);
+
 }
 
 // ===============================================

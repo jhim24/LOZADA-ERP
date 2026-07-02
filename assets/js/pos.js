@@ -1063,34 +1063,24 @@ function checkPaymentMode(){
 
     document.getElementById("cashReceived")?.focus();
 
-}
-// ===============================================
-// LOAD ORDER FOR PAYMENT
-// ===============================================
-
-const paymentTable = JSON.parse(
-
+    const paymentTable = JSON.parse(
     localStorage.getItem("paymentTable")
-
 );
 
 if(paymentTable){
 
     const orders = JSON.parse(
-
         localStorage.getItem("orders")
-
     ) || [];
 
-    const order = orders.find(order =>
+    const order = orders
+    .filter(order =>
 
         order.floor === paymentTable.floor &&
+        order.table === paymentTable.table
 
-        order.table === paymentTable.table &&
-
-        order.status === "Bill Requested"
-
-    );
+    )
+    .at(-1);
 
     if(order){
 
@@ -1101,6 +1091,9 @@ if(paymentTable){
     }
 
 }
+
+}
+
 // ===============================================
 // COMPLETE PAYMENT
 // ===============================================

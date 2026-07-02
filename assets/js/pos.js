@@ -915,6 +915,86 @@ document.addEventListener("click", function(e){
 
 });
 // ===============================================
+// PRINT BILL
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnPrintBill");
+
+    if(!btn) return;
+
+    generateBill();
+
+});
+// ===============================================
+// GENERATE BILL
+// ===============================================
+
+function generateBill(){
+
+    document.getElementById("billDate").innerHTML =
+    new Date().toLocaleString();
+
+    const table = JSON.parse(
+        localStorage.getItem("selectedTable")
+    ) || {};
+
+    document.getElementById("billTable").innerHTML =
+    table.table || "-";
+
+    document.getElementById("billCustomer").innerHTML =
+    table.customer || "Walk-in";
+
+    const tbody = document.getElementById("billItems");
+
+    tbody.innerHTML = "";
+
+    let total = 0;
+
+    cart.forEach(item=>{
+
+        const lineTotal = item.price * item.qty;
+
+        total += lineTotal;
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${item.name}</td>
+
+            <td>${item.qty}</td>
+
+            <td class="text-end">
+
+                ₱${lineTotal.toFixed(2)}
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    const vat = total * 0.12;
+
+    const grandTotal = total + vat;
+
+    document.getElementById("billGrandTotal").innerHTML =
+    "₱" + grandTotal.toFixed(2);
+
+    const modal = new bootstrap.Modal(
+
+        document.getElementById("billModal")
+
+    );
+
+    modal.show();
+
+}
+// ===============================================
 // DISCOUNT CHANGE
 // ===============================================
 

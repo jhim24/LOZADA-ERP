@@ -541,15 +541,55 @@ function generateReceipt(){
 
     });
 
-    const vat=subtotal*0.12;
+   const vat = subtotal * 0.12;
 
-    const grandTotal=subtotal+vat;
+let total = subtotal + vat;
+
+// Discount
+
+const discountSelect = document.getElementById("discountType");
+
+let discountPercent = 0;
+
+if(discountSelect){
+
+    discountPercent = Number(discountSelect.value);
+
+}
+
+const discountAmount = total * (discountPercent / 100);
+
+total -= discountAmount;
+
+// Service Charge
+
+const serviceSelect = document.getElementById("serviceCharge");
+
+let servicePercent = 0;
+
+if(serviceSelect){
+
+    servicePercent = Number(serviceSelect.value);
+
+}
+
+const serviceAmount = total * (servicePercent / 100);
+
+total += serviceAmount;
+
+const grandTotal = total;
 
     document.getElementById("receiptSubtotal").innerHTML=
     "₱"+subtotal.toFixed(2);
 
     document.getElementById("receiptVat").innerHTML=
     "₱"+vat.toFixed(2);
+    
+    document.getElementById("receiptDiscount").innerHTML =
+"-₱" + discountAmount.toFixed(2);
+
+document.getElementById("receiptServiceCharge").innerHTML =
+"₱" + serviceAmount.toFixed(2);
 
     document.getElementById("receiptGrandTotal").innerHTML=
     "₱"+grandTotal.toFixed(2);

@@ -308,7 +308,21 @@ function updateTotals(subtotal){
 
     const vat=subtotal*0.12;
 
-    const total=subtotal+vat;
+   let total = subtotal + vat;
+
+const discountSelect = document.getElementById("discountType");
+
+let discountPercent = 0;
+
+if(discountSelect){
+
+    discountPercent = Number(discountSelect.value);
+
+}
+
+const discountAmount = total * (discountPercent / 100);
+
+total = total - discountAmount;
 
     document.getElementById("subtotal").innerHTML="₱"+subtotal.toFixed(2);
 
@@ -357,8 +371,8 @@ const summaryDiscount = document.getElementById("summaryDiscount");
 
 if(summaryDiscount){
 
-    summaryDiscount.innerHTML = "₱0.00";
-
+   summaryDiscount.innerHTML =
+"₱" + discountAmount.toFixed(2);
 }
 
 const summaryGrandTotal = document.getElementById("summaryGrandTotal");
@@ -882,5 +896,24 @@ document.addEventListener("click", function(e){
     }
 
     generateReceipt();
+
+});
+// ===============================================
+// DISCOUNT CHANGE
+// ===============================================
+
+document.addEventListener("change", function(e){
+
+    if(e.target.id !== "discountType") return;
+
+    let subtotal = 0;
+
+    cart.forEach(item=>{
+
+        subtotal += item.price * item.qty;
+
+    });
+
+    updateTotals(subtotal);
 
 });

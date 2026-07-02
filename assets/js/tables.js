@@ -219,6 +219,16 @@ switch(table.status){
 
         break;
 
+        case "Bill Requested":
+
+    card.classList.add("table-bill");
+
+    badge.className = "badge bg-warning text-dark table-status";
+
+    badge.innerHTML = "Bill Requested";
+
+    break;
+
 }
       card.dataset.index = index;
 

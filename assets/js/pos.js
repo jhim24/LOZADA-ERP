@@ -853,8 +853,8 @@ const order = {
 
     status: "Pending",
 
-   payment: document.getElementById("paymentMethod").value,
-
+   payment: "",
+    
     cashier: "Administrator",
 
     floor: table.floor || "",
@@ -951,7 +951,49 @@ document.addEventListener("click", function(e){
         return;
 
     }
+// ===============================================
+// SAVE PAYMENT METHOD
+// ===============================================
 
+const paymentMethod = document.getElementById("paymentMethod").value;
+
+let orders = JSON.parse(
+
+    localStorage.getItem("orders")
+
+) || [];
+
+const selectedTable = JSON.parse(
+
+    localStorage.getItem("selectedTable")
+
+);
+
+const orderIndex = orders.findIndex(order=>
+
+    order.floor === selectedTable.floor &&
+
+    order.table === selectedTable.table &&
+
+    order.status === "Bill Requested"
+
+);
+
+if(orderIndex >= 0){
+
+    orders[orderIndex].payment = paymentMethod;
+
+    orders[orderIndex].status = "Paid";
+
+    localStorage.setItem(
+
+        "orders",
+
+        JSON.stringify(orders)
+
+    );
+
+}
    generateReceipt();
 
 });

@@ -67,6 +67,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     loadDashboardNotifications();
 
 }, 100);
+});
 // ======================================
 // CHART.JS
 // ======================================

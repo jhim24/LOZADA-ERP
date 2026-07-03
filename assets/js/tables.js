@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     await loadComponent("tables-card","../components/tables-card.html");
     await loadComponent("table-details-modal","../components/table-details-modal.html");
     await loadComponent("start-order-modal","../components/start-order-modal.html");
+    await loadComponent("table-form-modal","../components/table-form-modal.html");
 initializeTables();
 
 loadTables("Rooftop");

@@ -944,68 +944,55 @@ document.addEventListener("click", function(e){
 
     if(!btn) return;
 
-    if(cart.length===0){
+    if(cart.length === 0){
 
         alert("Shopping Cart is empty.");
 
         return;
 
     }
-// ===============================================
-// SAVE PAYMENT METHOD
-// ===============================================
 
-const paymentMethod = document.getElementById("paymentMethod").value;
+    const paymentMethod = document.getElementById("paymentMethod").value;
 
-let orders = JSON.parse(
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-    localStorage.getItem("orders")
+    const selectedTable = JSON.parse(localStorage.getItem("selectedTable"));
 
-) || [];
+    const orderIndex = orders.findIndex(order =>
 
-const selectedTable = JSON.parse(
+        order.floor === selectedTable.floor &&
 
-    localStorage.getItem("selectedTable")
+        order.table === selectedTable.table &&
 
-);
-
-const orderIndex = orders.findIndex(order=>
-
-    order.floor === selectedTable.floor &&
-
-    order.table === selectedTable.table &&
-
-   order.status === "Pending"
-
-);
-
-if(orderIndex >= 0){
-
-   if(orderIndex >= 0){
-
-    orders[orderIndex].payment = paymentMethod;
-
-    orders[orderIndex].status = "Paid";
-
-    orders[orderIndex].paidDate = new Date().toISOString();
-
-    localStorage.setItem(
-
-        "orders",
-
-        JSON.stringify(orders)
+        order.status === "Pending"
 
     );
 
-}else{
+    if(orderIndex >= 0){
 
-    console.error("Order not found for payment.");
+        orders[orderIndex].payment = paymentMethod;
 
-}
-   generateReceipt();
+        orders[orderIndex].status = "Paid";
+
+        orders[orderIndex].paidDate = new Date().toISOString();
+
+        localStorage.setItem(
+
+            "orders",
+
+            JSON.stringify(orders)
+
+        );
+
+    }else{
+
+        console.error("Order not found for payment.");
+
+    }
+
+    generateReceipt();
 
 });
-
 // ===============================================
 // PRINT BILL
 // ===============================================

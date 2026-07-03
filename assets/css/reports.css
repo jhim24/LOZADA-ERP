@@ -120,3 +120,38 @@ body{
     border-left:6px solid #374151 !important;
 
 }
+/* ======================================
+   DASHBOARD ICONS
+====================================== */
+
+.dashboard-card{
+
+    overflow:hidden;
+
+}
+
+.dashboard-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:30px;
+
+}
+
+.bg-success{
+
+    background:#16a34a !important;
+
+}

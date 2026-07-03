@@ -602,3 +602,117 @@ if(orderIndex >= 0){
     loadTables(floor);
 
 });
+// ===============================================
+// OPEN ADD TABLE MODAL
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnAddTable");
+
+    if(!btn) return;
+
+    document.getElementById("tableFormTitle").innerHTML =
+    "Add Table";
+
+    document.getElementById("tableFloor").value =
+    "Rooftop";
+
+    document.getElementById("tableName").value = "";
+
+    document.getElementById("tableSeats").value = 4;
+
+    const modal = new bootstrap.Modal(
+
+        document.getElementById("tableFormModal")
+
+    );
+
+    modal.show();
+
+});
+// ===============================================
+// SAVE TABLE
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnSaveTable");
+
+    if(!btn) return;
+
+    const floor = document.getElementById("tableFloor").value;
+
+    const name = document.getElementById("tableName").value.trim();
+
+    const seats = Number(document.getElementById("tableSeats").value);
+
+    if(name === ""){
+
+        alert("Please enter table name.");
+
+        return;
+
+    }
+
+    let tables = JSON.parse(
+
+        localStorage.getItem("restaurantTables")
+
+    ) || [];
+
+    const exists = tables.some(table=>
+
+        table.floor === floor &&
+
+        table.name.toLowerCase() === name.toLowerCase()
+
+    );
+
+    if(exists){
+
+        alert("Table already exists.");
+
+        return;
+
+    }
+
+    tables.push({
+
+        floor: floor,
+
+        name: name,
+
+        seats: seats,
+
+        status: "Available",
+
+        customer: "",
+
+        guests: "",
+
+        server: "",
+
+        orderNo: ""
+
+    });
+
+    localStorage.setItem(
+
+        "restaurantTables",
+
+        JSON.stringify(tables)
+
+    );
+
+    bootstrap.Modal.getInstance(
+
+        document.getElementById("tableFormModal")
+
+    ).hide();
+
+    loadTables(floor);
+
+    alert("Table added successfully.");
+
+});

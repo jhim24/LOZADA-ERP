@@ -59,9 +59,9 @@ window.addEventListener("DOMContentLoaded", () => {
     loadComponent("dashboard-summary", "../components/dashboard-summary.html")
 .then(() => {
 
-   loadDashboardCards();
-
+loadDashboardCards();
 loadDashboardBestSeller();
+loadDashboardNotifications();
 });
 
 });
@@ -501,5 +501,76 @@ function loadDashboardBestSeller(){
         `;
 
     });
+
+}
+// ======================================
+// LIVE DASHBOARD NOTIFICATIONS
+// ======================================
+
+function loadDashboardNotifications(){
+
+    const list = document.getElementById("dashboardNotifications");
+
+    if(!list) return;
+
+    list.innerHTML = "";
+
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    const tables = JSON.parse(localStorage.getItem("restaurantTables")) || [];
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    // Low Stock
+    products.forEach(product=>{
+
+        if(Number(product.stock) <= Number(product.reorderLevel || 10)){
+
+            list.innerHTML += `
+            <li class="list-group-item">
+                🔴 Low Stock : <strong>${product.name}</strong>
+            </li>`;
+        }
+
+    });
+
+    // Occupied Tables
+    const occupied = tables.filter(t=>t.status==="Occupied").length;
+
+    if(occupied){
+
+        list.innerHTML += `
+        <li class="list-group-item">
+            🍽 Occupied Tables : ${occupied}
+        </li>`;
+    }
+
+    // Bill Requested
+    const billRequested = tables.filter(t=>t.status==="Bill Requested").length;
+
+    if(billRequested){
+
+        list.innerHTML += `
+        <li class="list-group-item">
+            🧾 Waiting for Payment : ${billRequested}
+        </li>`;
+    }
+
+    // Pending Kitchen Orders
+    const pending = orders.filter(o=>o.status==="Pending").length;
+
+    if(pending){
+
+        list.innerHTML += `
+        <li class="list-group-item">
+            👨‍🍳 Kitchen Pending : ${pending}
+        </li>`;
+    }
+
+    if(list.innerHTML===""){
+
+        list.innerHTML=`
+        <li class="list-group-item text-success">
+            ✅ No notifications
+        </li>`;
+    }
 
 }

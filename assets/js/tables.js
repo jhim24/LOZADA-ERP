@@ -237,7 +237,7 @@ card.style.cursor = "pointer";
 
 grid.appendChild(clone);
     });
-
+updateDashboardCards();
 }
 // ===============================================
 // FLOOR TAB CLICK
@@ -716,3 +716,48 @@ document.addEventListener("click", function(e){
     alert("Table added successfully.");
 
 });
+// ===============================================
+// LIVE DASHBOARD CARDS
+// ===============================================
+
+function updateDashboardCards(){
+
+    const tables = JSON.parse(
+
+        localStorage.getItem("restaurantTables")
+
+    ) || [];
+
+    const available = tables.filter(table=>
+
+        table.status === "Available"
+
+    ).length;
+
+    const occupied = tables.filter(table=>
+
+        table.status === "Occupied"
+
+    ).length;
+
+    const reserved = tables.filter(table=>
+
+        table.status === "Reserved"
+
+    ).length;
+
+    const cleaning = tables.filter(table=>
+
+        table.status === "Cleaning"
+
+    ).length;
+
+    document.getElementById("availableTables").innerHTML = available;
+
+    document.getElementById("occupiedTables").innerHTML = occupied;
+
+    document.getElementById("reservedTables").innerHTML = reserved;
+
+    document.getElementById("cleaningTables").innerHTML = cleaning;
+
+}

@@ -981,9 +981,13 @@ const orderIndex = orders.findIndex(order=>
 
 if(orderIndex >= 0){
 
+   if(orderIndex >= 0){
+
     orders[orderIndex].payment = paymentMethod;
 
     orders[orderIndex].status = "Paid";
+
+    orders[orderIndex].paidDate = new Date().toISOString();
 
     localStorage.setItem(
 
@@ -992,6 +996,10 @@ if(orderIndex >= 0){
         JSON.stringify(orders)
 
     );
+
+}else{
+
+    console.error("Order not found for payment.");
 
 }
    generateReceipt();

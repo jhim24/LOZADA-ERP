@@ -11,8 +11,9 @@ document.addEventListener("DOMContentLoaded", function(){
 
     loadSalesChart();
 
-});
+    loadBestSellers();
 
+});
 // ===============================================
 // LOAD SALES REPORT
 // ===============================================
@@ -289,6 +290,100 @@ function loadSalesChart(){
             maintainAspectRatio:false
 
         }
+
+    });
+
+}
+// ===============================================
+// TOP SELLING PRODUCTS
+// ===============================================
+
+function loadBestSellers(){
+
+    const tbody = document.getElementById("bestSellerTable");
+
+    if(!tbody) return;
+
+    const orders = JSON.parse(
+
+        localStorage.getItem("orders")
+
+    ) || [];
+
+    const products = {};
+
+    orders.forEach(order=>{
+
+        if(!order.items) return;
+
+        order.items.forEach(item=>{
+
+            if(!products[item.name]){
+
+                products[item.name] = {
+
+                    qty: 0,
+
+                    sales: 0
+
+                };
+
+            }
+
+            products[item.name].qty += Number(item.qty);
+
+            products[item.name].sales +=
+                Number(item.price) * Number(item.qty);
+
+        });
+
+    });
+
+    const ranking = Object.entries(products)
+
+        .sort((a,b)=>b[1].qty-a[1].qty)
+
+        .slice(0,10);
+
+    if(ranking.length===0){
+
+        tbody.innerHTML=`
+
+        <tr>
+
+            <td colspan="4" class="text-center">
+
+                No Product Sales
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+    tbody.innerHTML="";
+
+    ranking.forEach((product,index)=>{
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${index+1}</td>
+
+            <td>${product[0]}</td>
+
+            <td>${product[1].qty}</td>
+
+            <td>₱${product[1].sales.toFixed(2)}</td>
+
+        </tr>
+
+        `;
 
     });
 

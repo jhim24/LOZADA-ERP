@@ -59,8 +59,9 @@ window.addEventListener("DOMContentLoaded", () => {
     loadComponent("dashboard-summary", "../components/dashboard-summary.html")
 .then(() => {
 
-    loadDashboardCards();
+   loadDashboardCards();
 
+loadDashboardBestSeller();
 });
 
 });
@@ -407,5 +408,98 @@ function loadDashboardCards(){
         document.getElementById("dashboardAverageSale").innerHTML=
 
         "₱"+averageSale.toLocaleString(undefined,{minimumFractionDigits:2});
+
+}
+// ======================================
+// DASHBOARD BEST SELLING
+// ======================================
+
+function loadDashboardBestSeller(){
+
+    const tbody = document.getElementById("dashboardBestSeller");
+
+    if(!tbody) return;
+
+    const orders = JSON.parse(
+
+        localStorage.getItem("orders")
+
+    ) || [];
+
+    const products = {};
+
+    orders.forEach(order=>{
+
+        if(order.status !== "Paid") return;
+
+        if(!order.items) return;
+
+        order.items.forEach(item=>{
+
+            if(!products[item.name]){
+
+                products[item.name] = 0;
+
+            }
+
+            products[item.name] += Number(item.qty);
+
+        });
+
+    });
+
+    const ranking = Object.entries(products)
+
+        .sort((a,b)=>b[1]-a[1])
+
+        .slice(0,5);
+
+    if(ranking.length===0){
+
+        tbody.innerHTML=`
+
+            <tr>
+
+                <td colspan="3" class="text-center">
+
+                    No Sales
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+    tbody.innerHTML="";
+
+    ranking.forEach((product,index)=>{
+
+        let medal = index + 1;
+
+        if(index===0) medal="🥇";
+
+        else if(index===1) medal="🥈";
+
+        else if(index===2) medal="🥉";
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${medal}</td>
+
+            <td>${product[0]}</td>
+
+            <td>${product[1]}</td>
+
+        </tr>
+
+        `;
+
+    });
 
 }

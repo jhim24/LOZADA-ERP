@@ -286,13 +286,13 @@ function loadDashboardCards(){
 
     let todayOrders = 0;
 
-    const today = new Date().toLocaleDateString();
+   const today = new Date().toDateString();
 
     orders.forEach(order=>{
 
         if(order.status !== "Paid") return;
 
-        const orderDate = new Date(order.date).toLocaleDateString();
+      const orderDate = new Date(order.date).toDateString();
 
         if(orderDate !== today) return;
 

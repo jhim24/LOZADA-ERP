@@ -145,67 +145,99 @@ if(salesCanvas){
     });
 
 }
-        // CATEGORY CHART
+      // ======================================
+// LIVE PAYMENT CHART
+// ======================================
 
-        const categoryCanvas = document.getElementById("categoryChart");
+const categoryCanvas = document.getElementById("categoryChart");
 
-        if (categoryCanvas) {
+if(categoryCanvas){
 
-            new Chart(categoryCanvas, {
+    const orders = JSON.parse(
 
-                type: "doughnut",
+        localStorage.getItem("orders")
 
-                data: {
+    ) || [];
 
-                    labels: [
+    const paymentSummary = {
 
-                        "Main Course",
+        "Cash":0,
 
-                        "Beverages",
+        "Credit Card":0,
 
-                        "Desserts",
+        "Debit Card":0,
 
-                        "Snacks"
+        "GCash":0,
 
-                    ],
+        "Maya":0,
 
-                    datasets: [{
+        "Bank Transfer":0
 
-                        data: [
+    };
 
-                            35,
+    orders.forEach(order=>{
 
-                            25,
+        if(order.status !== "Paid") return;
 
-                            20,
+        if(paymentSummary.hasOwnProperty(order.payment)){
 
-                            20
-
-                        ],
-
-                        backgroundColor: [
-
-                            "#2563EB",
-
-                            "#10B981",
-
-                            "#F59E0B",
-
-                            "#EF4444"
-
-                        ]
-
-                    }]
-
-                }
-
-            });
+            paymentSummary[order.payment]++;
 
         }
 
-    },500);
+    });
 
-});
+    new Chart(categoryCanvas,{
+
+        type:"doughnut",
+
+        data:{
+
+            labels:Object.keys(paymentSummary),
+
+            datasets:[{
+
+                data:Object.values(paymentSummary),
+
+                backgroundColor:[
+
+                    "#2563EB",
+
+                    "#10B981",
+
+                    "#F59E0B",
+
+                    "#EC4899",
+
+                    "#8B5CF6",
+
+                    "#EF4444"
+
+                ]
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            plugins:{
+
+                legend:{
+
+                    position:"bottom"
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
 // ======================================
 // LIVE DASHBOARD
 // ======================================

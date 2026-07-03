@@ -63,6 +63,7 @@ function loadSalesReport(){
    orders.forEach(order=>{
 
     if(order.status !== "Paid") return;
+    totalSales += Number(order.total);
         
         const orderDate = new Date(order.date);
 
@@ -139,13 +140,19 @@ if(
     "₱" + totalSales.toFixed(2);
 
     document.getElementById("todayOrders").innerHTML =
-    orders.length;
+orders.filter(order => order.status === "Paid").length;
 
     document.getElementById("todayCustomers").innerHTML =
-    orders.length;
+orders.filter(order => order.status === "Paid").length;
 
-    document.getElementById("averageSale").innerHTML =
-    "₱" + (totalSales/orders.length).toFixed(2);
+    const paidOrders = orders.filter(order => order.status === "Paid");
+
+document.getElementById("averageSale").innerHTML =
+"₱" + (
+    paidOrders.length
+        ? totalSales / paidOrders.length
+        : 0
+).toFixed(2);
     document.getElementById("cashSales").innerHTML =
 "₱" + cashSales.toFixed(2);
 
@@ -156,7 +163,8 @@ document.getElementById("digitalSales").innerHTML =
 "₱" + digitalSales.toFixed(2);
 
 document.getElementById("totalTransactions").innerHTML =
-orders.length;
+orders.filter(order => order.status === "Paid").length;
+    
     document.getElementById("dailySales").innerHTML =
 "₱" + dailySales.toFixed(2);
 

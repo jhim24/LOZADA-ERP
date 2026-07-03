@@ -58,13 +58,15 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     await loadComponent("dashboard-summary", "../components/dashboard-summary.html");
 
+    setTimeout(() => {
+
     loadDashboardCards();
 
     loadDashboardBestSeller();
 
     loadDashboardNotifications();
 
-});
+}, 100);
 // ======================================
 // CHART.JS
 // ======================================

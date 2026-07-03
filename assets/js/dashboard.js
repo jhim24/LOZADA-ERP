@@ -69,9 +69,14 @@ document.addEventListener("DOMContentLoaded", async function(){
 
 function initDashboard(){
 
-   loadDashboardCards();
+loadDashboardCards();
 
 loadSalesChart();
+
+loadPaymentChart();
+
+loadBestSeller();
+    
 }
 // ======================================
 // LIVE DASHBOARD CARDS
@@ -282,6 +287,166 @@ function loadSalesChart(){
             maintainAspectRatio:false
 
         }
+
+    });
+
+}
+// ======================================
+// LOAD PAYMENT CHART
+// ======================================
+
+function loadPaymentChart(){
+
+    const canvas = document.getElementById("categoryChart");
+
+    if(!canvas) return;
+
+    const orders = JSON.parse(
+
+        localStorage.getItem("orders")
+
+    ) || [];
+
+    const payment = {
+
+        "Cash":0,
+
+        "Credit Card":0,
+
+        "Debit Card":0,
+
+        "GCash":0,
+
+        "Maya":0,
+
+        "Bank Transfer":0
+
+    };
+
+    orders.forEach(order=>{
+
+        if(order.status !== "Paid") return;
+
+        if(payment.hasOwnProperty(order.payment)){
+
+            payment[order.payment]++;
+
+        }
+
+    });
+
+    if(window.paymentChart){
+
+        window.paymentChart.destroy();
+
+    }
+
+    window.paymentChart = new Chart(canvas,{
+
+        type:"doughnut",
+
+        data:{
+
+            labels:Object.keys(payment),
+
+            datasets:[{
+
+                data:Object.values(payment)
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            plugins:{
+
+                legend:{
+
+                    position:"bottom"
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+// ======================================
+// LOAD BEST SELLER
+// ======================================
+
+function loadBestSeller(){
+
+    const tbody = document.getElementById("dashboardBestSeller");
+
+    if(!tbody) return;
+
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    const products = {};
+
+    orders.forEach(order=>{
+
+        if(order.status !== "Paid") return;
+
+        if(!order.items) return;
+
+        order.items.forEach(item=>{
+
+            if(!products[item.name]){
+
+                products[item.name] = 0;
+
+            }
+
+            products[item.name] += Number(item.qty);
+
+        });
+
+    });
+
+    const ranking = Object.entries(products)
+
+        .sort((a,b)=>b[1]-a[1])
+
+        .slice(0,5);
+
+    if(ranking.length===0){
+
+        tbody.innerHTML = `
+        <tr>
+            <td colspan="3" class="text-center">
+                No Sales Yet
+            </td>
+        </tr>
+        `;
+
+        return;
+
+    }
+
+    tbody.innerHTML = "";
+
+    ranking.forEach((item,index)=>{
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${index+1}</td>
+
+            <td>${item[0]}</td>
+
+            <td>${item[1]}</td>
+
+        </tr>
+
+        `;
 
     });
 

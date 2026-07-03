@@ -975,7 +975,7 @@ const orderIndex = orders.findIndex(order=>
 
     order.table === selectedTable.table &&
 
-    order.status === "Bill Requested"
+   order.status === "Pending"
 
 );
 

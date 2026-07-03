@@ -40,29 +40,29 @@ async function loadComponent(id, file) {
 // LOAD COMPONENTS
 // ======================================
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
 
-    loadComponent("sidebar", "../components/sidebar.html");
+    await loadComponent("sidebar", "../components/sidebar.html");
 
-    loadComponent("navbar", "../components/navbar.html");
+    await loadComponent("navbar", "../components/navbar.html");
 
-    loadComponent("dashboard-cards", "../components/dashboard-cards.html");
+    await loadComponent("dashboard-cards", "../components/dashboard-cards.html");
 
-    loadComponent("dashboard-charts", "../components/dashboard-charts.html");
+    await loadComponent("dashboard-charts", "../components/dashboard-charts.html");
 
-    loadComponent("dashboard-orders", "../components/dashboard-orders.html");
+    await loadComponent("dashboard-orders", "../components/dashboard-orders.html");
 
-    loadComponent("dashboard-kitchen", "../components/dashboard-kitchen.html");
+    await loadComponent("dashboard-kitchen", "../components/dashboard-kitchen.html");
 
-    loadComponent("dashboard-inventory", "../components/dashboard-inventory.html");
+    await loadComponent("dashboard-inventory", "../components/dashboard-inventory.html");
 
-    loadComponent("dashboard-summary", "../components/dashboard-summary.html")
-.then(() => {
+    await loadComponent("dashboard-summary", "../components/dashboard-summary.html");
 
-loadDashboardCards();
-loadDashboardBestSeller();
-loadDashboardNotifications();
-});
+    loadDashboardCards();
+
+    loadDashboardBestSeller();
+
+    loadDashboardNotifications();
 
 });
 // ======================================

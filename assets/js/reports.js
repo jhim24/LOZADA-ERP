@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
     loadSalesReport();
 
+    loadSalesChart();
+
 });
 
 // ===============================================
@@ -236,3 +238,58 @@ document.addEventListener("click", function(e){
     });
 
 });
+// ===============================================
+// SALES CHART
+// ===============================================
+
+function loadSalesChart(){
+
+    const canvas = document.getElementById("salesChart");
+
+    if(!canvas) return;
+
+    const orders = JSON.parse(
+        localStorage.getItem("orders")
+    ) || [];
+
+    const labels = [];
+
+    const values = [];
+
+    orders.forEach(order=>{
+
+        labels.push(order.receiptNo);
+
+        values.push(Number(order.total));
+
+    });
+
+    new Chart(canvas,{
+
+        type:"bar",
+
+        data:{
+
+            labels:labels,
+
+            datasets:[{
+
+                label:"Sales",
+
+                data:values
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false
+
+        }
+
+    });
+
+}

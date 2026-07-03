@@ -60,9 +60,9 @@ function loadSalesReport(){
     let weeklySales = 0;
     let monthlySales = 0;
 
-    orders.forEach(order=>{
+   orders.forEach(order=>{
 
-        totalSales += Number(order.total);
+    if(order.status !== "Paid") return;
         
         const orderDate = new Date(order.date);
 

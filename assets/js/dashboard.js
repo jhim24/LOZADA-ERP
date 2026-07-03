@@ -76,6 +76,10 @@ loadSalesChart();
 loadPaymentChart();
 
 loadBestSeller();
+
+loadNotifications();
+    
+loadRecentOrders();
     
 }
 // ======================================
@@ -443,6 +447,153 @@ function loadBestSeller(){
             <td>${item[0]}</td>
 
             <td>${item[1]}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+// ======================================
+// LIVE NOTIFICATIONS
+// ======================================
+
+function loadNotifications(){
+
+    const list = document.getElementById("dashboardNotifications");
+
+    if(!list) return;
+
+    list.innerHTML = "";
+
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+
+    const tables = JSON.parse(localStorage.getItem("restaurantTables")) || [];
+
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    // LOW STOCK
+
+    products.forEach(product=>{
+
+        if(Number(product.stock) <= Number(product.reorderLevel || 10)){
+
+            list.innerHTML += `
+            <li class="list-group-item">
+                🔴 Low Stock : <strong>${product.name}</strong>
+            </li>`;
+        }
+
+    });
+
+    // OCCUPIED TABLES
+
+    const occupied = tables.filter(table=>table.status==="Occupied").length;
+
+    if(occupied){
+
+        list.innerHTML += `
+        <li class="list-group-item">
+            🍽 Occupied Tables : ${occupied}
+        </li>`;
+    }
+
+    // PENDING ORDERS
+
+    const pending = orders.filter(order=>order.status==="Pending").length;
+
+    if(pending){
+
+        list.innerHTML += `
+        <li class="list-group-item">
+            👨‍🍳 Pending Kitchen Orders : ${pending}
+        </li>`;
+    }
+
+    if(list.innerHTML===""){
+
+        list.innerHTML=`
+        <li class="list-group-item text-success">
+            ✅ No Notifications
+        </li>`;
+    }
+
+}
+// ======================================
+// AUTO REFRESH DASHBOARD
+// ======================================
+
+setInterval(function(){
+
+    loadDashboardCards();
+
+    loadSalesChart();
+
+    loadPaymentChart();
+
+    loadBestSeller();
+
+    loadNotifications();
+    
+    loadRecentOrders();
+
+},5000);
+// ======================================
+// LIVE RECENT ORDERS
+// ======================================
+
+function loadRecentOrders(){
+
+    const tbody = document.getElementById("dashboardRecentOrders");
+
+    if(!tbody) return;
+
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    tbody.innerHTML = "";
+
+    const recent = [...orders].reverse().slice(0,10);
+
+    if(recent.length===0){
+
+        tbody.innerHTML=`
+        <tr>
+            <td colspan="6" class="text-center">
+                No Orders Yet
+            </td>
+        </tr>
+        `;
+
+        return;
+
+    }
+
+    recent.forEach(order=>{
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${order.receiptNo}</td>
+
+            <td>${order.customer}</td>
+
+            <td>${order.table}</td>
+
+            <td>${order.payment || "-"}</td>
+
+            <td>₱${Number(order.total).toFixed(2)}</td>
+
+            <td>
+
+                <span class="badge bg-${order.status==="Paid"?"success":"warning"}">
+
+                    ${order.status}
+
+                </span>
+
+            </td>
 
         </tr>
 

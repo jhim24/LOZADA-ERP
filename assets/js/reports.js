@@ -368,12 +368,19 @@ function loadBestSellers(){
     tbody.innerHTML="";
 
     ranking.forEach((product,index)=>{
+let rank = index + 1;
 
+if(index === 0) rank = "🥇";
+
+else if(index === 1) rank = "🥈";
+
+else if(index === 2) rank = "🥉";
+        
         tbody.innerHTML += `
 
         <tr>
 
-            <td>${index+1}</td>
+            <td>${rank}</td>
 
             <td>${product[0]}</td>
 

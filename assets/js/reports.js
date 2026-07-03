@@ -344,6 +344,13 @@ function loadBestSellers(){
         .sort((a,b)=>b[1].qty-a[1].qty)
 
         .slice(0,10);
+    let grandTotalSales = 0;
+
+ranking.forEach(product=>{
+
+    grandTotalSales += product[1].sales;
+
+});
 
     if(ranking.length===0){
 
@@ -375,21 +382,26 @@ if(index === 0) rank = "🥇";
 else if(index === 1) rank = "🥈";
 
 else if(index === 2) rank = "🥉";
-        
+const percent = grandTotalSales > 0
+
+    ? ((product[1].sales / grandTotalSales) * 100).toFixed(1)
+
+    : "0.0";        
         tbody.innerHTML += `
 
         <tr>
 
-            <td>${rank}</td>
+    <td>${rank}</td>
 
-            <td>${product[0]}</td>
+    <td>${product[0]}</td>
 
-            <td>${product[1].qty}</td>
+    <td>${product[1].qty}</td>
 
-            <td>₱${product[1].sales.toFixed(2)}</td>
+    <td>₱${product[1].sales.toFixed(2)}</td>
 
-        </tr>
+    <td>${percent}%</td>
 
+</tr>
         `;
 
     });

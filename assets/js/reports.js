@@ -322,9 +322,11 @@ function loadBestSellers(){
 
     const products = {};
 
-    orders.forEach(order=>{
+  orders.forEach(order=>{
 
-        if(!order.items) return;
+    if(order.status !== "Paid") return;
+
+    if(!order.items) return;
 
         order.items.forEach(item=>{
 

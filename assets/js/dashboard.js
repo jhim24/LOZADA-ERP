@@ -574,3 +574,6 @@ function loadDashboardNotifications(){
     }
 
 }
+    },500);
+
+});

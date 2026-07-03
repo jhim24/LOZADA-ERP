@@ -257,7 +257,9 @@ function loadSalesChart(){
 
     const values = [];
 
-    orders.forEach(order=>{
+   orders.forEach(order=>{
+
+    if(order.status !== "Paid") return;
 
         labels.push(order.receiptNo);
 

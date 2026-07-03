@@ -958,16 +958,14 @@ document.addEventListener("click", function(e){
 
     const selectedTable = JSON.parse(localStorage.getItem("selectedTable"));
 
-    const orderIndex = orders.findIndex(order =>
-
-        order.floor === selectedTable.floor &&
-
-        order.table === selectedTable.table &&
-
-        order.status === "Pending"
-
-    );
-
+    const orderIndex = orders
+    .map((order, index) => ({ order, index }))
+    .filter(item =>
+        item.order.floor === selectedTable.floor &&
+        item.order.table === selectedTable.table &&
+        item.order.status === "Pending"
+    )
+    .pop()?.index ?? -1;
     if(orderIndex >= 0){
 
         orders[orderIndex].payment = paymentMethod;

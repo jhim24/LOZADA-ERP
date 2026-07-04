@@ -1240,7 +1240,6 @@ function checkPaymentMode(){
     }
 
 }
-}
 function printReceipt(){
 
     const receipt = document.getElementById("receiptContent").innerHTML;

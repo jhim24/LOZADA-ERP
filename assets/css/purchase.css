@@ -146,3 +146,74 @@ SIDEBAR TOGGLE
     margin-left:0;
 
 }
+/* ==========================================
+PURCHASE CONTAINER
+========================================== */
+
+.purchase-container{
+
+    padding:30px;
+
+    max-width:1600px;
+
+    margin:auto;
+
+}
+
+.purchase-container .row{
+
+    margin-bottom:20px;
+
+}
+
+.card{
+
+    transition:.25s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+.table-responsive{
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+}
+
+.table thead{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1;
+
+}
+
+.btn-primary{
+
+    background:#2563eb;
+
+    border:none;
+
+}
+
+.btn-success{
+
+    border:none;
+
+}
+
+.btn-secondary{
+
+    border:none;
+
+}

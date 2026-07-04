@@ -209,12 +209,183 @@
 
         </div>
 
-        <!-- ==========================================
-        PURCHASE FORM
-        ========================================== -->
+       <!-- ==========================================
+PURCHASE FORM
+========================================== -->
 
-        <div id="purchaseForm"></div>
+<div id="purchaseForm">
 
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        <i class="fa-solid fa-file-invoice"></i>
+
+        Purchase Information
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-md-3 mb-3">
+
+                <label class="form-label">
+
+                    Purchase No.
+
+                </label>
+
+                <input
+                    type="text"
+                    id="purchaseNo"
+                    class="form-control"
+                    readonly>
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <label class="form-label">
+
+                    Purchase Date
+
+                </label>
+
+                <input
+                    type="date"
+                    id="purchaseDate"
+                    class="form-control">
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <label class="form-label">
+
+                    Delivery Date
+
+                </label>
+
+                <input
+                    type="date"
+                    id="deliveryDate"
+                    class="form-control">
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <label class="form-label">
+
+                    Status
+
+                </label>
+
+                <select
+                    id="purchaseStatus"
+                    class="form-select">
+
+                    <option>Draft</option>
+
+                    <option>Pending</option>
+
+                    <option>Approved</option>
+
+                    <option>Received</option>
+
+                    <option>Cancelled</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+
+                    Supplier
+
+                </label>
+
+                <select
+                    id="supplierName"
+                    class="form-select">
+
+                    <option value="">
+
+                        Select Supplier
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <label class="form-label">
+
+                    Reference No.
+
+                </label>
+
+                <input
+                    type="text"
+                    id="referenceNo"
+                    class="form-control"
+                    placeholder="Invoice / DR No.">
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <label class="form-label">
+
+                    Prepared By
+
+                </label>
+
+                <input
+                    type="text"
+                    id="preparedBy"
+                    class="form-control"
+                    value="Administrator">
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-12">
+
+                <label class="form-label">
+
+                    Remarks
+
+                </label>
+
+                <textarea
+                    id="purchaseRemarks"
+                    class="form-control"
+                    rows="3"
+                    placeholder="Enter remarks..."></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
         <!-- ==========================================
         PURCHASE TABLE
         ========================================== -->

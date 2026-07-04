@@ -65,6 +65,8 @@ function initializePurchase(){
 
     loadDashboard();
 
+    loadSuppliers();
+
 }
 // ===============================================
 // GENERATE PURCHASE NUMBER
@@ -150,5 +152,36 @@ function loadDashboard(){
 
     document.getElementById("supplierCount").innerHTML =
         suppliers.length;
+
+}
+// ===============================================
+// LOAD SUPPLIERS
+// ===============================================
+
+function loadSuppliers(){
+
+    const select = document.getElementById("supplierName");
+
+    if(!select) return;
+
+    const suppliers = JSON.parse(
+        localStorage.getItem("suppliers")
+    ) || [];
+
+    select.innerHTML = `
+        <option value="">
+            Select Supplier
+        </option>
+    `;
+
+    suppliers.forEach(supplier=>{
+
+        select.innerHTML += `
+            <option value="${supplier.name}">
+                ${supplier.name}
+            </option>
+        `;
+
+    });
 
 }

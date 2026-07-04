@@ -960,11 +960,11 @@ document.addEventListener("click", function(e){
 
     const orderIndex = orders
     .map((order, index) => ({ order, index }))
-    .filter(item =>
-        item.order.floor === selectedTable.floor &&
-        item.order.table === selectedTable.table &&
-        item.order.status === "Pending"
-    )
+   .filter(item =>
+    item.order.floor === selectedTable.floor &&
+    item.order.table === selectedTable.table &&
+    item.order.status !== "Paid"
+)
     .pop()?.index ?? -1;
     if(orderIndex >= 0){
 

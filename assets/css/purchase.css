@@ -1,50 +1,120 @@
 /* ==========================================
-   LOZADA ERP PURCHASE MODULE
+   PURCHASE MODULE
 ========================================== */
 
 body{
-    background:#f5f7fb;
-    font-family:Segoe UI,Arial,sans-serif;
+
     margin:0;
+
+    background:#f5f7fb;
+
+    font-family:'Segoe UI',sans-serif;
+
+}
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:270px;
+
+    height:100vh;
+
+    background:#111827;
+
+    overflow-y:auto;
+
+    z-index:1000;
+
 }
 
 .main-content{
-    margin-left:280px;
-    padding:20px;
+
+    margin-left:270px;
+
+    min-height:100vh;
+
+    background:#f5f7fb;
+
+}
+
+.topbar{
+
+    height:70px;
+
+    background:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 25px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+.container-fluid{
+
+    padding:25px;
+
 }
 
 .card{
+
     border:none;
+
     border-radius:15px;
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
 }
 
 .card-header{
-    font-weight:600;
-}
 
-h2{
-    font-weight:700;
+    font-weight:600;
+
 }
 
 .form-control,
+
 .form-select{
+
     border-radius:10px;
+
 }
 
 .btn{
+
     border-radius:10px;
+
+}
+
+.table{
+
+    margin-bottom:0;
+
 }
 
 .table th{
+
     white-space:nowrap;
+
 }
 
-.table td{
-    vertical-align:middle;
-}
+@media(max-width:992px){
 
-@media (max-width:992px){
+    .sidebar{
+
+        transform:translateX(-100%);
+
+    }
 
     .main-content{
 

@@ -67,6 +67,8 @@ function initializePurchase(){
 
     loadSuppliers();
 
+    initializeSidebar();
+
 }
 // ===============================================
 // GENERATE PURCHASE NUMBER
@@ -181,6 +183,25 @@ function loadSuppliers(){
                 ${supplier.name}
             </option>
         `;
+
+    });
+
+}
+// ===============================================
+// SIDEBAR TOGGLE
+// ===============================================
+
+function initializeSidebar(){
+
+    const button = document.getElementById("toggleSidebar");
+
+    const sidebar = document.querySelector(".sidebar");
+
+    if(!button || !sidebar) return;
+
+    button.addEventListener("click",function(){
+
+        sidebar.classList.toggle("hide-sidebar");
 
     });
 

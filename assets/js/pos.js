@@ -1208,42 +1208,39 @@ function checkPaymentMode(){
     document.getElementById("cashReceived")?.focus();
 
     const paymentTable = JSON.parse(
-    localStorage.getItem("paymentTable")
-);
+        localStorage.getItem("paymentTable")
+    );
 
-if(paymentTable){
+    if(!paymentTable) return;
 
     const orders = JSON.parse(
         localStorage.getItem("orders")
     ) || [];
 
-  const order = orders
-.filter(order =>
-const order = orders.find(order =>
+    const order = orders.find(order =>
 
-    order.floor === paymentTable.floor &&
+        order.floor === paymentTable.floor &&
 
-    order.table === paymentTable.table &&
+        order.table === paymentTable.table &&
 
-    order.status === "Pending"
+        order.status !== "Paid"
 
-);
-   if(order){
+    );
 
-    cart = [...order.items];
+    if(order){
 
-    renderCart();
+        cart = [...order.items];
 
-}else{
+        renderCart();
 
-    alert("No pending order found.");
+    }else{
 
-}
+        alert("No pending order found.");
 
-}
+    }
 
 }
-
+}
 function printReceipt(){
 
     const receipt = document.getElementById("receiptContent").innerHTML;
@@ -1330,11 +1327,6 @@ function completePayment(){
         localStorage.getItem("selectedTable")
 
     );
-// ===============================================
-// PRINT RECEIPT
-// ===============================================
-
-
 
     if(!selectedTable) return;
 

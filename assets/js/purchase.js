@@ -39,10 +39,6 @@ async function loadComponent(id, file){
 
 document.addEventListener("DOMContentLoaded", async ()=>{
 
-    await loadComponent(
-        "sidebar",
-        "../components/sidebar.html"
-    );
 
     await loadComponent(
         "navbar",

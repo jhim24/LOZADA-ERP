@@ -834,7 +834,14 @@ document.addEventListener("click",function(e){
 function saveOrder(receiptNo,total){
 
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
+const table = JSON.parse(localStorage.getItem("selectedTable")) || {};
 
+// Hanapin kung may existing order na hindi pa Paid
+const existingOrder = orders.find(order =>
+    order.floor === table.floor &&
+    order.table === table.table &&
+    order.status !== "Paid"
+);
    const table = JSON.parse(
 
     localStorage.getItem("selectedTable")

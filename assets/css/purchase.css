@@ -123,3 +123,26 @@ body{
     }
 
 }
+/* ==========================================
+SIDEBAR TOGGLE
+========================================== */
+
+.sidebar.hide-sidebar{
+
+    transform:translateX(-270px);
+
+    transition:.3s;
+
+}
+
+.main-content{
+
+    transition:.3s;
+
+}
+
+.sidebar.hide-sidebar + .main-content{
+
+    margin-left:0;
+
+}

@@ -476,8 +476,7 @@ document.addEventListener("click", function(e){
 
     const btn = e.target.closest("#btnSendKitchen");
 // Clear cart after sending to kitchen
-cart = [];
-renderCart();
+
     if(!btn) return;
 console.log("STEP 1 - Send to Kitchen button clicked");
     if(cart.length===0){
@@ -497,6 +496,8 @@ console.log("STEP 2 - About to save order");
    saveOrder(receiptNo, grandTotal);
 console.log("STEP 3 - Order saved");
 alert("Order sent to Kitchen.");
+    cart = [];
+renderCart();
 
 // Huwag muna i-clear ang cart.
 // Ika-clear natin ito pagkatapos ng successful payment.
@@ -980,8 +981,7 @@ table.guests || 1;
 
 document.getElementById("paymentServer").innerHTML =
 table.server || "-";
-}
-// ======================================
+    // ======================================
 // LOAD EXISTING PENDING ORDER
 // ======================================
 
@@ -990,7 +990,9 @@ let orders = JSON.parse(localStorage.getItem("orders")) || [];
 const existingOrder = orders.find(order =>
 
     order.floor === table.floor &&
+
     order.table === table.table &&
+
     order.status === "Pending"
 
 );
@@ -1003,6 +1005,7 @@ if(existingOrder){
 
 }
 }
+
 // ======================================
 // RECEIVE PAYMENT
 // ======================================
@@ -1081,7 +1084,9 @@ function generateBill(){
 
     document.getElementById("billDate").innerHTML =
     new Date().toLocaleString();
-
+const table = JSON.parse(
+    localStorage.getItem("selectedTable")
+) || {};
     document.getElementById("billTable").innerHTML =
     table.table || "-";
 
@@ -1234,21 +1239,6 @@ if(paymentTable){
 
 }
 
-// ===============================================
-// COMPLETE PAYMENT
-// ===============================================
-
-function completePayment(){
-
-    const selectedTable = JSON.parse(
-
-        localStorage.getItem("selectedTable")
-
-    );
-// ===============================================
-// PRINT RECEIPT
-// ===============================================
-
 function printReceipt(){
 
     const receipt = document.getElementById("receiptContent").innerHTML;
@@ -1263,37 +1253,24 @@ function printReceipt(){
             <style>
 
                 body{
-
-                    font-family:Arial,sans-serif;
-
+                    font-family: Arial, sans-serif;
                     padding:15px;
-
                     font-size:12px;
-
                 }
 
                 table{
-
                     width:100%;
-
                     border-collapse:collapse;
-
                 }
 
-                th,td{
-
+                th, td{
                     padding:4px;
-
                     font-size:12px;
-
                 }
 
                 .receipt{
-
                     width:80mm;
-
                     margin:auto;
-
                 }
 
             </style>
@@ -1318,7 +1295,7 @@ function printReceipt(){
     printWindow.close();
 
 }
-    // ===============================================
+// ===============================================
 // PRINT OFFICIAL RECEIPT
 // ===============================================
 
@@ -1337,6 +1314,23 @@ document.addEventListener("click", function(e){
     },500);
 
 });
+// ===============================================
+// COMPLETE PAYMENT
+// ===============================================
+
+function completePayment(){
+
+    const selectedTable = JSON.parse(
+
+        localStorage.getItem("selectedTable")
+
+    );
+// ===============================================
+// PRINT RECEIPT
+// ===============================================
+
+
+
     if(!selectedTable) return;
 
     let tables = JSON.parse(

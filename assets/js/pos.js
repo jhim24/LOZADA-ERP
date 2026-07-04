@@ -475,7 +475,9 @@ document.addEventListener("click",function(e){
 document.addEventListener("click", function(e){
 
     const btn = e.target.closest("#btnSendKitchen");
-
+// Clear cart after sending to kitchen
+cart = [];
+renderCart();
     if(!btn) return;
 console.log("STEP 1 - Send to Kitchen button clicked");
     if(cart.length===0){
@@ -831,51 +833,90 @@ document.addEventListener("click",function(e){
 // SAVE ORDER
 // ===============================================
 
-function saveOrder(receiptNo,total){
+function saveOrder(receiptNo, total){
 
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
-const table = JSON.parse(localStorage.getItem("selectedTable")) || {};
 
-// Hanapin kung may existing order na hindi pa Paid
-const existingOrder = orders.find(order =>
-    order.floor === table.floor &&
-    order.table === table.table &&
-    order.status !== "Paid"
-);
-   const table = JSON.parse(
+    const table = JSON.parse(localStorage.getItem("selectedTable")) || {};
 
-    localStorage.getItem("selectedTable")
+    // Hanapin kung may existing unpaid order
+    const existingOrder = orders.find(order =>
 
-) || {};
+        order.floor === table.floor &&
+        order.table === table.table &&
+        order.status !== "Paid"
 
-const order = {
+    );
 
-    receiptNo: receiptNo,
+    if(existingOrder){
 
-    date: new Date().toLocaleString(),
+        // idagdag ang bagong items
 
-    items: [...cart],
+        cart.forEach(newItem=>{
 
-    total: total,
+            const oldItem = existingOrder.items.find(item=>
 
-    status: "Pending",
+                item.name === newItem.name
 
-   payment: "",
-    
-    cashier: "Administrator",
+            );
 
-    floor: table.floor || "",
+            if(oldItem){
 
-    table: table.table || "",
+                oldItem.qty += newItem.qty;
 
-    customer: table.customer || "Walk-in",
+            }else{
 
-    guests: table.guests || 1,
+                existingOrder.items.push({...newItem});
 
-    server: table.server || ""
+            }
 
-};
-    orders.push(order);
+        });
+
+        // update total
+
+        // Recompute total
+existingOrder.total = existingOrder.items.reduce((sum, item) => {
+
+    return sum + (Number(item.price) * Number(item.qty));
+
+}, 0);
+
+// Update date
+existingOrder.date = new Date().toLocaleString();
+
+    }else{
+
+        // gumawa ng bagong order
+
+        orders.push({
+
+            receiptNo: receiptNo,
+
+            date: new Date().toLocaleString(),
+
+            items: [...cart],
+
+            total: total,
+
+            status: "Pending",
+
+            payment: "",
+
+            cashier: "Administrator",
+
+            floor: table.floor || "",
+
+            table: table.table || "",
+
+            customer: table.customer || "Walk-in",
+
+            guests: table.guests || 1,
+
+            server: table.server || ""
+
+        });
+
+    }
 
     localStorage.setItem(
 
@@ -940,7 +981,28 @@ table.guests || 1;
 document.getElementById("paymentServer").innerHTML =
 table.server || "-";
 }
+// ======================================
+// LOAD EXISTING PENDING ORDER
+// ======================================
 
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+const existingOrder = orders.find(order =>
+
+    order.floor === table.floor &&
+    order.table === table.table &&
+    order.status === "Pending"
+
+);
+
+if(existingOrder){
+
+    cart = [...existingOrder.items];
+
+    renderCart();
+
+}
+}
 // ======================================
 // RECEIVE PAYMENT
 // ======================================
@@ -1019,10 +1081,6 @@ function generateBill(){
 
     document.getElementById("billDate").innerHTML =
     new Date().toLocaleString();
-
-    const table = JSON.parse(
-        localStorage.getItem("selectedTable")
-    ) || {};
 
     document.getElementById("billTable").innerHTML =
     table.table || "-";
@@ -1154,14 +1212,15 @@ if(paymentTable){
         localStorage.getItem("orders")
     ) || [];
 
-    const order = orders
-    .filter(order =>
+  const order = orders
+.filter(order =>
 
-        order.floor === paymentTable.floor &&
-        order.table === paymentTable.table
+    order.floor === paymentTable.floor &&
+    order.table === paymentTable.table &&
+    order.status === "Pending"
 
-    )
-    .at(-1);
+)
+.at(-1);
 
     if(order){
 

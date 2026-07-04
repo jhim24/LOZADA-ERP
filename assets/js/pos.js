@@ -1219,21 +1219,26 @@ if(paymentTable){
 
   const order = orders
 .filter(order =>
+const order = orders.find(order =>
 
     order.floor === paymentTable.floor &&
+
     order.table === paymentTable.table &&
+
     order.status === "Pending"
 
-)
-.at(-1);
+);
+   if(order){
 
-    if(order){
+    cart = [...order.items];
 
-        cart = [...order.items];
+    renderCart();
 
-        renderCart();
+}else{
 
-    }
+    alert("No pending order found.");
+
+}
 
 }
 

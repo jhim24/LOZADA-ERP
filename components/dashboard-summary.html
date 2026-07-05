@@ -1,122 +1,12 @@
 <!-- ==========================================
-     DASHBOARD SUMMARY
+EXECUTIVE BUSINESS SUMMARY
 ========================================== -->
 
-<section class="summary-section">
-
 <div class="row">
 
-    <!-- CASH FLOW -->
+    <!-- BUSINESS SUMMARY -->
 
-    <div class="col-lg-3 col-md-6 mb-4">
-
-        <div class="summary-card">
-
-            <div class="summary-icon green">
-
-                <i class="fa-solid fa-wallet"></i>
-
-            </div>
-
-            <div>
-
-                <small>Cash Flow</small>
-
-                <h3>₱286,500</h3>
-
-                <span class="text-success">+8.5%</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- RESERVATIONS -->
-
-    <div class="col-lg-3 col-md-6 mb-4">
-
-        <div class="summary-card">
-
-            <div class="summary-icon blue">
-
-                <i class="fa-solid fa-calendar-check"></i>
-
-            </div>
-
-            <div>
-
-                <small>Reservations</small>
-
-                <h3>18</h3>
-
-                <span>Today</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- EMPLOYEE -->
-
-    <div class="col-lg-3 col-md-6 mb-4">
-
-        <div class="summary-card">
-
-            <div class="summary-icon orange">
-
-                <i class="fa-solid fa-user-check"></i>
-
-            </div>
-
-            <div>
-
-                <small>Attendance</small>
-
-                <h3>24 / 32</h3>
-
-                <span>75% Present</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- DELIVERY -->
-
-    <div class="col-lg-3 col-md-6 mb-4">
-
-        <div class="summary-card">
-
-            <div class="summary-icon red">
-
-                <i class="fa-solid fa-truck-fast"></i>
-
-            </div>
-
-            <div>
-
-                <small>Deliveries</small>
-
-                <h3>6</h3>
-
-                <span>Incoming Today</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="row">
-
-    <!-- TOP SELLING -->
-
-    <div class="col-lg-6 mb-4">
+    <div class="col-lg-8 mb-4">
 
         <div class="widget">
 
@@ -124,9 +14,9 @@
 
                 <h4>
 
-                    <i class="fa-solid fa-trophy text-warning"></i>
+                    <i class="fa-solid fa-chart-column"></i>
 
-                    Top 5 Best Selling
+                    Business Summary
 
                 </h4>
 
@@ -134,37 +24,99 @@
 
             <div class="widget-body">
 
-                <table class="table table-hover">
+                <div class="row text-center">
 
-                    <thead>
+                    <div class="col-md-3 mb-3">
 
-                        <tr>
+                        <h3 id="dashboardCashSales">
 
-                            <th>#</th>
+                            ₱0.00
 
-                            <th>Product</th>
+                        </h3>
 
-                            <th>Qty</th>
+                        <small>Cash Sales</small>
 
-                        </tr>
+                    </div>
 
-                    </thead>
+                    <div class="col-md-3 mb-3">
 
-                    <tbody id="dashboardBestSeller">
+                        <h3 id="dashboardCardSales">
 
-                        <tr>
+                            ₱0.00
 
-                            <td colspan="3" class="text-center">
+                        </h3>
 
-                                No Sales
+                        <small>Card Sales</small>
 
-                            </td>
+                    </div>
 
-                        </tr>
+                    <div class="col-md-3 mb-3">
 
-                    </tbody>
+                        <h3 id="dashboardDigitalSales">
 
-                </table>
+                            ₱0.00
+
+                        </h3>
+
+                        <small>GCash / Maya</small>
+
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+
+                        <h3 id="dashboardExpenses">
+
+                            ₱0.00
+
+                        </h3>
+
+                        <small>Expenses</small>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row text-center">
+
+                    <div class="col-md-4">
+
+                        <h4 id="dashboardNetProfit">
+
+                            ₱0.00
+
+                        </h4>
+
+                        <small>Net Profit</small>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <h4 id="dashboardAverageOrder">
+
+                            ₱0.00
+
+                        </h4>
+
+                        <small>Average Order</small>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <h4 id="dashboardTransactions">
+
+                            0
+
+                        </h4>
+
+                        <small>Total Transactions</small>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -172,9 +124,9 @@
 
     </div>
 
-    <!-- NOTIFICATIONS -->
+    <!-- QUICK INFO -->
 
-    <div class="col-lg-6 mb-4">
+    <div class="col-lg-4 mb-4">
 
         <div class="widget">
 
@@ -182,9 +134,9 @@
 
                 <h4>
 
-                    <i class="fa-solid fa-bell"></i>
+                    <i class="fa-solid fa-circle-info"></i>
 
-                    System Notifications
+                    Quick Information
 
                 </h4>
 
@@ -192,9 +144,82 @@
 
             <div class="widget-body">
 
-               <ul class="list-group" id="dashboardNotifications">
+                <div class="list-group">
 
-</ul>
+                    <div class="list-group-item d-flex justify-content-between">
+
+                        Active Employees
+
+                        <span id="dashboardEmployeeCount">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div class="list-group-item d-flex justify-content-between">
+
+                        Active Suppliers
+
+                        <span id="dashboardSupplierCount">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div class="list-group-item d-flex justify-content-between">
+
+                        Products
+
+                        <span id="dashboardProductCount">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div class="list-group-item d-flex justify-content-between">
+
+                        Categories
+
+                        <span id="dashboardCategoryCount">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div class="list-group-item d-flex justify-content-between">
+
+                        Inventory Items
+
+                        <span id="dashboardInventoryCount">
+
+                            0
+
+                        </span>
+
+                    </div>
+
+                    <div class="list-group-item d-flex justify-content-between">
+
+                        Business Hours
+
+                        <span>
+
+                            8:00 AM - 10:00 PM
+
+                        </span>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>

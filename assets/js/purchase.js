@@ -202,3 +202,119 @@ function initializeSidebar(){
     });
 
 }
+// ===============================================
+// PURCHASE ITEMS
+// ===============================================
+
+let purchaseItems = [];
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnAddItem");
+
+    if(!btn) return;
+
+    addPurchaseRow();
+
+});
+// ===============================================
+// ADD PURCHASE ROW
+// ===============================================
+
+function addPurchaseRow(){
+
+    const tbody = document.getElementById("purchaseItemsBody");
+
+    if(!tbody) return;
+
+    if(tbody.innerHTML.includes("No Items Added")){
+
+        tbody.innerHTML = "";
+
+    }
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+
+        <td>
+
+            <select class="form-select purchase-product">
+
+                <option value="">Select Product</option>
+
+            </select>
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="form-control purchase-qty"
+                value="1"
+                min="1">
+
+        </td>
+
+        <td>
+
+            <input
+                type="text"
+                class="form-control purchase-unit"
+                value="PCS">
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="form-control purchase-cost"
+                value="0">
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="form-control purchase-discount"
+                value="0">
+
+        </td>
+
+        <td>
+
+            <input
+                type="number"
+                class="form-control purchase-vat"
+                value="12">
+
+        </td>
+
+        <td>
+
+            <input
+                type="text"
+                class="form-control purchase-total"
+                value="0.00"
+                readonly>
+
+        </td>
+
+        <td>
+
+            <button class="btn btn-danger btn-sm btnDeleteRow">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </button>
+
+        </td>
+
+    `;
+
+    tbody.appendChild(row);
+
+}

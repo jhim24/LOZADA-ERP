@@ -69,18 +69,20 @@ document.addEventListener("DOMContentLoaded", async function(){
 
 function initDashboard(){
 
-loadDashboardCards();
+    loadDashboardCards();
 
-loadSalesChart();
+    loadSalesChart();
 
-loadPaymentChart();
+    loadPaymentChart();
 
-loadBestSeller();
+    loadBestSeller();
 
-loadNotifications();
-    
-loadRecentOrders();
-    
+    loadNotifications();
+
+    loadRecentOrders();
+
+    loadBusinessSummary();
+
 }
 // ======================================
 // LIVE DASHBOARD CARDS
@@ -535,8 +537,10 @@ setInterval(function(){
     loadBestSeller();
 
     loadNotifications();
-    
+
     loadRecentOrders();
+
+    loadBusinessSummary();
 
 },5000);
 // ======================================
@@ -600,5 +604,110 @@ function loadRecentOrders(){
         `;
 
     });
+
+}
+// ======================================
+// BUSINESS SUMMARY
+// ======================================
+
+function loadBusinessSummary(){
+
+    const orders = JSON.parse(
+        localStorage.getItem("orders")
+    ) || [];
+
+    let cash = 0;
+
+    let card = 0;
+
+    let digital = 0;
+
+    let transactions = 0;
+
+    orders.forEach(order=>{
+
+        if(order.status !== "Paid") return;
+
+        transactions++;
+
+        switch(order.payment){
+
+            case "Cash":
+
+                cash += Number(order.total || 0);
+
+                break;
+
+            case "Credit Card":
+
+            case "Debit Card":
+
+                card += Number(order.total || 0);
+
+                break;
+
+            case "GCash":
+
+            case "Maya":
+
+            case "Bank Transfer":
+
+                digital += Number(order.total || 0);
+
+                break;
+
+        }
+
+    });
+
+    const expenses = 0;
+
+    const netProfit =
+        cash +
+        card +
+        digital -
+        expenses;
+
+    const setValue=(id,value)=>{
+
+        const element=document.getElementById(id);
+
+        if(element){
+
+            element.innerHTML=value;
+
+        }
+
+    };
+
+    setValue(
+        "dashboardCashSales",
+        "₱"+cash.toFixed(2)
+    );
+
+    setValue(
+        "dashboardCardSales",
+        "₱"+card.toFixed(2)
+    );
+
+    setValue(
+        "dashboardDigitalSales",
+        "₱"+digital.toFixed(2)
+    );
+
+    setValue(
+        "dashboardExpenses",
+        "₱"+expenses.toFixed(2)
+    );
+
+    setValue(
+        "dashboardNetProfit",
+        "₱"+netProfit.toFixed(2)
+    );
+
+    setValue(
+        "dashboardTransactions",
+        transactions
+    );
 
 }

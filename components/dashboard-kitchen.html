@@ -1,159 +1,141 @@
 <!-- ==========================================
-     KITCHEN DISPLAY
+LIVE KITCHEN MONITOR
 ========================================== -->
 
-<section class="kitchen-section">
+<div class="row">
 
-    <div class="widget">
+    <!-- KITCHEN STATUS -->
 
-        <div class="widget-header">
+    <div class="col-lg-8 mb-4">
 
-            <h4>
-                <i class="fa-solid fa-utensils"></i>
-                Kitchen Display System (KDS)
-            </h4>
+        <div class="widget">
 
-            <button class="btn btn-danger btn-sm">
-                6 Active Orders
-            </button>
+            <div class="widget-header d-flex justify-content-between align-items-center">
+
+                <h4>
+
+                    <i class="fa-solid fa-utensils"></i>
+
+                    Kitchen Live Monitor
+
+                </h4>
+
+                <button
+                    class="btn btn-success btn-sm">
+
+                    Open Kitchen Display
+
+                </button>
+
+            </div>
+
+            <div class="widget-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover">
+
+                        <thead class="table-light">
+
+                            <tr>
+
+                                <th>Order No.</th>
+
+                                <th>Table</th>
+
+                                <th>Customer</th>
+
+                                <th>Status</th>
+
+                                <th>Waiting Time</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="dashboardKitchenTable">
+
+                            <tr>
+
+                                <td colspan="5" class="text-center text-muted">
+
+                                    No Kitchen Orders
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
 
         </div>
 
-        <div class="widget-body">
+    </div>
 
-            <div class="kitchen-grid">
+    <!-- KITCHEN SUMMARY -->
 
-                <!-- ORDER -->
+    <div class="col-lg-4 mb-4">
 
-                <div class="kitchen-order preparing">
+        <div class="widget">
 
-                    <div class="order-header">
+            <div class="widget-header">
 
-                        <h5>#1001</h5>
+                <h4>
 
-                        <span class="badge bg-warning text-dark">
-                            Preparing
-                        </span>
+                    <i class="fa-solid fa-fire"></i>
 
-                    </div>
+                    Kitchen Status
 
-                    <h6>Table 01</h6>
+                </h4>
 
-                    <ul>
+            </div>
 
-                        <li>🍲 Bulalo x2</li>
+            <div class="widget-body">
 
-                        <li>🍚 Rice x2</li>
+                <div class="list-group">
 
-                        <li>🥤 Coke x2</li>
+                    <div class="list-group-item d-flex justify-content-between">
 
-                    </ul>
+                        Pending
 
-                    <div class="timer">
-
-                        ⏱ 08:45
+                        <span id="dashboardKitchenPending">0</span>
 
                     </div>
 
-                </div>
+                    <div class="list-group-item d-flex justify-content-between">
 
-                <!-- ORDER -->
+                        Preparing
 
-                <div class="kitchen-order cooking">
-
-                    <div class="order-header">
-
-                        <h5>#1002</h5>
-
-                        <span class="badge bg-primary">
-
-                            Cooking
-
-                        </span>
+                        <span id="dashboardKitchenPreparing">0</span>
 
                     </div>
 
-                    <h6>Table 08</h6>
+                    <div class="list-group-item d-flex justify-content-between">
 
-                    <ul>
+                        Ready
 
-                        <li>🥩 Pork Sisig</li>
-
-                        <li>🍺 Beer x3</li>
-
-                    </ul>
-
-                    <div class="timer">
-
-                        ⏱ 05:12
+                        <span id="dashboardKitchenReady">0</span>
 
                     </div>
 
-                </div>
+                    <div class="list-group-item d-flex justify-content-between">
 
-                <!-- ORDER -->
+                        Served
 
-                <div class="kitchen-order ready">
-
-                    <div class="order-header">
-
-                        <h5>#1003</h5>
-
-                        <span class="badge bg-success">
-
-                            Ready
-
-                        </span>
+                        <span id="dashboardKitchenServed">0</span>
 
                     </div>
 
-                    <h6>Take Out</h6>
+                    <div class="list-group-item d-flex justify-content-between">
 
-                    <ul>
+                        Average Prep Time
 
-                        <li>🍗 Chicken Inasal</li>
-
-                        <li>🍚 Rice</li>
-
-                    </ul>
-
-                    <div class="timer">
-
-                        Ready to Serve
-
-                    </div>
-
-                </div>
-
-                <!-- ORDER -->
-
-                <div class="kitchen-order waiting">
-
-                    <div class="order-header">
-
-                        <h5>#1004</h5>
-
-                        <span class="badge bg-danger">
-
-                            Waiting
-
-                        </span>
-
-                    </div>
-
-                    <h6>Table 05</h6>
-
-                    <ul>
-
-                        <li>🐟 Sinigang</li>
-
-                        <li>🥤 Sprite</li>
-
-                    </ul>
-
-                    <div class="timer">
-
-                        Waiting...
+                        <span id="dashboardKitchenAverage">0 min</span>
 
                     </div>
 
@@ -165,4 +147,4 @@
 
     </div>
 
-</section>
+</div>

@@ -1,8 +1,6 @@
 <!-- ==========================================
-     INVENTORY DASHBOARD
+INVENTORY & PURCHASE DASHBOARD
 ========================================== -->
-
-<section class="inventory-section">
 
 <div class="row">
 
@@ -12,19 +10,20 @@
 
         <div class="widget">
 
-            <div class="widget-header">
+            <div class="widget-header d-flex justify-content-between align-items-center">
 
                 <h4>
 
-                    <i class="fa-solid fa-box-open"></i>
+                    <i class="fa-solid fa-triangle-exclamation text-danger"></i>
 
                     Low Stock Alert
 
                 </h4>
 
-                <button class="btn btn-danger btn-sm">
+                <button
+                    class="btn btn-outline-danger btn-sm">
 
-                    8 Items
+                    View Inventory
 
                 </button>
 
@@ -32,57 +31,43 @@
 
             <div class="widget-body">
 
-                <table class="table table-hover align-middle">
+                <div class="table-responsive">
 
-                    <thead>
+                    <table class="table table-hover">
 
-                        <tr>
+                        <thead class="table-light">
 
-                            <th>Item</th>
-                            <th>Stock</th>
-                            <th>Status</th>
+                            <tr>
 
-                        </tr>
+                                <th>Item</th>
 
-                    </thead>
+                                <th>Stock</th>
 
-                    <tbody>
+                                <th>Minimum</th>
 
-                        <tr>
+                                <th>Status</th>
 
-                            <td>Chicken Breast</td>
-                            <td>5 kg</td>
-                            <td><span class="badge bg-danger">Low</span></td>
+                            </tr>
 
-                        </tr>
+                        </thead>
 
-                        <tr>
+                        <tbody id="dashboardLowStockTable">
 
-                            <td>Cooking Oil</td>
-                            <td>2 Bottles</td>
-                            <td><span class="badge bg-warning text-dark">Critical</span></td>
+                            <tr>
 
-                        </tr>
+                                <td colspan="4" class="text-center text-muted">
 
-                        <tr>
+                                    No Low Stock Items
 
-                            <td>Rice</td>
-                            <td>10 kg</td>
-                            <td><span class="badge bg-warning text-dark">Low</span></td>
+                                </td>
 
-                        </tr>
+                            </tr>
 
-                        <tr>
+                        </tbody>
 
-                            <td>Softdrinks</td>
-                            <td>12 Cases</td>
-                            <td><span class="badge bg-success">Good</span></td>
+                    </table>
 
-                        </tr>
-
-                    </tbody>
-
-                </table>
+                </div>
 
             </div>
 
@@ -90,77 +75,76 @@
 
     </div>
 
-    <!-- BEST SELLERS -->
+    <!-- PURCHASE SUMMARY -->
 
     <div class="col-lg-6 mb-4">
 
         <div class="widget">
 
-            <div class="widget-header">
+            <div class="widget-header d-flex justify-content-between align-items-center">
 
                 <h4>
 
-                    <i class="fa-solid fa-fire"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
 
-                    Best Selling Products
+                    Purchase Summary
 
                 </h4>
+
+                <button
+                    class="btn btn-outline-primary btn-sm">
+
+                    View Purchases
+
+                </button>
 
             </div>
 
             <div class="widget-body">
 
-                <table class="table table-striped">
+                <div class="row text-center">
 
-                    <thead>
+                    <div class="col-4">
 
-                        <tr>
+                        <h3 id="dashboardPendingPO">
 
-                            <th>Product</th>
-                            <th>Sold</th>
-                            <th>Revenue</th>
+                            0
 
-                        </tr>
+                        </h3>
 
-                    </thead>
+                        <small>Pending</small>
 
-                    <tbody>
+                    </div>
 
-                        <tr>
+                    <div class="col-4">
 
-                            <td>Bulalo</td>
-                            <td>245</td>
-                            <td>₱45,800</td>
+                        <h3 id="dashboardReceivedPO">
 
-                        </tr>
+                            0
 
-                        <tr>
+                        </h3>
 
-                            <td>Pork Sisig</td>
-                            <td>198</td>
-                            <td>₱34,900</td>
+                        <small>Received</small>
 
-                        </tr>
+                    </div>
 
-                        <tr>
+                    <div class="col-4">
 
-                            <td>Lechon Kawali</td>
-                            <td>165</td>
-                            <td>₱29,500</td>
+                        <h3 id="dashboardPurchaseTotal">
 
-                        </tr>
+                            ₱0.00
 
-                        <tr>
+                        </h3>
 
-                            <td>Halo-Halo</td>
-                            <td>152</td>
-                            <td>₱18,200</td>
+                        <small>Total Purchases</small>
 
-                        </tr>
+                    </div>
 
-                    </tbody>
+                </div>
 
-                </table>
+                <hr>
+
+                <canvas id="purchaseChart" height="120"></canvas>
 
             </div>
 
@@ -169,77 +153,3 @@
     </div>
 
 </div>
-
-<div class="row">
-
-    <!-- INVENTORY SUMMARY -->
-
-    <div class="col-lg-4 mb-4">
-
-        <div class="dashboard-card">
-
-            <div class="card-icon blue">
-
-                <i class="fa-solid fa-warehouse"></i>
-
-            </div>
-
-            <div class="card-info">
-
-                <small>Total Inventory Value</small>
-
-                <h3>₱1,285,000</h3>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-lg-4 mb-4">
-
-        <div class="dashboard-card">
-
-            <div class="card-icon green">
-
-                <i class="fa-solid fa-arrow-up"></i>
-
-            </div>
-
-            <div class="card-info">
-
-                <small>Stock In Today</small>
-
-                <h3>28 Items</h3>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-lg-4 mb-4">
-
-        <div class="dashboard-card">
-
-            <div class="card-icon orange">
-
-                <i class="fa-solid fa-arrow-down"></i>
-
-            </div>
-
-            <div class="card-info">
-
-                <small>Stock Out Today</small>
-
-                <h3>112 Items</h3>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>

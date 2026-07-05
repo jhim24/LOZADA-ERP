@@ -1,8 +1,6 @@
 <!-- ==========================================
-     RECENT ORDERS & KITCHEN DISPLAY
+EXECUTIVE DASHBOARD
 ========================================== -->
-
-<section class="orders-section">
 
 <div class="row">
 
@@ -12,7 +10,7 @@
 
         <div class="widget">
 
-            <div class="widget-header">
+            <div class="widget-header d-flex justify-content-between align-items-center">
 
                 <h4>
 
@@ -22,7 +20,8 @@
 
                 </h4>
 
-                <button class="btn btn-primary btn-sm">
+                <button
+                    class="btn btn-primary btn-sm">
 
                     View All
 
@@ -32,42 +31,45 @@
 
             <div class="widget-body">
 
-                <table class="table table-hover align-middle">
+                <div class="table-responsive">
 
-                   <thead>
+                    <table class="table table-hover align-middle">
 
-<tr>
+                        <thead class="table-light">
 
-<th>Receipt</th>
+                            <tr>
 
-<th>Customer</th>
+                                <th>Receipt</th>
 
-<th>Table</th>
+                                <th>Table</th>
 
-<th>Payment</th>
+                                <th>Customer</th>
 
-<th>Total</th>
+                                <th>Status</th>
 
-<th>Status</th>
+                                <th>Total</th>
 
-</tr>
+                            </tr>
 
-</thead>
-                <tbody id="dashboardRecentOrders">
+                        </thead>
 
-<tr>
+                        <tbody id="dashboardRecentOrders">
 
-<td colspan="6" class="text-center">
+                            <tr>
 
-Loading Orders...
+                                <td colspan="5" class="text-center text-muted">
 
-</td>
+                                    No Orders Found
 
-</tr>
+                                </td>
 
-</tbody>
+                            </tr>
 
-                </table>
+                        </tbody>
+
+                    </table>
+
+                </div>
 
             </div>
 
@@ -75,7 +77,7 @@ Loading Orders...
 
     </div>
 
-    <!-- KITCHEN DISPLAY -->
+    <!-- QUICK STATS -->
 
     <div class="col-lg-4 mb-4">
 
@@ -85,9 +87,9 @@ Loading Orders...
 
                 <h4>
 
-                    <i class="fa-solid fa-utensils"></i>
+                    <i class="fa-solid fa-bolt"></i>
 
-                    Kitchen Queue
+                    Quick Status
 
                 </h4>
 
@@ -95,33 +97,47 @@ Loading Orders...
 
             <div class="widget-body">
 
-                <div class="kitchen-card preparing">
+                <div class="list-group">
 
-                    <h5>#1002</h5>
+                    <div class="list-group-item d-flex justify-content-between">
 
-                    <p>Bulalo + Rice</p>
+                        Pending Orders
 
-                    <small>⏱ 08:35</small>
+                        <span id="dashboardPendingOrders">0</span>
 
-                </div>
+                    </div>
 
-                <div class="kitchen-card cooking">
+                    <div class="list-group-item d-flex justify-content-between">
 
-                    <h5>#1005</h5>
+                        Kitchen Queue
 
-                    <p>Pork Sisig</p>
+                        <span id="dashboardKitchenQueue">0</span>
 
-                    <small>⏱ 04:10</small>
+                    </div>
 
-                </div>
+                    <div class="list-group-item d-flex justify-content-between">
 
-                <div class="kitchen-card waiting">
+                        Paid Orders
 
-                    <h5>#1007</h5>
+                        <span id="dashboardPaidOrders">0</span>
 
-                    <p>Lechon Kawali</p>
+                    </div>
 
-                    <small>Waiting</small>
+                    <div class="list-group-item d-flex justify-content-between">
+
+                        Cancelled Orders
+
+                        <span id="dashboardCancelledOrders">0</span>
+
+                    </div>
+
+                    <div class="list-group-item d-flex justify-content-between">
+
+                        Total Customers
+
+                        <span id="dashboardCustomerCount">0</span>
+
+                    </div>
 
                 </div>
 
@@ -132,5 +148,3 @@ Loading Orders...
     </div>
 
 </div>
-
-</section>

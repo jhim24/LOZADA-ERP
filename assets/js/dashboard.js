@@ -76,9 +76,7 @@ function initDashboard(){
     loadPaymentChart();
 
     loadBestSeller();
-    
-    loadTopProductsChart();
-    
+     
     loadNotifications();
 
     loadRecentOrders();
@@ -464,93 +462,6 @@ function loadBestSeller(){
 
 }
 // ======================================
-// TOP SELLING PRODUCTS CHART
-// ======================================
-
-function loadTopProductsChart(){
-
-    const canvas =
-        document.getElementById("topProductsChart");
-
-    if(!canvas) return;
-
-    const orders = JSON.parse(
-        localStorage.getItem("orders")
-    ) || [];
-
-    const products = {};
-
-    orders.forEach(order=>{
-
-        if(order.status !== "Paid") return;
-
-        if(!order.items) return;
-
-        order.items.forEach(item=>{
-
-            if(!products[item.name]){
-
-                products[item.name]=0;
-
-            }
-
-            products[item.name]+=Number(item.qty);
-
-        });
-
-    });
-
-    const ranking = Object.entries(products)
-
-        .sort((a,b)=>b[1]-a[1])
-
-        .slice(0,5);
-
-    if(window.topProductsChart){
-
-        window.topProductsChart.destroy();
-
-    }
-
-    window.topProductsChart =
-        new Chart(canvas,{
-
-        type:"bar",
-
-        data:{
-
-            labels:ranking.map(x=>x[0]),
-
-            datasets:[{
-
-                label:"Qty Sold",
-
-                data:ranking.map(x=>x[1])
-
-            }]
-
-        },
-
-        options:{
-
-            responsive:true,
-
-            maintainAspectRatio:false,
-
-            plugins:{
-
-                legend:{
-                    display:false
-                }
-
-            }
-
-        }
-
-    });
-
-}
-// ======================================
 // LIVE NOTIFICATIONS
 // ======================================
 
@@ -628,9 +539,7 @@ setInterval(function(){
     loadPaymentChart();
 
     loadBestSeller();
-    
-    loadTopProductsChart();
-    
+      
     loadNotifications();
 
     loadRecentOrders();

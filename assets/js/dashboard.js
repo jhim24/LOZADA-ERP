@@ -256,12 +256,14 @@ function loadSalesChart(){
 
     const values = Object.values(sales);
 
-    if(window.salesChart){
+   if(
+    window.salesChart &&
+    typeof window.salesChart.destroy === "function"
+){
 
-        window.salesChart.destroy();
+    window.salesChart.destroy();
 
-    }
-
+}
     window.salesChart = new Chart(canvas,{
 
         type:"line",
@@ -341,12 +343,14 @@ function loadPaymentChart(){
 
     });
 
-    if(window.paymentChart){
+   if(
+    window.paymentChart &&
+    typeof window.paymentChart.destroy === "function"
+){
 
-        window.paymentChart.destroy();
+    window.paymentChart.destroy();
 
-    }
-
+}
     window.paymentChart = new Chart(canvas,{
 
         type:"doughnut",

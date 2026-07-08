@@ -1,52 +1,66 @@
 <!-- ==========================================
-     RESTAURANT TABLE CARD
+MODERN TABLE CARD
 ========================================== -->
 
 <template id="tableCardTemplate">
 
-<div class="col-xl-2 col-lg-3 col-md-4 col-6">
+<div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
 
-  <div class="card table-card shadow-sm border-0">
+    <div class="table-card">
 
-    <div class="card-body text-center">
+        <div class="table-top">
 
-        <div class="display-4 mb-2">
+            <div class="table-icon">
 
-            🪑
+                <i class="fa-solid fa-chair"></i>
 
-        </div>
+            </div>
 
-        <h4 class="fw-bold table-name">
+            <span class="table-status available">
 
-            Table 1
-
-        </h4>
-
-        <div class="text-muted table-floor mb-2">
-
-            Rooftop
-
-        </div>
-
-        <div class="mb-2">
-
-            👥
-
-            <span class="table-capacity">
-
-                4
+                Available
 
             </span>
 
-            Seats
+        </div>
+
+        <div class="table-content">
+
+            <h3 class="table-name">
+
+                Table 01
+
+            </h3>
+
+            <p class="table-floor">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                Main Dining
+
+            </p>
+
+            <p class="table-capacity">
+
+                <i class="fa-solid fa-users"></i>
+
+                4 Persons
+
+            </p>
 
         </div>
 
-        <span class="badge bg-success table-status">
+        <div class="table-footer">
 
-            Available
+            <button class="btn btn-success btn-sm w-100">
 
-        </span>
+                <i class="fa-solid fa-play"></i>
+
+                Start Order
+
+            </button>
+
+        </div>
 
     </div>
 

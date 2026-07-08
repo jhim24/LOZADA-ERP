@@ -1,77 +1,96 @@
 <!-- ==========================================
-     TABLE MANAGEMENT HEADER
+TABLE MANAGEMENT HEADER
 ========================================== -->
 
-<div class="card shadow-sm border-0 mb-4">
+<div class="dashboard-header mb-4">
 
-    <div class="card-body">
+    <div class="dashboard-title">
 
-        <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <h1>
 
-            <div>
+            <i class="fa-solid fa-chair"></i>
 
-                <h2 class="fw-bold mb-1">
+            Table Management
 
-                    <i class="fa-solid fa-chair text-primary"></i>
+        </h1>
 
-                    Table Management
+        <p>
 
-                </h2>
+            Manage restaurant tables, reservations and floor layout
 
-                <small class="text-muted">
+        </p>
 
-                    Manage Restaurant Tables & Floor Areas
+    </div>
 
-                </small>
+    <div class="dashboard-tools">
 
-            </div>
+        <button
+            class="btn btn-success"
+            id="btnAddTable">
 
-           <div class="d-flex gap-2">
+            <i class="fa-solid fa-plus"></i>
 
-    <button
-    class="btn btn-primary"
-    id="btnAddTable">
+            New Table
 
-        <i class="fa-solid fa-plus"></i>
+        </button>
 
-        Add Table
+        <button
+            class="btn btn-warning"
+            id="btnEditTable">
 
-    </button>
+            <i class="fa-solid fa-pen"></i>
 
-    <button
-    class="btn btn-warning"
-    id="btnEditTable">
+            Edit
 
-        <i class="fa-solid fa-pen"></i>
+        </button>
 
-        Edit
+        <button
+            class="btn btn-danger"
+            id="btnDeleteTable">
 
-    </button>
+            <i class="fa-solid fa-trash"></i>
 
-    <button
-    class="btn btn-danger"
-    id="btnDeleteTable">
+            Delete
 
-        <i class="fa-solid fa-trash"></i>
-
-        Delete
-
-    </button>
-
-</div>
-        </div>
+        </button>
 
     </div>
 
 </div>
 
-<div class="row g-3 mb-4">
+<!-- ==========================================
+TABLE SUMMARY
+========================================== -->
 
-    <div class="col-lg-3">
+<div class="row g-4 mb-4">
 
-        <div class="card border-success">
+    <div class="col-xl-3 col-md-6">
 
-            <div class="card-body text-center">
+        <div class="kpi-card">
+
+            <div class="kpi-info">
+
+                <small>Total Tables</small>
+
+                <h2 id="totalTables">0</h2>
+
+            </div>
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-chair"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+
+        <div class="kpi-card">
+
+            <div class="kpi-info">
 
                 <small>Available</small>
 
@@ -79,15 +98,21 @@
 
             </div>
 
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
         </div>
 
     </div>
 
-    <div class="col-lg-3">
+    <div class="col-xl-3 col-md-6">
 
-        <div class="card border-danger">
+        <div class="kpi-card">
 
-            <div class="card-body text-center">
+            <div class="kpi-info">
 
                 <small>Occupied</small>
 
@@ -95,19 +120,9 @@
 
             </div>
 
-        </div>
+            <div class="kpi-icon">
 
-    </div>
-
-    <div class="col-lg-3">
-
-        <div class="card border-warning">
-
-            <div class="card-body text-center">
-
-                <small>Reserved</small>
-
-                <h2 id="reservedTables">0</h2>
+                <i class="fa-solid fa-utensils"></i>
 
             </div>
 
@@ -115,15 +130,21 @@
 
     </div>
 
-    <div class="col-lg-3">
+    <div class="col-xl-3 col-md-6">
 
-        <div class="card border-secondary">
+        <div class="kpi-card">
 
-            <div class="card-body text-center">
+            <div class="kpi-info">
 
-                <small>Cleaning</small>
+                <small>Reserved</small>
 
-                <h2 id="cleaningTables">0</h2>
+                <h2 id="reservedTables">0</h2>
+
+            </div>
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-calendar-check"></i>
 
             </div>
 

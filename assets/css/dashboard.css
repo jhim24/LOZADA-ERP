@@ -1219,3 +1219,32 @@ body{
     background:#115e59;
 
 }
+/* ==========================================
+HEADER TOOLS
+========================================== */
+
+.dashboard-tools{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.dashboard-clock{
+
+    background:#ffffff;
+
+    border:1px solid #78aeb3;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    color:#0f766e;
+
+}

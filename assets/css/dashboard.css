@@ -973,3 +973,140 @@ text-align:right;
 color:#1E3A8A;
 
 }
+/* ==========================================
+   MODERN DASHBOARD UI
+========================================== */
+
+body{
+
+    background:#eef7f8;
+
+    font-family:'Segoe UI',sans-serif;
+
+}
+
+/* Main Container */
+
+.dashboard-container{
+
+    padding:30px;
+
+}
+
+/* Header */
+
+.dashboard-header{
+
+    background:#dff4f5;
+
+    border:1px solid #78aeb3;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.dashboard-header h1{
+
+    font-size:36px;
+
+    font-weight:700;
+
+    color:#162033;
+
+    margin:0;
+
+}
+
+.dashboard-header p{
+
+    color:#556170;
+
+    margin-top:8px;
+
+    margin-bottom:0;
+
+}
+
+/* KPI Cards */
+
+.kpi-card{
+
+    background:#ffffff;
+
+    border:1px solid #78aeb3;
+
+    border-radius:12px;
+
+    padding:22px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    transition:.25s;
+
+    min-height:135px;
+
+}
+
+.kpi-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.kpi-info small{
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+.kpi-info h2{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:#162033;
+
+    margin-top:10px;
+
+}
+
+.kpi-icon{
+
+    width:68px;
+
+    height:68px;
+
+    border-radius:12px;
+
+    background:#d9f1f2;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+    color:#0f766e;
+
+}

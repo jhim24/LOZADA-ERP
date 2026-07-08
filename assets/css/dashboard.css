@@ -112,13 +112,17 @@ body{
 
     flex:1;
 
-    width:100%;
+    margin-left:280px;
 
-    margin-left:260px;
+    width:calc(100% - 280px);
+
+    min-height:100vh;
 
     padding:25px;
 
     background:#eef7f8;
+
+    overflow-x:hidden;
 
 }
 

@@ -1,16 +1,16 @@
 <!-- ==========================================
-PREMIUM TABLE CARD
+PREMIUM RESTAURANT TABLE TILE
 ========================================== -->
 
 <template id="tableCardTemplate">
 
-<div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+<div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
 
     <div class="table-card">
 
-        <div class="table-status-bar">
+        <div class="table-header">
 
-            <span class="status available">
+            <span class="table-status available">
 
                 <i class="fa-solid fa-circle"></i>
 
@@ -20,47 +20,53 @@ PREMIUM TABLE CARD
 
         </div>
 
-        <div class="table-icon">
+        <div class="table-center">
 
-            <i class="fa-solid fa-chair"></i>
+            <div class="table-icon">
 
-        </div>
+                <i class="fa-solid fa-chair"></i>
 
-        <div class="table-body">
+            </div>
 
-            <h3 class="table-name">
+            <h2 class="table-name">
 
-                Table 01
+                TABLE 01
 
-            </h3>
+            </h2>
 
-            <div class="table-floor">
-
-                <i class="fa-solid fa-location-dot"></i>
+            <p class="table-floor">
 
                 Main Dining
 
-            </div>
+            </p>
 
-            <div class="table-capacity">
+            <div class="table-info">
 
-                <i class="fa-solid fa-users"></i>
+                <span>
 
-                4 Persons
+                    <i class="fa-solid fa-users"></i>
+
+                    4 Pax
+
+                </span>
+
+                <span>
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    00:00
+
+                </span>
 
             </div>
 
         </div>
 
-        <div class="table-actions">
+        <div class="table-footer">
 
-            <button class="btn btn-outline-primary btn-sm">
+            <button class="btn btn-success">
 
-                Details
-
-            </button>
-
-            <button class="btn btn-success btn-sm">
+                <i class="fa-solid fa-play"></i>
 
                 Start Order
 

@@ -103,3 +103,68 @@ border:2px solid #6B7280;
     background:#fff3cd;
 
 }
+/* ==========================================
+TABLE CARDS
+========================================== */
+
+.table-card{
+
+    background:#ffffff;
+
+    border:2px solid #dbe7ea;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    transition:.30s;
+
+    cursor:pointer;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.06);
+
+}
+
+.table-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+
+    border-color:#0f766e;
+
+}
+
+.table-card h4{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#162033;
+
+}
+
+.table-card p{
+
+    margin:6px 0;
+
+    color:#64748b;
+
+}
+
+.table-status{
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}

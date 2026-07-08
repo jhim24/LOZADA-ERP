@@ -735,3 +735,17 @@ function updateDashboardClock(){
 updateDashboardClock();
 
 setInterval(updateDashboardClock,1000);
+
+// ======================================
+// SIDEBAR TOGGLE
+// ======================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#toggleSidebar");
+
+    if(!btn) return;
+
+    document.body.classList.toggle("sidebar-collapsed");
+
+});

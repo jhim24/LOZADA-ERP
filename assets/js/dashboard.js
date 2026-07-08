@@ -47,6 +47,22 @@ document.addEventListener("DOMContentLoaded", async function(){
     await loadComponent("sidebar","../components/sidebar.html");
 
     await loadComponent("navbar","../components/navbar.html");
+    initializeSidebarToggle();
+    // ======================================
+// SIDEBAR TOGGLE
+// ======================================
+
+const toggleBtn = document.getElementById("toggleSidebar");
+
+if(toggleBtn){
+
+    toggleBtn.addEventListener("click", function(){
+
+        document.body.classList.toggle("sidebar-collapsed");
+
+    });
+
+}
 
     await loadComponent("dashboard-cards","../components/dashboard-cards.html");
 

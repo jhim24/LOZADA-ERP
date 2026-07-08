@@ -2,234 +2,210 @@
      LIVE DASHBOARD CARDS
 ========================================== -->
 
-<section class="cards-grid">
+<!-- ==========================================
+DASHBOARD KPI CARDS
+========================================== -->
+
+<section class="dashboard-kpi">
+
+<div class="row g-4">
 
     <!-- TODAY SALES -->
-    <div class="dashboard-card">
 
-        <div class="card-icon blue">
+    <div class="col-xl-3 col-lg-4 col-md-6">
 
-            <i class="fa-solid fa-cart-shopping"></i>
+        <div class="kpi-card">
 
-        </div>
+            <div class="kpi-info">
 
-        <div class="card-info">
+                <small>Today's Sales</small>
 
-            <small>TODAY'S SALES</small>
+                <h2 id="dashboardSales">₱0.00</h2>
 
-            <h3 id="dashboardSales">₱0.00</h3>
+            </div>
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-coins"></i>
+
+            </div>
 
         </div>
 
     </div>
 
-    <!-- ORDERS TODAY -->
-    <div class="dashboard-card">
+    <!-- ORDERS -->
 
-        <div class="card-icon green">
+    <div class="col-xl-3 col-lg-4 col-md-6">
 
-            <i class="fa-solid fa-bag-shopping"></i>
+        <div class="kpi-card">
 
-        </div>
+            <div class="kpi-info">
 
-        <div class="card-info">
+                <small>Orders Today</small>
 
-            <small>ORDERS TODAY</small>
+                <h2 id="dashboardOrders">0</h2>
 
-            <h3 id="dashboardOrders">0</h3>
+            </div>
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-receipt"></i>
+
+            </div>
 
         </div>
 
     </div>
 
     <!-- PROFIT -->
-    <div class="dashboard-card">
 
-        <div class="card-icon orange">
+    <div class="col-xl-3 col-lg-4 col-md-6">
 
-            <i class="fa-solid fa-chart-line"></i>
+        <div class="kpi-card">
 
-        </div>
+            <div class="kpi-info">
 
-        <div class="card-info">
+                <small>Net Profit</small>
 
-            <small>PROFIT</small>
+                <h2 id="dashboardProfit">₱0.00</h2>
 
-            <h3 id="dashboardProfit">₱0.00</h3>
+            </div>
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+            </div>
 
         </div>
 
     </div>
 
     <!-- LOW STOCK -->
-    <div class="dashboard-card">
 
-        <div class="card-icon red">
+    <div class="col-xl-3 col-lg-4 col-md-6">
 
-            <i class="fa-solid fa-box"></i>
+        <div class="kpi-card">
 
-        </div>
+            <div class="kpi-info">
 
-        <div class="card-info">
+                <small>Low Stock</small>
 
-            <small>LOW STOCK</small>
+                <h2 id="dashboardLowStock">0</h2>
 
-            <h3 id="dashboardLowStock">0</h3>
+            </div>
 
-        </div>
+            <div class="kpi-icon">
 
-    </div>
+                <i class="fa-solid fa-triangle-exclamation"></i>
 
-    <!-- AVAILABLE TABLES -->
-    <div class="dashboard-card">
-
-        <div class="card-icon teal">
-
-            <i class="fa-solid fa-chair"></i>
+            </div>
 
         </div>
-
-        <div class="card-info">
-
-            <small>AVAILABLE TABLES</small>
-
-            <h3 id="dashboardAvailableTables">0</h3>
-
-        </div>
-
-    </div>
-
-    <!-- OCCUPIED TABLES -->
-    <div class="dashboard-card">
-
-        <div class="card-icon red">
-
-            <i class="fa-solid fa-utensils"></i>
-
-        </div>
-
-        <div class="card-info">
-
-            <small>OCCUPIED TABLES</small>
-
-            <h3 id="dashboardOccupiedTables">0</h3>
-
-        </div>
-
-    </div>
-
-    <!-- CUSTOMERS -->
-    <div class="dashboard-card">
-
-        <div class="card-icon purple">
-
-            <i class="fa-solid fa-users"></i>
-
-        </div>
-
-        <div class="card-info">
-
-            <small>CUSTOMERS TODAY</small>
-
-            <h3 id="dashboardCustomers">0</h3>
-
-        </div>
-
-    </div>
-
-    <!-- AVERAGE SALE -->
-    <div class="dashboard-card">
-
-        <div class="card-icon yellow">
-
-            <i class="fa-solid fa-coins"></i>
-
-        </div>
-
-        <div class="card-info">
-
-            <small>AVERAGE SALE</small>
-
-            <h3 id="dashboardAverageSale">₱0.00</h3>
-
-        </div>
-
-    </div>
-<!-- PURCHASES -->
-<div class="dashboard-card">
-
-    <div class="card-icon indigo">
-
-        <i class="fa-solid fa-cart-plus"></i>
-
-    </div>
-
-    <div class="card-info">
-
-        <small>PURCHASES</small>
-
-        <h3 id="dashboardPurchases">₱0.00</h3>
 
     </div>
 
 </div>
 
-<!-- INVENTORY VALUE -->
-<div class="dashboard-card">
+<div class="row g-4 mt-1">
 
-    <div class="card-icon cyan">
+    <!-- PURCHASES -->
 
-        <i class="fa-solid fa-warehouse"></i>
+    <div class="col-xl-3 col-lg-4 col-md-6">
+
+        <div class="kpi-card">
+
+            <div class="kpi-info">
+
+                <small>Purchases</small>
+
+                <h2 id="dashboardPurchases">₱0.00</h2>
+
+            </div>
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="card-info">
+    <!-- INVENTORY -->
 
-        <small>INVENTORY VALUE</small>
+    <div class="col-xl-3 col-lg-4 col-md-6">
 
-        <h3 id="dashboardInventoryValue">₱0.00</h3>
+        <div class="kpi-card">
+
+            <div class="kpi-info">
+
+                <small>Inventory Value</small>
+
+                <h2 id="dashboardInventoryValue">₱0.00</h2>
+
+            </div>
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-boxes-stacked"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SUPPLIERS -->
+
+    <div class="col-xl-3 col-lg-4 col-md-6">
+
+        <div class="kpi-card">
+
+            <div class="kpi-info">
+
+                <small>Suppliers</small>
+
+                <h2 id="dashboardSuppliers">0</h2>
+
+            </div>
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-truck"></i>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- EMPLOYEES -->
+
+    <div class="col-xl-3 col-lg-4 col-md-6">
+
+        <div class="kpi-card">
+
+            <div class="kpi-info">
+
+                <small>Employees</small>
+
+                <h2 id="dashboardEmployees">0</h2>
+
+            </div>
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-user-tie"></i>
+
+            </div>
+
+        </div>
 
     </div>
 
 </div>
 
-<!-- SUPPLIERS -->
-<div class="dashboard-card">
-
-    <div class="card-icon dark">
-
-        <i class="fa-solid fa-truck"></i>
-
-    </div>
-
-    <div class="card-info">
-
-        <small>SUPPLIERS</small>
-
-        <h3 id="dashboardSuppliers">0</h3>
-
-    </div>
-
-</div>
-
-<!-- EMPLOYEES -->
-<div class="dashboard-card">
-
-    <div class="card-icon pink">
-
-        <i class="fa-solid fa-user-tie"></i>
-
-    </div>
-
-    <div class="card-info">
-
-        <small>EMPLOYEES</small>
-
-        <h3 id="dashboardEmployees">0</h3>
-
-    </div>
-
-</div>
-     
 </section>
-

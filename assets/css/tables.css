@@ -168,3 +168,160 @@ TABLE CARDS
     font-weight:700;
 
 }
+/* ==========================
+   PREMIUM TABLE CARD
+========================== */
+
+.table-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    border:1px solid #dbe7ea;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.30s;
+
+    height:100%;
+
+}
+
+.table-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+
+    border-color:#0f766e;
+
+}
+
+.table-status-bar{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-bottom:15px;
+
+}
+
+.status{
+
+    padding:6px 12px;
+
+    border-radius:50px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+.status.available{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.status.occupied{
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+}
+
+.status.reserved{
+
+    background:#fef3c7;
+
+    color:#b45309;
+
+}
+
+.status.cleaning{
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+}
+
+.table-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:0 auto 20px;
+
+    border-radius:50%;
+
+    background:#ecfeff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.table-icon i{
+
+    font-size:42px;
+
+    color:#0f766e;
+
+}
+
+.table-body{
+
+    text-align:center;
+
+}
+
+.table-name{
+
+    font-size:26px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.table-floor,
+
+.table-capacity{
+
+    color:#64748b;
+
+    margin-bottom:8px;
+
+}
+
+.table-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:20px;
+
+}
+
+.table-actions button{
+
+    flex:1;
+
+    border-radius:10px;
+
+}

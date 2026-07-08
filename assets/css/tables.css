@@ -168,23 +168,23 @@ TABLE CARDS
     font-weight:700;
 
 }
-/* ==========================
+/* ==========================================
    PREMIUM TABLE CARD
-========================== */
+========================================== */
 
 .table-card{
 
-    background:#fff;
+    background:#ffffff;
+
+    border:2px solid #e5e7eb;
 
     border-radius:20px;
 
-    padding:20px;
-
-    border:1px solid #dbe7ea;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    overflow:hidden;
 
     transition:.30s;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
 
     height:100%;
 
@@ -194,27 +194,27 @@ TABLE CARDS
 
     transform:translateY(-8px);
 
-    box-shadow:0 18px 40px rgba(0,0,0,.15);
-
     border-color:#0f766e;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
 
 }
 
-.table-status-bar{
+.table-header{
+
+    padding:15px 18px;
 
     display:flex;
 
     justify-content:flex-end;
 
-    margin-bottom:15px;
-
 }
 
-.status{
+.table-status{
 
-    padding:6px 12px;
+    padding:7px 14px;
 
-    border-radius:50px;
+    border-radius:30px;
 
     font-size:12px;
 
@@ -222,7 +222,7 @@ TABLE CARDS
 
 }
 
-.status.available{
+.available{
 
     background:#dcfce7;
 
@@ -230,7 +230,7 @@ TABLE CARDS
 
 }
 
-.status.occupied{
+.occupied{
 
     background:#fee2e2;
 
@@ -238,7 +238,7 @@ TABLE CARDS
 
 }
 
-.status.reserved{
+.reserved{
 
     background:#fef3c7;
 
@@ -246,11 +246,19 @@ TABLE CARDS
 
 }
 
-.status.cleaning{
+.cleaning{
 
     background:#dbeafe;
 
     color:#1d4ed8;
+
+}
+
+.table-center{
+
+    text-align:center;
+
+    padding:10px 20px 20px;
 
 }
 
@@ -260,11 +268,11 @@ TABLE CARDS
 
     height:90px;
 
-    margin:0 auto 20px;
+    margin:auto;
 
-    border-radius:50%;
+    border-radius:20px;
 
-    background:#ecfeff;
+    background:linear-gradient(135deg,#0f766e,#14b8a6);
 
     display:flex;
 
@@ -272,56 +280,66 @@ TABLE CARDS
 
     align-items:center;
 
+    margin-bottom:20px;
+
 }
 
 .table-icon i{
 
+    color:#fff;
+
     font-size:42px;
-
-    color:#0f766e;
-
-}
-
-.table-body{
-
-    text-align:center;
 
 }
 
 .table-name{
 
-    font-size:26px;
+    font-size:28px;
 
     font-weight:700;
 
     margin-bottom:10px;
 
+    color:#162033;
+
 }
 
-.table-floor,
-
-.table-capacity{
+.table-floor{
 
     color:#64748b;
 
-    margin-bottom:8px;
+    margin-bottom:12px;
 
 }
 
-.table-actions{
+.table-info{
 
     display:flex;
 
-    gap:10px;
+    justify-content:center;
 
-    margin-top:20px;
+    gap:18px;
+
+    color:#64748b;
+
+    font-size:15px;
 
 }
 
-.table-actions button{
+.table-footer{
 
-    flex:1;
+    padding:18px;
 
-    border-radius:10px;
+    border-top:1px solid #edf2f7;
+
+}
+
+.table-footer .btn{
+
+    width:100%;
+
+    border-radius:12px;
+
+    font-weight:600;
 
 }

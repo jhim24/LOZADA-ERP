@@ -1110,3 +1110,112 @@ body{
     color:#0f766e;
 
 }
+/* ==========================================
+   DASHBOARD WIDGETS
+========================================== */
+
+.widget{
+
+    background:#ffffff;
+
+    border:1px solid #78aeb3;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
+
+    transition:.25s;
+
+}
+
+.widget:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.widget-header{
+
+    background:#dff4f5;
+
+    border-bottom:1px solid #78aeb3;
+
+    padding:16px 20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.widget-header h4{
+
+    margin:0;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#162033;
+
+}
+
+.widget-body{
+
+    padding:20px;
+
+    min-height:280px;
+
+}
+.table{
+
+    margin-bottom:0;
+
+}
+
+.table thead{
+
+    background:#374151;
+
+    color:#fff;
+
+}
+
+.table thead th{
+
+    color:#fff;
+
+    font-weight:600;
+
+    border:none;
+
+}
+
+.table tbody tr:hover{
+
+    background:#f1f8f9;
+
+}
+.btn-success{
+
+    background:#0f766e;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:10px 18px;
+
+}
+
+.btn-success:hover{
+
+    background:#115e59;
+
+}

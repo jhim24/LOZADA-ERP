@@ -3,27 +3,31 @@
 // LAYOUT MANAGER
 // ======================================
 
-document.addEventListener("click", function(e){
+function initLayout(){
 
-    const btn = e.target.closest("#toggleSidebar");
-
-    if(!btn) return;
-
-    document.body.classList.toggle("sidebar-collapsed");
-
-    localStorage.setItem(
-        "sidebarCollapsed",
-        document.body.classList.contains("sidebar-collapsed")
-    );
-
-});
-
-document.addEventListener("DOMContentLoaded", function(){
-
+    // Restore sidebar state
     if(localStorage.getItem("sidebarCollapsed") === "true"){
 
         document.body.classList.add("sidebar-collapsed");
 
     }
 
-});
+    // Toggle sidebar
+    const btn = document.getElementById("toggleSidebar");
+
+    if(btn){
+
+        btn.onclick = function(){
+
+            document.body.classList.toggle("sidebar-collapsed");
+
+            localStorage.setItem(
+                "sidebarCollapsed",
+                document.body.classList.contains("sidebar-collapsed")
+            );
+
+        };
+
+    }
+
+}

@@ -1,5 +1,5 @@
 <!-- ==========================================
-MODERN TABLE CARD
+PREMIUM TABLE CARD
 ========================================== -->
 
 <template id="tableCardTemplate">
@@ -8,15 +8,11 @@ MODERN TABLE CARD
 
     <div class="table-card">
 
-        <div class="table-top">
+        <div class="table-status-bar">
 
-            <div class="table-icon">
+            <span class="status available">
 
-                <i class="fa-solid fa-chair"></i>
-
-            </div>
-
-            <span class="table-status available">
+                <i class="fa-solid fa-circle"></i>
 
                 Available
 
@@ -24,7 +20,13 @@ MODERN TABLE CARD
 
         </div>
 
-        <div class="table-content">
+        <div class="table-icon">
+
+            <i class="fa-solid fa-chair"></i>
+
+        </div>
+
+        <div class="table-body">
 
             <h3 class="table-name">
 
@@ -32,29 +34,33 @@ MODERN TABLE CARD
 
             </h3>
 
-            <p class="table-floor">
+            <div class="table-floor">
 
                 <i class="fa-solid fa-location-dot"></i>
 
                 Main Dining
 
-            </p>
+            </div>
 
-            <p class="table-capacity">
+            <div class="table-capacity">
 
                 <i class="fa-solid fa-users"></i>
 
                 4 Persons
 
-            </p>
+            </div>
 
         </div>
 
-        <div class="table-footer">
+        <div class="table-actions">
 
-            <button class="btn btn-success btn-sm w-100">
+            <button class="btn btn-outline-primary btn-sm">
 
-                <i class="fa-solid fa-play"></i>
+                Details
+
+            </button>
+
+            <button class="btn btn-success btn-sm">
 
                 Start Order
 

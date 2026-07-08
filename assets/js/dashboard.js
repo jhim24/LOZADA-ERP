@@ -48,22 +48,7 @@ document.addEventListener("DOMContentLoaded", async function(){
 
     await loadComponent("navbar","../components/navbar.html");
     initializeSidebarToggle();
-    // ======================================
-// SIDEBAR TOGGLE
-// ======================================
-
-const toggleBtn = document.getElementById("toggleSidebar");
-
-if(toggleBtn){
-
-    toggleBtn.addEventListener("click", function(){
-
-        document.body.classList.toggle("sidebar-collapsed");
-
-    });
-
-}
-
+  
     await loadComponent("dashboard-cards","../components/dashboard-cards.html");
 
     await loadComponent("dashboard-charts","../components/dashboard-charts.html");
@@ -763,5 +748,20 @@ document.addEventListener("click", function(e){
     if(!btn) return;
 
     document.body.classList.toggle("sidebar-collapsed");
+
+    localStorage.setItem(
+        "sidebarCollapsed",
+        document.body.classList.contains("sidebar-collapsed")
+    );
+
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    if(localStorage.getItem("sidebarCollapsed") === "true"){
+
+        document.body.classList.add("sidebar-collapsed");
+
+    }
 
 });

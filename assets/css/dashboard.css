@@ -1269,3 +1269,51 @@ HEADER TOOLS
     color:#0f766e;
 
 }
+/* ==========================================
+SIDEBAR COLLAPSE
+========================================== */
+
+body.sidebar-collapsed .sidebar{
+
+    width:80px;
+
+    transition:.30s;
+
+}
+
+body.sidebar-collapsed .logo h2,
+body.sidebar-collapsed .logo small,
+body.sidebar-collapsed .menu span,
+body.sidebar-collapsed .sidebar-footer{
+
+    display:none;
+
+}
+
+body.sidebar-collapsed .menu li a{
+
+    justify-content:center;
+
+    padding:16px;
+
+}
+
+body.sidebar-collapsed .menu li i{
+
+    margin:0;
+
+    font-size:20px;
+
+}
+
+body.sidebar-collapsed .main{
+
+    margin-left:80px;
+
+    width:calc(100% - 80px);
+
+    transition:.30s;
+
+}
+
+.sidebar

@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async function(){
     await loadComponent("sidebar","../components/sidebar.html");
 
     await loadComponent("navbar","../components/navbar.html");
-   
+    initLayout();
     await loadComponent("dashboard-cards","../components/dashboard-cards.html");
 
     await loadComponent("dashboard-charts","../components/dashboard-charts.html");

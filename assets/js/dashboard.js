@@ -715,3 +715,23 @@ function loadBusinessSummary(){
     );
 
 }
+// ======================================
+// LIVE CLOCK
+// ======================================
+
+function updateDashboardClock(){
+
+    const clock = document.getElementById("liveClock");
+
+    if(!clock) return;
+
+    const now = new Date();
+
+    clock.innerHTML =
+        now.toLocaleTimeString();
+
+}
+
+updateDashboardClock();
+
+setInterval(updateDashboardClock,1000);

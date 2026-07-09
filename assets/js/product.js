@@ -59,54 +59,58 @@ generateProductCode();
 
 });
 // ===============================================
-// LOAD CATEGORY DROPDOWN
+// LOAD CATEGORY DROPDOWN (FIREBASE)
 // ===============================================
 
 function loadCategoryDropdown(){
 
-    const categorySelect = document.getElementById("productCategory");
+const categorySelect = document.getElementById("productCategory");
 
-    if(!categorySelect) return;
+if(!categorySelect) return;
 
-    const categories = JSON.parse(localStorage.getItem("categories")) || [];
+db.ref("categories").on("value",snapshot=>{
 
-    categorySelect.innerHTML = "";
+categorySelect.innerHTML="";
 
-    if(categories.length===0){
+if(!snapshot.exists()){
 
-        categorySelect.innerHTML = `
-            <option value="">
-                No Category Available
-            </option>
-        `;
+categorySelect.innerHTML=`
+<option value="">
+No Category Available
+</option>
+`;
 
-        return;
+return;
 
-    }
+}
 
-    categorySelect.innerHTML = `
-        <option value="">
-            -- Select Category --
-        </option>
-    `;
+categorySelect.innerHTML=`
+<option value="">
+-- Select Category --
+</option>
+`;
 
-    categories.forEach(category=>{
+snapshot.forEach(child=>{
 
-        if(category.status==="Active"){
+const category = child.val();
 
-            categorySelect.innerHTML += `
+if(category.status==="Active"){
 
-                <option value="${category.name}">
+categorySelect.innerHTML+=`
 
-                    ${category.name}
+<option value="${category.name}">
 
-                </option>
+${category.name}
 
-            `;
+</option>
 
-        }
+`;
 
-    });
+}
+
+});
+
+});
 
 }
 // ===============================================

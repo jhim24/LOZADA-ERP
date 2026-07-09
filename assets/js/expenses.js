@@ -114,3 +114,20 @@ function clearExpense(){
     document.getElementById("expenseCategory").selectedIndex=0;
 
 }
+// ======================================
+// EXPENSE LIST
+// ======================================
+
+let expenses = [];
+
+// ======================================
+// SAVE BUTTON
+// ======================================
+
+const btnSaveExpense = document.getElementById("btnSaveExpense");
+
+if(btnSaveExpense){
+
+    btnSaveExpense.addEventListener("click", saveExpense);
+
+}

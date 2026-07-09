@@ -1037,22 +1037,7 @@ line-height:1;
 
     }
 
-    /* CART */
-
-    .cart-container{
-
-        margin-top:20px;
-
-        overflow-x:auto;
-
-    }
-
-    .cart-table{
-
-        min-width:700px;
-
-    }
-
+   
     /* PAYMENT */
 
     .payment-panel{

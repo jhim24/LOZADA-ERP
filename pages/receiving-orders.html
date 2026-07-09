@@ -282,7 +282,10 @@ let totalSales=0;
 
 snapshot.forEach(child=>{
 
-const order=child.val();
+const order = child.val();
+
+// Show NEW orders only
+if(order.status !== "NEW") return;
 
 todayOrders++;
 

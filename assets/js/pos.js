@@ -240,57 +240,28 @@ function renderCart(){
 
         <tr>
 
-            <td>
+           <td>
 
-                <div class="cart-product">
+    <div class="cart-product">
 
-                    <img
-src="${item.image}"
-class="cart-image"
-alt="${item.name}">
+        <img
+        src="${item.image}"
+        class="cart-image"
+        alt="${item.name}">
 
-                    <div>
+        <div class="cart-details">
 
-                        <strong>${item.name}</strong>
+            <div class="cart-name">
+                ${item.name}
+            </div>
 
-                        <br>
+            <div class="cart-note">
+                Special Instructions
+            </div>
 
-                        <small class="text-muted">
+        </div>
 
-                            Special Instructions
-
-                        </small>
-
-                    </div>
-
-                </div>
-
-            </td><td>
-
-<div class="cart-product">
-
-<img
-src="${item.image}"
-class="cart-image"
-alt="${item.name}">
-
-<div class="cart-details">
-
-<div class="cart-name">
-
-${item.name}
-
-</div>
-
-<div class="cart-note">
-
-Special Instructions
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </td>
 

@@ -83,43 +83,21 @@ let categories = [];
 let editIndex = -1;
 document.addEventListener("click",function(e){
 
-const btn=e.target.closest("#btnSaveCategory");
+const btn=e.target.closest(".btn-delete");
 
 if(!btn) return;
 
-const code=
-document.getElementById("categoryCode").value.trim();
+const code = btn.dataset.code;
 
-const name=
-document.getElementById("categoryName").value.trim();
+if(!confirm("Delete this category?")) return;
 
-const description=
-document.getElementById("categoryDescription").value.trim();
+db.ref("categories/"+code)
+.remove()
+.then(()=>{
 
-const status=
-document.getElementById("categoryStatus").value;
+alert("Category Deleted Successfully.");
 
-if(name===""){
-
-alert("Category Name is required.");
-
-return;
-
-}
-
-db.ref("categories/"+code).set({
-
-name:name,
-
-description:description,
-
-status:status
-
-}).then(()=>{
-
-alert("Category saved successfully.");
-
-clearCategoryForm();
+generateCategoryCode();
 
 });
 
@@ -328,15 +306,17 @@ clearCategoryForm();
 
 function clearCategoryForm(){
 
-    editIndex = -1;
+editIndex="";
 
-    document.getElementById("categoryName").value = "";
+document.getElementById("categoryCode").readOnly=true;
 
-    document.getElementById("categoryDescription").value = "";
+document.getElementById("categoryName").value="";
 
-    document.getElementById("categoryStatus").value = "Active";
+document.getElementById("categoryDescription").value="";
 
-    generateCategoryCode();
+document.getElementById("categoryStatus").value="Active";
+
+generateCategoryCode();
 
 }
 // ===============================================

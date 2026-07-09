@@ -189,41 +189,35 @@ document.addEventListener("click",function(e){
 
     }
 
-  products.push({
+  db.ref("products/"+code).set({
 
-    code,
+code,
 
-    category,
+category,
 
-    name,
+name,
 
-    sellingPrice,
+sellingPrice,
 
-    costPrice,
+costPrice,
 
-    barcode,
+barcode,
 
-    description,
+description,
 
-    status,
+status,
 
-    image:selectedImage
+image:selectedImage
+
+}).then(()=>{
+
+alert("Product Saved Successfully.");
+
+clearProductForm();
+
+loadProductTable();
 
 });
-
-    localStorage.setItem(
-
-        "products",
-
-        JSON.stringify(products)
-
-    );
-
-    alert("Product saved successfully.");
-
-    loadProductTable();
-
-    clearProductForm();
 
 });
 // ===============================================

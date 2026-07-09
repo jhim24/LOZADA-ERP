@@ -223,13 +223,15 @@ data-code="${category.code}">
 
 function generateCategoryCode(){
 
-    const categories = JSON.parse(localStorage.getItem("categories")) || [];
+db.ref("categories").once("value").then(snapshot=>{
 
-    const nextNumber = categories.length + 1;
+const nextNumber = snapshot.numChildren()+1;
 
-    const code = "CAT-" + String(nextNumber).padStart(4,"0");
+const code = "CAT-" + String(nextNumber).padStart(4,"0");
 
-    document.getElementById("categoryCode").value = code;
+document.getElementById("categoryCode").value = code;
+
+});
 
 }
 // ===============================================

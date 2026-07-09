@@ -386,37 +386,50 @@ function loadProductTable(){
 // EDIT PRODUCT
 // ===============================================
 
-document.addEventListener("click", function(e){
+document.addEventListener("click",function(e){
 
-    const btn = e.target.closest(".btn-edit-product");
+const btn = e.target.closest(".btn-edit-product");
 
-    if(!btn) return;
+if(!btn) return;
 
-    editProductIndex = Number(btn.dataset.index);
+const key = btn.dataset.key;
 
-    const product = products[editProductIndex];
+const product = products.find(
+item => item.firebaseKey === key
+);
 
-    document.getElementById("productCode").value = product.code;
+if(!product) return;
 
-    document.getElementById("productCategory").value = product.category;
+editProductIndex = key;
 
-    document.getElementById("productName").value = product.name;
+document.getElementById("productCode").value = product.code;
 
-    document.getElementById("sellingPrice").value = product.sellingPrice;
+document.getElementById("productCategory").value = product.category;
 
-    document.getElementById("costPrice").value = product.costPrice;
+document.getElementById("productName").value = product.name;
 
-    document.getElementById("barcode").value = product.barcode;
+document.getElementById("sellingPrice").value = product.sellingPrice;
 
-    document.getElementById("productDescription").value = product.description;
+document.getElementById("costPrice").value = product.costPrice;
 
-    document.getElementById("productStatus").value = product.status;
+document.getElementById("barcode").value = product.barcode;
+
+document.getElementById("productDescription").value = product.description;
+
+document.getElementById("productStatus").value = product.status;
+
 selectedImage = product.image || "";
 
 document.getElementById("imagePreview").src =
-    selectedImage ||
-    "https://via.placeholder.com/180x180?text=No+Image";
+selectedImage ||
+"https://via.placeholder.com/180x180?text=No+Image";
+
+document.getElementById("btnSaveProduct").style.display="none";
+
+document.getElementById("btnUpdateProduct").style.display="block";
+
 });
+
 // ===============================================
 // UPDATE PRODUCT
 // ===============================================

@@ -787,37 +787,35 @@ function loadPOSProducts(){
 
 function loadPOSCategories(){
 
-    const container=document.getElementById("categoryButtons");
+    const container = document.getElementById("categoryButtons");
 
     if(!container) return;
 
-    const categories=JSON.parse(localStorage.getItem("categories"))||[];
+    db.ref("categories").on("value", snapshot=>{
 
-    container.innerHTML=`
+        container.innerHTML = `
         <button
         class="btn btn-dark category-btn active"
         data-category="All">
-
             All
-
         </button>
-    `;
-
-    categories.forEach(category=>{
-
-        if(category.status!=="Active") return;
-
-        container.innerHTML+=`
-
-        <button
-        class="btn btn-outline-dark category-btn"
-        data-category="${category.name}">
-
-            ${category.name}
-
-        </button>
-
         `;
+
+        snapshot.forEach(child=>{
+
+            const category = child.val();
+
+            if(category.status !== "Active") return;
+
+            container.innerHTML += `
+            <button
+            class="btn btn-outline-dark category-btn"
+            data-category="${category.name}">
+                ${category.name}
+            </button>
+            `;
+
+        });
 
     });
 

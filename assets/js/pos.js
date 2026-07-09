@@ -265,7 +265,34 @@ alt="${item.name}">
 
                 </div>
 
-            </td>
+            </td><td>
+
+<div class="cart-product">
+
+<img
+src="${item.image}"
+class="cart-image"
+alt="${item.name}">
+
+<div class="cart-details">
+
+<div class="cart-name">
+
+${item.name}
+
+</div>
+
+<div class="cart-note">
+
+Special Instructions
+
+</div>
+
+</div>
+
+</div>
+
+</td>
 
             <td>
 

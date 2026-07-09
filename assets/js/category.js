@@ -75,10 +75,11 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
 });
 // ===============================================
-// SAVE CATEGORY (LOCAL STORAGE)
+// GLOBAL VARIABLES
 // ===============================================
 
-let categories = JSON.parse(localStorage.getItem("categories")) || [];
+let categories = [];
+
 let editIndex = -1;
 document.addEventListener("click",function(e){
 

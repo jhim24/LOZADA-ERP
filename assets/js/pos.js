@@ -621,7 +621,14 @@ if(serviceSelect){
 }
 
 const serviceAmount = total * (servicePercent / 100);
+const summaryServiceCharge = document.getElementById("summaryServiceCharge");
 
+if(summaryServiceCharge){
+
+    summaryServiceCharge.innerHTML =
+    "₱" + serviceAmount.toFixed(2);
+
+}
 total += serviceAmount;
 
 const grandTotal = total;

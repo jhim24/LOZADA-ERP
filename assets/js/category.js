@@ -81,27 +81,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
 let categories = [];
 
 let editIndex = -1;
-document.addEventListener("click",function(e){
 
-const btn=e.target.closest(".btn-delete");
-
-if(!btn) return;
-
-const code = btn.dataset.code;
-
-if(!confirm("Delete this category?")) return;
-
-db.ref("categories/"+code)
-.remove()
-.then(()=>{
-
-alert("Category Deleted Successfully.");
-
-generateCategoryCode();
-
-});
-
-});
 // ===============================================
 // LOAD CATEGORY TABLE
 // ===============================================
@@ -238,7 +218,9 @@ editIndex = code;
     document.getElementById("categoryDescription").value = category.description;
 
     document.getElementById("categoryStatus").value = category.status;
+document.getElementById("btnSaveCategory").style.display="none";
 
+document.getElementById("btnUpdateCategory").style.display="block";
 });
 // ===============================================
 // UPDATE CATEGORY
@@ -294,11 +276,6 @@ clearCategoryForm();
 
 });
 
-    alert("Category updated successfully.");
-
-    loadCategoryTable();
-
-
 });
 // ===============================================
 // CLEAR CATEGORY FORM
@@ -317,7 +294,9 @@ document.getElementById("categoryDescription").value="";
 document.getElementById("categoryStatus").value="Active";
 
 generateCategoryCode();
+document.getElementById("btnSaveCategory").style.display="block";
 
+document.getElementById("btnUpdateCategory").style.display="none";
 }
 // ===============================================
 // DELETE CATEGORY

@@ -1,1 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PAPPRITO ERP</title>
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+padding:25px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
+}
+
+.header h1{
+font-size:32px;
+color:#e91e63;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:white;
+border-radius:18px;
+padding:25px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+cursor:pointer;
+transition:.3s;
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.card i{
+
+font-size:45px;
+margin-bottom:15px;
+color:#4a90e2;
+
+}
+
+.card h3{
+
+margin-bottom:10px;
+
+}
+
+.card p{
+
+font-size:13px;
+color:#666;
+
+}
+
+.quick{
+
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.quick h2{
+
+margin-bottom:20px;
+
+}
+
+.buttons{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+
+}
+
+.buttons a{
+
+background:#4a90e2;
+color:white;
+text-decoration:none;
+padding:18px;
+text-align:center;
+border-radius:12px;
+font-weight:bold;
+
+}
+
+.buttons a:hover{
+
+background:#357bd8;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>
+🍔 PAPPRITO ERP
+</h1>
+
+<h3>
+Restaurant Management System
+</h3>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fa-solid fa-globe"></i>
+
+<h3>Website Orders</h3>
+
+<p>
+Orders from Website
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-cash-register"></i>
+
+<h3>POS Orders</h3>
+
+<p>
+Cashier Orders
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-utensils"></i>
+
+<h3>Kitchen Queue</h3>
+
+<p>
+Kitchen Display
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<h3>Sales</h3>
+
+<p>
+Daily Sales
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-users"></i>
+
+<h3>Customers</h3>
+
+<p>
+Customer List
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-box"></i>
+
+<h3>Inventory</h3>
+
+<p>
+Restaurant Stocks
+</p>
+
+</div>
+
+</div>
+
+<div class="quick">
+
+<h2>
+Quick Access
+</h2>
+
+<div class="buttons">
+
+<a href="website-orders.html">
+
+🌐 Website Orders
+
+</a>
+
+<a href="pos.html">
+
+🛒 POS
+
+</a>
+
+<a href="kitchen.html">
+
+🍳 Kitchen
+
+</a>
+
+<a href="sales.html">
+
+💰 Sales
+
+</a>
+
+<a href="products.html">
+
+📦 Products
+
+</a>
+
+<a href="customers.html">
+
+👥 Customers
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

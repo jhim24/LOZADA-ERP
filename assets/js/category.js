@@ -315,7 +315,6 @@ document.addEventListener("click", function(e){
 
     loadCategoryTable();
 
-    clearCategoryForm();
 
 });
 // ===============================================
@@ -373,5 +372,5 @@ const btn=e.target.closest("#btnClearCategory");
 if(!btn) return;
 
 clearCategoryForm();
-
+loadCategoryTable();
 });

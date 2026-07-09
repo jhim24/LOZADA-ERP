@@ -340,9 +340,18 @@ ${order.status||"NEW"}
 
 <td>
 
-<button>
+<button
+onclick="acceptOrder('${child.key}')"
+style="
+background:#28a745;
+color:white;
+border:none;
+padding:8px 15px;
+border-radius:8px;
+cursor:pointer;
+">
 
-View
+Accept
 
 </button>
 
@@ -365,7 +374,19 @@ document.getElementById("acceptedOrders").innerText=acceptedOrders;
 document.getElementById("totalSales").innerText="₱"+totalSales.toLocaleString();
 
 });
+function acceptOrder(key){
 
+db.ref("orders/"+key).update({
+
+status:"ACCEPTED"
+
+}).then(()=>{
+
+alert("Order Accepted");
+
+});
+
+}
 </script>
 </body>
 </html>

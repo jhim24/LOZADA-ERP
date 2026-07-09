@@ -155,3 +155,24 @@ body{
     background:#16a34a !important;
 
 }
+/* ==========================================
+REPORT FULL SCREEN
+========================================== */
+
+.dashboard-container{
+
+    width:100%;
+
+    max-width:100%;
+
+    margin:0;
+
+    padding:20px;
+
+}
+
+.main > .dashboard-container{
+
+    width:100%;
+
+}

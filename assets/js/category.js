@@ -83,7 +83,7 @@ let categories = [];
 let editIndex = -1;
 document.addEventListener("click",function(e){
 
-const btn=e.target.closest("#btnUpdateCategory");
+const btn=e.target.closest("#btnSaveCategory");
 
 if(!btn) return;
 

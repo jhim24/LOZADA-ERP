@@ -521,25 +521,3 @@ document.addEventListener("change",function(e){
     reader.readAsDataURL(file);
 
 });
-// ======================================
-// IMAGE PREVIEW
-// ======================================
-
-const productImage = document.getElementById("productImage");
-
-if(productImage){
-
-    productImage.addEventListener("change", function(e){
-
-        const file = e.target.files[0];
-
-        if(file){
-
-            document.getElementById("imagePreview").src =
-                URL.createObjectURL(file);
-
-        }
-
-    });
-
-}

@@ -68,179 +68,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
     setInterval(updateKitchenClock,1000);
 setInterval(loadKitchenOrders,2000);
 });
-// ===============================================
-// LOAD KITCHEN ORDERS
-// ===============================================
 
-function loadKitchenOrders(){
-
-    const board = document.getElementById("kitchenBoard");
-
-    if(!board) return;
-
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-    board.innerHTML = "";
-
-    let pending = 0;
-    let preparing = 0;
-    let ready = 0;
-
-    const kitchenOrders = orders.filter(order=>{
-
-        return order.status==="Pending" ||
-
-               order.status==="Preparing" ||
-
-               order.status==="Ready";
-
-    });
-
-    if(kitchenOrders.length===0){
-
-        board.innerHTML=`
-
-        <div class="col-12">
-
-            <div class="alert alert-secondary text-center">
-
-                No Kitchen Orders
-
-            </div>
-
-        </div>
-
-        `;
-
-    }
-
-    kitchenOrders.forEach((order,index)=>{
-
-        if(order.status==="Pending") pending++;
-
-        if(order.status==="Preparing") preparing++;
-
-        if(order.status==="Ready") ready++;
-
-        let itemsHTML="";
-
-        order.items.forEach(item=>{
-
-            itemsHTML+=`
-
-            <li>
-
-                ${item.qty} x ${item.name}
-
-            </li>
-
-            `;
-
-        });
-
-        board.innerHTML+=`
-
-        <div class="col-lg-4 mb-4">
-
-            <div class="card shadow border-0">
-
-                <div class="card-header bg-dark text-white">
-
-                    <h5 class="mb-0">
-
-                        Order #${order.receiptNo}
-
-                    </h5>
-
-                    <small>${order.date}</small>
-
-                </div>
-
-                <div class="card-body">
-
-                    <ul>
-
-                        ${itemsHTML}
-
-                    </ul>
-<div class="mb-2">
-
-    <strong>Table:</strong>
-
-    ${order.floor} - ${order.table}
-
-    <br>
-
-    <strong>Customer:</strong>
-
-    ${order.customer}
-
-    <br>
-
-    <strong>Guests:</strong>
-
-    ${order.guests}
-
-    <br>
-
-    <strong>Server:</strong>
-
-    ${order.server}
-
-</div>
-
-<hr>
-                    <hr>
-
-                   <div class="d-flex justify-content-between align-items-center mt-3">
-
-    <span class="badge
-    ${order.status==="Pending"?"bg-warning":
-      order.status==="Preparing"?"bg-primary":
-      "bg-success"}">
-
-        ${order.status}
-
-    </span>
-
-    <div>
-
-        <button
-        class="btn btn-primary btn-sm btn-preparing"
-        data-receipt="${order.receiptNo}">
-
-            Preparing
-
-        </button>
-
-        <button
-        class="btn btn-success btn-sm btn-ready"
-        data-receipt="${order.receiptNo}">
-
-            Ready
-
-        </button>
-
-    </div>
-
-</div>
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-    document.getElementById("kitchenPending").innerHTML = pending;
-
-    document.getElementById("kitchenPreparing").innerHTML = preparing;
-
-    document.getElementById("kitchenReady").innerHTML = ready;
-
-}
 // ===============================================
 // UPDATE STATUS FROM KITCHEN
 // ===============================================
@@ -277,45 +105,13 @@ document.addEventListener("click",function(e){
 // UPDATE ORDER STATUS
 // ===============================================
 
-function updateKitchenStatus(receiptNo,status){
+function updateKitchenStatus(key, status){
 
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-    const index = orders.findIndex(order=>{
-
-        return String(order.receiptNo)===String(receiptNo);
-
+    db.ref("orders/" + key).update({
+        status: status
+    }).then(()=>{
+        loadKitchenOrders();
     });
-
-    if(index===-1) return;
-
-    orders[index].status = status;
-// Notify Cashier
-
-localStorage.setItem(
-
-    "kitchenNotification",
-
-    JSON.stringify({
-
-        receiptNo: receiptNo,
-
-        status: status,
-
-        time: new Date().toLocaleTimeString()
-
-    })
-
-);
-    localStorage.setItem(
-
-        "orders",
-
-        JSON.stringify(orders)
-
-    );
-
-    loadKitchenOrders();
 
 }
 // ===============================================
@@ -340,7 +136,12 @@ const order = child.val();
 const key = child.key;
 
 // Show ACCEPTED orders only
-if(order.status !== "ACCEPTED") return;
+if(
+    order.status !== "ACCEPTED" &&
+    order.status !== "PREPARING"
+){
+    return;
+}
 
 pending++;
 
@@ -382,12 +183,19 @@ ${items}
 
 <button
 class="btn btn-success w-100"
-onclick="startCooking('${key}')">
+onclick="updateKitchenStatus('${key}','PREPARING')"
 
 START COOKING
 
 </button>
 
+<button
+class="btn btn-primary w-100 mt-2"
+onclick="updateKitchenStatus('${key}','READY')">
+
+READY
+
+</button>
 </div>
 
 </div>

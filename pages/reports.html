@@ -226,17 +226,29 @@
     </div>
 
 </div>
-    <!-- ==========================================
-     REPORT FILTER
+<!-- ==========================================
+REPORT FILTER
 ========================================== -->
 
-<div class="card mb-3">
+<div class="widget mb-4">
 
-    <div class="card-body">
+    <div class="widget-header">
 
-        <div class="row g-2">
+        <h4>
 
-            <div class="col-md-3">
+            <i class="fa-solid fa-filter"></i>
+
+            Report Filters
+
+        </h4>
+
+    </div>
+
+    <div class="widget-body">
+
+        <div class="row g-3">
+
+            <div class="col-lg-3">
 
                 <label class="form-label">
 
@@ -251,7 +263,7 @@
 
             </div>
 
-            <div class="col-md-3">
+            <div class="col-lg-3">
 
                 <label class="form-label">
 
@@ -266,7 +278,7 @@
 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-lg-4">
 
                 <label class="form-label">
 
@@ -282,15 +294,21 @@
 
             </div>
 
-            <div class="col-md-2 d-flex align-items-end">
+            <div class="col-lg-2 d-grid">
+
+                <label class="form-label">
+
+                    &nbsp;
+
+                </label>
 
                 <button
-                    class="btn btn-primary w-100"
+                    class="btn btn-success"
                     id="btnFilter">
 
                     <i class="fa-solid fa-filter"></i>
 
-                    Filter
+                    Apply
 
                 </button>
 
@@ -356,23 +374,61 @@
     </div>
 
 </div>
-    <!-- ==========================================
-     SALES CHART
+<!-- ==========================================
+     REPORT CHARTS
 ========================================== -->
 
-<div class="card mb-4">
+<div class="row mb-4">
 
-    <div class="card-header">
+    <div class="col-lg-8">
 
-        <i class="fa-solid fa-chart-column"></i>
+        <div class="widget">
 
-        Sales Analytics
+            <div class="widget-header">
+
+                <h4>
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Sales Overview
+
+                </h4>
+
+            </div>
+
+            <div class="widget-body">
+
+                <canvas id="salesChart" height="100"></canvas>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="card-body">
+    <div class="col-lg-4">
 
-        <canvas id="salesChart" height="100"></canvas>
+        <div class="widget">
+
+            <div class="widget-header">
+
+                <h4>
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    Payment Methods
+
+                </h4>
+
+            </div>
+
+            <div class="widget-body">
+
+                <canvas id="paymentChart"></canvas>
+
+            </div>
+
+        </div>
 
     </div>
 

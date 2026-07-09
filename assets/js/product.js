@@ -276,134 +276,110 @@ function loadProductTable(){
 
     if(!tableBody) return;
 
-   tableBody.innerHTML="";
+    db.ref("products").on("value", snapshot=>{
 
-products=[];
+        tableBody.innerHTML="";
 
-db.ref("products").on("value",snapshot=>{
+        products=[];
 
-tableBody.innerHTML="";
+        if(!snapshot.exists()){
 
-products=[];
+            tableBody.innerHTML=`
 
-if(!snapshot.exists()){
+            <tr>
 
-tableBody.innerHTML=`
+                <td colspan="7" class="text-center text-muted">
 
-<tr>
+                    No Products Found
 
-<td colspan="7" class="text-center text-muted">
+                </td>
 
-No Products Found
+            </tr>
 
-</td>
+            `;
 
-</tr>
+            return;
 
-`;
+        }
 
-return;
+        snapshot.forEach(child=>{
 
-}
+            const product = child.val();
 
-snapshot.forEach(child=>{
+            product.firebaseKey = child.key;
 
-const product=child.val();
+            products.push(product);
 
-product.firebaseKey=child.key;
+            tableBody.innerHTML += `
 
-products.push(product);
+            <tr>
 
-        tableBody.innerHTML = `
+                <td>
 
-        <tr>
+                    <img
+                    src="${product.image || 'https://via.placeholder.com/55x55?text=No+Image'}"
+                    style="
+                        width:55px;
+                        height:55px;
+                        object-fit:cover;
+                        border-radius:8px;
+                        border:1px solid #ddd;">
 
-            <td colspan="6" class="text-center text-muted">
+                </td>
 
-                No Products Found
+                <td>${product.code}</td>
 
-            </td>
+                <td>${product.category}</td>
 
-        </tr>
+                <td>
 
-        `;
+                    <strong>${product.name}</strong>
 
-        return;
+                </td>
 
-    }
+                <td class="text-end">
 
- products.forEach((product,index)=>{
+                    ₱${Number(product.sellingPrice).toFixed(2)}
 
-    tableBody.innerHTML += `
+                </td>
 
-    <tr>
+                <td>
 
-        <td>
+                    <span class="badge ${product.status==="Active" ? "bg-success" : "bg-secondary"}">
 
-            <img
-            src="${product.image || 'https://via.placeholder.com/55x55?text=No+Image'}"
-            style="
-                width:55px;
-                height:55px;
-                object-fit:cover;
-                border-radius:8px;
-                border:1px solid #ddd;">
+                        ${product.status}
 
-        </td>
+                    </span>
 
-        <td>${product.code}</td>
+                </td>
 
-        <td>${product.category}</td>
+                <td>
 
-        <td>
+                    <button
+                    class="btn btn-warning btn-sm btn-edit-product"
+                    data-key="${product.firebaseKey}">
 
-            <strong>${product.name}</strong>
+                        <i class="fa-solid fa-pen"></i>
 
-        </td>
+                    </button>
 
-        <td class="text-end">
+                    <button
+                    class="btn btn-danger btn-sm btn-delete-product"
+                    data-key="${product.firebaseKey}">
 
-            ₱${Number(product.sellingPrice).toFixed(2)}
+                        <i class="fa-solid fa-trash"></i>
 
-        </td>
+                    </button>
 
-        <td>
+                </td>
 
-            <span class="badge ${product.status==="Active" ? "bg-success" : "bg-secondary"}">
+            </tr>
 
-                ${product.status}
+            `;
 
-            </span>
+        });
 
-        </td>
-
-        <td>
-
-            <button
-            class="btn btn-warning btn-sm btn-edit-product"
-           data-key="${product.firebaseKey}"
-
-                <i class="fa-solid fa-pen"></i>
-
-            </button>
-
-            <button
-            class="btn btn-danger btn-sm btn-delete-product"
-            data-key="${product.firebaseKey}"
-
-                <i class="fa-solid fa-trash"></i>
-
-            </button>
-
-        </td>
-
-    </tr>
-
-    `;
-
-});
-
-});
+    });
 
 }
 // ===============================================

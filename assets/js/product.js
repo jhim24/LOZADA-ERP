@@ -276,11 +276,43 @@ function loadProductTable(){
 
     if(!tableBody) return;
 
-    products = JSON.parse(localStorage.getItem("products")) || [];
+   tableBody.innerHTML="";
 
-    tableBody.innerHTML = "";
+products=[];
 
-    if(products.length===0){
+db.ref("products").on("value",snapshot=>{
+
+tableBody.innerHTML="";
+
+products=[];
+
+if(!snapshot.exists()){
+
+tableBody.innerHTML=`
+
+<tr>
+
+<td colspan="7" class="text-center text-muted">
+
+No Products Found
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+snapshot.forEach(child=>{
+
+const product=child.val();
+
+product.firebaseKey=child.key;
+
+products.push(product);
 
         tableBody.innerHTML = `
 
@@ -349,7 +381,7 @@ function loadProductTable(){
 
             <button
             class="btn btn-warning btn-sm btn-edit-product"
-            data-index="${index}">
+           data-key="${product.firebaseKey}"
 
                 <i class="fa-solid fa-pen"></i>
 
@@ -357,7 +389,7 @@ function loadProductTable(){
 
             <button
             class="btn btn-danger btn-sm btn-delete-product"
-            data-index="${index}">
+            data-key="${product.firebaseKey}"
 
                 <i class="fa-solid fa-trash"></i>
 
@@ -368,6 +400,8 @@ function loadProductTable(){
     </tr>
 
     `;
+
+});
 
 });
 

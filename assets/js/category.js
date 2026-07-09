@@ -192,6 +192,55 @@ document.getElementById("categoryCode").value = code;
 });
 
 }
+
+// ===============================================
+// SAVE CATEGORY
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+const btn = e.target.closest("#btnSaveCategory");
+
+if(!btn) return;
+
+const code = document.getElementById("categoryCode").value.trim();
+
+const name = document.getElementById("categoryName").value.trim();
+
+const description = document.getElementById("categoryDescription").value.trim();
+
+const status = document.getElementById("categoryStatus").value;
+
+if(name===""){
+
+alert("Category Name is required.");
+
+return;
+
+}
+
+db.ref("categories/"+code).set({
+
+code,
+
+name,
+
+description,
+
+status
+
+}).then(()=>{
+
+alert("Category Saved Successfully.");
+
+clearCategoryForm();
+
+loadCategoryTable();
+
+});
+
+});
+
 // ===============================================
 // EDIT CATEGORY
 // ===============================================

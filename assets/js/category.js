@@ -80,49 +80,48 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
 let categories = JSON.parse(localStorage.getItem("categories")) || [];
 let editIndex = -1;
-document.addEventListener("click", function(e){
+document.addEventListener("click",function(e){
 
-    const btn = e.target.closest("#btnSaveCategory");
+const btn=e.target.closest("#btnUpdateCategory");
 
-    if(!btn) return;
+if(!btn) return;
 
-    const code = document.getElementById("categoryCode").value.trim();
+const code=
+document.getElementById("categoryCode").value.trim();
 
-    const name = document.getElementById("categoryName").value.trim();
+const name=
+document.getElementById("categoryName").value.trim();
 
-    const description = document.getElementById("categoryDescription").value.trim();
+const description=
+document.getElementById("categoryDescription").value.trim();
 
-    const status = document.getElementById("categoryStatus").value;
+const status=
+document.getElementById("categoryStatus").value;
 
-    if(name===""){
+if(name===""){
 
-        alert("Category Name is required.");
+alert("Category Name is required.");
 
-        return;
+return;
 
-    }
+}
 
-    db.ref("categories/"+code).set({
+db.ref("categories/"+code).update({
 
-    code:code,
+name:name,
 
-    name:name,
+description:description,
 
-    description:description,
-
-    status:status,
-
-    createdAt:Date.now()
+status:status
 
 }).then(()=>{
 
-    alert("Category saved successfully.");
+alert("Category updated successfully.");
 
-    loadCategoryTable();
-
-    clearCategoryForm();
+clearCategoryForm();
 
 });
+
 });
 // ===============================================
 // LOAD CATEGORY TABLE

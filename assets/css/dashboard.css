@@ -114,7 +114,7 @@ body{
 
     margin-left:280px;
 
-    width:calc(100vw - 280px);
+    width:calc(100% - 280px);
 
     min-height:100vh;
 
@@ -122,10 +122,9 @@ body{
 
     background:#eef7f8;
 
-    overflow-x:auto;
+    overflow-x:hidden;
 
 }
-
 /* ===========================
    TOPBAR
 =========================== */

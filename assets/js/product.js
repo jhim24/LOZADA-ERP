@@ -51,11 +51,15 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
     await loadComponent("product-table","../components/product-table.html");
 
-   loadCategoryDropdown();
+    setTimeout(()=>{
 
-loadProductTable();
+        loadCategoryDropdown();
 
-generateProductCode();
+        loadProductTable();
+
+        generateProductCode();
+
+    },200);
 
 });
 // ===============================================
@@ -69,7 +73,7 @@ const categorySelect = document.getElementById("productCategory");
 if(!categorySelect) return;
 
 db.ref("categories").on("value",snapshot=>{
-
+console.log(snapshot.val());
 categorySelect.innerHTML="";
 
 if(!snapshot.exists()){

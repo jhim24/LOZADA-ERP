@@ -521,3 +521,29 @@ document.addEventListener("change",function(e){
     reader.readAsDataURL(file);
 
 });
+// ===============================================
+// IMAGE URL PREVIEW
+// ===============================================
+
+document.addEventListener("input", function(e){
+
+    if(e.target.id !== "productImageUrl") return;
+
+    const url = e.target.value.trim();
+
+    if(url === ""){
+
+        document.getElementById("imagePreview").src =
+            "https://via.placeholder.com/180x180?text=No+Image";
+
+        selectedImage = "";
+
+        return;
+
+    }
+
+    document.getElementById("imagePreview").src = url;
+
+    selectedImage = url;
+
+});

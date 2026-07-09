@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
 let categories = [];
 
-let editIndex = -1;
+let editIndex = "";
 
 // ===============================================
 // LOAD CATEGORY TABLE

@@ -298,3 +298,125 @@ localStorage.setItem(
     loadKitchenOrders();
 
 }
+// ===============================================
+// LOAD KITCHEN ORDERS
+// ===============================================
+
+function loadKitchenOrders(){
+
+const board = document.getElementById("kitchenBoard");
+
+db.ref("orders").on("value",snapshot=>{
+
+let html = "";
+
+let pending = 0;
+let preparing = 0;
+let ready = 0;
+
+snapshot.forEach(child=>{
+
+const order = child.val();
+const key = child.key;
+
+// Show ACCEPTED orders only
+if(order.status !== "ACCEPTED") return;
+
+pending++;
+
+let items = "";
+
+(order.items || []).forEach(item=>{
+
+items += `
+<div class="mb-1">
+<b>${item.qty}x</b> ${item.name}
+</div>
+`;
+
+});
+
+html += `
+
+<div class="col-lg-4">
+
+<div class="card shadow border-warning">
+
+<div class="card-header bg-warning fw-bold">
+
+${order.orderNumber || order.trackingnumber}
+
+</div>
+
+<div class="card-body">
+
+<p><b>Customer:</b> ${order.customer}</p>
+
+<p><b>Order Type:</b> ${order.orderType}</p>
+
+<hr>
+
+${items}
+
+<hr>
+
+<button
+class="btn btn-success w-100"
+onclick="startCooking('${key}')">
+
+START COOKING
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+if(html===""){
+
+html = `
+<div class="col-12">
+
+<div class="alert alert-secondary text-center">
+
+No Kitchen Orders
+
+</div>
+
+</div>
+`;
+
+}
+
+board.innerHTML = html;
+
+document.getElementById("kitchenPending").innerText = pending;
+document.getElementById("kitchenPreparing").innerText = preparing;
+document.getElementById("kitchenReady").innerText = ready;
+
+});
+
+}
+// ===============================================
+// START COOKING
+// ===============================================
+
+function startCooking(key){
+
+db.ref("orders/"+key).update({
+
+status:"PREPARING"
+
+}).then(()=>{
+
+alert("Order is now Preparing.");
+
+});
+
+}

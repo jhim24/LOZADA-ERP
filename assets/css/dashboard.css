@@ -114,15 +114,15 @@ body{
 
     margin-left:280px;
 
-    width:calc(100% - 280px);
+    width:calc(100vw - 280px);
 
     min-height:100vh;
 
-    padding:25px;
+    padding:20px;
 
     background:#eef7f8;
 
-    overflow-x:hidden;
+    overflow-x:auto;
 
 }
 
@@ -1008,12 +1008,13 @@ body{
 
     width:100%;
 
-    max-width:100%;
+    max-width:none;
 
-    padding:30px;
+    margin:0;
+
+    padding:20px;
 
 }
-
 /* Header */
 
 .dashboard-header{

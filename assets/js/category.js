@@ -130,61 +130,69 @@ document.addEventListener("click", function(e){
 
 function loadCategoryTable(){
 
-    const tableBody = document.getElementById("categoryTableBody");
+const tableBody =
+document.getElementById("categoryTableBody");
 
-    if(!tableBody) return;
+if(!tableBody) return;
 
-    categories = JSON.parse(localStorage.getItem("categories")) || [];
+db.ref("categories").on("value",snapshot=>{
 
-    tableBody.innerHTML = "";
+tableBody.innerHTML="";
 
-    if(categories.length===0){
+categories=[];
 
-        tableBody.innerHTML=`
+if(!snapshot.exists()){
 
-        <tr>
+tableBody.innerHTML=`
 
-            <td colspan="5" class="text-center text-muted">
+<tr>
 
-                No Category Found
+<td colspan="5"
+class="text-center text-muted">
 
-            </td>
+No Category Found
 
-        </tr>
+</td>
 
-        `;
+</tr>
 
-        return;
+`;
 
-    }
+return;
 
-    categories.forEach((category,index)=>{
+}
 
-        tableBody.innerHTML += `
+snapshot.forEach(child=>{
 
-        <tr>
+const category=child.val();
 
-            <td>${category.code}</td>
+categories.push(category);
 
-            <td>${category.name}</td>
+tableBody.innerHTML+=`
 
-            <td>${category.description}</td>
+<tr>
 
-            <td>
+<td>${category.code}</td>
 
-                <span class="badge ${category.status==="Active"?"bg-success":"bg-secondary"}">
+<td>${category.name}</td>
 
-                    ${category.status}
+<td>${category.description}</td>
 
-                </span>
+<td>
 
-            </td>
+<span class="badge ${category.status==="Active"?"bg-success":"bg-secondary"}">
 
-            <td>
+${category.status}
 
-               <button
+</span>
+
+</td>
+
+<td>
+
+<button
 class="btn btn-warning btn-sm btn-edit"
-data-index="${index}">
+data-code="${category.code}">
 
 <i class="fa-solid fa-pen"></i>
 
@@ -192,19 +200,21 @@ data-index="${index}">
 
 <button
 class="btn btn-danger btn-sm btn-delete"
-data-index="${index}">
+data-code="${category.code}">
 
 <i class="fa-solid fa-trash"></i>
 
 </button>
 
-            </td>
+</td>
 
-        </tr>
+</tr>
 
-        `;
+`;
 
-    });
+});
+
+});
 
 }
 // ===============================================

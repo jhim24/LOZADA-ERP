@@ -1611,3 +1611,60 @@ line-height:1;
     border-right:1px solid #eee;
 
 }
+/* ==========================================
+   CART PRODUCT DESIGN
+========================================== */
+
+.cart-product{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.cart-image{
+
+width:70px;
+
+height:70px;
+
+border-radius:12px;
+
+object-fit:cover;
+
+border:1px solid #ddd;
+
+box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.cart-details{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.cart-name{
+
+font-size:17px;
+
+font-weight:700;
+
+color:#222;
+
+}
+
+.cart-note{
+
+font-size:13px;
+
+color:#888;
+
+margin-top:4px;
+
+}

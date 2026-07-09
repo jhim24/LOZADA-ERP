@@ -563,38 +563,39 @@ loadProductTable();
 });
 
 });
+
 // ===============================================
 // DELETE PRODUCT
 // ===============================================
 
-document.addEventListener("click", function(e){
+document.addEventListener("click",function(e){
 
-    const btn = e.target.closest(".btn-delete-product");
+const btn = e.target.closest(".btn-delete-product");
 
-    if(!btn) return;
+if(!btn) return;
 
-    const index = Number(btn.dataset.index);
+const key = btn.dataset.key;
 
-    const confirmDelete = confirm(
-        "Are you sure you want to delete this product?"
-    );
+if(!confirm("Are you sure you want to delete this product?")){
 
-    if(!confirmDelete) return;
+return;
 
-    products.splice(index,1);
+}
 
-    localStorage.setItem(
-        "products",
-        JSON.stringify(products)
-    );
+db.ref("products/"+key)
+.remove()
+.then(()=>{
 
-    loadProductTable();
+alert("Product Deleted Successfully.");
 
-    clearProductForm();
+clearProductForm();
 
-    alert("Product deleted successfully.");
+loadProductTable();
 
 });
+
+});
+
 // ===============================================
 // SEARCH PRODUCT
 // ===============================================

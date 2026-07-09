@@ -337,36 +337,26 @@ function clearCategoryForm(){
 // DELETE CATEGORY
 // ===============================================
 
-document.addEventListener("click", function(e){
+document.addEventListener("click",function(e){
 
-    const btn = e.target.closest(".btn-delete");
+const btn=e.target.closest(".btn-delete");
 
-    if(!btn) return;
+if(!btn) return;
 
-    const index = Number(btn.dataset.index);
+const code=btn.dataset.code;
 
-    const confirmDelete = confirm(
+const confirmDelete=confirm(
+"Are you sure you want to delete this category?"
+);
 
-        "Are you sure you want to delete this category?"
+if(!confirmDelete) return;
 
-    );
+db.ref("categories/"+code)
+.remove()
+.then(()=>{
 
-    if(!confirmDelete) return;
+alert("Category deleted successfully.");
 
-    categories.splice(index,1);
-
-    localStorage.setItem(
-
-        "categories",
-
-        JSON.stringify(categories)
-
-    );
-
-    loadCategoryTable();
-
-    generateCategoryCode();
-
-    alert("Category deleted successfully.");
+});
 
 });

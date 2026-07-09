@@ -330,29 +330,6 @@ transform:translateY(-8px);
 box-shadow:0 20px 40px rgba(0,0,0,.18);
 
 }
-.product-card img{
-
-width:100%;
-
-aspect-ratio:1 / 1;
-
-height:auto;
-
-object-fit:contain;
-
-object-position:center;
-
-background:#ffffff;
-
-padding:10px;
-
-display:block;
-
-border-radius:18px 18px 0 0;
-
-transition:.35s;
-
-}
 
 .product-info{
 
@@ -371,35 +348,7 @@ text-align:center;
 flex:1;
 
 }
-.product-info h5{
 
-margin:12px 0 8px;
-
-font-weight:700;
-
-font-size:24px;
-
-text-align:center;
-
-width:100%;
-
-}
-
-.price{
-
-font-size:30px;
-
-font-weight:800;
-
-color:#F59E0B;
-
-margin-bottom:15px;
-
-text-align:center;
-
-width:100%;
-
-}
 /* ==========================================
    PAYMENT PANEL
 ========================================== */
@@ -722,49 +671,7 @@ min-width:25px;
 text-align:center;
 
 }
-/* ===========================
-PRODUCT INSIDE CART
-=========================== */
 
-.cart-product{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-}
-
-.cart-image{
-
-width:55px;
-
-height:55px;
-
-border-radius:10px;
-
-object-fit:cover;
-
-border:1px solid #ddd;
-
-}
-
-.cart-product strong{
-
-font-size:17px;
-
-font-weight:700;
-
-}
-
-.cart-product small{
-
-font-size:13px;
-
-color:#777;
-
-}
 /* ==========================================
    PRODUCT CARD CENTER
 ========================================== */
@@ -788,13 +695,7 @@ font-weight:700;
 padding:5px 10px;
 
 }
-.product-info .btn{
 
-width:100%;
-
-margin-top:8px;
-
-}
 /* ==========================================
 PRODUCT CARD BUTTON
 ========================================== */
@@ -1047,67 +948,7 @@ line-height:1;
     }
 
 }
-.cart-info{
 
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    background:#fff8e7;
-
-    border-bottom:1px solid #ddd;
-
-}
-
-.info-box{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    padding:18px;
-
-    border-right:1px solid #ddd;
-
-}
-
-.info-box:last-child{
-
-    border-right:none;
-
-}
-
-.info-box i{
-
-    font-size:26px;
-
-    color:#333;
-
-}
-
-.info-box small{
-
-    display:block;
-
-    color:#777;
-
-    font-size:12px;
-
-    font-weight:600;
-
-}
-
-.info-box h6{
-
-    margin:0;
-
-    font-size:20px;
-
-    font-weight:700;
-
-}
 /* ==========================================
    SHOPPING CART HEADER
 ========================================== */

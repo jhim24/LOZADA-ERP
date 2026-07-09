@@ -154,14 +154,15 @@ ${category.status}
 
 <button
 class="btn btn-warning btn-sm btn-edit"
-data-key="${category.firebaseKey}"
+data-key="${category.firebaseKey}">
+
 <i class="fa-solid fa-pen"></i>
 
 </button>
 
 <button
 class="btn btn-danger btn-sm btn-delete"
-data-key="${category.firebaseKey}"
+data-key="${category.firebaseKey}">
 
 <i class="fa-solid fa-trash"></i>
 
@@ -359,7 +360,7 @@ const btn=e.target.closest(".btn-delete");
 
 if(!btn) return;
 
-const code=btn.dataset.code;
+const key = btn.dataset.key;
 
 const confirmDelete=confirm(
 "Are you sure you want to delete this category?"

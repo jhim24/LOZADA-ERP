@@ -1537,3 +1537,77 @@ line-height:1;
     color:#222;
 
 }
+/* ==========================================
+   SHOPPING CART TABLE
+========================================== */
+
+.cart-table{
+
+    margin:0;
+
+    border-collapse:separate;
+
+    border-spacing:0;
+
+}
+
+.cart-table thead th{
+
+    background:#2f3542;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    text-align:center;
+
+    padding:15px 10px;
+
+    border:none;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:2;
+
+}
+
+.cart-table tbody td{
+
+    padding:15px 10px;
+
+    vertical-align:middle;
+
+    border-bottom:1px solid #ececec;
+
+    background:#fff;
+
+}
+
+.cart-table tbody tr:hover{
+
+    background:#fafafa;
+
+}
+
+.cart-table tbody tr:hover td{
+
+    background:#fafafa;
+
+}
+.table-responsive{
+
+    max-height:420px;
+
+    overflow-y:auto;
+
+    border-left:1px solid #eee;
+
+    border-right:1px solid #eee;
+
+}

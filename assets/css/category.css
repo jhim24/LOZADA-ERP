@@ -1,208 +1,393 @@
-/* ==========================================
-   LOZADA ERP
-   CATEGORY MANAGEMENT
-========================================== */
+// ===============================================
+// LOZADA ERP V2
+// CATEGORY MANAGEMENT
+// FIREBASE VERSION
+// ===============================================
 
-body{
-    background:#f4f6f9;
-}
+// ---------- FIREBASE ----------
 
-/* CARD */
+const firebaseConfig = {
 
-.card{
-    border:none;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
+    apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
 
-.card-header{
-    background:#4a90e2;
-    color:#fff;
-    border-radius:15px 15px 0 0 !important;
-    font-weight:600;
-    font-size:18px;
-}
+    authDomain: "papprito-orders.firebaseapp.com",
 
-.card-body{
-    padding:20px;
-}
+    databaseURL: "https://papprito-orders-default-rtdb.firebaseio.com",
 
-/* FORM */
+    projectId: "papprito-orders",
 
-.form-label{
-    font-weight:600;
-    color:#374151;
-}
+    storageBucket: "papprito-orders.firebasestorage.app",
 
-.form-control,
-.form-select{
+    messagingSenderId: "831941801424",
 
-    border-radius:10px;
-    border:1px solid #d1d5db;
+    appId: "1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+if (!firebase.apps.length) {
+
+    firebase.initializeApp(firebaseConfig);
 
 }
 
-.form-control:focus,
-.form-select:focus{
+const db = firebase.database();
 
-    border-color:#4a90e2;
+// ===============================================
+// GLOBAL VARIABLES
+// ===============================================
 
-    box-shadow:0 0 0 .2rem rgba(74,144,226,.2);
+let categories = [];
 
-}
+let selectedCode = "";
 
-/* BUTTONS */
+// ===============================================
+// LOAD HTML COMPONENTS
+// ===============================================
 
-.btn{
+async function loadComponent(id, file) {
 
-    border-radius:10px;
+    try {
 
-    font-weight:600;
+        const response = await fetch(file);
 
-}
+        if (!response.ok) {
 
-.btn-primary{
+            throw new Error(file);
 
-    background:#4a90e2;
+        }
 
-    border:none;
+        document.getElementById(id).innerHTML = await response.text();
 
-}
+    } catch (err) {
 
-.btn-success{
+        console.error(err);
 
-    border:none;
-
-}
-
-.btn-warning{
-
-    color:#fff;
+    }
 
 }
 
-.btn-danger{
+// ===============================================
+// INITIALIZE PAGE
+// ===============================================
 
-    border:none;
+document.addEventListener("DOMContentLoaded", async () => {
 
-}
+    await loadComponent("sidebar", "../components/sidebar.html");
 
-/* TABLE */
+    await loadComponent("navbar", "../components/navbar.html");
 
-.table{
+    await loadComponent("category-form", "../components/category-form.html");
 
-    margin-bottom:0;
+    await loadComponent("category-table", "../components/category-table.html");
 
-}
+    generateCategoryCode();
 
-.table thead{
+    loadCategoryTable();
 
-    background:#2f3b4f;
+});
+   // ===============================================
+// AUTO CATEGORY CODE
+// ===============================================
 
-    color:#fff;
+function generateCategoryCode() {
 
-}
+    db.ref("categories").once("value").then(snapshot => {
 
-.table thead th{
+        const total = snapshot.numChildren() + 1;
 
-    border:none;
+        const code = "CAT-" + String(total).padStart(4, "0");
 
-    padding:14px;
+        const txt = document.getElementById("categoryCode");
 
-    font-size:14px;
+        if (txt) {
 
-}
+            txt.value = code;
 
-.table tbody td{
+        }
 
-    vertical-align:middle;
-
-    padding:14px;
-
-}
-
-.table-hover tbody tr:hover{
-
-    background:#f1f7ff;
+    });
 
 }
 
-/* STATUS */
+// ===============================================
+// SAVE CATEGORY
+// ===============================================
 
-.badge{
+document.addEventListener("click", function (e) {
 
-    padding:8px 12px;
+    const btn = e.target.closest("#btnSaveCategory");
 
-    border-radius:20px;
+    if (!btn) return;
 
-    font-size:12px;
+    const code = document.getElementById("categoryCode").value.trim();
+
+    const name = document.getElementById("categoryName").value.trim();
+
+    const description = document.getElementById("categoryDescription").value.trim();
+
+    const status = document.getElementById("categoryStatus").value;
+
+    if (name === "") {
+
+        alert("Category Name is required.");
+
+        return;
+
+    }
+
+    db.ref("categories/" + code).set({
+
+        code: code,
+
+        name: name,
+
+        description: description,
+
+        status: status,
+
+        createdAt: Date.now()
+
+    }).then(() => {
+
+        alert("Category saved successfully.");
+
+        clearCategoryForm();
+
+        generateCategoryCode();
+
+    });
+
+});
+
+// ===============================================
+// LOAD CATEGORY TABLE
+// ===============================================
+
+function loadCategoryTable() {
+
+    const tableBody = document.getElementById("categoryTableBody");
+
+    if (!tableBody) return;
+
+    db.ref("categories").on("value", snapshot => {
+
+        tableBody.innerHTML = "";
+
+        categories = [];
+
+        if (!snapshot.exists()) {
+
+            tableBody.innerHTML = `
+
+<tr>
+
+<td colspan="5" class="text-center text-muted">
+
+No Category Found
+
+</td>
+
+</tr>
+
+`;
+
+            return;
+
+        }
+
+        snapshot.forEach(child => {
+
+            const category = child.val();
+
+            categories.push(category);
+
+            tableBody.innerHTML += `
+
+<tr>
+
+<td>${category.code}</td>
+
+<td>${category.name}</td>
+
+<td>${category.description}</td>
+
+<td>
+
+<span class="badge ${category.status === "Active" ? "bg-success" : "bg-secondary"}">
+
+${category.status}
+
+</span>
+
+</td>
+
+<td>
+
+<button
+class="btn btn-warning btn-sm btn-edit"
+data-code="${category.code}">
+
+<i class="fa-solid fa-pen"></i>
+
+</button>
+
+<button
+class="btn btn-danger btn-sm btn-delete"
+data-code="${category.code}">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+        });
+
+    });
+
+}
+           // ===============================================
+// EDIT CATEGORY
+// ===============================================
+
+document.addEventListener("click", function (e) {
+
+    const btn = e.target.closest(".btn-edit");
+
+    if (!btn) return;
+
+    const code = btn.dataset.code;
+
+    db.ref("categories/" + code).once("value").then(snapshot => {
+
+        if (!snapshot.exists()) return;
+
+        const category = snapshot.val();
+
+        selectedCode = code;
+
+        document.getElementById("categoryCode").value = category.code;
+
+        document.getElementById("categoryName").value = category.name;
+
+        document.getElementById("categoryDescription").value = category.description;
+
+        document.getElementById("categoryStatus").value = category.status;
+
+        document.getElementById("btnSaveCategory").style.display = "none";
+
+        document.getElementById("btnUpdateCategory").style.display = "inline-block";
+
+    });
+
+});
+
+// ===============================================
+// UPDATE CATEGORY
+// ===============================================
+
+document.addEventListener("click", function (e) {
+
+    const btn = e.target.closest("#btnUpdateCategory");
+
+    if (!btn) return;
+
+    const name = document.getElementById("categoryName").value.trim();
+
+    const description = document.getElementById("categoryDescription").value.trim();
+
+    const status = document.getElementById("categoryStatus").value;
+
+    if (name == "") {
+
+        alert("Category Name is required.");
+
+        return;
+
+    }
+
+    db.ref("categories/" + selectedCode).update({
+
+        name,
+
+        description,
+
+        status
+
+    }).then(() => {
+
+        alert("Category Updated Successfully.");
+
+        clearCategoryForm();
+
+    });
+
+});
+
+// ===============================================
+// DELETE CATEGORY
+// ===============================================
+
+document.addEventListener("click", function (e) {
+
+    const btn = e.target.closest(".btn-delete");
+
+    if (!btn) return;
+
+    const code = btn.dataset.code;
+
+    if (!confirm("Delete this category?")) return;
+
+    db.ref("categories/" + code).remove().then(() => {
+
+        alert("Category Deleted Successfully.");
+
+    });
+
+});
+
+// ===============================================
+// CLEAR FORM
+// ===============================================
+
+function clearCategoryForm() {
+
+    selectedCode = "";
+
+    document.getElementById("categoryName").value = "";
+
+    document.getElementById("categoryDescription").value = "";
+
+    document.getElementById("categoryStatus").value = "Active";
+
+    document.getElementById("btnSaveCategory").style.display = "inline-block";
+
+    document.getElementById("btnUpdateCategory").style.display = "none";
 
 }
 
-/* SEARCH */
+// ===============================================
+// SEARCH CATEGORY
+// ===============================================
 
-.search-box{
+document.addEventListener("keyup", function (e) {
 
-    margin-bottom:15px;
+    if (e.target.id != "searchCategory") return;
 
-}
+    const keyword = e.target.value.toLowerCase();
 
-.search-box input{
+    document.querySelectorAll("#categoryTableBody tr").forEach(row => {
 
-    border-radius:10px;
+        row.style.display = row.innerText.toLowerCase().includes(keyword)
 
-}
+            ? ""
 
-/* TABLE CONTAINER */
+            : "none";
 
-.table-responsive{
+    });
 
-    border-radius:15px;
-
-    overflow:hidden;
-
-}
-
-/* ACTION BUTTONS */
-
-.btn-sm{
-
-    width:36px;
-
-    height:36px;
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    margin-right:5px;
-
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.card{
-
-margin-bottom:20px;
-
-}
-
-.table{
-
-font-size:13px;
-
-}
-
-.btn-sm{
-
-width:32px;
-
-height:32px;
-
-}
-
-}
+});

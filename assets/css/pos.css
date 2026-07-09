@@ -1310,3 +1310,64 @@ line-height:1;
     }
 
 }
+.cart-info{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    background:#fff8e7;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+.info-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:18px;
+
+    border-right:1px solid #ddd;
+
+}
+
+.info-box:last-child{
+
+    border-right:none;
+
+}
+
+.info-box i{
+
+    font-size:26px;
+
+    color:#333;
+
+}
+
+.info-box small{
+
+    display:block;
+
+    color:#777;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.info-box h6{
+
+    margin:0;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}

@@ -3,6 +3,32 @@
 // pos.js
 // ===============================================
 
+const firebaseConfig = {
+
+    apiKey:"AIza...",
+
+    authDomain:"papprito-orders.firebaseapp.com",
+
+    databaseURL:"https://papprito-orders-default-rtdb.firebaseio.com",
+
+    projectId:"papprito-orders",
+
+    storageBucket:"papprito-orders.firebasestorage.app",
+
+    messagingSenderId:"831941801424",
+
+    appId:"1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+if(!firebase.apps.length){
+
+    firebase.initializeApp(firebaseConfig);
+
+}
+
+const db = firebase.database();
+
 // ---------- COMPONENT LOADER ----------
 
 async function loadComponent(id, file) {
@@ -680,86 +706,86 @@ function loadPOSProducts(){
 
     if(!grid) return;
 
-    const products = JSON.parse(localStorage.getItem("products")) || [];
+    db.ref("products").on("value", snapshot=>{
 
-    grid.innerHTML = "";
+        grid.innerHTML="";
 
-    if(products.length===0){
+        if(!snapshot.exists()){
 
-        grid.innerHTML = `
-
-        <div class="alert alert-warning">
-
-            No Products Available
-
-        </div>
-
-        `;
-
-        return;
-
-    }
-
-   products.forEach(product=>{
-
-    if(product.status!=="Active") return;
-
-    if(window.currentCategory){
-
-        if(window.currentCategory!=="All"){
-
-            if(product.category!==window.currentCategory){
-
-                return;
-
-            }
+            grid.innerHTML=`
+            <div class="alert alert-warning">
+                No Products Available
+            </div>
+            `;
+            return;
 
         }
 
-    }
+        snapshot.forEach(child=>{
 
-        if(product.status!=="Active") return;
+            const product = child.val();
 
-        const image = product.image && product.image!=="" ?
-            product.image :
-            "https://via.placeholder.com/300x220?text=No+Image";
+            // Active products only
+            if(product.status !== "Active") return;
 
-        grid.innerHTML += `
+            // Category Filter
+            if(window.currentCategory){
 
-        <div class="product-card">
+                if(window.currentCategory !== "All"){
 
-            <img src="${image}" alt="${product.name}">
+                    if(product.category !== window.currentCategory){
 
-            <div class="product-info">
+                        return;
 
-                <span class="badge bg-primary">
+                    }
 
-                    ${product.category}
+                }
 
-                </span>
+            }
 
-                <h5>${product.name}</h5>
+            const image =
+                product.image && product.image !== ""
+                ? product.image
+                : "https://via.placeholder.com/300x220?text=No+Image";
 
-                <p class="price">
+            grid.innerHTML += `
 
-                    ₱${Number(product.sellingPrice).toFixed(2)}
+            <div class="product-card">
 
-                </p>
+                <img src="${image}" alt="${product.name}">
 
-                <button
+                <div class="product-info">
+
+                    <span class="badge bg-primary">
+
+                        ${product.category}
+
+                    </span>
+
+                    <h5>${product.name}</h5>
+
+                    <p class="price">
+
+                        ₱${Number(product.sellingPrice).toFixed(2)}
+
+                    </p>
+
+                    <button
                     class="btn btn-warning w-100 add-cart">
 
-                    <i class="fa-solid fa-cart-plus"></i>
+                        <i class="fa-solid fa-cart-plus"></i>
 
-                    Add to Cart
+                        Add to Cart
 
-                </button>
+                    </button>
+
+                </div>
 
             </div>
 
-        </div>
+            `;
 
-        `;
+        });
 
     });
 

@@ -1371,3 +1371,78 @@ line-height:1;
     font-weight:700;
 
 }
+/* ==========================================
+   SHOPPING CART HEADER
+========================================== */
+
+.widget-header{
+
+    background:#c8102e;
+
+    color:#fff;
+
+    padding:18px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-radius:12px 12px 0 0;
+
+}
+
+.cart-header-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.cart-header-left i{
+
+    font-size:38px;
+
+    color:#fff;
+
+}
+
+.cart-header-left h4{
+
+    margin:0;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+.cart-header-left small{
+
+    color:#ffe6e6;
+
+    font-size:14px;
+
+}
+
+.cart-badge{
+
+    background:#FFC107;
+
+    color:#222;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+}

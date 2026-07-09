@@ -244,9 +244,14 @@ document.addEventListener("click", function(e){
 
     if(!btn) return;
 
-    editIndex = Number(btn.dataset.index);
+  const code = btn.dataset.code;
 
-    const category = categories[editIndex];
+   const category =
+categories.find(
+item => item.code === code
+);
+
+editIndex = code;
 
     document.getElementById("categoryCode").value = category.code;
 
@@ -267,7 +272,7 @@ document.addEventListener("click", function(e){
 
     if(!btn) return;
 
-    if(editIndex === -1){
+  if(editIndex==""){
 
         alert("Please select a category first.");
 
@@ -291,25 +296,25 @@ document.addEventListener("click", function(e){
 
     }
 
-    categories[editIndex] = {
+   db.ref("categories/"+editIndex).update({
 
-        code,
+code,
 
-        name,
+name,
 
-        description,
+description,
 
-        status
+status
 
-    };
+}).then(()=>{
 
-    localStorage.setItem(
+alert("Category Updated Successfully");
 
-        "categories",
+loadCategoryTable();
 
-        JSON.stringify(categories)
+clearCategoryForm();
 
-    );
+});
 
     alert("Category updated successfully.");
 

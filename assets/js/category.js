@@ -102,31 +102,27 @@ document.addEventListener("click", function(e){
 
     }
 
-    categories.push({
+    db.ref("categories/"+code).set({
 
-        code,
+    code:code,
 
-        name,
+    name:name,
 
-        description,
+    description:description,
 
-        status
+    status:status,
 
-    });
+    createdAt:Date.now()
 
-    localStorage.setItem(
+}).then(()=>{
 
-        "categories",
+    alert("Category saved successfully.");
 
-        JSON.stringify(categories)
+    loadCategoryTable();
 
-    );
+    clearCategoryForm();
 
- alert("Category saved successfully.");
-
-loadCategoryTable();
-
-clearCategoryForm();
+});
 });
 // ===============================================
 // LOAD CATEGORY TABLE

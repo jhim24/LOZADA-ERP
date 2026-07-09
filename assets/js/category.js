@@ -107,7 +107,7 @@ return;
 
 }
 
-db.ref("categories/"+code).update({
+db.ref("categories/"+code).set({
 
 name:name,
 
@@ -117,7 +117,7 @@ status:status
 
 }).then(()=>{
 
-alert("Category updated successfully.");
+alert("Category saved successfully.");
 
 clearCategoryForm();
 

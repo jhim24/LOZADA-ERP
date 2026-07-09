@@ -1446,3 +1446,94 @@ line-height:1;
     font-size:18px;
 
 }
+/* ==========================================
+   DINE-IN INFORMATION BAR
+========================================== */
+
+.cart-info{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    background:#FFF8E8;
+
+    border-left:1px solid #e5e5e5;
+
+    border-right:1px solid #e5e5e5;
+
+    border-bottom:1px solid #e5e5e5;
+
+}
+
+.info-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:18px;
+
+    border-right:1px solid #e5e5e5;
+
+}
+
+.info-box:last-child{
+
+    border-right:none;
+
+}
+
+.info-box i{
+
+    width:48px;
+
+    height:48px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#ffffff;
+
+    border-radius:50%;
+
+    color:#c8102e;
+
+    font-size:22px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.info-box small{
+
+    display:block;
+
+    color:#777;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+.info-box h6{
+
+    margin-top:3px;
+
+    margin-bottom:0;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#222;
+
+}

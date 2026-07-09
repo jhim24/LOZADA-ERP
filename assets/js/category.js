@@ -122,7 +122,11 @@ return;
 
 snapshot.forEach(child=>{
 
-const category=child.val();
+const firebaseKey = child.key;
+
+const category = child.val();
+
+category.firebaseKey = firebaseKey;
 
 categories.push(category);
 
@@ -150,15 +154,14 @@ ${category.status}
 
 <button
 class="btn btn-warning btn-sm btn-edit"
-data-code="${category.code}">
-
+data-key="${category.firebaseKey}"
 <i class="fa-solid fa-pen"></i>
 
 </button>
 
 <button
 class="btn btn-danger btn-sm btn-delete"
-data-code="${category.code}">
+data-key="${category.firebaseKey}"
 
 <i class="fa-solid fa-trash"></i>
 
@@ -251,14 +254,13 @@ document.addEventListener("click", function(e){
 
     if(!btn) return;
 
-  const code = btn.dataset.code;
-
+ const key = btn.dataset.key;
    const category =
 categories.find(
-item => item.code === code
+item => item.firebaseKey === key
 );
 
-editIndex = code;
+editIndex = key;
 
     document.getElementById("categoryCode").value = category.code;
 
@@ -365,7 +367,7 @@ const confirmDelete=confirm(
 
 if(!confirmDelete) return;
 
-db.ref("categories/"+code)
+db.ref("categories/"+key)
 .remove()
 .then(()=>{
 

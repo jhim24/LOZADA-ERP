@@ -264,7 +264,11 @@ document.getElementById("imagePreview").src=
     document.getElementById("productImage").value = "";
 
     generateProductCode();
+document.getElementById("btnSaveProduct").style.display="block";
 
+document.getElementById("btnUpdateProduct").style.display="none";
+
+editProductIndex="";
 }
 // ===============================================
 // LOAD PRODUCT TABLE
@@ -493,6 +497,70 @@ document.addEventListener("click", function(e){
     clearProductForm();
 
     alert("Product updated successfully.");
+
+});// ===============================================
+// UPDATE PRODUCT
+// ===============================================
+
+document.addEventListener("click",function(e){
+
+const btn = e.target.closest("#btnUpdateProduct");
+
+if(!btn) return;
+
+if(editProductIndex==""){
+
+alert("Please select a product first.");
+
+return;
+
+}
+
+const code=document.getElementById("productCode").value;
+
+const category=document.getElementById("productCategory").value;
+
+const name=document.getElementById("productName").value.trim();
+
+const sellingPrice=parseFloat(document.getElementById("sellingPrice").value)||0;
+
+const costPrice=parseFloat(document.getElementById("costPrice").value)||0;
+
+const barcode=document.getElementById("barcode").value.trim();
+
+const description=document.getElementById("productDescription").value.trim();
+
+const status=document.getElementById("productStatus").value;
+
+db.ref("products/"+editProductIndex).update({
+
+code,
+
+category,
+
+name,
+
+sellingPrice,
+
+costPrice,
+
+barcode,
+
+description,
+
+status,
+
+image:selectedImage
+
+}).then(()=>{
+
+alert("Product Updated Successfully.");
+
+clearProductForm();
+
+loadProductTable();
+
+});
 
 });
 // ===============================================

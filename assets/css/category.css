@@ -1,0 +1,208 @@
+/* ==========================================
+   LOZADA ERP
+   CATEGORY MANAGEMENT
+========================================== */
+
+body{
+    background:#f4f6f9;
+}
+
+/* CARD */
+
+.card{
+    border:none;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.card-header{
+    background:#4a90e2;
+    color:#fff;
+    border-radius:15px 15px 0 0 !important;
+    font-weight:600;
+    font-size:18px;
+}
+
+.card-body{
+    padding:20px;
+}
+
+/* FORM */
+
+.form-label{
+    font-weight:600;
+    color:#374151;
+}
+
+.form-control,
+.form-select{
+
+    border-radius:10px;
+    border:1px solid #d1d5db;
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:#4a90e2;
+
+    box-shadow:0 0 0 .2rem rgba(74,144,226,.2);
+
+}
+
+/* BUTTONS */
+
+.btn{
+
+    border-radius:10px;
+
+    font-weight:600;
+
+}
+
+.btn-primary{
+
+    background:#4a90e2;
+
+    border:none;
+
+}
+
+.btn-success{
+
+    border:none;
+
+}
+
+.btn-warning{
+
+    color:#fff;
+
+}
+
+.btn-danger{
+
+    border:none;
+
+}
+
+/* TABLE */
+
+.table{
+
+    margin-bottom:0;
+
+}
+
+.table thead{
+
+    background:#2f3b4f;
+
+    color:#fff;
+
+}
+
+.table thead th{
+
+    border:none;
+
+    padding:14px;
+
+    font-size:14px;
+
+}
+
+.table tbody td{
+
+    vertical-align:middle;
+
+    padding:14px;
+
+}
+
+.table-hover tbody tr:hover{
+
+    background:#f1f7ff;
+
+}
+
+/* STATUS */
+
+.badge{
+
+    padding:8px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+}
+
+/* SEARCH */
+
+.search-box{
+
+    margin-bottom:15px;
+
+}
+
+.search-box input{
+
+    border-radius:10px;
+
+}
+
+/* TABLE CONTAINER */
+
+.table-responsive{
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+/* ACTION BUTTONS */
+
+.btn-sm{
+
+    width:36px;
+
+    height:36px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-right:5px;
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.card{
+
+margin-bottom:20px;
+
+}
+
+.table{
+
+font-size:13px;
+
+}
+
+.btn-sm{
+
+width:32px;
+
+height:32px;
+
+}
+
+}

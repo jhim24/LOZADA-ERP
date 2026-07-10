@@ -961,6 +961,49 @@ existingOrder.date = new Date().toLocaleString();
 
 }
 // ===============================================
+// UPDATE PENDING ORDER
+// ===============================================
+
+function updatePendingOrder(){
+
+    const table = JSON.parse(
+        localStorage.getItem("selectedTable")
+    );
+
+    if(!table) return;
+
+    let orders = JSON.parse(
+        localStorage.getItem("orders")
+    ) || [];
+
+    const order = orders.find(order =>
+
+        order.floor === table.floor &&
+        order.table === table.table &&
+        order.status === "Pending"
+
+    );
+
+    if(!order) return;
+
+    order.items = [...cart];
+
+    order.total = cart.reduce((sum,item)=>{
+
+        return sum + (item.price * item.qty);
+
+    },0);
+
+    order.date = new Date().toLocaleString();
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
+}
+
+// ===============================================
 // LOAD SELECTED TABLE
 // ===============================================
 

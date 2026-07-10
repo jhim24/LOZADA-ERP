@@ -1642,42 +1642,36 @@ function completePayment(){
 
     if(!selectedTable) return;
 
-    let tables = JSON.parse(
+   db.ref("restaurantTables").once("value").then(snapshot=>{
 
-        localStorage.getItem("restaurantTables")
+    snapshot.forEach(child=>{
 
-    ) || [];
+        const table = child.val();
 
-    const index = tables.findIndex(table=>
+        if(
+            table.floor === selectedTable.floor &&
+            table.name === selectedTable.table
+        ){
 
-        table.floor === selectedTable.floor &&
+            db.ref("restaurantTables/" + child.key).update({
 
-        table.name === selectedTable.table
+                status: "Available",
 
-    );
+                customer: "",
 
-    if(index >= 0){
+                guests: "",
 
-        tables[index].status = "Available";
+                server: "",
 
-        tables[index].customer = "";
+                orderNo: ""
 
-        tables[index].guests = "";
+            });
 
-        tables[index].server = "";
+        }
 
-        tables[index].orderNo = "";
+    });
 
-    }
-
-    localStorage.setItem(
-
-        "restaurantTables",
-
-        JSON.stringify(tables)
-
-    );
-
+});
     cart = [];
 
     renderCart();

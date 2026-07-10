@@ -1580,11 +1580,37 @@ if(!paymentTable) return;
 
         const order = child.val();
 
-        if(
-            order.floor === paymentTable.floor &&
-            order.table === paymentTable.table &&
-            order.status !== "Paid"
-        ){
+       const customerOrder = JSON.parse(
+    localStorage.getItem("customerOrder")
+) || {};
+
+let match = false;
+
+if(customerOrder.orderType === "DELIVERY" ||
+   customerOrder.orderType === "TAKE-OUT"){
+
+    match =
+        order.customerName === customerOrder.name &&
+        order.status !== "Paid";
+
+}else{
+
+    match =
+        order.floor === paymentTable.floor &&
+        order.table === paymentTable.table &&
+        order.status !== "Paid";
+
+}
+
+if(match){
+
+    cart = order.items || [];
+
+    renderCart();
+
+    found = true;
+
+}
 
             cart = order.items || [];
 

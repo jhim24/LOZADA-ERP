@@ -504,9 +504,6 @@ document.addEventListener("click", function(e){
 
     if(!btn) return;
 console.log("STEP 1 - Send to Kitchen button clicked");
-    
-   // Reload pending order from Firebase
-cart = [];
     const receiptNo = Math.floor(Math.random() * 900000) + 100000;
 
    const grandTotal = parseFloat(

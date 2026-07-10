@@ -1125,7 +1125,10 @@ table.customer ||
         server:table.server || ""
 
     });
+}
+
 });
+
 }
 // ===============================================
 // UPDATE PENDING ORDER

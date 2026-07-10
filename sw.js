@@ -29,7 +29,16 @@ self.addEventListener("fetch", event => {
 
         .then(response => {
 
-            return response || fetch(event.request);
+            if (response) {
+                return response;
+            }
+
+            return fetch(event.request).catch(() => {
+                return new Response("", {
+                    status: 404,
+                    statusText: "Offline"
+                });
+            });
 
         })
 

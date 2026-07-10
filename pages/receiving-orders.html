@@ -137,7 +137,81 @@ color:white;
 font-size:12px;
 
 }
+.order-entry{
 
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+margin-bottom:25px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.entry-grid{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+}
+
+.entry-card{
+
+padding:30px;
+
+border-radius:15px;
+
+background:#fafafa;
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.30s;
+
+border:2px solid transparent;
+
+}
+
+.entry-card:hover{
+
+background:#C8102E;
+
+color:white;
+
+transform:translateY(-5px);
+
+}
+
+.entry-card i{
+
+font-size:55px;
+
+margin-bottom:15px;
+
+}
+
+.entry-card h3{
+
+margin-bottom:10px;
+
+}
+
+@media(max-width:768px){
+
+.entry-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
 </style>
 
 </head>
@@ -431,6 +505,21 @@ status:"ACCEPTED"
 alert("Order Accepted");
 
 });
+
+}
+  function startOrder(type){
+
+    localStorage.setItem("orderType",type);
+
+    if(type==="DINE-IN"){
+
+        window.location.href="tables.html";
+
+    }else{
+
+        window.location.href="customer-order.html";
+
+    }
 
 }
 </script>

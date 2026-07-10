@@ -70,6 +70,7 @@ setInterval(updateClock,1000);
 
 setReceiptDate();
 loadSelectedTable();
+loadCustomerOrder();
 checkPaymentMode();
 });
 
@@ -1505,3 +1506,43 @@ document.addEventListener("hidden.bs.modal", function(e){
     completePayment();
 
 });
+// ===============================================
+// LOAD CUSTOMER ORDER
+// ===============================================
+
+function loadCustomerOrder(){
+
+    const info = document.getElementById("customerOrderInfo");
+
+    if(!info) return;
+
+    const customer = JSON.parse(
+        localStorage.getItem("customerOrder")
+    );
+
+    if(!customer) return;
+
+    info.classList.remove("d-none");
+
+    document.getElementById("customerOrderType").innerHTML =
+        customer.orderType || "-";
+
+    document.getElementById("customerOrderName").innerHTML =
+        customer.name || "-";
+
+    document.getElementById("customerOrderPhone").innerHTML =
+        customer.phone || "-";
+
+    document.getElementById("customerOrderSource").innerHTML =
+        customer.orderSource || "-";
+
+    document.getElementById("customerOrderAddress").innerHTML =
+        customer.address || "-";
+
+    document.getElementById("customerOrderPartner").innerHTML =
+        customer.partner || "-";
+
+    document.getElementById("customerOrderFee").innerHTML =
+        Number(customer.fee || 0).toFixed(2);
+
+}

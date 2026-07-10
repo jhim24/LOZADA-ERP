@@ -190,7 +190,7 @@ document.addEventListener("click",function(e){
     }
 
 const newProduct = db.ref("products").push();
-
+console.log("Selected Image:", selectedImage);
 newProduct.set({
 
     firebaseKey: newProduct.key,

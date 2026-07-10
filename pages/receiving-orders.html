@@ -339,7 +339,11 @@ Incoming Orders
 
 <th>Order #</th>
 
+<th>Type</th>
+
 <th>Customer</th>
+
+<th>Phone</th>
 
 <th>Source</th>
 
@@ -350,7 +354,6 @@ Incoming Orders
 <th>Action</th>
 
 </tr>
-
 </thead>
 
 <tbody id="ordersTable">
@@ -420,31 +423,13 @@ acceptedOrders++;
 
 }
 
-html+=`
+html += `
 
 <tr>
 
 <td>
 
-${order.orderNumber||child.key}
-
-</td>
-
-<td>
-
-${order.customer||order.customerName||"-"}
-
-</td>
-
-<td>
-
-${order.source||"POS"}
-
-</td>
-
-<td>
-
-₱${Number(order.total||0).toLocaleString()}
+${order.orderNumber || child.key}
 
 </td>
 
@@ -452,7 +437,41 @@ ${order.source||"POS"}
 
 <span class="status">
 
-${order.status||"NEW"}
+${order.orderType || "DINE-IN"}
+
+</span>
+
+</td>
+
+<td>
+
+${order.customerName || order.customer || "Walk-in"}
+
+</td>
+
+<td>
+
+${order.customerPhone || "-"}
+
+</td>
+
+<td>
+
+${order.orderSource || order.source || "Walk-in"}
+
+</td>
+
+<td>
+
+₱${Number(order.total || 0).toLocaleString()}
+
+</td>
+
+<td>
+
+<span class="status">
+
+${order.status || "NEW"}
 
 </span>
 
@@ -461,6 +480,25 @@ ${order.status||"NEW"}
 <td>
 
 <button
+onclick="acceptOrder('${child.key}')"
+style="
+background:#28a745;
+color:white;
+border:none;
+padding:8px 15px;
+border-radius:8px;
+cursor:pointer;
+">
+
+Accept
+
+</button>
+
+</td>
+
+</tr>
+
+`;
 onclick="acceptOrder('${child.key}')"
 style="
 background:#28a745;

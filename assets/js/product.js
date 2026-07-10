@@ -189,35 +189,47 @@ document.addEventListener("click",function(e){
 
     }
 
-  db.ref("products/"+code).set({
+db.ref("products/" + code).once("value").then(snapshot=>{
 
-code,
+    if(snapshot.exists()){
 
-category,
+        alert("Product Code already exists.");
 
-name,
+        generateProductCode();
 
-sellingPrice,
+        return;
 
-costPrice,
+    }
 
-barcode,
+    db.ref("products/" + code).set({
 
-description,
+        code,
 
-status,
+        category,
 
-image:selectedImage
+        name,
 
-}).then(()=>{
+        sellingPrice,
 
-alert("Product Saved Successfully.");
+        costPrice,
 
-clearProductForm();
+        barcode,
 
-loadProductTable();
+        description,
 
-});
+        status,
+
+        image:selectedImage
+
+    }).then(()=>{
+
+        alert("Product Saved Successfully.");
+
+        clearProductForm();
+
+        loadProductTable();
+
+    });
 
 });
 // ===============================================

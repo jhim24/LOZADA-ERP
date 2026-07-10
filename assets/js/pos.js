@@ -1678,7 +1678,8 @@ function completePayment(){
     renderCart();
 
     localStorage.removeItem("selectedTable");
-
+    localStorage.removeItem("customerOrder");
+    localStorage.removeItem("paymentMode");
     alert("Payment completed successfully!");
 
     window.location.href = "tables.html";

@@ -238,24 +238,16 @@ db.ref("products/" + code).once("value").then(snapshot=>{
 
 function generateProductCode(){
 
-    db.ref("products").once("value", snapshot=>{
+    db.ref("products").once("value").then(snapshot=>{
 
-        let max = 0;
+        const total = snapshot.numChildren() + 1;
 
-        snapshot.forEach(child=>{
+        document.getElementById("productCode").value =
+            "PRD-" + String(total).padStart(4,"0");
 
-            const product = child.val();
+    });
 
-            if(product.code){
-
-                const number = parseInt(product.code.replace("PRD-",""));
-
-                if(number > max){
-
-                    max = number;
-
-                }
-
+}
             }
 
         });
@@ -313,7 +305,7 @@ function loadProductTable(){
 
     if(!tableBody) return;
 
-    db.ref("products").on("value", snapshot=>{
+    db.ref("products").once("value").then(snapshot=>{
 
         tableBody.innerHTML="";
 

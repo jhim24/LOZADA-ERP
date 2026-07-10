@@ -887,7 +887,7 @@ document.addEventListener("click",function(e){
 
 function saveOrder(receiptNo, total){
 
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  const ordersRef = db.ref("orders");
 
     const table = JSON.parse(
     localStorage.getItem("selectedTable")
@@ -900,7 +900,7 @@ const customerOrder = JSON.parse(
 ) || {};
     const customer = customerOrder;
     // Hanapin kung may existing unpaid order
-    
+    /*
 const existingOrder = orders.find(order => {
 
     if(customer.orderType === "DELIVERY" ||
@@ -915,6 +915,40 @@ const existingOrder = orders.find(order => {
            order.status !== "Paid";
 
 });
+*/
+    ordersRef.once("value").then(snapshot => {
+
+    let existingOrder = null;
+    let existingKey = "";
+
+    snapshot.forEach(child => {
+
+        const order = child.val();
+
+        if(customer.orderType === "DELIVERY" ||
+           customer.orderType === "TAKE-OUT"){
+
+            if(order.customerName === customer.name &&
+               order.status !== "Paid"){
+
+                existingOrder = order;
+                existingKey = child.key;
+            }
+
+        }else{
+
+            if(order.floor === table.floor &&
+               order.table === table.table &&
+               order.status !== "Paid"){
+
+                existingOrder = order;
+                existingKey = child.key;
+            }
+
+        }
+
+    });
+        /*
     if(existingOrder){
 
         // idagdag ang bagong items
@@ -1009,15 +1043,89 @@ table.customer ||
         });
 
     }
+*/
+        if(existingOrder){
 
-    localStorage.setItem(
+    cart.forEach(newItem=>{
 
-        "orders",
+        const oldItem = existingOrder.items.find(item =>
+            item.name === newItem.name
+        );
 
-        JSON.stringify(orders)
+        if(oldItem){
 
-    );
+            oldItem.qty += newItem.qty;
 
+        }else{
+
+            existingOrder.items.push({...newItem});
+
+        }
+
+    });
+
+    existingOrder.total = existingOrder.items.reduce((sum,item)=>{
+
+        return sum + (Number(item.price) * Number(item.qty));
+
+    },0);
+
+    existingOrder.date = new Date().toLocaleString();
+
+    db.ref("orders/" + existingKey).update(existingOrder);
+
+}else{
+
+    const newOrder = db.ref("orders").push();
+
+    newOrder.set({
+
+        receiptNo,
+
+        date:new Date().toLocaleString(),
+
+        items:[...cart],
+
+        total,
+
+        status:"Pending",
+
+        payment:"",
+
+        cashier:"Administrator",
+
+        orderType:customer.orderType || "DINE-IN",
+
+        orderSource:customer.orderSource || "Walk-in",
+
+        customerName:customer.name || table.customer || "Walk-in",
+
+        customerPhone:customer.phone || "",
+
+        customerEmail:customer.email || "",
+
+        deliveryAddress:customer.address || "",
+
+        deliveryPartner:customer.partner || "",
+
+        deliveryFee:Number(customer.fee || 0),
+
+        requestedTime:customer.requestedTime || "",
+
+        customerNotes:customer.notes || "",
+
+        floor:table.floor || "",
+
+        table:table.table || "",
+
+        customer:customer.name || table.customer || "Walk-in",
+
+        guests:table.guests || 1,
+
+        server:table.server || ""
+
+    });
+});
 }
 // ===============================================
 // UPDATE PENDING ORDER

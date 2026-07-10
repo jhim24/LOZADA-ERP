@@ -419,7 +419,9 @@ const btn = e.target.closest(".btn-edit-product");
 
 if(!btn) return;
 
-const key = btn.dataset.key;
+const key = btn.getAttribute("data-key");
+
+console.log("DELETE KEY:", key);
 
 const product = products.find(
 item => item.firebaseKey === key

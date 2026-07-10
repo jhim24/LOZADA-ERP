@@ -1069,13 +1069,50 @@ line-height:1;
 
 .cart-table tbody td{
 
-    padding:15px 10px;
+    padding:18px 15px;
 
     vertical-align:middle;
+
+    text-align:center;
 
     border-bottom:1px solid #ececec;
 
     background:#fff;
+
+}
+.cart-table tbody td:first-child{
+
+    text-align:left;
+
+    width:40%;
+
+}
+
+.cart-table tbody td:nth-child(2){
+
+    width:18%;
+
+}
+
+.cart-table tbody td:nth-child(3){
+
+    width:15%;
+
+    font-weight:700;
+
+}
+
+.cart-table tbody td:nth-child(4){
+
+    width:17%;
+
+    font-weight:700;
+
+}
+
+.cart-table tbody td:nth-child(5){
+
+    width:10%;
 
 }
 

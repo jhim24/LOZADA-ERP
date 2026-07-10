@@ -110,11 +110,28 @@ function initDashboard(){
 
 function loadDashboardCards(){
 
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+   db.ref("orders").on("value", orderSnapshot=>{
 
-    const tables = JSON.parse(localStorage.getItem("restaurantTables")) || [];
+db.ref("restaurantTables").on("value", tableSnapshot=>{
 
-    const products = JSON.parse(localStorage.getItem("products")) || [];
+db.ref("products").on("value", productSnapshot=>{
+const orders = [];
+
+const tables = [];
+
+const products = [];
+
+orderSnapshot.forEach(child=>{
+    orders.push(child.val());
+});
+
+tableSnapshot.forEach(child=>{
+    tables.push(child.val());
+});
+
+productSnapshot.forEach(child=>{
+    products.push(child.val());
+});
 
     let totalSales = 0;
 
@@ -237,10 +254,15 @@ function loadDashboardCards(){
     );
 
     setValue(
-        "dashboardOccupiedTables",
-        occupiedTables
-    );
+    "dashboardOccupiedTables",
+    occupiedTables
+);
 
+});
+
+});
+
+});
 }
 // ======================================
 // LOAD SALES CHART

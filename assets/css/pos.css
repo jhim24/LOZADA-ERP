@@ -1119,3 +1119,72 @@ color:#888;
 margin-top:4px;
 
 }
+/* ==========================================
+   CART SUMMARY
+========================================== */
+
+.cart-summary{
+
+    background:#ffffff;
+
+    padding:22px;
+
+    border:1px solid #e5e5e5;
+
+    border-top:none;
+
+}
+
+.cart-summary div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:12px 0;
+
+    font-size:16px;
+
+    border-bottom:1px dashed #dddddd;
+
+}
+
+.cart-summary div:last-child{
+
+    border-bottom:none;
+
+}
+
+.cart-summary strong{
+
+    font-weight:700;
+
+}
+
+.grand-total{
+
+    margin-top:15px;
+
+    background:#c8102e;
+
+    color:#fff;
+
+    padding:18px 20px !important;
+
+    border-radius:12px;
+
+    font-size:28px !important;
+
+    font-weight:800;
+
+}
+
+.grand-total span{
+
+    font-size:28px;
+
+    font-weight:800;
+
+}

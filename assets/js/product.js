@@ -189,49 +189,38 @@ document.addEventListener("click",function(e){
 
     }
 
-db.ref("products/" + code).once("value").then(snapshot=>{
+const newProduct = db.ref("products").push();
 
-    if(snapshot.exists()){
+newProduct.set({
 
-        alert("Product Code already exists.");
+    firebaseKey: newProduct.key,
 
-        generateProductCode();
+    code,
 
-        return;
+    category,
 
-    }
+    name,
 
-    db.ref("products/" + code).set({
+    sellingPrice,
 
-        code,
+    costPrice,
 
-        category,
+    barcode,
 
-        name,
+    description,
 
-        sellingPrice,
+    status,
 
-        costPrice,
+    image: selectedImage
 
-        barcode,
+}).then(()=>{
 
-        description,
+    alert("Product Saved Successfully.");
 
-        status,
+    clearProductForm();
 
-        image:selectedImage
+    loadProductTable();
 
-    }).then(()=>{
-
-        alert("Product Saved Successfully.");
-
-        clearProductForm();
-
-        loadProductTable();
-
-    });
-
-});
 });
 // ===============================================
 // PRODUCT CODE
@@ -241,15 +230,34 @@ function generateProductCode(){
 
     db.ref("products").once("value").then(snapshot=>{
 
-        const total = snapshot.numChildren() + 1;
+        let max = 0;
+
+        snapshot.forEach(child=>{
+
+            const product = child.val();
+
+            if(product.code){
+
+                const num = parseInt(product.code.replace("PRD-",""));
+
+                if(num > max){
+
+                    max = num;
+
+                }
+
+            }
+
+        });
+
+        const next = max + 1;
 
         document.getElementById("productCode").value =
-            "PRD-" + String(total).padStart(4,"0");
+            "PRD-" + String(next).padStart(6,"0");
 
     });
 
-}
-         
+}  
 // ===============================================
 // CLEAR PRODUCT FORM
 // ===============================================
@@ -448,7 +456,7 @@ document.getElementById("btnSaveProduct").style.display="none";
 document.getElementById("btnUpdateProduct").style.display="block";
 
 });
-
+});
 // ===============================================
 // UPDATE PRODUCT
 // ===============================================

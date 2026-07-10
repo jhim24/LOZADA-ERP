@@ -648,9 +648,19 @@ document.getElementById("receiptTable").innerHTML =
 
 selectedTable.table || "-";
 
+const customerOrder = JSON.parse(
+
+    localStorage.getItem("customerOrder")
+
+) || {};
+
 document.getElementById("receiptCustomer").innerHTML =
 
-selectedTable.customer || "Walk-in";
+customerOrder.name ||
+
+selectedTable.customer ||
+
+"Walk-in";
 
 document.getElementById("receiptGuests").innerHTML =
 
@@ -868,7 +878,11 @@ function saveOrder(receiptNo, total){
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
     const table = JSON.parse(localStorage.getItem("selectedTable")) || {};
+const customerOrder = JSON.parse(
 
+    localStorage.getItem("customerOrder")
+
+) || {};
     // Hanapin kung may existing unpaid order
     const existingOrder = orders.find(order =>
 
@@ -938,7 +952,13 @@ existingOrder.date = new Date().toLocaleString();
 
             table: table.table || "",
 
-            customer: table.customer || "Walk-in",
+           customer:
+
+customerOrder.name ||
+
+table.customer ||
+
+"Walk-in",
 
             guests: table.guests || 1,
 
@@ -1053,6 +1073,32 @@ table.guests || 1;
 
 document.getElementById("paymentServer").innerHTML =
 table.server || "-";
+
+    // ===============================================
+// CUSTOMER ORDER INFORMATION
+// ===============================================
+
+const customerOrder = JSON.parse(
+
+    localStorage.getItem("customerOrder")
+
+) || {};
+
+const customerInfo = document.getElementById("selectedCustomer");
+
+if(customerInfo && customerOrder.name){
+
+    customerInfo.innerHTML = customerOrder.name;
+
+}
+
+const paymentCustomer = document.getElementById("paymentCustomer");
+
+if(paymentCustomer && customerOrder.name){
+
+    paymentCustomer.innerHTML = customerOrder.name;
+
+}
     // ======================================
 // LOAD EXISTING PENDING ORDER
 // ======================================

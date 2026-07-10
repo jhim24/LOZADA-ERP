@@ -155,28 +155,24 @@ document.addEventListener("input",function(e){
 // SHOPPING CART
 // ===============================================
 
-let cart=[];
+let cart = [];
 
-document.addEventListener("click",function(e){
+document.addEventListener("click", function(e){
 
-    renderCart();
-updatePendingOrder();
+    const button = e.target.closest(".add-cart");
 
     if(!button) return;
 
-    const card=button.closest(".product-card");
+    const card = button.closest(".product-card");
 
-    const name=card.querySelector("h5").innerText;
+    const name = card.querySelector("h5").innerText;
 
-    const price=parseFloat(
-
+    const price = parseFloat(
         card.querySelector(".price")
-        .innerText
-        .replace("₱","")
-
+        .innerText.replace("₱","")
     );
 
-    const item=cart.find(p=>p.name===name);
+    const item = cart.find(p => p.name === name);
 
     if(item){
 
@@ -184,22 +180,18 @@ updatePendingOrder();
 
     }else{
 
-       const image = card.querySelector("img").src;
+        cart.push({
+            name: name,
+            price: price,
+            qty: 1,
+            image: card.querySelector("img").src
+        });
 
-cart.push({
-
-    name: name,
-
-    price: price,
-
-    qty: 1,
-
-    image: image
-
-});
     }
 
     renderCart();
+
+    updatePendingOrder();
 
 });
 
@@ -463,11 +455,10 @@ document.addEventListener("click",function(e){
 
         const index=e.target.dataset.index;
 
-        cart[index].qty++;
-
-        renderCart();cart[index].qty++;
+      cart[index].qty++;
 
 renderCart();
+
 updatePendingOrder();
 
     }

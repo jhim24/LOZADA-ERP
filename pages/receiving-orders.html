@@ -137,6 +137,25 @@ color:white;
 font-size:12px;
 
 }
+  .status-new{
+background:#ff9800;
+}
+
+.status-accepted{
+background:#28a745;
+}
+
+.status-rejected{
+background:#dc3545;
+}
+
+.status-preparing{
+background:#0d6efd;
+}
+
+.status-ready{
+background:#6f42c1;
+}
 .order-entry{
 
 background:white;
@@ -468,7 +487,7 @@ ${order.orderSource || order.source || "Walk-in"}
 
 <td>
 
-<span class="status ${order.status}">
+<span class="${getStatusClass(order.status)}">
 
 ${order.status || "NEW"}
 
@@ -480,16 +499,51 @@ ${order.status || "NEW"}
 
 <button
 onclick="acceptOrder('${child.key}')"
-style="
-background:#28a745;
-color:white;
-border:none;
-padding:8px 15px;
-border-radius:8px;
-cursor:pointer;
-">
+class="btn btn-success btn-sm">
+
+<i class="fa fa-check"></i>
 
 Accept
+
+</button>
+
+<button
+onclick="preparingOrder('${child.key}')"
+class="btn btn-primary btn-sm">
+
+<i class="fa fa-fire"></i>
+
+Preparing
+
+</button>
+
+<button
+onclick="readyOrder('${child.key}')"
+class="btn btn-info btn-sm">
+
+<i class="fa fa-bell"></i>
+
+Ready
+
+</button>
+
+<button
+onclick="rejectOrder('${child.key}')"
+class="btn btn-warning btn-sm">
+
+<i class="fa fa-times"></i>
+
+Reject
+
+</button>
+
+<button
+onclick="deleteOrder('${child.key}')"
+class="btn btn-danger btn-sm">
+
+<i class="fa fa-trash"></i>
+
+Delete
 
 </button>
 
@@ -537,6 +591,89 @@ alert("Order Accepted");
 
         window.location.href="customer-order.html";
 
+    }
+
+}
+  function rejectOrder(key){
+
+    if(!confirm("Reject this order?")) return;
+
+    db.ref("orders/" + key).update({
+
+        status: "REJECTED"
+
+    }).then(()=>{
+
+        alert("Order Rejected");
+
+    });
+
+}
+  function deleteOrder(key){
+
+    if(!confirm("Are you sure you want to permanently delete this order?")) return;
+
+    db.ref("orders/" + key).remove()
+    .then(()=>{
+
+        alert("Order Deleted");
+
+    })
+    .catch(error=>{
+
+        alert("Delete Failed: " + error.message);
+
+    });
+
+}
+  function preparingOrder(key){
+
+    db.ref("orders/" + key).update({
+
+        status: "PREPARING"
+
+    }).then(()=>{
+
+        alert("Order is now Preparing.");
+
+    });
+
+}
+
+function readyOrder(key){
+
+    db.ref("orders/" + key).update({
+
+        status: "READY"
+
+    }).then(()=>{
+
+        alert("Order is Ready.");
+
+    });
+
+}
+  function getStatusClass(status){
+
+    switch(status){
+
+        case "NEW":
+            return "status status-new";
+
+        case "ACCEPTED":
+            return "status status-accepted";
+
+        case "REJECTED":
+            return "status status-rejected";
+
+        case "PREPARING":
+            return "status status-preparing";
+
+        case "READY":
+            return "status status-ready";
+
+        default:
+            return "status";
     }
 
 }

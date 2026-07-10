@@ -159,7 +159,8 @@ let cart=[];
 
 document.addEventListener("click",function(e){
 
-    const button=e.target.closest(".add-cart");
+    renderCart();
+updatePendingOrder();
 
     if(!button) return;
 
@@ -464,7 +465,10 @@ document.addEventListener("click",function(e){
 
         cart[index].qty++;
 
-        renderCart();
+        renderCart();cart[index].qty++;
+
+renderCart();
+updatePendingOrder();
 
     }
 
@@ -483,6 +487,7 @@ document.addEventListener("click",function(e){
         }
 
         renderCart();
+updatePendingOrder();
 
     }
 
@@ -492,9 +497,10 @@ document.addEventListener("click",function(e){
 
         const index=e.target.closest(".remove-item").dataset.index;
 
-        cart.splice(index,1);
+       cart.splice(index,1);
 
-        renderCart();
+renderCart();
+updatePendingOrder();
 
     }
 

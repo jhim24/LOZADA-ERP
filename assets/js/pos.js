@@ -657,7 +657,7 @@ const customerOrder = JSON.parse(
 
 document.getElementById("receiptCustomer").innerHTML =
 
-customerOrder.name ||
+customer.name ||
 
 selectedTable.customer ||
 
@@ -878,14 +878,10 @@ function saveOrder(receiptNo, total){
 
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-    const table = JSON.parse(localStorage.getItem("selectedTable")) || {};
     const table = JSON.parse(
     localStorage.getItem("selectedTable")
 ) || {};
 
-const customer = JSON.parse(
-    localStorage.getItem("customerOrder")
-) || {};
 const customerOrder = JSON.parse(
 
     localStorage.getItem("customerOrder")
@@ -981,7 +977,7 @@ customerNotes: customer.notes || "",
 
            customer:
 
-customerOrder.name ||
+customer.name ||
 
 table.customer ||
 
@@ -1113,22 +1109,22 @@ const customerOrder = JSON.parse(
 
 const customerInfo = document.getElementById("selectedCustomer");
 
-if(customerInfo && customerOrder.name){
+if(customerInfo && customer.name){
 
-    customerInfo.innerHTML = customerOrder.name;
+    customerInfo.innerHTML = customer.name;
 
 }
 
 const paymentCustomer = document.getElementById("paymentCustomer");
 
-if(paymentCustomer && customerOrder.name){
+if(paymentCustomer && customer.name){
 
-    paymentCustomer.innerHTML = customerOrder.name;
+    paymentCustomer.innerHTML = customer.name;
 
 }
     // ======================================
 // LOAD EXISTING PENDING ORDER
-// ======================================
+// ======================================customer.name
 
 let orders = JSON.parse(localStorage.getItem("orders")) || [];
 

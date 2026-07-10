@@ -226,13 +226,34 @@ loadProductTable();
 
 function generateProductCode(){
 
-    const products=JSON.parse(localStorage.getItem("products")) || [];
+    db.ref("products").once("value", snapshot=>{
 
-    const next=products.length+1;
+        let max = 0;
 
-    document.getElementById("productCode").value=
+        snapshot.forEach(child=>{
 
-        "PRD-"+String(next).padStart(4,"0");
+            const product = child.val();
+
+            if(product.code){
+
+                const number = parseInt(product.code.replace("PRD-",""));
+
+                if(number > max){
+
+                    max = number;
+
+                }
+
+            }
+
+        });
+
+        const next = max + 1;
+
+        document.getElementById("productCode").value =
+        "PRD-" + String(next).padStart(4,"0");
+
+    });
 
 }
 // ===============================================

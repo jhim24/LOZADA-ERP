@@ -1188,3 +1188,48 @@ margin-top:4px;
     font-weight:800;
 
 }
+/* ==========================================
+   CART ACTION BUTTON
+========================================== */
+
+.remove-item{
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#dc3545;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:auto;
+
+    transition:.25s;
+
+}
+
+.remove-item:hover{
+
+    background:#b02a37;
+
+    transform:scale(1.08);
+
+    box-shadow:0 4px 12px rgba(220,53,69,.35);
+
+}
+
+.remove-item i{
+
+    font-size:16px;
+
+}

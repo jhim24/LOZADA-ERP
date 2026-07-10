@@ -504,14 +504,9 @@ document.addEventListener("click", function(e){
 
     if(!btn) return;
 console.log("STEP 1 - Send to Kitchen button clicked");
-    if(cart.length===0){
-
-        alert("Shopping Cart is empty.");
-
-        return;
-
-    }
-
+    
+   // Reload pending order from Firebase
+cart = [];
     const receiptNo = Math.floor(Math.random() * 900000) + 100000;
 
    const grandTotal = parseFloat(

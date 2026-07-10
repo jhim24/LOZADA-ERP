@@ -212,13 +212,25 @@ function renderCart(){
 
     if(cart.length===0){
 
-        cartItems.innerHTML=`
-        <tr>
-            <td colspan="5" class="text-center text-muted">
-                Cart is Empty
-            </td>
-        </tr>
-        `;
+       cartItems.innerHTML = `
+<tr>
+    <td colspan="5">
+
+        <div class="empty-cart">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <h4>Your Shopping Cart is Empty</h4>
+
+            <p>
+                Add products from the menu to start a new order.
+            </p>
+
+        </div>
+
+    </td>
+</tr>
+`;
 
         updateTotals(0);
 

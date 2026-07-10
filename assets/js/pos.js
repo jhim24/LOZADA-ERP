@@ -1515,10 +1515,10 @@ function checkPaymentMode(){
     document.getElementById("cashReceived")?.focus();
 
     const paymentTable = JSON.parse(
-        localStorage.getItem("paymentTable")
-    );
+    localStorage.getItem("selectedTable")
+);
 
-    if(!paymentTable) return;
+if(!paymentTable) return;
 
    db.ref("orders").once("value").then(snapshot=>{
 
@@ -1671,7 +1671,8 @@ function completePayment(){
 
     });
 
-});
+}).then(()=>{
+
     cart = [];
 
     renderCart();
@@ -1682,7 +1683,8 @@ function completePayment(){
 
     window.location.href = "tables.html";
 
-}
+});
+
 // ===============================================
 // RECEIPT CLOSED
 // ===============================================
@@ -1704,33 +1706,59 @@ function loadCustomerOrder(){
 
     if(!info) return;
 
-    const customer = JSON.parse(
-        localStorage.getItem("customerOrder")
-    );
+    const table = JSON.parse(
+        localStorage.getItem("selectedTable")
+    ) || {};
 
-    if(!customer) return;
+    db.ref("orders").once("value").then(snapshot=>{
 
-    info.classList.remove("d-none");
+        let found = false;
 
-    document.getElementById("customerOrderType").innerHTML =
-        customer.orderType || "-";
+        snapshot.forEach(child=>{
 
-    document.getElementById("customerOrderName").innerHTML =
-        customer.name || "-";
+            const order = child.val();
 
-    document.getElementById("customerOrderPhone").innerHTML =
-        customer.phone || "-";
+            if(
+                order.floor === table.floor &&
+                order.table === table.table &&
+                order.status !== "Paid"
+            ){
 
-    document.getElementById("customerOrderSource").innerHTML =
-        customer.orderSource || "-";
+                found = true;
 
-    document.getElementById("customerOrderAddress").innerHTML =
-        customer.address || "-";
+                info.classList.remove("d-none");
 
-    document.getElementById("customerOrderPartner").innerHTML =
-        customer.partner || "-";
+                document.getElementById("customerOrderType").innerHTML =
+                    order.orderType || "-";
 
-    document.getElementById("customerOrderFee").innerHTML =
-        Number(customer.fee || 0).toFixed(2);
+                document.getElementById("customerOrderName").innerHTML =
+                    order.customerName || "-";
+
+                document.getElementById("customerOrderPhone").innerHTML =
+                    order.customerPhone || "-";
+
+                document.getElementById("customerOrderSource").innerHTML =
+                    order.orderSource || "-";
+
+                document.getElementById("customerOrderAddress").innerHTML =
+                    order.deliveryAddress || "-";
+
+                document.getElementById("customerOrderPartner").innerHTML =
+                    order.deliveryPartner || "-";
+
+                document.getElementById("customerOrderFee").innerHTML =
+                    Number(order.deliveryFee || 0).toFixed(2);
+
+            }
+
+        });
+
+        if(!found){
+
+            info.classList.add("d-none");
+
+        }
+
+    });
 
 }

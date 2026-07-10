@@ -1080,6 +1080,17 @@ line-height:1;
     background:#fff;
 
 }
+.cart-table tbody tr{
+
+    height:110px;
+
+}
+
+.cart-table tbody td{
+
+    height:110px;
+
+}
 .cart-table tbody td:first-child{
 
     text-align:left;
@@ -1144,27 +1155,29 @@ line-height:1;
 
 .cart-product{
 
-display:flex;
+    display:flex;
 
-align-items:center;
+    align-items:center;
 
-gap:15px;
+    gap:18px;
+
+    min-height:80px;
 
 }
 
 .cart-image{
 
-width:70px;
+    width:85px;
 
-height:70px;
+    height:85px;
 
-border-radius:12px;
+    border-radius:12px;
 
-object-fit:cover;
+    object-fit:cover;
 
-border:1px solid #ddd;
+    border:1px solid #ddd;
 
-box-shadow:0 2px 8px rgba(0,0,0,.08);
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 
 }
 

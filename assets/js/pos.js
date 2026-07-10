@@ -879,6 +879,13 @@ function saveOrder(receiptNo, total){
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
     const table = JSON.parse(localStorage.getItem("selectedTable")) || {};
+    const table = JSON.parse(
+    localStorage.getItem("selectedTable")
+) || {};
+
+const customer = JSON.parse(
+    localStorage.getItem("customerOrder")
+) || {};
 const customerOrder = JSON.parse(
 
     localStorage.getItem("customerOrder")
@@ -948,6 +955,25 @@ existingOrder.date = new Date().toLocaleString();
             payment: "",
 
             cashier: "Administrator",
+            orderType: customer.orderType || "DINE-IN",
+
+orderSource: customer.orderSource || "Walk-in",
+
+customerName: customer.name || table.customer || "Walk-in",
+
+customerPhone: customer.phone || "",
+
+customerEmail: customer.email || "",
+
+deliveryAddress: customer.address || "",
+
+deliveryPartner: customer.partner || "",
+
+deliveryFee: Number(customer.fee || 0),
+
+requestedTime: customer.requestedTime || "",
+
+customerNotes: customer.notes || "",
 
             floor: table.floor || "",
 

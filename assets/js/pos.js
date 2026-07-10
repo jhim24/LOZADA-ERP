@@ -514,15 +514,27 @@ console.log("STEP 1 - Send to Kitchen button clicked");
 
     const receiptNo = Math.floor(Math.random() * 900000) + 100000;
 
-    const grandTotal = parseFloat(
-        document.getElementById("totalAmount").value
-    ) || 0;
-console.log("STEP 2 - About to save order");
-   saveOrder(receiptNo, grandTotal);
-console.log("STEP 3 - Order saved");
-alert("Order sent to Kitchen.");
+   const grandTotal = parseFloat(
+    document.getElementById("totalAmount").value
+) || 0;
+
+try{
+
+    saveOrder(receiptNo, grandTotal);
+
+    alert("Order sent to Kitchen.");
+
     cart = [];
-renderCart();
+
+    renderCart();
+
+}catch(error){
+
+    console.error(error);
+
+    alert(error.message);
+
+}
 
 // Huwag muna i-clear ang cart.
 // Ika-clear natin ito pagkatapos ng successful payment.
@@ -657,12 +669,11 @@ const customerOrder = JSON.parse(
 
 document.getElementById("receiptCustomer").innerHTML =
 
-customer.name ||
+customerOrder.name ||
 
 selectedTable.customer ||
 
 "Walk-in";
-
 document.getElementById("receiptGuests").innerHTML =
 
 selectedTable.guests || "1";
@@ -887,7 +898,9 @@ const customerOrder = JSON.parse(
     localStorage.getItem("customerOrder")
 
 ) || {};
+    const customer = customerOrder;
     // Hanapin kung may existing unpaid order
+    
     const existingOrder = orders.find(order =>
 
         order.floor === table.floor &&
@@ -895,7 +908,20 @@ const customerOrder = JSON.parse(
         order.status !== "Paid"
 
     );
+const existingOrder = orders.find(order => {
 
+    if(customer.orderType === "DELIVERY" ||
+       customer.orderType === "TAKE-OUT"){
+
+        return order.customerName === customer.name &&
+               order.status !== "Paid";
+    }
+
+    return order.floor === table.floor &&
+           order.table === table.table &&
+           order.status !== "Paid";
+
+});
     if(existingOrder){
 
         // idagdag ang bagong items
@@ -1008,21 +1034,30 @@ function updatePendingOrder(){
 
     const table = JSON.parse(
         localStorage.getItem("selectedTable")
-    );
+    ) || {};
 
-    if(!table) return;
+    const customerOrder = JSON.parse(
+        localStorage.getItem("customerOrder")
+    ) || {};
 
     let orders = JSON.parse(
         localStorage.getItem("orders")
     ) || [];
 
-    const order = orders.find(order =>
+    const order = orders.find(order => {
 
-        order.floor === table.floor &&
-        order.table === table.table &&
-        order.status === "Pending"
+    if(customerOrder.orderType === "DELIVERY" ||
+       customerOrder.orderType === "TAKE-OUT"){
 
-    );
+        return order.customerName === customerOrder.name &&
+               order.status === "Pending";
+    }
+
+    return order.floor === table.floor &&
+           order.table === table.table &&
+           order.status === "Pending";
+
+});
 
     if(!order) return;
 
@@ -1109,17 +1144,16 @@ const customerOrder = JSON.parse(
 
 const customerInfo = document.getElementById("selectedCustomer");
 
-if(customerInfo && customer.name){
+if(customerInfo && customerOrder.name){
 
-    customerInfo.innerHTML = customer.name;
+    customerInfo.innerHTML = customerOrder.name;
 
 }
-
 const paymentCustomer = document.getElementById("paymentCustomer");
 
-if(paymentCustomer && customer.name){
+if(paymentCustomer && customerOrder.name){
 
-    paymentCustomer.innerHTML = customer.name;
+    paymentCustomer.innerHTML = customerOrder.name;
 
 }
     // ======================================

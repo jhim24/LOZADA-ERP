@@ -232,6 +232,7 @@ db.ref("products/" + code).once("value").then(snapshot=>{
     });
 
 });
+});
 // ===============================================
 // PRODUCT CODE
 // ===============================================
@@ -248,18 +249,7 @@ function generateProductCode(){
     });
 
 }
-            }
-
-        });
-
-        const next = max + 1;
-
-        document.getElementById("productCode").value =
-        "PRD-" + String(next).padStart(4,"0");
-
-    });
-
-}
+         
 // ===============================================
 // CLEAR PRODUCT FORM
 // ===============================================

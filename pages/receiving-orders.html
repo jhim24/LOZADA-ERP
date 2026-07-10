@@ -405,7 +405,6 @@ snapshot.forEach(child=>{
 const order = child.val();
 
 // Show NEW orders only
-if(order.status !== "NEW") return;
 
 todayOrders++;
 
@@ -480,25 +479,6 @@ ${order.status || "NEW"}
 <td>
 
 <button
-onclick="acceptOrder('${child.key}')"
-style="
-background:#28a745;
-color:white;
-border:none;
-padding:8px 15px;
-border-radius:8px;
-cursor:pointer;
-">
-
-Accept
-
-</button>
-
-</td>
-
-</tr>
-
-`;
 onclick="acceptOrder('${child.key}')"
 style="
 background:#28a745;

@@ -1685,7 +1685,7 @@ function completePayment(){
     window.location.href = "tables.html";
 
 });
-
+}
 // ===============================================
 // RECEIPT CLOSED
 // ===============================================

@@ -271,11 +271,13 @@ Proceed to POS
 
 <script>
 
-const orderType = localStorage.getItem("orderType");
+const orderType = localStorage.getItem("orderType") || "TAKE-OUT";
 
-if(orderType==="DELIVERY"){
+document.getElementById("orderTypeDisplay").value = orderType;
 
-    document.getElementById("deliverySection").style.display="block";
+if(orderType === "DELIVERY"){
+
+    document.getElementById("deliverySection").style.display = "block";
 
 }
 
@@ -285,9 +287,15 @@ function proceedPOS(){
 
         orderType:orderType,
 
+        orderSource:document.getElementById("orderSource").value,
+
         name:document.getElementById("customerName").value,
 
         phone:document.getElementById("customerPhone").value,
+
+        email:document.getElementById("customerEmail").value,
+
+        requestedTime:document.getElementById("requestedTime").value,
 
         notes:document.getElementById("customerNotes").value,
 
@@ -295,22 +303,18 @@ function proceedPOS(){
 
         partner:document.getElementById("deliveryPartner").value,
 
-        fee:document.getElementById("deliveryFee").value
+        fee:Number(document.getElementById("deliveryFee").value || 0)
 
     };
 
     localStorage.setItem(
-
         "customerOrder",
-
         JSON.stringify(customer)
-
     );
 
     window.location.href="pos.html";
 
 }
-
 </script>
 
 </body>

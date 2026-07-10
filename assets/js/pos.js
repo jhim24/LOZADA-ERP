@@ -1748,7 +1748,43 @@ function completePayment(){
         }
 
     });
+const customerOrder = JSON.parse(
+    localStorage.getItem("customerOrder")
+) || {};
 
+db.ref("orders").once("value").then(snapshot=>{
+
+    snapshot.forEach(child=>{
+
+        const order = child.val();
+
+        let match = false;
+
+        if(customerOrder.orderType === "DELIVERY" ||
+           customerOrder.orderType === "TAKE-OUT"){
+
+            match =
+                order.customerName === customerOrder.name &&
+                order.status === "Paid";
+
+        }else{
+
+            match =
+                order.floor === selectedTable.floor &&
+                order.table === selectedTable.table &&
+                order.status === "Paid";
+
+        }
+
+        if(match){
+
+            db.ref("orders/" + child.key).remove();
+
+        }
+
+    });
+
+});
 }).then(()=>{
 
     cart = [];

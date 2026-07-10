@@ -1144,44 +1144,54 @@ function updatePendingOrder(){
         localStorage.getItem("customerOrder")
     ) || {};
 
-    let orders = JSON.parse(
-        localStorage.getItem("orders")
-    ) || [];
+    db.ref("orders").once("value").then(snapshot=>{
 
-    const order = orders.find(order => {
+        snapshot.forEach(child=>{
 
-    if(customerOrder.orderType === "DELIVERY" ||
-       customerOrder.orderType === "TAKE-OUT"){
+            const order = child.val();
 
-        return order.customerName === customerOrder.name &&
-               order.status === "Pending";
-    }
+            let match = false;
 
-    return order.floor === table.floor &&
-           order.table === table.table &&
-           order.status === "Pending";
+            if(customerOrder.orderType === "DELIVERY" ||
+               customerOrder.orderType === "TAKE-OUT"){
 
-});
+                match =
+                    order.customerName === customerOrder.name &&
+                    order.status === "Pending";
 
-    if(!order) return;
+            }else{
 
-    order.items = [...cart];
+                match =
+                    order.floor === table.floor &&
+                    order.table === table.table &&
+                    order.status === "Pending";
 
-    order.total = cart.reduce((sum,item)=>{
+            }
 
-        return sum + (item.price * item.qty);
+            if(match){
 
-    },0);
+                db.ref("orders/" + child.key).update({
 
-    order.date = new Date().toLocaleString();
+                    items: [...cart],
 
-    localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
-    );
+                    total: cart.reduce((sum,item)=>{
+
+                        return sum +
+                               (Number(item.price) * Number(item.qty));
+
+                    },0),
+
+                    date: new Date().toLocaleString()
+
+                });
+
+            }
+
+        });
+
+    });
 
 }
-
 // ===============================================
 // LOAD SELECTED TABLE
 // ===============================================
@@ -1264,25 +1274,27 @@ if(paymentCustomer && customerOrder.name){
 // LOAD EXISTING PENDING ORDER
 // ======================================customer.name
 
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    db.ref("orders").once("value").then(snapshot=>{
 
-const existingOrder = orders.find(order =>
+    snapshot.forEach(child=>{
 
-    order.floor === table.floor &&
+        const order = child.val();
 
-    order.table === table.table &&
+        if(
+            order.floor === table.floor &&
+            order.table === table.table &&
+            order.status === "Pending"
+        ){
 
-    order.status === "Pending"
+            cart = order.items || [];
 
-);
+            renderCart();
 
-if(existingOrder){
+        }
 
-    cart = [...existingOrder.items];
+    });
 
-    renderCart();
-
-}
+});
 }
 
 // ======================================
@@ -1305,9 +1317,7 @@ document.addEventListener("click", function(e){
 
     const paymentMethod = document.getElementById("paymentMethod").value;
 
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-   const selectedTable = JSON.parse(
+  const selectedTable = JSON.parse(
     localStorage.getItem("selectedTable")
 ) || {};
 
@@ -1315,47 +1325,49 @@ const customerOrder = JSON.parse(
     localStorage.getItem("customerOrder")
 ) || {};
 
-const orderIndex = orders
-.map((order,index)=>({order,index}))
-.filter(item=>{
+db.ref("orders").once("value").then(snapshot=>{
 
-    if(customerOrder.orderType==="DELIVERY" ||
-       customerOrder.orderType==="TAKE-OUT"){
+    snapshot.forEach(child=>{
 
-        return item.order.customerName===customerOrder.name &&
-               item.order.status!=="Paid";
-    }
+        const order = child.val();
 
-    return item.order.floor===selectedTable.floor &&
-           item.order.table===selectedTable.table &&
-           item.order.status!=="Paid";
+        let match = false;
 
-})
-.pop()?.index ?? -1;
-    
-    if(orderIndex >= 0){
+        if(customerOrder.orderType === "DELIVERY" ||
+           customerOrder.orderType === "TAKE-OUT"){
 
-        orders[orderIndex].payment = paymentMethod;
+            match =
+                order.customerName === customerOrder.name &&
+                order.status !== "Paid";
 
-        orders[orderIndex].status = "Paid";
+        }else{
 
-        orders[orderIndex].paidDate = new Date().toISOString();
+            match =
+                order.floor === selectedTable.floor &&
+                order.table === selectedTable.table &&
+                order.status !== "Paid";
 
-        localStorage.setItem(
+        }
 
-            "orders",
+        if(match){
 
-            JSON.stringify(orders)
+            db.ref("orders/" + child.key).update({
 
-        );
+                payment: paymentMethod,
 
-    }else{
+                status: "Paid",
 
-        console.error("Order not found for payment.");
+                paidDate: new Date().toISOString()
 
-    }
+            });
+
+        }
+
+    });
 
     generateReceipt();
+
+});
 
 });
 // ===============================================
@@ -1508,31 +1520,37 @@ function checkPaymentMode(){
 
     if(!paymentTable) return;
 
-    const orders = JSON.parse(
-        localStorage.getItem("orders")
-    ) || [];
+   db.ref("orders").once("value").then(snapshot=>{
 
-    const order = orders.find(order =>
+    let found = false;
 
-        order.floor === paymentTable.floor &&
+    snapshot.forEach(child=>{
 
-        order.table === paymentTable.table &&
+        const order = child.val();
 
-        order.status !== "Paid"
+        if(
+            order.floor === paymentTable.floor &&
+            order.table === paymentTable.table &&
+            order.status !== "Paid"
+        ){
 
-    );
+            cart = order.items || [];
 
-    if(order){
+            renderCart();
 
-        cart = [...order.items];
+            found = true;
 
-        renderCart();
+        }
 
-    }else{
+    });
+
+    if(!found){
 
         alert("No pending order found.");
 
     }
+
+});
 
 }
 function printReceipt(){

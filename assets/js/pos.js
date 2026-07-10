@@ -901,13 +901,6 @@ const customerOrder = JSON.parse(
     const customer = customerOrder;
     // Hanapin kung may existing unpaid order
     
-    const existingOrder = orders.find(order =>
-
-        order.floor === table.floor &&
-        order.table === table.table &&
-        order.status !== "Paid"
-
-    );
 const existingOrder = orders.find(order => {
 
     if(customer.orderType === "DELIVERY" ||
@@ -1203,16 +1196,32 @@ document.addEventListener("click", function(e){
 
     let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-    const selectedTable = JSON.parse(localStorage.getItem("selectedTable"));
+   const selectedTable = JSON.parse(
+    localStorage.getItem("selectedTable")
+) || {};
 
-    const orderIndex = orders
-    .map((order, index) => ({ order, index }))
-   .filter(item =>
-    item.order.floor === selectedTable.floor &&
-    item.order.table === selectedTable.table &&
-    item.order.status !== "Paid"
-)
-    .pop()?.index ?? -1;
+const customerOrder = JSON.parse(
+    localStorage.getItem("customerOrder")
+) || {};
+
+const orderIndex = orders
+.map((order,index)=>({order,index}))
+.filter(item=>{
+
+    if(customerOrder.orderType==="DELIVERY" ||
+       customerOrder.orderType==="TAKE-OUT"){
+
+        return item.order.customerName===customerOrder.name &&
+               item.order.status!=="Paid";
+    }
+
+    return item.order.floor===selectedTable.floor &&
+           item.order.table===selectedTable.table &&
+           item.order.status!=="Paid";
+
+})
+.pop()?.index ?? -1;
+    
     if(orderIndex >= 0){
 
         orders[orderIndex].payment = paymentMethod;

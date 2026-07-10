@@ -988,6 +988,8 @@ line-height:1;
 
     padding:18px 15px;
 
+    height:110px;
+
     vertical-align:middle;
 
     text-align:center;
@@ -995,11 +997,6 @@ line-height:1;
     border-bottom:1px solid #ececec;
 
     background:#fff;
-
-}
-.cart-table tbody tr{
-
-    height:110px;
 
 }
 
@@ -1100,9 +1097,11 @@ line-height:1;
 
 .cart-details{
 
-display:flex;
+    display:flex;
 
-flex-direction:column;
+    flex-direction:column;
+
+    justify-content:center;
 
 }
 

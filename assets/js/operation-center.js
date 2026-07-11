@@ -85,3 +85,131 @@ document.addEventListener("DOMContentLoaded", async()=>{
     setInterval(loadOperationCenter,2000);
 
 });
+// ===============================================
+// LOAD OPERATION CENTER
+// ===============================================
+
+function loadOperationCenter(){
+
+    db.ref("orders").on("value", snapshot=>{
+
+        let pendingHTML = "";
+        let preparingHTML = "";
+        let readyHTML = "";
+        let servedHTML = "";
+        let paidHTML = "";
+
+        let pending = 0;
+        let preparing = 0;
+        let ready = 0;
+        let served = 0;
+        let paid = 0;
+
+        snapshot.forEach(child=>{
+
+            const order = child.val();
+
+            const card = `
+
+            <div class="card shadow-sm mb-2">
+
+                <div class="card-body p-2">
+
+                    <small class="text-muted">
+
+                        Receipt #${order.receiptNo || "-"}
+
+                    </small>
+
+                    <br>
+
+                    <strong>
+
+                        ${order.table || order.orderType || "-"}
+
+                    </strong>
+
+                    <br>
+
+                    <small>
+
+                        ${order.customerName || order.customer || "Walk-in"}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+            `;
+
+            switch(order.status){
+
+                case "Pending":
+
+                    pending++;
+
+                    pendingHTML += card;
+
+                    break;
+
+                case "Preparing":
+
+                    preparing++;
+
+                    preparingHTML += card;
+
+                    break;
+
+                case "Ready":
+
+                    ready++;
+
+                    readyHTML += card;
+
+                    break;
+
+                case "Served":
+
+                    served++;
+
+                    servedHTML += card;
+
+                    break;
+
+                case "Paid":
+
+                    paid++;
+
+                    paidHTML += card;
+
+                    break;
+
+            }
+
+        });
+
+        document.getElementById("pendingBoard").innerHTML =
+            pendingHTML || '<div class="alert alert-light text-center">No Pending Orders</div>';
+
+        document.getElementById("preparingBoard").innerHTML =
+            preparingHTML || '<div class="alert alert-light text-center">No Preparing Orders</div>';
+
+        document.getElementById("readyBoard").innerHTML =
+            readyHTML || '<div class="alert alert-light text-center">No Ready Orders</div>';
+
+        document.getElementById("servedBoard").innerHTML =
+            servedHTML || '<div class="alert alert-light text-center">No Served Orders</div>';
+
+        document.getElementById("paidBoard").innerHTML =
+            paidHTML || '<div class="alert alert-light text-center">No Paid Orders</div>';
+
+        document.getElementById("pendingCount").innerText = pending;
+        document.getElementById("preparingCount").innerText = preparing;
+        document.getElementById("readyCount").innerText = ready;
+        document.getElementById("servedCount").innerText = served;
+        document.getElementById("paidCount").innerText = paid;
+
+    });
+
+}

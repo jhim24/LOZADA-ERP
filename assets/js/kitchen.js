@@ -240,19 +240,33 @@ document.getElementById("kitchenReady").innerText = ready;
 
 }
 // ===============================================
-// START COOKING
+// UPDATE KITCHEN CLOCK
 // ===============================================
 
-function startCooking(key){
+function updateKitchenClock(){
 
-db.ref("orders/"+key).update({
+    const clock = document.getElementById("currentKitchenTime");
 
-status:"PREPARING"
+    if(!clock) return;
 
-}).then(()=>{
+    clock.innerHTML = new Date().toLocaleTimeString();
 
-alert("Order is now Preparing.");
+}
 
-});
+// ===============================================
+// UPDATE ORDER STATUS
+// ===============================================
+
+function updateKitchenStatus(key,status){
+
+    db.ref("orders/" + key).update({
+
+        status: status
+
+    }).then(()=>{
+
+        loadKitchenOrders();
+
+    });
 
 }

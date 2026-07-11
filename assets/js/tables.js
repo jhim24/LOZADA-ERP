@@ -552,43 +552,85 @@ document.addEventListener("click", function(e){
 
     if(!btn) return;
 
-    const customer = document.getElementById("customerName").value || "Walk-in";
-
-    const guests = document.getElementById("numberGuests").value;
-
-    const server = document.getElementById("serverName").value;
-
-    const notes = document.getElementById("tableNotes").value;
-
-    let selectedTable = JSON.parse(
+    const selectedTable = JSON.parse(
 
         localStorage.getItem("selectedTable")
 
-    ) || {};
-
-    selectedTable.customer = customer;
-
-    selectedTable.guests = guests;
-
-    selectedTable.server = server;
-
-    selectedTable.notes = notes;
-
-    localStorage.setItem(
-
-        "selectedTable",
-
-        JSON.stringify(selectedTable)
-
     );
 
-    bootstrap.Modal.getInstance(
+    if(!selectedTable){
 
-        document.getElementById("startOrderModal")
+        alert("No table selected.");
 
-    ).hide();
+        return;
 
-    window.location.href = "pos.html";
+    }
+
+    const customer = document.getElementById("customerName").value || "Walk-in";
+
+    const guests = Number(
+
+        document.getElementById("numberGuests").value
+
+    ) || 1;
+
+    const server = document.getElementById("serverName").value || "";
+
+    const notes = document.getElementById("tableNotes").value || "";
+
+    db.ref("restaurantTables/" + selectedTable.key).update({
+
+        status: "Occupied",
+
+        customer: customer,
+
+        guests: guests,
+
+        server: server,
+
+        notes: notes
+
+    }).then(()=>{
+
+        localStorage.setItem(
+
+            "selectedTable",
+
+            JSON.stringify({
+
+                key: selectedTable.key,
+
+                floor: selectedTable.floor,
+
+                table: selectedTable.table,
+
+                customer: customer,
+
+                guests: guests,
+
+                server: server,
+
+                notes: notes
+
+            })
+
+        );
+
+        bootstrap.Modal.getInstance(
+
+            document.getElementById("startOrderModal")
+
+        ).hide();
+
+        window.location.href = "pos.html";
+
+    }).catch(error=>{
+
+        console.error(error);
+
+        alert("Unable to start order.");
+
+    });
 
 });
 // ===============================================

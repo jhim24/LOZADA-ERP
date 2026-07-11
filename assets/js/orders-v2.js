@@ -263,9 +263,6 @@ document.addEventListener("click", function(e){
         document.getElementById("viewStatus").innerHTML =
             order.status || "-";
 
-        document.getElementById("viewCashier").innerHTML =
-            order.cashier || "-";
-
         document.getElementById("viewCustomer").innerHTML =
             order.customerName || "Walk-in";
 

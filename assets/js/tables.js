@@ -594,66 +594,88 @@ document.addEventListener("click", function(e){
     const floor = document.getElementById("modalFloor").innerHTML;
 
     let tables = JSON.parse(
+
         localStorage.getItem("restaurantTables")
+
     ) || [];
 
     const index = tables.findIndex(table=>
 
-        table.name === tableName &&
-        table.floor === floor
+        table.name===tableName &&
+
+        table.floor===floor
 
     );
 
-    if(index < 0) return;
+    if(index<0) return;
+
+    // Change table status
 
     tables[index].status = "Bill Requested";
-    
-// UPDATE ORDER STATUS IN FIREBASE
 
-db.ref("orders").once("value").then(snapshot=>{
-
-    snapshot.forEach(child=>{
-
-        const order = child.val();
-
-        if(
-            order.floor === floor &&
-            order.table === tableName &&
-            order.status === "Pending"
-        ){
-
-            db.ref("orders/" + child.key).update({
-
-                status: "Bill Requested"
-
-            });
-
-        }
-
-    });
-
-});
-    .then(()=>{
-
-    bootstrap.Modal.getInstance(
-
-        document.getElementById("tableDetailsModal")
-
-    ).hide();
-
-    window.location.href="pos.html";
-
-});
     localStorage.setItem(
+
         "restaurantTables",
+
         JSON.stringify(tables)
+
     );
 
-    bootstrap.Modal.getInstance(
-        document.getElementById("tableDetailsModal")
-    ).hide();
+    // Update Firebase order
 
-    loadTables(floor);
+    db.ref("orders").once("value").then(snapshot=>{
+
+        const updates = [];
+
+        snapshot.forEach(child=>{
+
+            const order = child.val();
+
+            if(
+
+                order.floor===floor &&
+
+                order.table===tableName &&
+
+                order.status==="Pending"
+
+            ){
+
+                updates.push(
+
+                    db.ref("orders/"+child.key).update({
+
+                        status:"Bill Requested"
+
+                    })
+
+                );
+
+            }
+
+        });
+
+        return Promise.all(updates);
+
+    }).then(()=>{
+
+        bootstrap.Modal.getInstance(
+
+            document.getElementById("tableDetailsModal")
+
+        ).hide();
+
+        loadTables(floor);
+
+        alert("Bill request sent successfully.");
+
+    }).catch(error=>{
+
+        console.error(error);
+
+        alert("Unable to update bill request.");
+
+    });
 
 });
 // ===============================================

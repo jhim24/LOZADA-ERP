@@ -147,9 +147,23 @@ if(
     return;
 }
 
-pending++;
+// ===============================================
+// COUNTERS
+// ===============================================
 
-let items = "";
+if(order.status === "Pending"){
+
+    pending++;
+
+}else if(order.status === "Preparing"){
+
+    preparing++;
+
+}else if(order.status === "Ready"){
+
+    ready++;
+
+}
 
 (order.items || []).forEach(item=>{
 

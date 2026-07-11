@@ -102,19 +102,6 @@ document.addEventListener("click",function(e){
 });
 
 // ===============================================
-// UPDATE ORDER STATUS
-// ===============================================
-
-function updateKitchenStatus(key, status){
-
-    db.ref("orders/" + key).update({
-        status: status
-    }).then(()=>{
-        loadKitchenOrders();
-    });
-
-}
-// ===============================================
 // LOAD KITCHEN ORDERS
 // ===============================================
 

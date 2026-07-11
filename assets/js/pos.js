@@ -1456,7 +1456,7 @@ document.addEventListener("change", function(e){
 // PAYMENT MODE
 // ===============================================
 
-function checkPaymentMode(){
+async function checkPaymentMode(){
 
     const paymentMode = localStorage.getItem("paymentMode");
 
@@ -1470,9 +1470,9 @@ function checkPaymentMode(){
 
         paymentPanel.scrollIntoView({
 
-            behavior:"smooth",
+            behavior: "smooth",
 
-            block:"start"
+            block: "start"
 
         });
 
@@ -1480,61 +1480,79 @@ function checkPaymentMode(){
 
     document.getElementById("cashReceived")?.focus();
 
-    const paymentTable = JSON.parse(
-    localStorage.getItem("selectedTable")
-);
+    const selectedTable = JSON.parse(
 
-if(!paymentTable) return;
+        localStorage.getItem("selectedTable")
 
-   db.ref("orders").once("value").then(snapshot=>{
+    ) || {};
 
-    let found = false;
+    const customerOrder = JSON.parse(
 
-    snapshot.forEach(child=>{
+        localStorage.getItem("customerOrder")
 
-        const order = child.val();
+    ) || {};
 
-       const customerOrder = JSON.parse(
-    localStorage.getItem("customerOrder")
-) || {};
+    if(!selectedTable.floor) return;
 
-let match = false;
+    try{
 
-if(customerOrder.orderType === "DELIVERY" ||
-   customerOrder.orderType === "TAKE-OUT"){
+        const snapshot = await db.ref("orders").once("value");
 
-    match =
-        order.customerName === customerOrder.name &&
-        order.status !== "Paid";
+        let found = false;
 
-}else{
+        snapshot.forEach(child=>{
 
-    match =
-        order.floor === paymentTable.floor &&
-        order.table === paymentTable.table &&
-        order.status !== "Paid";
+            const order = child.val();
 
-}
+            let match = false;
 
-if(match){
+            if(
+                customerOrder.orderType === "DELIVERY" ||
+                customerOrder.orderType === "TAKE-OUT"
+            ){
 
-            cart = order.items || [];
+                match =
+                    order.customerName === customerOrder.name &&
+                    order.status !== "Paid";
 
-            renderCart();
+            }else{
+
+                match =
+                    order.floor === selectedTable.floor &&
+                    order.table === selectedTable.table &&
+                    order.status !== "Paid";
+
+            }
+
+            if(!match) return;
 
             found = true;
 
+            // ===========================
+            // LOAD ORDER TO CART
+            // ===========================
+
+            cart = order.items ? [...order.items] : [];
+
+            renderCart();
+
+            loadCustomerOrder();
+
+        });
+
+        if(!found){
+
+            alert("No pending order found.");
+
         }
 
-    });
+    }catch(error){
 
-    if(!found){
+        console.error(error);
 
-        alert("No pending order found.");
+        alert("Unable to load pending order.");
 
     }
-
-});
 
 }
 function printReceipt(){

@@ -124,10 +124,7 @@ snapshot.forEach(child=>{
 
     let items = "";
 
-    // ===============================================
-    // SHOW VALID KITCHEN ORDERS
-    // ===============================================
-
+    // Show only kitchen orders
     if(
         order.status !== "Pending" &&
         order.status !== "Preparing" &&
@@ -136,10 +133,7 @@ snapshot.forEach(child=>{
         return;
     }
 
-    // ===============================================
-    // COUNTERS
-    // ===============================================
-
+    // Counters
     if(order.status === "Pending"){
 
         pending++;
@@ -154,6 +148,7 @@ snapshot.forEach(child=>{
 
     }
 
+    // Items
     (order.items || []).forEach(item=>{
 
         items += `
@@ -164,14 +159,56 @@ snapshot.forEach(child=>{
 
     });
 
-items += `
-<div class="mb-1">
-<b>${item.qty}x</b> ${item.name}
-</div>
-`;
+    // Card
+    html += `
+
+    <div class="col-lg-4">
+
+        <div class="card shadow border-warning">
+
+            <div class="card-header bg-warning fw-bold">
+
+                Receipt # ${order.receiptNo || key}
+
+            </div>
+
+            <div class="card-body">
+
+                <p><b>Customer:</b> ${order.customerName || order.customer || "Walk-in"}</p>
+
+                <p><b>Order Type:</b> ${order.orderType || "DINE-IN"}</p>
+
+                <hr>
+
+                ${items}
+
+                <hr>
+
+                <button
+                    class="btn btn-success w-100"
+                    onclick="updateKitchenStatus('${key}','Preparing')">
+
+                    START COOKING
+
+                </button>
+
+                <button
+                    class="btn btn-primary w-100 mt-2"
+                    onclick="updateKitchenStatus('${key}','Ready')">
+
+                    READY
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
 
 });
-
 html += `
 
 <div class="col-lg-4">

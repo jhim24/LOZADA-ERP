@@ -531,9 +531,6 @@ try{
 // Huwag muna i-clear ang cart.
 // Ika-clear natin ito pagkatapos ng successful payment.
 
-// cart = [];
-// renderCart();
-
 });
 // ======================================
 // GENERATE RECEIPT
@@ -1360,7 +1357,7 @@ db.ref("orders").once("value").then(snapshot=>{
     generateReceipt();
 
 });
-    
+});  
 // ===============================================
 // PRINT BILL
 // ===============================================

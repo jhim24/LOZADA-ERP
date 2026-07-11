@@ -183,7 +183,9 @@ html += `
 
 <div class="card-header bg-warning fw-bold">
 
-${order.orderNumber || order.trackingnumber}
+Receipt #
+
+${order.receiptNo || key}
 
 </div>
 

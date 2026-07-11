@@ -178,86 +178,110 @@ function loadTables(floor){
 
     const template = document.getElementById("tableCardTemplate");
 
-    const tables = JSON.parse(
+    if(!template) return;
 
-        localStorage.getItem("restaurantTables")
+    db.ref("restaurantTables").once("value").then(snapshot=>{
 
-    ) || [];
+        grid.innerHTML = "";
 
-    grid.innerHTML = "";
+        let total = 0;
+        let available = 0;
+        let occupied = 0;
+        let reserved = 0;
 
-    tables
-    .filter(table => table.floor === floor)
-    .forEach((table,index)=>{
+        snapshot.forEach(child=>{
 
-        const clone = template.content.cloneNode(true);
+            const table = child.val();
 
-        clone.querySelector(".table-name").innerHTML =
-            table.name;
+            total++;
 
-        clone.querySelector(".table-floor").innerHTML =
-            table.floor;
+            if(table.status === "Available") available++;
+            if(table.status === "Occupied") occupied++;
+            if(table.status === "Reserved") reserved++;
 
-        clone.querySelector(".table-capacity").innerHTML =
-            table.seats;
+            if(table.floor !== floor) return;
 
-        clone.querySelector(".table-status").innerHTML =
-            table.status;
-const card = clone.querySelector(".table-card");
+            const clone = template.content.cloneNode(true);
 
-const badge = clone.querySelector(".table-status");
-switch(table.status){
+            clone.querySelector(".table-name").innerHTML =
+                table.name;
 
-    case "Available":
+            clone.querySelector(".table-floor").innerHTML =
+                table.floor;
 
-        card.classList.add("table-available");
+            clone.querySelector(".table-capacity").innerHTML =
+                table.seats;
 
-        badge.className = "badge bg-success table-status";
+            const badge =
+                clone.querySelector(".table-status");
 
-        break;
+            badge.innerHTML = table.status;
 
-    case "Occupied":
+            const card =
+                clone.querySelector(".table-card");
 
-        card.classList.add("table-occupied");
+            card.dataset.key = child.key;
 
-        badge.className = "badge bg-danger table-status";
+            card.style.cursor = "pointer";
 
-        break;
+            switch(table.status){
 
-    case "Reserved":
+                case "Available":
 
-        card.classList.add("table-reserved");
+                    card.classList.add("table-available");
 
-        badge.className = "badge bg-warning text-dark table-status";
+                    badge.className =
+                    "badge bg-success table-status";
 
-        break;
+                    break;
 
-    case "Cleaning":
+                case "Occupied":
 
-        card.classList.add("table-cleaning");
+                    card.classList.add("table-occupied");
 
-        badge.className = "badge bg-secondary table-status";
+                    badge.className =
+                    "badge bg-danger table-status";
 
-        break;
+                    break;
 
-        case "Bill Requested":
+                case "Reserved":
 
-    card.classList.add("table-bill");
+                    card.classList.add("table-reserved");
 
-    badge.className = "badge bg-warning text-dark table-status";
+                    badge.className =
+                    "badge bg-primary table-status";
 
-    badge.innerHTML = "Bill Requested";
+                    break;
 
-    break;
+                case "Bill Requested":
 
-}
-      card.dataset.index = index;
+                    card.classList.add("table-bill");
 
-card.style.cursor = "pointer";
+                    badge.className =
+                    "badge bg-warning text-dark table-status";
 
-grid.appendChild(clone);
+                    break;
+
+            }
+
+            grid.appendChild(clone);
+
+        });
+
+        document.getElementById("totalTables").innerHTML =
+            total;
+
+        document.getElementById("availableTables").innerHTML =
+            available;
+
+        document.getElementById("occupiedTables").innerHTML =
+            occupied;
+
+        document.getElementById("reservedTables").innerHTML =
+            reserved;
+
     });
-updateDashboardCards();
+
 }
 // ===============================================
 // FLOOR TAB CLICK

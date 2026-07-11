@@ -180,3 +180,34 @@ function loadDispatchOrders(){
     });
 
 }
+// ===============================================
+// FOOD SERVED
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-food-served");
+
+    if(!btn) return;
+
+    const key = btn.dataset.key;
+
+    db.ref("orders/" + key).update({
+
+        status: "Served",
+
+        servedTime: new Date().toISOString()
+
+    }).then(()=>{
+
+        alert("Order marked as Food Served.");
+
+    }).catch(error=>{
+
+        console.error(error);
+
+        alert("Unable to update order.");
+
+    });
+
+});

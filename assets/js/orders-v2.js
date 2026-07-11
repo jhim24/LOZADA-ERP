@@ -89,6 +89,12 @@ document.addEventListener("DOMContentLoaded",async()=>{
         "../components/order-view-modal.html"
     );
 
+    // ===============================================
+    // LOAD FIREBASE ORDERS
+    // ===============================================
+
+    loadOrders();
+
 });
 // ===============================================
 // LOAD ORDERS FROM FIREBASE

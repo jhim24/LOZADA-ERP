@@ -307,11 +307,66 @@ document.addEventListener("click", function(e){
 
         });
 
-        document.getElementById("viewGrandTotal").innerHTML =
+      // ===============================================
+// ORDER INFORMATION
+// ===============================================
 
-            "₱" + Number(order.total || 0).toFixed(2);
+document.getElementById("viewPayment").innerHTML =
+    order.payment || "-";
 
-        const modal = new bootstrap.Modal(
+document.getElementById("viewCashierName").innerHTML =
+    order.cashier || "-";
+
+document.getElementById("viewServer").innerHTML =
+    order.server || "-";
+
+document.getElementById("viewGuests").innerHTML =
+    order.guests || "1";
+
+document.getElementById("viewFloor").innerHTML =
+    order.floor || "-";
+
+// ===============================================
+// TOTALS
+// ===============================================
+
+const subtotal = Number(order.total || 0);
+
+document.getElementById("viewSubtotal").innerHTML =
+    "₱" + subtotal.toFixed(2);
+
+document.getElementById("viewGrandTotal").innerHTML =
+    "₱" + subtotal.toFixed(2);
+
+// ===============================================
+// STATUS BADGE
+// ===============================================
+
+const statusColors = {
+
+    Pending : "warning",
+
+    Preparing : "primary",
+
+    Ready : "success",
+
+    Served : "info",
+
+    Paid : "dark",
+
+    Cancelled : "danger"
+
+};
+
+document.getElementById("viewStatus").innerHTML = `
+
+<span class="badge bg-${statusColors[order.status] || "secondary"} fs-6">
+
+    ${order.status || "-"}
+
+</span>
+
+`;
 
             document.getElementById("orderViewModal")
 

@@ -381,3 +381,37 @@ modal.show();
     });
 
 });
+// ===============================================
+// DELETE ORDER
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-delete-order");
+
+    if(!btn) return;
+
+    const key = btn.dataset.key;
+
+    if(!confirm("Are you sure you want to delete this order?")){
+
+        return;
+
+    }
+
+    db.ref("orders/" + key)
+        .remove()
+        .then(()=>{
+
+            alert("Order deleted successfully.");
+
+        })
+        .catch(error=>{
+
+            console.error(error);
+
+            alert("Unable to delete order.");
+
+        });
+
+});

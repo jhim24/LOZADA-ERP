@@ -57,7 +57,7 @@ async function loadComponent(id,file){
 // INITIALIZE
 // ===============================================
 
-document.addEventListener("DOMContentLoaded",async()=>{
+document.addEventListener("DOMContentLoaded", async()=>{
 
     await loadComponent("sidebar","../components/sidebar.html");
 
@@ -66,5 +66,9 @@ document.addEventListener("DOMContentLoaded",async()=>{
     await loadComponent("dispatch-header","../components/dispatch-header.html");
 
     await loadComponent("dispatch-board","../components/dispatch-board.html");
+
+    loadDispatchOrders();
+
+    setInterval(loadDispatchOrders,2000);
 
 });

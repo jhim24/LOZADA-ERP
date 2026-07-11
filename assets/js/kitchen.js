@@ -135,10 +135,14 @@ snapshot.forEach(child=>{
 const order = child.val();
 const key = child.key;
 
-// Show ACCEPTED orders only
+// ===============================================
+// SHOW PENDING / PREPARING ORDERS
+// ===============================================
+
 if(
-    order.status !== "ACCEPTED" &&
-    order.status !== "PREPARING"
+    order.status !== "Pending" &&
+    order.status !== "Preparing" &&
+    order.status !== "Ready"
 ){
     return;
 }

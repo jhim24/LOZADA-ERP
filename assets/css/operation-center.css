@@ -1,0 +1,201 @@
+/* ==========================================
+   OPERATION CENTER
+========================================== */
+
+body{
+
+    background:#f4f6f9;
+
+}
+
+/* ==========================================
+   KPI CARDS
+========================================== */
+
+.kpi-card{
+
+    background:#ffffff;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    transition:.25s;
+
+}
+
+.kpi-card:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.kpi-info small{
+
+    display:block;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#6c757d;
+
+}
+
+.kpi-info h2{
+
+    margin-top:8px;
+
+    font-size:34px;
+
+    font-weight:800;
+
+    color:#212529;
+
+}
+
+.kpi-icon{
+
+    font-size:38px;
+
+    opacity:.25;
+
+}
+
+/* ==========================================
+   COLUMN HEADER
+========================================== */
+
+.card-header{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    letter-spacing:.4px;
+
+}
+
+/* ==========================================
+   ORDER CARD
+========================================== */
+
+#pendingBoard .card,
+#preparingBoard .card,
+#readyBoard .card,
+#servedBoard .card,
+#paidBoard .card{
+
+    border:none;
+
+    border-radius:10px;
+
+    margin-bottom:12px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    transition:.20s;
+
+}
+
+#pendingBoard .card:hover,
+#preparingBoard .card:hover,
+#readyBoard .card:hover,
+#servedBoard .card:hover,
+#paidBoard .card:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================
+   RECEIPT NUMBER
+========================================== */
+
+.card-body small{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#6c757d;
+
+}
+
+/* ==========================================
+   TABLE NUMBER
+========================================== */
+
+.card-body strong{
+
+    display:block;
+
+    margin:6px 0;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:#111;
+
+}
+
+/* ==========================================
+   CUSTOMER
+========================================== */
+
+.card-body{
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#333;
+
+}
+
+/* ==========================================
+   EMPTY MESSAGE
+========================================== */
+
+.alert{
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+    .kpi-info h2{
+
+        font-size:26px;
+
+    }
+
+    .card-header{
+
+        font-size:16px;
+
+    }
+
+    .card-body strong{
+
+        font-size:18px;
+
+    }
+
+}

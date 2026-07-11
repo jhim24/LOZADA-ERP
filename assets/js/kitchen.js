@@ -119,40 +119,50 @@ let ready = 0;
 
 snapshot.forEach(child=>{
 
-const order = child.val();
-const key = child.key;
+    const order = child.val();
+    const key = child.key;
 
-// ===============================================
-// SHOW PENDING / PREPARING ORDERS
-// ===============================================
+    let items = "";
 
-if(
-    order.status !== "Pending" &&
-    order.status !== "Preparing" &&
-    order.status !== "Ready"
-){
-    return;
-}
+    // ===============================================
+    // SHOW VALID KITCHEN ORDERS
+    // ===============================================
 
-// ===============================================
-// COUNTERS
-// ===============================================
+    if(
+        order.status !== "Pending" &&
+        order.status !== "Preparing" &&
+        order.status !== "Ready"
+    ){
+        return;
+    }
 
-if(order.status === "Pending"){
+    // ===============================================
+    // COUNTERS
+    // ===============================================
 
-    pending++;
+    if(order.status === "Pending"){
 
-}else if(order.status === "Preparing"){
+        pending++;
 
-    preparing++;
+    }else if(order.status === "Preparing"){
 
-}else if(order.status === "Ready"){
+        preparing++;
 
-    ready++;
+    }else if(order.status === "Ready"){
 
-}
+        ready++;
 
-(order.items || []).forEach(item=>{
+    }
+
+    (order.items || []).forEach(item=>{
+
+        items += `
+        <div class="mb-1">
+            <b>${item.qty}x</b> ${item.name}
+        </div>
+        `;
+
+    });
 
 items += `
 <div class="mb-1">

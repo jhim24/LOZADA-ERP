@@ -819,41 +819,49 @@ document.addEventListener("click", function(e){
 function updateDashboardCards(){
 
     const tables = JSON.parse(
-
         localStorage.getItem("restaurantTables")
-
     ) || [];
 
-    const available = tables.filter(table=>
+    const total = tables.length;
 
-        table.status === "Available"
-
+    const available = tables.filter(t =>
+        t.status === "Available"
     ).length;
 
-    const occupied = tables.filter(table=>
-
-        table.status === "Occupied"
-
+    const occupied = tables.filter(t =>
+        t.status === "Occupied"
     ).length;
 
-    const reserved = tables.filter(table=>
-
-        table.status === "Reserved"
-
+    const reserved = tables.filter(t =>
+        t.status === "Reserved"
     ).length;
 
-    const cleaning = tables.filter(table=>
+    const totalTables =
+        document.getElementById("totalTables");
 
-        table.status === "Cleaning"
+    if(totalTables){
+        totalTables.innerHTML = total;
+    }
 
-    ).length;
+    const availableTables =
+        document.getElementById("availableTables");
 
-    document.getElementById("availableTables").innerHTML = available;
+    if(availableTables){
+        availableTables.innerHTML = available;
+    }
 
-    document.getElementById("occupiedTables").innerHTML = occupied;
+    const occupiedTables =
+        document.getElementById("occupiedTables");
 
-    document.getElementById("reservedTables").innerHTML = reserved;
+    if(occupiedTables){
+        occupiedTables.innerHTML = occupied;
+    }
 
-    document.getElementById("cleaningTables").innerHTML = cleaning;
+    const reservedTables =
+        document.getElementById("reservedTables");
+
+    if(reservedTables){
+        reservedTables.innerHTML = reserved;
+    }
 
 }

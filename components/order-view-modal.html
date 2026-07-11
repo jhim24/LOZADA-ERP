@@ -2,121 +2,184 @@
      ORDER VIEW MODAL
 ========================================== -->
 
-<div
-class="modal fade"
-id="orderViewModal"
-tabindex="-1">
+<div class="modal fade"
+     id="orderViewModal"
+     tabindex="-1">
 
-<div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
 
-<div class="modal-content">
+        <div class="modal-content">
 
-<div class="modal-header bg-primary text-white">
+            <div class="modal-header bg-primary text-white">
 
-<h5 class="modal-title">
+                <h5 class="modal-title">
 
-<i class="fa-solid fa-receipt"></i>
+                    <i class="fa-solid fa-receipt"></i>
 
-Order Details
+                    Order Details
 
-</h5>
+                </h5>
 
-<button
-class="btn-close btn-close-white"
-data-bs-dismiss="modal">
+                <button
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal">
+                </button>
 
-</button>
+            </div>
 
-</div>
+            <div class="modal-body">
 
-<div class="modal-body">
+                <!-- ORDER INFORMATION -->
 
-<div class="row mb-3">
+                <div class="row mb-4">
 
-<div class="col-md-6">
+                    <div class="col-md-3">
 
-<strong>Receipt No :</strong>
+                        <strong>Receipt No.</strong>
 
-<span id="viewReceiptNo"></span>
+                        <div id="viewReceiptNo">-</div>
 
-</div>
+                    </div>
 
-<div class="col-md-6">
+                    <div class="col-md-3">
 
-<strong>Date :</strong>
+                        <strong>Date</strong>
 
-<span id="viewDate"></span>
+                        <div id="viewDate">-</div>
 
-</div>
+                    </div>
 
-</div>
+                    <div class="col-md-3">
 
-<table class="table table-bordered">
+                        <strong>Status</strong>
 
-<thead class="table-light">
+                        <div id="viewStatus">-</div>
 
-<tr>
+                    </div>
 
-<th>Product</th>
+                    <div class="col-md-3">
 
-<th width="100">Qty</th>
+                        <strong>Cashier</strong>
 
-<th width="120">Price</th>
+                        <div id="viewCashier">-</div>
 
-<th width="120">Total</th>
+                    </div>
 
-</tr>
+                </div>
 
-</thead>
+                <div class="row mb-4">
 
-<tbody id="viewOrderItems">
+                    <div class="col-md-4">
 
-</tbody>
+                        <strong>Customer</strong>
 
-</table>
+                        <div id="viewCustomer">-</div>
 
-<div class="text-end">
+                    </div>
 
-<h4>
+                    <div class="col-md-4">
 
-Grand Total :
+                        <strong>Table</strong>
 
-<span id="viewGrandTotal">
+                        <div id="viewTable">-</div>
 
-₱0.00
+                    </div>
 
-</span>
+                    <div class="col-md-4">
 
-</h4>
+                        <strong>Order Type</strong>
 
-</div>
+                        <div id="viewOrderType">-</div>
 
-</div>
+                    </div>
 
-<div class="modal-footer">
+                </div>
 
-<button
-class="btn btn-secondary"
-data-bs-dismiss="modal">
+                <!-- ORDER ITEMS -->
 
-Close
+                <div class="table-responsive">
 
-</button>
+                    <table class="table table-bordered">
 
-<button
-class="btn btn-success"
-id="btnPrintOrder">
+                        <thead class="table-dark">
 
-<i class="fa-solid fa-print"></i>
+                            <tr>
 
-Print
+                                <th width="70">Qty</th>
 
-</button>
+                                <th>Product</th>
 
-</div>
+                                <th width="120">Price</th>
 
-</div>
+                                <th width="120">Total</th>
 
-</div>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="viewOrderItems">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <!-- TOTALS -->
+
+                <div class="row justify-content-end mt-4">
+
+                    <div class="col-md-4">
+
+                        <table class="table">
+
+                            <tr>
+
+                                <th>Total</th>
+
+                                <td class="text-end"
+                                    id="viewGrandTotal">
+
+                                    ₱0.00
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Close
+
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    id="btnPrintOrderReceipt">
+
+                    <i class="fa-solid fa-print"></i>
+
+                    Print Receipt
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>

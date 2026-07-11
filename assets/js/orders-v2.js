@@ -24,3 +24,69 @@ if(!firebase.apps.length){
 }
 
 const db = firebase.database();
+// ===============================================
+// COMPONENT LOADER
+// ===============================================
+
+async function loadComponent(id,file){
+
+    try{
+
+        const response = await fetch(file);
+
+        if(!response.ok){
+
+            throw new Error(file);
+
+        }
+
+        const html = await response.text();
+
+        const element = document.getElementById(id);
+
+        if(element){
+
+            element.innerHTML = html;
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+// ===============================================
+// INITIALIZE
+// ===============================================
+
+document.addEventListener("DOMContentLoaded",async()=>{
+
+    await loadComponent(
+        "sidebar",
+        "../components/sidebar.html"
+    );
+
+    await loadComponent(
+        "navbar",
+        "../components/navbar.html"
+    );
+
+    await loadComponent(
+        "orders-header",
+        "../components/orders-header.html"
+    );
+
+    await loadComponent(
+        "orders-table",
+        "../components/orders-table.html"
+    );
+
+    await loadComponent(
+        "order-view-modal",
+        "../components/order-view-modal.html"
+    );
+
+});

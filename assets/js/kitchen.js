@@ -201,19 +201,20 @@ ${items}
 
 <button
 class="btn btn-success w-100"
-onclick="updateKitchenStatus('${key}','PREPARING')"
+onclick="updateKitchenStatus('${key}','Preparing')">
 
-START COOKING
+    START COOKING
 
 </button>
 
 <button
 class="btn btn-primary w-100 mt-2"
-onclick="updateKitchenStatus('${key}','READY')">
+onclick="updateKitchenStatus('${key}','Ready')">
 
-READY
+    READY
 
 </button>
+
 </div>
 
 </div>

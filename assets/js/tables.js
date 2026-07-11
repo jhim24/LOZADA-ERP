@@ -567,29 +567,31 @@ document.addEventListener("click", function(e){
 
     tables[index].status = "Bill Requested";
     
-// UPDATE LATEST ORDER STATUS
+// UPDATE ORDER STATUS IN FIREBASE
 
-let orders = JSON.parse(
-    localStorage.getItem("orders")
-) || [];
+db.ref("orders").once("value").then(snapshot=>{
 
-const orderIndex = orders
-    .map(order =>
-        order.floor === floor &&
-        order.table === tableName
-    )
-    .lastIndexOf(true);
+    snapshot.forEach(child=>{
 
-if(orderIndex >= 0){
+        const order = child.val();
 
-    orders[orderIndex].status = "Bill Requested";
+        if(
+            order.floor === floor &&
+            order.table === tableName &&
+            order.status === "Pending"
+        ){
 
-    localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
-    );
+            db.ref("orders/" + child.key).update({
 
-}
+                status: "Bill Requested"
+
+            });
+
+        }
+
+    });
+
+});
     localStorage.setItem(
         "restaurantTables",
         JSON.stringify(tables)

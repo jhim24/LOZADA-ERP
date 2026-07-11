@@ -584,3 +584,44 @@ Grand Total :
     printWindow.print();
 
 });
+// ===============================================
+// ARCHIVE ORDER TO HISTORY
+// ===============================================
+
+function archiveOrder(key){
+
+    db.ref("orders/" + key).once("value").then(snapshot=>{
+
+        if(!snapshot.exists()) return;
+
+        const order = snapshot.val();
+
+        const now = new Date();
+
+        const year = now.getFullYear();
+
+        const month = String(now.getMonth()+1).padStart(2,"0");
+
+        db.ref(`orders/history/${year}/${month}/${key}`)
+        .set(order)
+        .then(()=>{
+
+            return db.ref("orders/" + key).remove();
+
+        })
+        .then(()=>{
+
+            console.log("Order archived successfully.");
+
+        })
+        .catch(error=>{
+
+            console.error(error);
+
+            alert("Unable to archive order.");
+
+        });
+
+    });
+
+}

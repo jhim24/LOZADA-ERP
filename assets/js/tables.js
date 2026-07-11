@@ -438,6 +438,39 @@ localStorage.setItem(
         server: tableInfo.server
     })
 );
+    db.ref("orders").once("value").then(snapshot=>{
+
+    snapshot.forEach(child=>{
+
+        const order = child.val();
+
+        if(
+            order.floor === floor &&
+            order.table === tableName &&
+            order.status === "Bill Requested"
+        ){
+
+            localStorage.setItem(
+                "customerOrder",
+                JSON.stringify({
+                    name: order.customerName,
+                    orderType: order.orderType,
+                    phone: order.customerPhone,
+                    email: order.customerEmail,
+                    address: order.deliveryAddress,
+                    partner: order.deliveryPartner,
+                    fee: order.deliveryFee,
+                    notes: order.customerNotes,
+                    requestedTime: order.requestedTime,
+                    orderSource: order.orderSource
+                })
+            );
+
+        }
+
+    });
+
+});
     bootstrap.Modal.getInstance(
 
         document.getElementById("tableDetailsModal")

@@ -253,7 +253,7 @@ document.addEventListener("click", function(e){
         }
 
         const order = snapshot.val();
-
+        window.currentOrder = order;
         document.getElementById("viewReceiptNo").innerHTML =
             order.receiptNo || "-";
 
@@ -413,5 +413,174 @@ document.addEventListener("click", function(e){
             alert("Unable to delete order.");
 
         });
+
+});
+// ===============================================
+// PRINT RECEIPT
+// ===============================================
+
+document.addEventListener("click",function(e){
+
+    if(e.target.id !== "btnPrintOrderReceipt") return;
+
+    if(!window.currentOrder){
+
+        alert("No order selected.");
+
+        return;
+
+    }
+
+    const order = window.currentOrder;
+
+    let items = "";
+
+    (order.items || []).forEach(item=>{
+
+        items += `
+
+<tr>
+
+<td>${item.qty}</td>
+
+<td>${item.name}</td>
+
+<td style="text-align:right">
+
+₱${Number(item.price).toFixed(2)}
+
+</td>
+
+<td style="text-align:right">
+
+₱${Number(item.qty * item.price).toFixed(2)}
+
+</td>
+
+</tr>
+
+`;
+
+    });
+
+    const printWindow = window.open("","PRINT","width=800,height=700");
+
+    printWindow.document.write(`
+
+<html>
+
+<head>
+
+<title>Receipt</title>
+
+<style>
+
+body{
+
+font-family:Arial,sans-serif;
+
+padding:20px;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+th,td{
+
+border:1px solid #ccc;
+
+padding:6px;
+
+}
+
+h2{
+
+margin-bottom:5px;
+
+}
+
+.text-right{
+
+text-align:right;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>LOZADA ERP</h2>
+
+<h4>Order Receipt</h4>
+
+<hr>
+
+<p><strong>Receipt:</strong> ${order.receiptNo}</p>
+
+<p><strong>Date:</strong> ${order.date}</p>
+
+<p><strong>Customer:</strong> ${order.customerName || "Walk-in"}</p>
+
+<p><strong>Table:</strong> ${order.table || "-"}</p>
+
+<p><strong>Order Type:</strong> ${order.orderType || "-"}</p>
+
+<p><strong>Status:</strong> ${order.status}</p>
+
+<hr>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Qty</th>
+
+<th>Item</th>
+
+<th>Price</th>
+
+<th>Total</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+${items}
+
+</tbody>
+
+</table>
+
+<h3 style="text-align:right">
+
+Grand Total :
+
+₱${Number(order.total).toFixed(2)}
+
+</h3>
+
+</body>
+
+</html>
+
+`);
+
+    printWindow.document.close();
+
+    printWindow.focus();
+
+    printWindow.print();
 
 });

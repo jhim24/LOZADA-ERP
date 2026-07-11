@@ -883,73 +883,60 @@ document.addEventListener("click",function(e){
 // SAVE ORDER
 // ===============================================
 
-function saveOrder(receiptNo, total){
+async function saveOrder(receiptNo, total){
 
-  const ordersRef = db.ref("orders");
+    const ordersRef = db.ref("orders");
 
     const table = JSON.parse(
-    localStorage.getItem("selectedTable")
-) || {};
+        localStorage.getItem("selectedTable")
+    ) || {};
 
-const customerOrder = JSON.parse(
+    const customer = JSON.parse(
+        localStorage.getItem("customerOrder")
+    ) || {};
 
-    localStorage.getItem("customerOrder")
-
-) || {};
-    const customer = customerOrder;
-    // Hanapin kung may existing unpaid order
-    /*
-const existingOrder = orders.find(order => {
-
-    if(customer.orderType === "DELIVERY" ||
-       customer.orderType === "TAKE-OUT"){
-
-        return order.customerName === customer.name &&
-               order.status !== "Paid";
-    }
-
-    return order.floor === table.floor &&
-           order.table === table.table &&
-           order.status !== "Paid";
-
-});
-*/
-    ordersRef.once("value").then(snapshot => {
+    const snapshot = await ordersRef.once("value");
 
     let existingOrder = null;
     let existingKey = "";
 
-    snapshot.forEach(child => {
+    snapshot.forEach(child=>{
 
         const order = child.val();
 
-        if(customer.orderType === "DELIVERY" ||
-           customer.orderType === "TAKE-OUT"){
+        if(
+            customer.orderType === "DELIVERY" ||
+            customer.orderType === "TAKE-OUT"
+        ){
 
-            if(order.customerName === customer.name &&
-               order.status !== "Paid"){
+            if(
+                order.customerName === customer.name &&
+                order.status !== "Paid"
+            ){
 
                 existingOrder = order;
                 existingKey = child.key;
+
             }
 
         }else{
 
-            if(order.floor === table.floor &&
-               order.table === table.table &&
-               order.status !== "Paid"){
+            if(
+                order.floor === table.floor &&
+                order.table === table.table &&
+                order.status !== "Paid"
+            ){
 
                 existingOrder = order;
                 existingKey = child.key;
+
             }
 
         }
 
     });
-        /*
-    if(existingOrder){
 
-        // idagdag ang bagong items
+    if(existingOrder){
 
         cart.forEach(newItem=>{
 
@@ -971,161 +958,75 @@ const existingOrder = orders.find(order => {
 
         });
 
-        // update total
+        existingOrder.total =
+            existingOrder.items.reduce((sum,item)=>{
 
-        // Recompute total
-existingOrder.total = existingOrder.items.reduce((sum, item) => {
+                return sum +
+                    (Number(item.price) * Number(item.qty));
 
-    return sum + (Number(item.price) * Number(item.qty));
+            },0);
 
-}, 0);
+        existingOrder.date =
+            new Date().toLocaleString();
 
-// Update date
-existingOrder.date = new Date().toLocaleString();
+        await db.ref("orders/" + existingKey)
+            .update(existingOrder);
 
-    }else{
-
-        // gumawa ng bagong order
-
-        orders.push({
-
-            receiptNo: receiptNo,
-
-            date: new Date().toLocaleString(),
-
-            items: [...cart],
-
-            total: total,
-
-            status: "Pending",
-
-            payment: "",
-
-            cashier: "Administrator",
-            orderType: customer.orderType || "DINE-IN",
-
-orderSource: customer.orderSource || "Walk-in",
-
-customerName: customer.name || table.customer || "Walk-in",
-
-customerPhone: customer.phone || "",
-
-customerEmail: customer.email || "",
-
-deliveryAddress: customer.address || "",
-
-deliveryPartner: customer.partner || "",
-
-deliveryFee: Number(customer.fee || 0),
-
-requestedTime: customer.requestedTime || "",
-
-customerNotes: customer.notes || "",
-
-            floor: table.floor || "",
-
-            table: table.table || "",
-
-           customer:
-
-customer.name ||
-
-table.customer ||
-
-"Walk-in",
-
-            guests: table.guests || 1,
-
-            server: table.server || ""
-
-        });
+        return existingKey;
 
     }
-*/
-        if(existingOrder){
 
-    cart.forEach(newItem=>{
+    const newOrder = ordersRef.push();
 
-        const oldItem = existingOrder.items.find(item =>
-            item.name === newItem.name
-        );
+    await newOrder.set({
 
-        if(oldItem){
+        receiptNo: receiptNo,
 
-            oldItem.qty += newItem.qty;
+        date: new Date().toLocaleString(),
 
-        }else{
+        items: [...cart],
 
-            existingOrder.items.push({...newItem});
+        total: total,
 
-        }
+        status: "Pending",
 
-    });
+        payment: "",
 
-    existingOrder.total = existingOrder.items.reduce((sum,item)=>{
+        cashier: "Administrator",
 
-        return sum + (Number(item.price) * Number(item.qty));
+        orderType: customer.orderType || "DINE-IN",
 
-    },0);
+        orderSource: customer.orderSource || "Walk-in",
 
-    existingOrder.date = new Date().toLocaleString();
+        customerName: customer.name || table.customer || "Walk-in",
 
-    db.ref("orders/" + existingKey).update(existingOrder);
+        customerPhone: customer.phone || "",
 
-}else{
+        customerEmail: customer.email || "",
 
-    const newOrder = db.ref("orders").push();
+        deliveryAddress: customer.address || "",
 
-    newOrder.set({
+        deliveryPartner: customer.partner || "",
 
-        receiptNo,
+        deliveryFee: Number(customer.fee || 0),
 
-        date:new Date().toLocaleString(),
+        requestedTime: customer.requestedTime || "",
 
-        items:[...cart],
+        customerNotes: customer.notes || "",
 
-        total,
+        floor: table.floor || "",
 
-        status:"Pending",
+        table: table.table || "",
 
-        payment:"",
+        customer: customer.name || table.customer || "Walk-in",
 
-        cashier:"Administrator",
+        guests: table.guests || 1,
 
-        orderType:customer.orderType || "DINE-IN",
-
-        orderSource:customer.orderSource || "Walk-in",
-
-        customerName:customer.name || table.customer || "Walk-in",
-
-        customerPhone:customer.phone || "",
-
-        customerEmail:customer.email || "",
-
-        deliveryAddress:customer.address || "",
-
-        deliveryPartner:customer.partner || "",
-
-        deliveryFee:Number(customer.fee || 0),
-
-        requestedTime:customer.requestedTime || "",
-
-        customerNotes:customer.notes || "",
-
-        floor:table.floor || "",
-
-        table:table.table || "",
-
-        customer:customer.name || table.customer || "Walk-in",
-
-        guests:table.guests || 1,
-
-        server:table.server || ""
+        server: table.server || ""
 
     });
-}
 
-});
+    return newOrder.key;
 
 }
 // ===============================================

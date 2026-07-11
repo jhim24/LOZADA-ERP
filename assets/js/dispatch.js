@@ -72,3 +72,111 @@ document.addEventListener("DOMContentLoaded", async()=>{
     setInterval(loadDispatchOrders,2000);
 
 });
+// ===============================================
+// LOAD DISPATCH ORDERS
+// ===============================================
+
+function loadDispatchOrders(){
+
+    const board = document.getElementById("dispatchBoard");
+
+    if(!board) return;
+
+    db.ref("orders").on("value",snapshot=>{
+
+        let html = "";
+
+        let ready = 0;
+        let served = 0;
+        let total = 0;
+
+        snapshot.forEach(child=>{
+
+            const key = child.key;
+            const order = child.val();
+
+            // Dispatch shows READY orders only
+            if(order.status !== "Ready") return;
+
+            total++;
+            ready++;
+
+            let items = "";
+
+            (order.items || []).forEach(item=>{
+
+                items += `
+                    <div class="mb-1">
+                        <b>${item.qty}x</b> ${item.name}
+                    </div>
+                `;
+
+            });
+
+            html += `
+
+            <div class="col-lg-4">
+
+                <div class="card shadow border-success">
+
+                    <div class="card-header bg-success text-white">
+
+                        Receipt # ${order.receiptNo || key}
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <p><b>Table:</b> ${order.table || "-"}</p>
+
+                        <p><b>Customer:</b> ${order.customerName || order.customer || "Walk-in"}</p>
+
+                        <p><b>Order Type:</b> ${order.orderType || "DINE-IN"}</p>
+
+                        <hr>
+
+                        ${items}
+
+                        <hr>
+
+                        <button
+                            class="btn btn-primary w-100 btn-food-served"
+                            data-key="${key}">
+
+                            <i class="fa-solid fa-check"></i>
+
+                            FOOD SERVED
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+        if(html === ""){
+
+            html = `
+                <div class="col-12">
+                    <div class="alert alert-secondary text-center">
+                        No Ready Orders
+                    </div>
+                </div>
+            `;
+
+        }
+
+        board.innerHTML = html;
+
+        document.getElementById("dispatchReady").innerText = ready;
+        document.getElementById("dispatchServed").innerText = served;
+        document.getElementById("dispatchTotal").innerText = total;
+
+    });
+
+}

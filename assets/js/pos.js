@@ -1360,65 +1360,7 @@ db.ref("orders").once("value").then(snapshot=>{
     generateReceipt();
 
 });
-db.ref("orders").once("value").then(snapshot=>{
-
-    let found = false;
-
-    snapshot.forEach(child=>{
-
-        const order = child.val();
-
-        let match = false;
-
-        if(customerOrder.orderType === "DELIVERY" ||
-           customerOrder.orderType === "TAKE-OUT"){
-
-            match =
-                order.customerName === customerOrder.name &&
-                order.status !== "Paid";
-
-        }else{
-
-            match =
-                order.floor === selectedTable.floor &&
-                order.table === selectedTable.table &&
-                order.status !== "Paid";
-
-        }
-
-        if(match){
-
-            found = true;
-
-            // Load items from Firebase
-            cart = order.items || [];
-
-            renderCart();
-
-            db.ref("orders/" + child.key).update({
-
-                payment: paymentMethod,
-                status: "Paid",
-                paidDate: new Date().toISOString()
-
-            }).then(()=>{
-
-                generateReceipt();
-
-            });
-
-        }
-
-    });
-
-    if(!found){
-
-        alert("No pending order found.");
-
-    }
-
-});
-});
+    
 // ===============================================
 // PRINT BILL
 // ===============================================
@@ -1600,14 +1542,6 @@ if(customerOrder.orderType === "DELIVERY" ||
 }
 
 if(match){
-
-    cart = order.items || [];
-
-    renderCart();
-
-    found = true;
-
-}
 
             cart = order.items || [];
 

@@ -220,3 +220,125 @@ No Order History Found
     });
 
 }
+// ===============================================
+// VIEW HISTORY ORDER
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-history-view");
+
+    if(!btn) return;
+
+    const key = btn.dataset.key;
+
+    db.ref("orders/history").once("value").then(snapshot=>{
+
+        let selectedOrder = null;
+
+        snapshot.forEach(yearSnap=>{
+
+            yearSnap.forEach(monthSnap=>{
+
+                if(selectedOrder) return;
+
+                if(monthSnap.hasChild(key)){
+
+                    selectedOrder = monthSnap.child(key).val();
+
+                }
+
+            });
+
+        });
+
+        if(!selectedOrder){
+
+            alert("Order not found.");
+
+            return;
+
+        }
+
+        // Save for future print function
+        window.currentHistoryOrder = selectedOrder;
+
+        // Reuse the same modal used in Orders
+        document.getElementById("viewReceiptNo").innerHTML =
+            selectedOrder.receiptNo || "-";
+
+        document.getElementById("viewDate").innerHTML =
+            selectedOrder.date || "-";
+
+        document.getElementById("viewStatus").innerHTML =
+            selectedOrder.status || "-";
+
+        document.getElementById("viewCustomer").innerHTML =
+            selectedOrder.customerName || "Walk-in";
+
+        document.getElementById("viewTable").innerHTML =
+            selectedOrder.table || "-";
+
+        document.getElementById("viewOrderType").innerHTML =
+            selectedOrder.orderType || "-";
+
+        document.getElementById("viewPayment").innerHTML =
+            selectedOrder.payment || "-";
+
+        document.getElementById("viewCashierName").innerHTML =
+            selectedOrder.cashier || "-";
+
+        document.getElementById("viewServer").innerHTML =
+            selectedOrder.server || "-";
+
+        document.getElementById("viewGuests").innerHTML =
+            selectedOrder.guests || "1";
+
+        document.getElementById("viewFloor").innerHTML =
+            selectedOrder.floor || "-";
+
+        const tbody = document.getElementById("viewOrderItems");
+
+        tbody.innerHTML = "";
+
+        (selectedOrder.items || []).forEach(item=>{
+
+            tbody.innerHTML += `
+
+            <tr>
+
+                <td>${item.qty}</td>
+
+                <td>${item.name}</td>
+
+                <td class="text-end">
+                    ₱${Number(item.price).toFixed(2)}
+                </td>
+
+                <td class="text-end">
+                    ₱${Number(item.qty * item.price).toFixed(2)}
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById("viewSubtotal").innerHTML =
+            "₱" + Number(selectedOrder.total || 0).toFixed(2);
+
+        document.getElementById("viewGrandTotal").innerHTML =
+            "₱" + Number(selectedOrder.total || 0).toFixed(2);
+
+        const modal = new bootstrap.Modal(
+
+            document.getElementById("orderViewModal")
+
+        );
+
+        modal.show();
+
+    });
+
+});

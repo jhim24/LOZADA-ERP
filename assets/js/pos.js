@@ -1200,57 +1200,80 @@ if(paymentCustomer && customerOrder.name){
 // RECEIVE PAYMENT
 // ======================================
 
-document.addEventListener("click", function(e){
+document.addEventListener("click", async function(e){
 
     const btn = e.target.closest("#btnReceivePayment");
 
     if(!btn) return;
 
-    if(cart.length === 0){
+    const paymentMethod =
+        document.getElementById("paymentMethod").value;
 
-        alert("Shopping Cart is empty.");
+    const selectedTable = JSON.parse(
 
-        return;
+        localStorage.getItem("selectedTable")
 
-    }
+    ) || {};
 
-    const paymentMethod = document.getElementById("paymentMethod").value;
+    const customerOrder = JSON.parse(
 
-  const selectedTable = JSON.parse(
-    localStorage.getItem("selectedTable")
-) || {};
+        localStorage.getItem("customerOrder")
 
-const customerOrder = JSON.parse(
-    localStorage.getItem("customerOrder")
-) || {};
+    ) || {};
 
-db.ref("orders").once("value").then(snapshot=>{
+    try{
 
-    snapshot.forEach(child=>{
+        const snapshot = await db.ref("orders").once("value");
 
-        const order = child.val();
+        let found = false;
 
-        let match = false;
+        for(const child of Object.entries(snapshot.val() || {})){
 
-        if(customerOrder.orderType === "DELIVERY" ||
-           customerOrder.orderType === "TAKE-OUT"){
+            const key = child[0];
 
-            match =
-                order.customerName === customerOrder.name &&
-                order.status !== "Paid";
+            const order = child[1];
 
-        }else{
+            let match = false;
 
-            match =
-                order.floor === selectedTable.floor &&
-                order.table === selectedTable.table &&
-                order.status !== "Paid";
+            if(
+                customerOrder.orderType === "DELIVERY" ||
+                customerOrder.orderType === "TAKE-OUT"
+            ){
 
-        }
+                match =
+                    order.customerName === customerOrder.name &&
+                    order.status !== "Paid";
 
-        if(match){
+            }else{
 
-            db.ref("orders/" + child.key).update({
+                match =
+                    order.floor === selectedTable.floor &&
+                    order.table === selectedTable.table &&
+                    order.status !== "Paid";
+
+            }
+
+            if(!match){
+
+                continue;
+
+            }
+
+            found = true;
+
+            // ---------------------------------
+            // LOAD ORDER TO CART
+            // ---------------------------------
+
+            cart = [...(order.items || [])];
+
+            renderCart();
+
+            // ---------------------------------
+            // UPDATE PAYMENT
+            // ---------------------------------
+
+            await db.ref("orders/" + key).update({
 
                 payment: paymentMethod,
 
@@ -1260,14 +1283,31 @@ db.ref("orders").once("value").then(snapshot=>{
 
             });
 
+            // ---------------------------------
+            // GENERATE RECEIPT
+            // ---------------------------------
+
+            generateReceipt();
+
+            break;
+
         }
 
-    });
+        if(!found){
 
-    generateReceipt();
+            alert("No pending order found.");
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("Unable to receive payment.");
+
+    }
 
 });
-});  
 // ===============================================
 // PRINT BILL
 // ===============================================

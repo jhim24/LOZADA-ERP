@@ -402,87 +402,95 @@ if(currentStatus === "Occupied"){
 
 if(currentStatus === "Bill Requested"){
 
+    localStorage.setItem("paymentMode","true");
+
+    const tableInfo = tables[index];
+
     localStorage.setItem(
 
-        "paymentMode",
+        "selectedTable",
 
-        "true"
+        JSON.stringify({
+
+            floor: tableInfo.floor,
+
+            table: tableInfo.name,
+
+            customer: tableInfo.customer,
+
+            guests: tableInfo.guests,
+
+            server: tableInfo.server
+
+        })
 
     );
-    
-// SAVE TABLE FOR PAYMENT
 
-localStorage.setItem(
-
-    "paymentTable",
-
-    JSON.stringify({
-
-        floor: floor,
-
-        table: tableName
-
-    })
-
-);
-
-const tableInfo = tables[index];
-
-localStorage.setItem(
-    "selectedTable",
-    JSON.stringify({
-        floor: tableInfo.floor,
-        table: tableInfo.name,
-        customer: tableInfo.customer,
-        guests: tableInfo.guests,
-        server: tableInfo.server
-    })
-);
     db.ref("orders").once("value").then(snapshot=>{
 
-    snapshot.forEach(child=>{
+        snapshot.forEach(child=>{
 
-        const order = child.val();
+            const order = child.val();
 
-        if(
-            order.floor === floor &&
-            order.table === tableName &&
-            order.status === "Bill Requested"
-        ){
+            if(
 
-            localStorage.setItem(
-                "customerOrder",
-                JSON.stringify({
-                    name: order.customerName,
-                    orderType: order.orderType,
-                    phone: order.customerPhone,
-                    email: order.customerEmail,
-                    address: order.deliveryAddress,
-                    partner: order.deliveryPartner,
-                    fee: order.deliveryFee,
-                    notes: order.customerNotes,
-                    requestedTime: order.requestedTime,
-                    orderSource: order.orderSource
-                })
-            );
+                order.floor === tableInfo.floor &&
 
-        }
+                order.table === tableInfo.name &&
+
+                order.status !== "Paid"
+
+            ){
+
+                localStorage.setItem(
+
+                    "customerOrder",
+
+                    JSON.stringify({
+
+                        name: order.customerName,
+
+                        orderType: order.orderType,
+
+                        phone: order.customerPhone,
+
+                        email: order.customerEmail,
+
+                        address: order.deliveryAddress,
+
+                        partner: order.deliveryPartner,
+
+                        fee: order.deliveryFee,
+
+                        notes: order.customerNotes,
+
+                        requestedTime: order.requestedTime,
+
+                        orderSource: order.orderSource
+
+                    })
+
+                );
+
+            }
+
+        });
+
+    }).then(()=>{
+
+        bootstrap.Modal.getInstance(
+
+            document.getElementById("tableDetailsModal")
+
+        ).hide();
+
+        window.location.href="pos.html";
 
     });
-
-});
-    bootstrap.Modal.getInstance(
-
-        document.getElementById("tableDetailsModal")
-
-    ).hide();
-
-    window.location.href = "pos.html";
 
     return;
 
 }
-
     tables[index].status = "Occupied";
 
     localStorage.setItem(
@@ -623,6 +631,17 @@ db.ref("orders").once("value").then(snapshot=>{
         }
 
     });
+
+});
+    .then(()=>{
+
+    bootstrap.Modal.getInstance(
+
+        document.getElementById("tableDetailsModal")
+
+    ).hide();
+
+    window.location.href="pos.html";
 
 });
     localStorage.setItem(

@@ -643,41 +643,29 @@ document.addEventListener("click", function(e){
 
     if(!btn) return;
 
-    const tableName = document.getElementById("modalTableName").innerHTML;
+    const selectedTable = JSON.parse(
 
-    const floor = document.getElementById("modalFloor").innerHTML;
-
-    let tables = JSON.parse(
-
-        localStorage.getItem("restaurantTables")
-
-    ) || [];
-
-    const index = tables.findIndex(table=>
-
-        table.name===tableName &&
-
-        table.floor===floor
+        localStorage.getItem("selectedTable")
 
     );
 
-    if(index<0) return;
+    if(!selectedTable){
 
-    // Change table status
+        alert("No table selected.");
 
-    tables[index].status = "Bill Requested";
+        return;
 
-    localStorage.setItem(
+    }
 
-        "restaurantTables",
+    db.ref("restaurantTables/" + selectedTable.key).update({
 
-        JSON.stringify(tables)
+        status: "Bill Requested"
 
-    );
+    }).then(()=>{
 
-    // Update Firebase order
+        return db.ref("orders").once("value");
 
-    db.ref("orders").once("value").then(snapshot=>{
+    }).then(snapshot=>{
 
         const updates = [];
 
@@ -687,19 +675,19 @@ document.addEventListener("click", function(e){
 
             if(
 
-                order.floor===floor &&
+                order.floor === selectedTable.floor &&
 
-                order.table===tableName &&
+                order.table === selectedTable.table &&
 
-                order.status==="Pending"
+                order.status === "Pending"
 
             ){
 
                 updates.push(
 
-                    db.ref("orders/"+child.key).update({
+                    db.ref("orders/" + child.key).update({
 
-                        status:"Bill Requested"
+                        status: "Bill Requested"
 
                     })
 
@@ -719,7 +707,7 @@ document.addEventListener("click", function(e){
 
         ).hide();
 
-        loadTables(floor);
+        loadTables(selectedTable.floor);
 
         alert("Bill request sent successfully.");
 
@@ -727,7 +715,7 @@ document.addEventListener("click", function(e){
 
         console.error(error);
 
-        alert("Unable to update bill request.");
+        alert("Unable to process bill request.");
 
     });
 

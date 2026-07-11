@@ -395,181 +395,151 @@ document.addEventListener("click", function(e){
 // OPEN TABLE
 // ===============================================
 
-document.addEventListener("click",function(e){
+document.addEventListener("click", function(e){
 
     const btn = e.target.closest("#btnOpenTable");
 
     if(!btn) return;
 
-    const tableName = document.getElementById("modalTableName").innerHTML;
+    const tableKey = btn.dataset.key;
 
-    const floor = document.getElementById("modalFloor").innerHTML;
-    
-    const currentStatus =
-    document.getElementById("modalStatus").innerHTML;
+    if(!tableKey){
 
-    let tables = JSON.parse(
+        alert("Please select a table.");
 
-        localStorage.getItem("restaurantTables")
+        return;
 
-    ) || [];
+    }
 
-    const index = tables.findIndex(table=>
+    db.ref("restaurantTables/" + tableKey).once("value").then(snapshot=>{
 
-        table.name===tableName &&
+        if(!snapshot.exists()){
 
-        table.floor===floor
+            alert("Table not found.");
 
-    );
+            return;
 
-    if(index<0) return;
+        }
 
-    // ===============================================
-// SMART BUTTON ACTION
-// ===============================================
+        const table = snapshot.val();
 
-if(currentStatus === "Occupied"){
+        // ===============================================
+        // ADD ORDER
+        // ===============================================
 
-    bootstrap.Modal.getInstance(
+        if(table.status === "Occupied"){
 
-        document.getElementById("tableDetailsModal")
+            localStorage.setItem("selectedTable", JSON.stringify({
 
-    ).hide();
+                key: tableKey,
+                floor: table.floor,
+                table: table.name,
+                customer: table.customer || "",
+                guests: table.guests || 1,
+                server: table.server || ""
 
-    window.location.href = "pos.html";
+            }));
 
-    return;
+            bootstrap.Modal.getInstance(
+                document.getElementById("tableDetailsModal")
+            ).hide();
 
-}
+            window.location.href = "pos.html";
 
-if(currentStatus === "Bill Requested"){
+            return;
 
-    localStorage.setItem("paymentMode","true");
+        }
 
-    const tableInfo = tables[index];
+        // ===============================================
+        // RECEIVE PAYMENT
+        // ===============================================
 
-    localStorage.setItem(
+        if(table.status === "Bill Requested"){
 
-        "selectedTable",
+            localStorage.setItem("paymentMode","true");
 
-        JSON.stringify({
+            localStorage.setItem("selectedTable", JSON.stringify({
 
-            floor: tableInfo.floor,
+                key: tableKey,
+                floor: table.floor,
+                table: table.name,
+                customer: table.customer || "",
+                guests: table.guests || 1,
+                server: table.server || ""
 
-            table: tableInfo.name,
+            }));
 
-            customer: tableInfo.customer,
+            db.ref("orders").once("value").then(orderSnapshot=>{
 
-            guests: tableInfo.guests,
+                orderSnapshot.forEach(child=>{
 
-            server: tableInfo.server
+                    const order = child.val();
 
-        })
+                    if(
+                        order.floor === table.floor &&
+                        order.table === table.name &&
+                        order.status !== "Paid"
+                    ){
 
-    );
+                        localStorage.setItem(
+                            "customerOrder",
+                            JSON.stringify({
 
-    db.ref("orders").once("value").then(snapshot=>{
+                                name: order.customerName,
+                                orderType: order.orderType,
+                                phone: order.customerPhone,
+                                email: order.customerEmail,
+                                address: order.deliveryAddress,
+                                partner: order.deliveryPartner,
+                                fee: order.deliveryFee,
+                                notes: order.customerNotes,
+                                requestedTime: order.requestedTime,
+                                orderSource: order.orderSource
 
-        snapshot.forEach(child=>{
+                            })
+                        );
 
-            const order = child.val();
+                    }
 
-            if(
+                });
 
-                order.floor === tableInfo.floor &&
+            }).then(()=>{
 
-                order.table === tableInfo.name &&
+                bootstrap.Modal.getInstance(
+                    document.getElementById("tableDetailsModal")
+                ).hide();
 
-                order.status !== "Paid"
+                window.location.href = "pos.html";
 
-            ){
+            });
 
-                localStorage.setItem(
+            return;
 
-                    "customerOrder",
+        }
 
-                    JSON.stringify({
+        // ===============================================
+        // OPEN NEW TABLE
+        // ===============================================
 
-                        name: order.customerName,
+        localStorage.setItem("selectedTable", JSON.stringify({
 
-                        orderType: order.orderType,
+            key: tableKey,
+            floor: table.floor,
+            table: table.name
 
-                        phone: order.customerPhone,
-
-                        email: order.customerEmail,
-
-                        address: order.deliveryAddress,
-
-                        partner: order.deliveryPartner,
-
-                        fee: order.deliveryFee,
-
-                        notes: order.customerNotes,
-
-                        requestedTime: order.requestedTime,
-
-                        orderSource: order.orderSource
-
-                    })
-
-                );
-
-            }
-
-        });
-
-    }).then(()=>{
+        }));
 
         bootstrap.Modal.getInstance(
-
             document.getElementById("tableDetailsModal")
-
         ).hide();
 
-        window.location.href="pos.html";
+        const startModal = new bootstrap.Modal(
+            document.getElementById("startOrderModal")
+        );
+
+        startModal.show();
 
     });
-
-    return;
-
-}
-    tables[index].status = "Occupied";
-
-    localStorage.setItem(
-
-        "restaurantTables",
-
-        JSON.stringify(tables)
-
-    );
-
-    localStorage.setItem(
-
-        "selectedTable",
-
-        JSON.stringify({
-
-            floor:floor,
-
-            table:tableName
-
-        })
-
-    );
-
-  bootstrap.Modal.getInstance(
-
-    document.getElementById("tableDetailsModal")
-
-).hide();
-
-const startModal = new bootstrap.Modal(
-
-    document.getElementById("startOrderModal")
-
-);
-
-startModal.show();
 
 });
 // ===============================================

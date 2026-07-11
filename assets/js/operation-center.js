@@ -78,4 +78,10 @@ document.addEventListener("DOMContentLoaded", async()=>{
         "../components/operation-board.html"
     );
 
+    // Start Live Monitoring
+    loadOperationCenter();
+
+    // Auto Refresh
+    setInterval(loadOperationCenter,2000);
+
 });

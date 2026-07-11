@@ -209,58 +209,7 @@ snapshot.forEach(child=>{
     `;
 
 });
-html += `
-
-<div class="col-lg-4">
-
-<div class="card shadow border-warning">
-
-<div class="card-header bg-warning fw-bold">
-
-Receipt #
-
-${order.receiptNo || key}
-
-</div>
-
-<div class="card-body">
-
-<p><b>Customer:</b> ${order.customer}</p>
-
-<p><b>Order Type:</b> ${order.orderType}</p>
-
-<hr>
-
-${items}
-
-<hr>
-
-<button
-class="btn btn-success w-100"
-onclick="updateKitchenStatus('${key}','Preparing')">
-
-    START COOKING
-
-</button>
-
-<button
-class="btn btn-primary w-100 mt-2"
-onclick="updateKitchenStatus('${key}','Ready')">
-
-    READY
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
+    
 if(html===""){
 
 html = `

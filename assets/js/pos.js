@@ -497,39 +497,48 @@ updatePendingOrder();
     }
 
 });
-document.addEventListener("click", function(e){
+// ===============================================
+// SEND TO KITCHEN
+// ===============================================
+
+document.addEventListener("click", async function(e){
 
     const btn = e.target.closest("#btnSendKitchen");
-// Clear cart after sending to kitchen
 
     if(!btn) return;
-console.log("STEP 1 - Send to Kitchen button clicked");
+
+    if(cart.length === 0){
+
+        alert("Shopping Cart is empty.");
+
+        return;
+
+    }
+
     const receiptNo = Math.floor(Math.random() * 900000) + 100000;
 
-   const grandTotal = parseFloat(
-    document.getElementById("totalAmount").value
-) || 0;
+    const grandTotal =
+        parseFloat(document.getElementById("totalAmount").value) || 0;
 
-try{
+    try{
 
-    saveOrder(receiptNo, grandTotal);
+        // Hintayin munang matapos ang Firebase save
+        await saveOrder(receiptNo, grandTotal);
 
-    alert("Order sent to Kitchen.");
+        alert("Order sent to Kitchen.");
 
-    cart = [];
+        // Clear local cart
+        cart = [];
 
-    renderCart();
+        renderCart();
 
-}catch(error){
+    }catch(error){
 
-    console.error(error);
+        console.error(error);
 
-    alert(error.message);
+        alert("Unable to send order to Kitchen.");
 
-}
-
-// Huwag muna i-clear ang cart.
-// Ika-clear natin ito pagkatapos ng successful payment.
+    }
 
 });
 // ======================================

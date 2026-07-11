@@ -311,86 +311,84 @@ document.addEventListener("click", function(e){
 // OPEN TABLE DETAILS
 // ===============================================
 
-document.addEventListener("click",function(e){
+document.addEventListener("click", function(e){
 
     const card = e.target.closest(".table-card");
 
     if(!card) return;
 
-    const index = Number(card.dataset.index);
+    document.querySelectorAll(".table-card").forEach(c=>{
 
-    const floor = document.querySelector(".floor-tab.active").dataset.floor;
+        c.classList.remove("selected");
 
-    const tables = JSON.parse(
+    });
 
-        localStorage.getItem("restaurantTables")
+    card.classList.add("selected");
 
-    ) || [];
+    const tableKey = card.dataset.key;
 
-    const table = tables.filter(t=>t.floor===floor)[index];
+    db.ref("restaurantTables/" + tableKey).once("value").then(snapshot=>{
 
-    document.getElementById("modalTableName").innerHTML =
+        if(!snapshot.exists()) return;
+
+        const table = snapshot.val();
+
+        document.getElementById("modalTableName").innerHTML =
         table.name;
 
-    document.getElementById("modalFloor").innerHTML =
+        document.getElementById("modalFloor").innerHTML =
         table.floor;
 
-    document.getElementById("modalSeats").innerHTML =
+        document.getElementById("modalSeats").innerHTML =
         table.seats;
 
-    document.getElementById("modalStatus").innerHTML =
+        document.getElementById("modalStatus").innerHTML =
         table.status;
 
-    document.getElementById("modalCustomer").innerHTML =
+        document.getElementById("modalCustomer").innerHTML =
         table.customer || "Walk-in";
 
-    document.getElementById("modalOrder").innerHTML =
+        document.getElementById("modalOrder").innerHTML =
         table.orderNo || "-";
-    // ===============================================
-// CHANGE PRIMARY BUTTON
-// ===============================================
 
-const btn = document.getElementById("btnOpenTable");
+        const btn = document.getElementById("btnOpenTable");
 
-if(table.status === "Available"){
+        btn.dataset.key = tableKey;
 
-    btn.innerHTML = "Open Table";
+        if(table.status === "Available"){
 
-    btn.className = "btn btn-success";
+            btn.innerHTML = "Open Table";
+            btn.className = "btn btn-success";
 
-}
+        }
+        else if(table.status === "Occupied"){
 
-else if(table.status === "Occupied"){
+            btn.innerHTML = "Add Order";
+            btn.className = "btn btn-primary";
 
-    btn.innerHTML = "Add Order";
+        }
+        else if(table.status === "Bill Requested"){
 
-    btn.className = "btn btn-primary";
+            btn.innerHTML = "Receive Payment";
+            btn.className = "btn btn-warning";
 
-}
+        }
+        else if(table.status === "Paid"){
 
-else if(table.status === "Bill Requested"){
+            btn.innerHTML = "Close Table";
+            btn.className = "btn btn-secondary";
 
-    btn.innerHTML = "Receive Payment";
+        }
 
-    btn.className = "btn btn-warning";
+        const modal = new bootstrap.Modal(
 
-}
+            document.getElementById("tableDetailsModal")
 
-else if(table.status === "Paid"){
+        );
 
-    btn.innerHTML = "Close Table";
+        modal.show();
 
-    btn.className = "btn btn-secondary";
-
-}
-
-    const modal = new bootstrap.Modal(
-
-        document.getElementById("tableDetailsModal")
-
-    );
-
-    modal.show();
+    });
 
 });
 // ===============================================

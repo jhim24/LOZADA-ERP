@@ -368,12 +368,13 @@ document.getElementById("viewStatus").innerHTML = `
 
 `;
 
-            document.getElementById("orderViewModal")
+           const modal = new bootstrap.Modal(
 
-        );
+    document.getElementById("orderViewModal")
 
-        modal.show();
+);
 
+modal.show();
     }).catch(error=>{
 
         console.error(error);

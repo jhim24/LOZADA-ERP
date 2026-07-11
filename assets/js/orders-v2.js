@@ -230,3 +230,101 @@ function loadOrders(){
     });
 
 }
+// ===============================================
+// VIEW ORDER DETAILS
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest(".btn-view-order");
+
+    if(!btn) return;
+
+    const key = btn.dataset.key;
+
+    db.ref("orders/" + key).once("value").then(snapshot=>{
+
+        if(!snapshot.exists()){
+
+            alert("Order not found.");
+
+            return;
+
+        }
+
+        const order = snapshot.val();
+
+        document.getElementById("viewReceiptNo").innerHTML =
+            order.receiptNo || "-";
+
+        document.getElementById("viewDate").innerHTML =
+            order.date || "-";
+
+        document.getElementById("viewStatus").innerHTML =
+            order.status || "-";
+
+        document.getElementById("viewCashier").innerHTML =
+            order.cashier || "-";
+
+        document.getElementById("viewCustomer").innerHTML =
+            order.customerName || "Walk-in";
+
+        document.getElementById("viewTable").innerHTML =
+            order.table || "-";
+
+        document.getElementById("viewOrderType").innerHTML =
+            order.orderType || "-";
+
+        const tbody = document.getElementById("viewOrderItems");
+
+        tbody.innerHTML = "";
+
+        (order.items || []).forEach(item=>{
+
+            tbody.innerHTML += `
+
+            <tr>
+
+                <td>${item.qty}</td>
+
+                <td>${item.name}</td>
+
+                <td class="text-end">
+
+                    ₱${Number(item.price).toFixed(2)}
+
+                </td>
+
+                <td class="text-end">
+
+                    ₱${Number(item.qty * item.price).toFixed(2)}
+
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById("viewGrandTotal").innerHTML =
+
+            "₱" + Number(order.total || 0).toFixed(2);
+
+        const modal = new bootstrap.Modal(
+
+            document.getElementById("orderViewModal")
+
+        );
+
+        modal.show();
+
+    }).catch(error=>{
+
+        console.error(error);
+
+        alert("Unable to load order details.");
+
+    });
+
+});

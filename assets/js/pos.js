@@ -1377,63 +1377,131 @@ document.addEventListener("click", function(e){
 
 function generateBill(){
 
-    document.getElementById("billDate").innerHTML =
-    new Date().toLocaleString();
-const table = JSON.parse(
-    localStorage.getItem("selectedTable")
-) || {};
-    document.getElementById("billTable").innerHTML =
-    table.table || "-";
+    const selectedTable = JSON.parse(
+        localStorage.getItem("selectedTable")
+    ) || {};
 
-    document.getElementById("billCustomer").innerHTML =
-    table.customer || "Walk-in";
+    const customerOrder = JSON.parse(
+        localStorage.getItem("customerOrder")
+    ) || {};
 
-    const tbody = document.getElementById("billItems");
+    db.ref("orders").once("value").then(snapshot=>{
 
-    tbody.innerHTML = "";
+        let found = false;
 
-    let total = 0;
+        snapshot.forEach(child=>{
 
-    cart.forEach(item=>{
+            const order = child.val();
 
-        const lineTotal = item.price * item.qty;
+            let match = false;
 
-        total += lineTotal;
+            // DELIVERY / TAKE-OUT
+            if(
+                customerOrder.orderType === "DELIVERY" ||
+                customerOrder.orderType === "TAKE-OUT"
+            ){
 
-        tbody.innerHTML += `
+                match =
+                    order.customerName === customerOrder.name &&
+                    order.status !== "Paid";
 
-        <tr>
+            }else{
 
-            <td>${item.name}</td>
+                // DINE-IN
 
-            <td>${item.qty}</td>
+                match =
+                    order.floor === selectedTable.floor &&
+                    order.table === selectedTable.table &&
+                    order.status !== "Paid";
 
-            <td class="text-end">
+            }
 
-                ₱${lineTotal.toFixed(2)}
+            if(!match) return;
 
-            </td>
+            found = true;
 
-        </tr>
+            // ----------------------------
+            // HEADER
+            // ----------------------------
 
-        `;
+            document.getElementById("billDate").innerHTML =
+                new Date().toLocaleString();
+
+            document.getElementById("billTable").innerHTML =
+                order.table || "-";
+
+            document.getElementById("billCustomer").innerHTML =
+                order.customerName || "Walk-in";
+
+            // ----------------------------
+            // ITEMS
+            // ----------------------------
+
+            const tbody = document.getElementById("billItems");
+
+            tbody.innerHTML = "";
+
+            let subtotal = 0;
+
+            (order.items || []).forEach(item=>{
+
+                const lineTotal =
+                    Number(item.price) * Number(item.qty);
+
+                subtotal += lineTotal;
+
+                tbody.innerHTML += `
+
+                <tr>
+
+                    <td>${item.name}</td>
+
+                    <td>${item.qty}</td>
+
+                    <td class="text-end">
+
+                        ₱${lineTotal.toFixed(2)}
+
+                    </td>
+
+                </tr>
+
+                `;
+
+            });
+
+            // ----------------------------
+            // TOTALS
+            // ----------------------------
+
+            const vat = subtotal * 0.12;
+
+            let grandTotal = subtotal + vat;
+
+            document.getElementById("billGrandTotal").innerHTML =
+                "₱" + grandTotal.toFixed(2);
+
+            // ----------------------------
+            // SHOW MODAL
+            // ----------------------------
+
+            const modal = new bootstrap.Modal(
+
+                document.getElementById("billModal")
+
+            );
+
+            modal.show();
+
+        });
+
+        if(!found){
+
+            alert("No pending order found.");
+
+        }
 
     });
-
-    const vat = total * 0.12;
-
-    const grandTotal = total + vat;
-
-    document.getElementById("billGrandTotal").innerHTML =
-    "₱" + grandTotal.toFixed(2);
-
-    const modal = new bootstrap.Modal(
-
-        document.getElementById("billModal")
-
-    );
-
-    modal.show();
 
 }
 // ===============================================

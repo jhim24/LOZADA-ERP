@@ -227,7 +227,13 @@ newProduct.set({
 
     clearProductForm();
 
-    loadProductTable();
+}).catch(error=>{
+
+    console.error(error);
+
+    alert("Unable to save product.");
+
+});
 
 });
 // ===============================================

@@ -15,114 +15,79 @@
 
     </div>
 
-  <div class="card-body product-card-body">
+ <div class="card-body product-card-body">
 
-<div class="row">
+    <!-- ==========================
+         ROW 1 : PRODUCT DETAILS
+    =========================== -->
 
-<div class="col-lg-7">
+    <div class="row g-3">
 
-        <!-- PRODUCT CODE -->
+        <div class="col-lg-2">
 
-        <div class="mb-3">
-
-            <label class="form-label">
-
-                Product Code
-
-            </label>
+            <label class="form-label">Product Code</label>
 
             <input
                 type="text"
                 class="form-control"
                 id="productCode"
-                value="PRD-0001"
                 readonly>
 
         </div>
 
-        <!-- CATEGORY -->
+        <div class="col-lg-2">
 
-        <div class="mb-3">
-
-            <label class="form-label">
-
-                Category
-
-            </label>
+            <label class="form-label">Category</label>
 
             <select
                 class="form-select"
                 id="productCategory">
 
-                <option value="">Loading Categories...</option>
+                <option value="">Loading...</option>
 
             </select>
 
         </div>
 
-        <!-- PRODUCT NAME -->
+        <div class="col-lg-3">
 
-        <div class="mb-3">
-
-            <label class="form-label">
-
-                Product Name
-
-            </label>
+            <label class="form-label">Product Name</label>
 
             <input
                 type="text"
                 class="form-control"
                 id="productName"
-                placeholder="Enter Product Name">
+                placeholder="Product Name">
 
         </div>
 
-        <!-- SELLING PRICE -->
+        <div class="col-lg-1">
 
-        <div class="mb-3">
-
-            <label class="form-label">
-
-                Selling Price
-
-            </label>
+            <label class="form-label">Selling</label>
 
             <input
                 type="number"
                 class="form-control"
                 id="sellingPrice"
-                placeholder="0.00">
+                placeholder="0">
 
         </div>
 
-        <!-- COST -->
+        <div class="col-lg-1">
 
-        <div class="mb-3">
-
-            <label class="form-label">
-
-                Cost Price
-
-            </label>
+            <label class="form-label">Cost</label>
 
             <input
                 type="number"
                 class="form-control"
                 id="costPrice"
-                placeholder="0.00">
+                placeholder="0">
 
         </div>
 
-        <!-- BARCODE -->
+        <div class="col-lg-2">
 
-        <div class="mb-3">
-
-            <label class="form-label">
-
-                Barcode
-
-            </label>
+            <label class="form-label">Barcode</label>
 
             <input
                 type="text"
@@ -131,148 +96,120 @@
                 placeholder="Barcode">
 
         </div>
-<!-- Product Image moved to right panel -->
-     
-<!-- STATUS -->
 
-<div class="mb-4">
+        <div class="col-lg-1">
 
-    <label class="form-label">
+            <label class="form-label">Status</label>
 
-        Status
+            <select
+                class="form-select"
+                id="productStatus">
 
-    </label>
+                <option value="Active">Active</option>
 
-    <select
-        class="form-select"
-        id="productStatus">
+                <option value="Inactive">Inactive</option>
 
-        <option value="Active">Active</option>
+            </select>
 
-        <option value="Inactive">Inactive</option>
-
-    </select>
-
-</div>
-
-</div>
-
-<div class="col-lg-5">
-
-    <div class="product-image-card">
-
-    <!-- PRODUCT IMAGE -->
-
-    <div class="text-center mb-4">
-
-      <img
-    id="imagePreview"
-    src="https://via.placeholder.com/250x250?text=No+Image"
-    class="img-fluid rounded shadow border"
-    style="
-        width:250px;
-        height:250px;
-        object-fit:cover;
-        background:#fff;
-        padding:5px;
-    "
-/>
+        </div>
 
     </div>
 
-    <div class="mb-3">
+    <!-- ==========================
+         ROW 2 : IMAGE + BUTTONS
+    =========================== -->
 
-        <label class="form-label">
+    <div class="row mt-4 align-items-center">
 
-            Upload Product Image
+        <div class="col-lg-2 text-center">
 
-        </label>
+            <img
+                id="imagePreview"
+                src="https://via.placeholder.com/180x180?text=No+Image"
+                class="img-fluid rounded shadow border">
 
-        <input
+        </div>
 
-            type="file"
+        <div class="col-lg-4">
 
-            class="form-control"
+            <label class="form-label">
 
-            id="productImage"
+                Upload Product Image
 
-            accept="image/*">
+            </label>
+
+            <input
+                type="file"
+                class="form-control"
+                id="productImage"
+                accept="image/*">
+
+        </div>
+
+        <div class="col-lg-3">
+
+            <label class="form-label">
+
+                Image URL
+
+            </label>
+
+            <input
+                type="url"
+                class="form-control"
+                id="productImageUrl"
+                placeholder="https://example.com/image.jpg">
+
+        </div>
+
+        <div class="col-lg-3">
+
+            <div class="d-grid gap-2">
+
+                <button
+                    class="btn btn-primary"
+                    id="btnSaveProduct">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Product
+
+                </button>
+
+                <button
+                    class="btn btn-warning"
+                    id="btnUpdateProduct"
+                    style="display:none;">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                    Update Product
+
+                </button>
+
+                <button
+                    class="btn btn-secondary"
+                    id="btnClearProduct">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Clear
+
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="mb-4">
+    <!-- ==========================
+         ROW 3 : DESCRIPTION
+    =========================== -->
 
-        <label class="form-label">
+    <div class="row mt-4">
 
-            Image URL
-
-        </label>
-
-        <input
-
-            type="url"
-
-            class="form-control"
-
-            id="productImageUrl"
-
-            placeholder="https://example.com/product.jpg">
-
-    </div>
-
-    <hr>
-
-    <div class="d-grid gap-2">
-
-        <button
-
-            class="btn btn-primary"
-
-            id="btnSaveProduct">
-
-            <i class="fa-solid fa-floppy-disk"></i>
-
-            Save Product
-
-        </button>
-
-        <button
-
-            class="btn btn-warning"
-
-            id="btnUpdateProduct"
-
-            style="display:none;">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Update Product
-
-        </button>
-
-        <button
-
-            class="btn btn-secondary"
-
-            id="btnClearProduct">
-
-            <i class="fa-solid fa-rotate"></i>
-
-            Clear
-
-        </button>
-
-      </div>
-
-</div>
-
-<!-- DESCRIPTION -->
-
-<div class="row mt-4">
-
-    <div class="col-12">
-
-        <div class="mb-0">
+        <div class="col-12">
 
             <label class="form-label">
 
@@ -282,16 +219,12 @@
 
             <textarea
                 class="form-control"
-                rows="4"
                 id="productDescription"
+                rows="4"
                 placeholder="Product Description"></textarea>
 
         </div>
 
     </div>
-
-</div>
-
-</div>
 
 </div>

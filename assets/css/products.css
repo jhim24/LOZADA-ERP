@@ -332,3 +332,84 @@
     transform:translateY(-2px);
 
 }
+/* ==========================================
+   PRODUCT TABLE
+========================================== */
+
+.product-table{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.product-table table{
+
+    margin-bottom:0;
+
+}
+
+.product-table thead{
+
+    background:#0F172A;
+
+}
+
+.product-table thead th{
+
+    color:#ffffff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    padding:16px;
+
+    border:none;
+
+    white-space:nowrap;
+
+}
+
+.product-table tbody td{
+
+    padding:15px;
+
+    vertical-align:middle;
+
+    font-size:14px;
+
+    color:#374151;
+
+}
+
+.product-table tbody tr{
+
+    transition:.25s;
+
+}
+
+.product-table tbody tr:hover{
+
+    background:#F8FAFC;
+
+}
+
+.product-table img{
+
+    width:55px;
+
+    height:55px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:1px solid #E5E7EB;
+
+}

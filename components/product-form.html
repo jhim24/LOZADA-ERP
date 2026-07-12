@@ -133,44 +133,29 @@
         </div>
 <!-- Product Image moved to right panel -->
      
-<!-- DESCRIPTION -->
+<!-- STATUS -->
 
-<div class="mb-3">
+<div class="mb-4">
 
     <label class="form-label">
 
-        Description
+        Status
 
     </label>
 
-    <textarea
-        class="form-control"
-        rows="3"
-        id="productDescription"
-        placeholder="Product Description"></textarea>
+    <select
+        class="form-select"
+        id="productStatus">
+
+        <option value="Active">Active</option>
+
+        <option value="Inactive">Inactive</option>
+
+    </select>
 
 </div>
-        <!-- STATUS -->
 
-        <div class="mb-4">
-
-            <label class="form-label">
-
-                Status
-
-            </label>
-
-            <select
-                class="form-select"
-                id="productStatus">
-
-                <option value="Active">Active</option>
-
-                <option value="Inactive">Inactive</option>
-
-            </select>
-
-           </div>
+</div>
 
     </div>
 
@@ -281,10 +266,35 @@
 
         </button>
 
+      </div>
+
+</div>
+
+<!-- DESCRIPTION -->
+
+<div class="row mt-4">
+
+    <div class="col-12">
+
+        <div class="mb-0">
+
+            <label class="form-label">
+
+                Description
+
+            </label>
+
+            <textarea
+                class="form-control"
+                rows="4"
+                id="productDescription"
+                placeholder="Product Description"></textarea>
+
+        </div>
+
     </div>
 
 </div>
-    </div>
 
 </div>
 

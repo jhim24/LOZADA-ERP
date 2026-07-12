@@ -91,11 +91,9 @@ const waitTable = setInterval(()=>{
 
         loadCategoryDropdown();
 
-        loadProductTable();
+      setTimeout(()=>{
 
-        generateProductCode();
-
-    }
+    loadProductTable();
 
 },100);
 

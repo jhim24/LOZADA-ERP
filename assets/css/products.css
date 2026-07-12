@@ -1,0 +1,103 @@
+/* ==========================================
+   LOZADA ERP
+   PRODUCT MANAGEMENT
+   Version 3
+========================================== */
+
+/* Page Background */
+
+.product-page{
+
+    background:#eef7f8;
+
+}
+
+/* Product Cards */
+
+.product-card{
+
+    background:#ffffff;
+
+    border:1px solid #d9e3ea;
+
+    border-radius:15px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+
+    margin-bottom:20px;
+
+    overflow:hidden;
+
+}
+
+/* Card Header */
+
+.product-card-header{
+
+    background:#0F766E;
+
+    color:#ffffff;
+
+    padding:15px 20px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+/* Card Body */
+
+.product-card-body{
+
+    padding:20px;
+
+}
+
+/* Labels */
+
+.product-card label{
+
+    font-weight:600;
+
+    color:#374151;
+
+    margin-bottom:6px;
+
+}
+
+/* Inputs */
+
+.product-card .form-control,
+.product-card .form-select{
+
+    border-radius:10px;
+
+    border:1px solid #ced4da;
+
+    min-height:45px;
+
+    font-size:15px;
+
+}
+
+.product-card .form-control:focus,
+.product-card .form-select:focus{
+
+    border-color:#0F766E;
+
+    box-shadow:0 0 0 .2rem rgba(15,118,110,.15);
+
+}
+
+/* Buttons */
+
+.product-card .btn{
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    min-height:45px;
+
+}

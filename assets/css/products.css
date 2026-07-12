@@ -101,3 +101,96 @@
     min-height:45px;
 
 }
+/* ==========================================
+   PRODUCT FORM LAYOUT
+========================================== */
+
+.product-card{
+
+    border:0;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.product-card-header{
+
+    background:linear-gradient(135deg,#0F766E,#115E59);
+
+    color:#fff;
+
+    padding:18px 25px;
+
+    border-bottom:none;
+
+}
+
+.product-card-header h5{
+
+    margin:0;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+
+.product-card-body{
+
+    padding:30px;
+
+    background:#ffffff;
+
+}
+
+.product-card label{
+
+    font-weight:600;
+
+    color:#374151;
+
+    margin-bottom:8px;
+
+}
+
+.product-card .form-control,
+
+.product-card .form-select{
+
+    height:48px;
+
+    border-radius:12px;
+
+    border:1px solid #d1d5db;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+.product-card textarea.form-control{
+
+    height:auto;
+
+    min-height:110px;
+
+    resize:vertical;
+
+}
+
+.product-card .form-control:focus,
+
+.product-card .form-select:focus{
+
+    border-color:#0F766E;
+
+    box-shadow:0 0 0 .20rem rgba(15,118,110,.15);
+
+}

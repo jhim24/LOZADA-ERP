@@ -162,7 +162,7 @@ snapshot.forEach(child=>{
     // Card
     html += `
 
-    <div class="col-lg-4">
+   <div class="col-xl-3 col-lg-4 col-md-6">
 
         <div class="card shadow border-warning">
 

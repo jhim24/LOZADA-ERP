@@ -131,70 +131,8 @@
                 placeholder="Barcode">
 
         </div>
-
-      <!-- ==========================================
-PRODUCT IMAGE
-========================================== -->
-
-<div class="mb-3">
-
-    <label class="form-label">
-
-        Product Image (Upload)
-
-    </label>
-
-    <input
-        type="file"
-        class="form-control"
-        id="productImage"
-        accept="image/*">
-
-</div>
-
-<div class="mb-3">
-
-    <label class="form-label">
-
-        Or Image URL
-
-    </label>
-
-    <input
-        type="url"
-        class="form-control"
-        id="productImageUrl"
-        placeholder="https://example.com/product.jpg">
-
-</div>
-
-<div class="text-center mb-3">
-
-    <img
-
-        id="imagePreview"
-
-        src="https://via.placeholder.com/180x180?text=No+Image"
-
-        style="
-
-            width:180px;
-
-            height:180px;
-
-            object-fit:cover;
-
-            border-radius:12px;
-
-            border:1px solid #ddd;
-
-            padding:4px;
-
-            background:#fff;
-
-        ">
-
-</div>
+<!-- Product Image moved to right panel -->
+     
 <!-- DESCRIPTION -->
 
 <div class="mb-3">
@@ -236,42 +174,111 @@ PRODUCT IMAGE
 </div>
 
 <div class="col-lg-4">
-        <!-- BUTTONS -->
 
-        <div class="d-grid gap-2">
+    <!-- PRODUCT IMAGE -->
 
-            <button
-                class="btn btn-primary"
-                id="btnSaveProduct">
+    <div class="text-center mb-4">
 
-                <i class="fa-solid fa-floppy-disk"></i>
+      <img
+    id="imagePreview"
+    src="https://via.placeholder.com/250x250?text=No+Image"
+    class="img-fluid rounded shadow border"
+    style="
+        width:250px;
+        height:250px;
+        object-fit:cover;
+        background:#fff;
+        padding:5px;
+    "
+/>
 
-                Save Product
+    </div>
 
-            </button>
+    <div class="mb-3">
 
-           <button
-class="btn btn-warning"
-id="btnUpdateProduct"
-style="display:none;">
+        <label class="form-label">
 
-<i class="fa-solid fa-pen"></i>
+            Upload Product Image
 
-Update Product
+        </label>
 
-</button>
-            <button
-                class="btn btn-secondary"
-                id="btnClearProduct">
+        <input
 
-                <i class="fa-solid fa-rotate"></i>
+            type="file"
 
-                Clear
+            class="form-control"
 
-            </button>
+            id="productImage"
 
-                </div>
+            accept="image/*">
 
+    </div>
+
+    <div class="mb-4">
+
+        <label class="form-label">
+
+            Image URL
+
+        </label>
+
+        <input
+
+            type="url"
+
+            class="form-control"
+
+            id="productImageUrl"
+
+            placeholder="https://example.com/product.jpg">
+
+    </div>
+
+    <hr>
+
+    <div class="d-grid gap-2">
+
+        <button
+
+            class="btn btn-primary"
+
+            id="btnSaveProduct">
+
+            <i class="fa-solid fa-floppy-disk"></i>
+
+            Save Product
+
+        </button>
+
+        <button
+
+            class="btn btn-warning"
+
+            id="btnUpdateProduct"
+
+            style="display:none;">
+
+            <i class="fa-solid fa-pen"></i>
+
+            Update Product
+
+        </button>
+
+        <button
+
+            class="btn btn-secondary"
+
+            id="btnClearProduct">
+
+            <i class="fa-solid fa-rotate"></i>
+
+            Clear
+
+        </button>
+
+    </div>
+
+</div>
     </div>
 
 </div>

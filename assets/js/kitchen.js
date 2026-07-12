@@ -66,7 +66,8 @@ document.addEventListener("DOMContentLoaded",async()=>{
     updateKitchenClock();
 
     setInterval(updateKitchenClock,1000);
-setInterval(loadKitchenOrders,2000);
+    setInterval(updateOrderTimers,1000);
+    setInterval(loadKitchenOrders,2000);
 });
 
 // ===============================================
@@ -202,13 +203,25 @@ snapshot.forEach(child=>{
 
             </p>
 
-            <p class="mb-3">
+           <p class="mb-2">
 
-                <i class="fa-solid fa-utensils"></i>
+    <i class="fa-solid fa-utensils"></i>
 
-                ${order.orderType || "DINE-IN"}
+    ${order.orderType || "DINE-IN"}
 
-            </p>
+</p>
+
+<p class="mb-3 kitchen-time">
+
+    <i class="fa-regular fa-clock"></i>
+
+    <span id="timer-${key}">
+
+        00:00
+
+    </span>
+
+</p>
 
             <hr>
 
@@ -389,5 +402,149 @@ function updateKitchenStatus(key,status){
     font-size:18px;
 
     padding:4px 0;
+
+}
+// ===============================================
+// ORDER TIMER
+// ===============================================
+
+function updateOrderTimers(){
+
+    db.ref("orders").once("value").then(snapshot=>{
+
+        snapshot.forEach(child=>{
+
+            const order = child.val();
+
+            const key = child.key;
+
+            if(!order.createdAt){
+
+                return;
+
+            }
+
+            const timer = document.getElementById(
+
+                "timer-" + key
+
+            );
+
+            if(!timer){
+
+                return;
+
+            }
+
+            const diff = Math.floor(
+
+                (Date.now() - order.createdAt) / 1000
+
+            );
+
+            const minutes = Math.floor(diff / 60);
+
+            const seconds = diff % 60;
+
+           timer.innerHTML =
+
+    String(minutes).padStart(2,"0")
+
+    +
+
+    ":"
+
+    +
+
+    String(seconds).padStart(2,"0");
+
+// Remove previous color classes
+
+timer.classList.remove(
+
+    "timer-green",
+
+    "timer-yellow",
+
+    "timer-red"
+
+);
+
+// Change color based on elapsed time
+
+if(minutes < 5){
+
+    timer.classList.add("timer-green");
+
+}
+
+else if(minutes < 10){
+
+    timer.classList.add("timer-yellow");
+
+}
+
+else{
+
+    timer.classList.add("timer-red");
+
+}
+
+        });
+
+    });
+
+}
+/* ==========================================
+   ORDER TIMER COLORS
+========================================== */
+
+.kitchen-time{
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.timer-green{
+
+    color:#16a34a;
+
+}
+
+.timer-yellow{
+
+    color:#f59e0b;
+
+}
+
+.timer-red{
+
+    color:#dc2626;
+
+    animation:blinkTimer 1s infinite;
+
+}
+
+@keyframes blinkTimer{
+
+    0%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.35;
+
+    }
+
+    100%{
+
+        opacity:1;
+
+    }
 
 }

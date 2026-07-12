@@ -200,21 +200,27 @@
 
 #imagePreview{
 
+    display:block;
+
     width:100%;
 
-    max-width:260px;
+    max-width:220px;
 
-    height:260px;
+    height:auto;
 
-    object-fit:cover;
+    aspect-ratio:1 / 1;
+
+    margin:0 auto;
+
+    object-fit:contain;
 
     border-radius:18px;
 
     border:2px dashed #cbd5e1;
 
-    background:#f8fafc;
+    background:#ffffff;
 
-    padding:8px;
+    padding:10px;
 
     transition:.30s;
 

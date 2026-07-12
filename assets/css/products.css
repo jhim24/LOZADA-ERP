@@ -253,3 +253,82 @@
     min-height:46px;
 
 }
+/* ==========================================
+   PRODUCT ACTION BUTTONS
+========================================== */
+
+#btnSaveProduct,
+#btnUpdateProduct,
+#btnClearProduct{
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    transition:all .25s ease;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+#btnSaveProduct{
+
+    background:#0F766E;
+
+    color:#fff;
+
+}
+
+#btnSaveProduct:hover{
+
+    background:#115E59;
+
+    transform:translateY(-2px);
+
+}
+
+#btnUpdateProduct{
+
+    background:#F59E0B;
+
+    color:#fff;
+
+}
+
+#btnUpdateProduct:hover{
+
+    background:#D97706;
+
+    transform:translateY(-2px);
+
+}
+
+#btnClearProduct{
+
+    background:#64748B;
+
+    color:#fff;
+
+}
+
+#btnClearProduct:hover{
+
+    background:#475569;
+
+    transform:translateY(-2px);
+
+}

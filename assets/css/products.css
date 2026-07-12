@@ -531,3 +531,106 @@
     margin:0 auto;
 
 }
+/* ==========================================
+   PRODUCT FORM V5
+========================================== */
+
+.product-card{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+}
+
+.product-card-header{
+
+    background:linear-gradient(135deg,#0F766E,#0D9488);
+
+    padding:18px 24px;
+
+    border-bottom:none;
+
+}
+
+.product-card-header h5{
+
+    color:#ffffff;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    margin:0;
+
+}
+
+.product-card-body{
+
+    padding:28px;
+
+    background:#ffffff;
+
+}
+
+/* ==========================================
+   LABELS
+========================================== */
+
+.product-card label{
+
+    font-size:13px;
+
+    font-weight:700;
+
+    color:#475569;
+
+    margin-bottom:8px;
+
+}
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+.product-card .form-control,
+
+.product-card .form-select{
+
+    height:48px;
+
+    border-radius:12px;
+
+    border:1px solid #D1D5DB;
+
+    font-size:15px;
+
+    box-shadow:none;
+
+    transition:.25s;
+
+}
+
+.product-card textarea.form-control{
+
+    min-height:120px;
+
+    height:auto;
+
+    resize:vertical;
+
+}
+
+.product-card .form-control:focus,
+
+.product-card .form-select:focus{
+
+    border-color:#0F766E;
+
+    box-shadow:0 0 0 .18rem rgba(15,118,110,.15);
+
+}

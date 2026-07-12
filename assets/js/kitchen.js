@@ -160,41 +160,83 @@ snapshot.forEach(child=>{
     });
 
     // Card
-    html += `
+ html += `
 
-   <div class="col-xl-3 col-lg-4 col-md-6">
+<div class="col-xl-3 col-lg-4 col-md-6 mb-4">
 
-        <div class="card shadow border-warning">
+    <div class="card shadow-lg border-0 kitchen-order-card h-100">
 
-            <div class="card-header bg-warning fw-bold">
+        <div class="card-header bg-danger text-white">
 
-                Receipt # ${order.receiptNo || key}
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h5 class="mb-0 fw-bold">
+
+                    <i class="fa-solid fa-receipt"></i>
+
+                    ${order.receiptNo || key}
+
+                </h5>
+
+                <span class="badge bg-light text-dark">
+
+                    ${order.status}
+
+                </span>
 
             </div>
 
-            <div class="card-body">
+        </div>
 
-                <p><b>Customer:</b> ${order.customerName || order.customer || "Walk-in"}</p>
+        <div class="card-body">
 
-                <p><b>Order Type:</b> ${order.orderType || "DINE-IN"}</p>
+            <p class="mb-2">
 
-                <hr>
+                <i class="fa-solid fa-user"></i>
 
-                ${items}
+                <strong>
 
-                <hr>
+                    ${order.customerName || order.customer || "Walk-in"}
+
+                </strong>
+
+            </p>
+
+            <p class="mb-3">
+
+                <i class="fa-solid fa-utensils"></i>
+
+                ${order.orderType || "DINE-IN"}
+
+            </p>
+
+            <hr>
+
+            ${items}
+
+            <hr>
+
+            <div class="d-grid gap-2">
 
                 <button
-                    class="btn btn-success w-100"
+
+                    class="btn btn-success"
+
                     onclick="updateKitchenStatus('${key}','Preparing')">
+
+                    <i class="fa-solid fa-fire"></i>
 
                     START COOKING
 
                 </button>
 
                 <button
-                    class="btn btn-primary w-100 mt-2"
+
+                    class="btn btn-primary"
+
                     onclick="updateKitchenStatus('${key}','Ready')">
+
+                    <i class="fa-solid fa-circle-check"></i>
 
                     READY
 
@@ -206,7 +248,9 @@ snapshot.forEach(child=>{
 
     </div>
 
-    `;
+</div>
+
+`;
 
 });
     

@@ -236,8 +236,7 @@ newProduct.set({
 
 function generateProductCode(){
 
-    db.ref("products").once("value").then(snapshot=>{
-
+    db.ref("products").on("value", snapshot=>{
         let max = 0;
 
         snapshot.forEach(child=>{
@@ -307,11 +306,17 @@ editProductIndex="";
 
 function loadProductTable(){
 
-    const tableBody = document.getElementById("productTableBody");
+   const tableBody = document.getElementById("productTableBody");
 
-    if(!tableBody) return;
+if(!tableBody){
 
-    db.ref("products").once("value").then(snapshot=>{
+    console.log("Waiting for product table...");
+
+    return;
+
+}
+
+  db.ref("products").on("value", snapshot=>{
 
         tableBody.innerHTML="";
 

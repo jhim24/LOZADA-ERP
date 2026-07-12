@@ -481,7 +481,6 @@ document.getElementById("btnSaveProduct").style.display="none";
 document.getElementById("btnUpdateProduct").style.display="block";
 
 });
-});
 // ===============================================
 // UPDATE PRODUCT
 // ===============================================

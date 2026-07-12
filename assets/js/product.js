@@ -81,7 +81,13 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
     await loadComponent("product-table","../components/product-table.html");
 
-    setTimeout(()=>{
+   // Wait until table component is ready
+
+const waitTable = setInterval(()=>{
+
+    if(document.getElementById("productTableBody")){
+
+        clearInterval(waitTable);
 
         loadCategoryDropdown();
 
@@ -89,7 +95,9 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
         generateProductCode();
 
-    },200);
+    }
+
+},100);
 
 });
 // ===============================================

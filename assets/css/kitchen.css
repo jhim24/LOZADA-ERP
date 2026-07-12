@@ -138,3 +138,56 @@ body{
     padding:4px 0;
 
 }
+/* ==========================================
+   ORDER TIMER COLORS
+========================================== */
+
+.kitchen-time{
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.timer-green{
+
+    color:#16a34a;
+
+}
+
+.timer-yellow{
+
+    color:#f59e0b;
+
+}
+
+.timer-red{
+
+    color:#dc2626;
+
+    animation:blinkTimer 1s infinite;
+
+}
+
+@keyframes blinkTimer{
+
+    0%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.35;
+
+    }
+
+    100%{
+
+        opacity:1;
+
+    }
+
+}

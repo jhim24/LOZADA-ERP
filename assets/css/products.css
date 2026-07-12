@@ -194,3 +194,62 @@
     box-shadow:0 0 0 .20rem rgba(15,118,110,.15);
 
 }
+/* ==========================================
+   PRODUCT IMAGE PANEL
+========================================== */
+
+#imagePreview{
+
+    width:100%;
+
+    max-width:260px;
+
+    height:260px;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+    border:2px dashed #cbd5e1;
+
+    background:#f8fafc;
+
+    padding:8px;
+
+    transition:.30s;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+#imagePreview:hover{
+
+    transform:scale(1.02);
+
+    border-color:#0F766E;
+
+}
+
+.col-lg-4 hr{
+
+    margin:25px 0;
+
+    border-top:2px solid #e5e7eb;
+
+}
+
+.col-lg-4 .form-label{
+
+    font-weight:700;
+
+    color:#374151;
+
+}
+
+.col-lg-4 .form-control{
+
+    border-radius:12px;
+
+    min-height:46px;
+
+}

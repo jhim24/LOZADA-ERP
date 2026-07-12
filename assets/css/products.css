@@ -413,3 +413,86 @@
     border:1px solid #E5E7EB;
 
 }
+/* ==========================================
+   PRODUCT TABLE ACTION BUTTONS
+========================================== */
+
+.product-table .btn{
+
+    width:40px;
+
+    height:40px;
+
+    padding:0;
+
+    border:none;
+
+    border-radius:10px;
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:0 2px;
+
+    transition:all .25s ease;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}
+
+.product-table .btn i{
+
+    font-size:15px;
+
+}
+
+.product-table .btn-primary{
+
+    background:#2563EB;
+
+    color:#fff;
+
+}
+
+.product-table .btn-primary:hover{
+
+    background:#1D4ED8;
+
+    transform:translateY(-2px);
+
+}
+
+.product-table .btn-warning{
+
+    background:#F59E0B;
+
+    color:#fff;
+
+}
+
+.product-table .btn-warning:hover{
+
+    background:#D97706;
+
+    transform:translateY(-2px);
+
+}
+
+.product-table .btn-danger{
+
+    background:#DC2626;
+
+    color:#fff;
+
+}
+
+.product-table .btn-danger:hover{
+
+    background:#B91C1C;
+
+    transform:translateY(-2px);
+
+}

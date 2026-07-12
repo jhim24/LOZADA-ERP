@@ -182,7 +182,9 @@ document.addEventListener(
         );
 loadSalesSummary();
 loadPaymentSummary(); 
-initializeCashComputation();        
+initializeCashComputation(); 
+initializeDenominationCalculator(); 
+initializeSaveClosing();        
 }
 
 );
@@ -599,5 +601,273 @@ function computeCashSummary(){
         "form-control fw-bold text-primary";
 
     }
+
+}
+// ===============================================
+// CASH DENOMINATION CALCULATOR
+// ===============================================
+
+function initializeDenominationCalculator(){
+
+    const denominations = document.querySelectorAll(".denomination");
+
+    denominations.forEach(input=>{
+
+        input.addEventListener(
+
+            "input",
+
+            computeDenominationTotal
+
+        );
+
+    });
+
+    computeDenominationTotal();
+
+}
+
+// ===============================================
+// COMPUTE CASH DENOMINATION
+// ===============================================
+
+function computeDenominationTotal(){
+
+    let total = 0;
+
+    document.querySelectorAll(".denomination")
+
+    .forEach(input=>{
+
+        const qty = Number(input.value || 0);
+
+        const value = Number(input.dataset.value || 0);
+
+        total += qty * value;
+
+    });
+
+    const totalField = document.getElementById(
+
+        "cashDenominationTotal"
+
+    );
+
+    if(totalField){
+
+        totalField.value =
+
+            "₱" +
+
+            total.toLocaleString(
+
+                undefined,
+
+                {
+
+                    minimumFractionDigits:2,
+
+                    maximumFractionDigits:2
+
+                }
+
+            );
+
+    }
+
+    const actualCash = document.getElementById(
+
+        "actualCash"
+
+    );
+
+    if(actualCash){
+
+        actualCash.value = total.toFixed(2);
+
+    }
+
+    computeCashSummary();
+
+}
+// ===============================================
+// SAVE CLOSING REPORT
+// ===============================================
+
+function initializeSaveClosing(){
+
+    const button = document.getElementById(
+
+        "btnSaveClosing"
+
+    );
+
+    if(!button) return;
+
+    button.addEventListener(
+
+        "click",
+
+        saveClosingReport
+
+    );
+
+}
+
+// ===============================================
+// SAVE DATA TO FIREBASE
+// ===============================================
+
+function saveClosingReport(){
+
+    const now = new Date();
+
+    const year = now.getFullYear();
+
+    const month = now.toLocaleString(
+
+        "en-US",
+
+        {
+
+            month:"long"
+
+        }
+
+    );
+
+    const closingNo =
+
+        "CLS" +
+
+        Date.now();
+
+    const data = {
+
+        closingNo,
+
+        date:
+
+            document.getElementById(
+
+                "closingDate"
+
+            )?.value || "",
+
+        cashier:
+
+            document.getElementById(
+
+                "closingCashier"
+
+            )?.value || "",
+
+        shift:
+
+            document.getElementById(
+
+                "closingShift"
+
+            )?.value || "",
+
+        openingCash:
+
+            document.getElementById(
+
+                "openingCashAmount"
+
+            )?.value || "0",
+
+        totalTransactions:
+
+            document.getElementById(
+
+                "totalTransactions"
+
+            )?.value || "0",
+
+        grossSales:
+
+            document.getElementById(
+
+                "grossSales"
+
+            )?.value || "₱0.00",
+
+        totalPayment:
+
+            document.getElementById(
+
+                "paymentTotal"
+
+            )?.value || "₱0.00",
+
+        expectedCash:
+
+            document.getElementById(
+
+                "expectedCash"
+
+            )?.value || "0",
+
+        actualCash:
+
+            document.getElementById(
+
+                "actualCash"
+
+            )?.value || "0",
+
+        overShort:
+
+            document.getElementById(
+
+                "overShort"
+
+            )?.value || "₱0.00",
+
+        remarks:
+
+            document.getElementById(
+
+                "expenseRemarks"
+
+            )?.value || "",
+
+        createdAt:
+
+            firebase.database.ServerValue.TIMESTAMP
+
+    };
+
+    db.ref(
+
+        `cashierClosing/${year}/${month}/${closingNo}`
+
+    )
+
+    .set(data)
+
+    .then(()=>{
+
+        alert(
+
+            "Cashier Closing Report Saved Successfully."
+
+        );
+
+    })
+
+    .catch(error=>{
+
+        console.error(error);
+
+        alert(
+
+            "Unable to save Closing Report."
+
+        );
+
+    });
 
 }

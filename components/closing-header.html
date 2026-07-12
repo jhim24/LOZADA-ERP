@@ -1,0 +1,131 @@
+<!-- ==========================================
+     CASHIER CLOSING HEADER
+========================================== -->
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+            <div>
+
+                <h3 class="fw-bold mb-1">
+
+                    <i class="fa-solid fa-cash-register text-success"></i>
+
+                    Cashier Closing Report
+
+                </h3>
+
+                <p class="text-muted mb-0">
+
+                    End of Shift Sales and Cash Reconciliation
+
+                </p>
+
+            </div>
+
+            <div class="d-flex gap-2 mt-3 mt-lg-0">
+
+                <button
+                    class="btn btn-primary"
+                    id="btnPrintClosing">
+
+                    <i class="fa-solid fa-print"></i>
+
+                    Print
+
+                </button>
+
+                <button
+                    class="btn btn-success"
+                    id="btnCloseShift">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Close Shift
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row g-3">
+
+            <div class="col-lg-3">
+
+                <label class="form-label">
+
+                    Date
+
+                </label>
+
+                <input
+                    type="date"
+                    class="form-control"
+                    id="closingDate">
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <label class="form-label">
+
+                    Shift
+
+                </label>
+
+                <select
+                    class="form-select"
+                    id="closingShift">
+
+                    <option>Morning</option>
+
+                    <option>Afternoon</option>
+
+                    <option>Evening</option>
+
+                </select>
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <label class="form-label">
+
+                    Cashier
+
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    id="closingCashier"
+                    placeholder="Cashier Name">
+
+            </div>
+
+            <div class="col-lg-3">
+
+                <label class="form-label">
+
+                    Closing Time
+
+                </label>
+
+                <input
+                    type="time"
+                    class="form-control"
+                    id="closingTime">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

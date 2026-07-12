@@ -180,7 +180,424 @@ document.addEventListener(
             "Cashier Closing Report Loaded Successfully."
 
         );
+loadSalesSummary();
+loadPaymentSummary(); 
+initializeCashComputation();        
+}
+
+);
+// ===============================================
+// SALES SUMMARY
+// ===============================================
+
+function loadSalesSummary(){
+
+    db.ref("orders").once("value")
+
+    .then(snapshot=>{
+
+        let totalTransactions = 0;
+
+        let totalItems = 0;
+
+        let grossSales = 0;
+
+        snapshot.forEach(child=>{
+
+            const order = child.val();
+
+            if(order.status==="Cancelled"){
+
+                return;
+
+            }
+
+            totalTransactions++;
+
+            grossSales += Number(
+
+                order.total || 0
+
+            );
+
+            (order.items || []).forEach(item=>{
+
+                totalItems += Number(
+
+                    item.qty || 0
+
+                );
+
+            });
+
+        });
+
+        const txtTransactions =
+
+            document.getElementById(
+
+                "totalTransactions"
+
+            );
+
+        if(txtTransactions){
+
+            txtTransactions.value =
+
+                totalTransactions;
+
+        }
+
+        const txtItems =
+
+            document.getElementById(
+
+                "totalItemsSold"
+
+            );
+
+        if(txtItems){
+
+            txtItems.value =
+
+                totalItems;
+
+        }
+
+        const txtGross =
+
+            document.getElementById(
+
+                "grossSales"
+
+            );
+
+        if(txtGross){
+
+            txtGross.value =
+
+                "₱" +
+
+                grossSales.toLocaleString(
+
+                    undefined,
+
+                    {
+
+                        minimumFractionDigits:2,
+
+                        maximumFractionDigits:2
+
+                    }
+
+                );
+
+        }
+
+    })
+
+    .catch(error=>{
+
+        console.error(
+
+            error
+
+        );
+
+    });
+
+}
+// ===============================================
+// PAYMENT SUMMARY
+// ===============================================
+
+function loadPaymentSummary(){
+
+    db.ref("orders").once("value")
+
+    .then(snapshot=>{
+
+        let cash = 0;
+
+        let gcash = 0;
+
+        let maya = 0;
+
+        let credit = 0;
+
+        let debit = 0;
+
+        let bank = 0;
+
+        let others = 0;
+
+        snapshot.forEach(child=>{
+
+            const order = child.val();
+
+            if(order.status === "Cancelled"){
+
+                return;
+
+            }
+
+            const amount = Number(order.total || 0);
+
+            switch((order.payment || "").toLowerCase()){
+
+                case "cash":
+
+                    cash += amount;
+
+                    break;
+
+                case "gcash":
+
+                    gcash += amount;
+
+                    break;
+
+                case "maya":
+
+                    maya += amount;
+
+                    break;
+
+                case "credit card":
+
+                    credit += amount;
+
+                    break;
+
+                case "debit card":
+
+                    debit += amount;
+
+                    break;
+
+                case "bank transfer":
+
+                    bank += amount;
+
+                    break;
+
+                default:
+
+                    others += amount;
+
+                    break;
+
+            }
+
+        });
+
+        document.getElementById("paymentCash").value =
+            "₱" + cash.toFixed(2);
+
+        document.getElementById("paymentGCash").value =
+            "₱" + gcash.toFixed(2);
+
+        document.getElementById("paymentMaya").value =
+            "₱" + maya.toFixed(2);
+
+        document.getElementById("paymentCreditCard").value =
+            "₱" + credit.toFixed(2);
+
+        document.getElementById("paymentDebitCard").value =
+            "₱" + debit.toFixed(2);
+
+        document.getElementById("paymentBankTransfer").value =
+            "₱" + bank.toFixed(2);
+
+        document.getElementById("paymentOthers").value =
+            "₱" + others.toFixed(2);
+
+        document.getElementById("paymentTotal").value =
+            "₱" + (
+                cash +
+                gcash +
+                maya +
+                credit +
+                debit +
+                bank +
+                others
+            ).toFixed(2);
+
+    })
+
+    .catch(error=>{
+
+        console.error(error);
+
+    });
+
+}
+// ===============================================
+// CASH COMPUTATION
+// ===============================================
+
+function initializeCashComputation(){
+
+    const fields=[
+
+        "openingCashAmount",
+
+        "cashSalesAmount",
+
+        "cashInAmount",
+
+        "cashOutAmount",
+
+        "actualCash"
+
+    ];
+
+    fields.forEach(id=>{
+
+        const input=document.getElementById(id);
+
+        if(input){
+
+            input.addEventListener(
+
+                "input",
+
+                computeCashSummary
+
+            );
+
+        }
+
+    });
+
+    computeCashSummary();
+
+}
+
+// ===============================================
+// COMPUTE EXPECTED CASH
+// ===============================================
+
+function computeCashSummary(){
+
+    const opening=
+
+        Number(
+
+            document.getElementById(
+
+                "openingCashAmount"
+
+            )?.value||0
+
+        );
+
+    const cashSales=
+
+        Number(
+
+            document.getElementById(
+
+                "cashSalesAmount"
+
+            )?.value||0
+
+        );
+
+    const cashIn=
+
+        Number(
+
+            document.getElementById(
+
+                "cashInAmount"
+
+            )?.value||0
+
+        );
+
+    const cashOut=
+
+        Number(
+
+            document.getElementById(
+
+                "cashOutAmount"
+
+            )?.value||0
+
+        );
+
+    const actual=
+
+        Number(
+
+            document.getElementById(
+
+                "actualCash"
+
+            )?.value||0
+
+        );
+
+    const expected=
+
+        opening+
+
+        cashSales+
+
+        cashIn-
+
+        cashOut;
+
+    const variance=
+
+        actual-
+
+        expected;
+
+    document.getElementById(
+
+        "expectedCash"
+
+    ).value=
+
+    expected.toFixed(2);
+
+    const overShort=
+
+        document.getElementById(
+
+            "overShort"
+
+        );
+
+    overShort.value=
+
+        "₱"+variance.toFixed(2);
+
+    if(variance>0){
+
+        overShort.className=
+
+        "form-control fw-bold text-success";
 
     }
 
-);
+    else if(variance<0){
+
+        overShort.className=
+
+        "form-control fw-bold text-danger";
+
+    }
+
+    else{
+
+        overShort.className=
+
+        "form-control fw-bold text-primary";
+
+    }
+
+}

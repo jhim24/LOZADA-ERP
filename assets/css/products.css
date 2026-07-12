@@ -634,3 +634,229 @@
     box-shadow:0 0 0 .18rem rgba(15,118,110,.15);
 
 }
+/* ==========================================
+   PRODUCT IMAGE SECTION
+========================================== */
+
+#imagePreview{
+
+    width:180px;
+
+    height:180px;
+
+    object-fit:cover;
+
+    display:block;
+
+    margin:auto;
+
+    border:3px solid #E2E8F0;
+
+    border-radius:16px;
+
+    background:#FFFFFF;
+
+    padding:6px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.30s;
+
+}
+
+#imagePreview:hover{
+
+    transform:scale(1.03);
+
+    border-color:#0F766E;
+
+}
+
+/* ==========================================
+   UPLOAD SECTION
+========================================== */
+
+input[type="file"]{
+
+    cursor:pointer;
+
+}
+
+input[type="file"]::file-selector-button{
+
+    background:#0F766E;
+
+    color:#FFFFFF;
+
+    border:none;
+
+    padding:8px 14px;
+
+    border-radius:8px;
+
+    margin-right:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+input[type="file"]::file-selector-button:hover{
+
+    background:#0D9488;
+
+}
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+#btnSaveProduct,
+#btnUpdateProduct,
+#btnClearProduct{
+
+    height:48px;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    transition:.25s;
+
+}
+
+#btnSaveProduct{
+
+    background:#0F766E;
+
+    border:none;
+
+}
+
+#btnSaveProduct:hover{
+
+    background:#0D9488;
+
+}
+
+#btnUpdateProduct{
+
+    color:#FFFFFF;
+
+}
+
+#btnClearProduct{
+
+    background:#64748B;
+
+    border:none;
+
+}
+
+#btnClearProduct:hover{
+
+    background:#475569;
+
+}
+/* ==========================================
+   PRODUCT MASTER LIST
+========================================== */
+
+.product-table{
+
+    background:#FFFFFF;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+}
+
+.product-table .table{
+
+    margin:0;
+
+}
+
+.product-table thead th{
+
+    position:sticky;
+
+    top:0;
+
+    background:#0F766E;
+
+    color:#FFFFFF;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    padding:14px;
+
+    vertical-align:middle;
+
+    white-space:nowrap;
+
+    z-index:2;
+
+}
+
+.product-table tbody td{
+
+    padding:14px;
+
+    vertical-align:middle;
+
+    font-size:14px;
+
+    color:#334155;
+
+}
+
+.product-table tbody tr{
+
+    transition:.25s;
+
+}
+
+.product-table tbody tr:hover{
+
+    background:#F8FAFC;
+
+}
+
+.product-table img{
+
+    width:55px;
+
+    height:55px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:1px solid #E2E8F0;
+
+}
+
+.product-table .table-responsive{
+
+    max-height:600px;
+
+    overflow:auto;
+
+}

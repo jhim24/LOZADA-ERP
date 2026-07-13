@@ -218,91 +218,154 @@ class="alert alert-primary mt-3 mb-3 d-none">
     </div>
 
 </div>
-  <!-- CUSTOMER ORDER INFORMATION -->
+<!-- ==========================================
+     CUSTOMER INFORMATION
+========================================== -->
 
 <div
 id="customerOrderInfo"
-class="alert alert-warning mt-3 mb-3 d-none">
+class="card shadow-sm mt-3 mb-3 d-none">
 
-<div class="row">
+    <div class="card-header bg-warning">
 
-<div class="col-md-3">
+        <h5 class="mb-0">
 
-<strong>Order Type</strong>
+            <i class="fa-solid fa-user"></i>
 
-<br>
+            Customer Information
 
-<span id="customerOrderType">-</span>
+        </h5>
 
-</div>
+    </div>
 
-<div class="col-md-3">
+    <div class="card-body">
 
-<strong>Customer</strong>
+        <div class="row">
 
-<br>
+            <div class="col-md-4 mb-3">
 
-<span id="customerOrderName">-</span>
+                <label class="form-label">
 
-</div>
+                    Customer Name
 
-<div class="col-md-3">
+                </label>
 
-<strong>Phone</strong>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="customerName">
 
-<br>
+            </div>
 
-<span id="customerOrderPhone">-</span>
+            <div class="col-md-4 mb-3">
 
-</div>
+                <label class="form-label">
 
-<div class="col-md-3">
+                    Mobile Number
 
-<strong>Source</strong>
+                </label>
 
-<br>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="customerPhone">
 
-<span id="customerOrderSource">-</span>
+            </div>
 
-</div>
+            <div class="col-md-4 mb-3">
 
-</div>
+                <label class="form-label">
 
-<hr>
+                    Order Type
 
-<div class="row">
+                </label>
 
-<div class="col-md-6">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="customerOrderType"
+                    readonly>
 
-<strong>Delivery Address</strong>
+            </div>
 
-<br>
+        </div>
 
-<span id="customerOrderAddress">-</span>
+        <div class="row">
 
-</div>
+            <div class="col-md-6 mb-3">
 
-<div class="col-md-3">
+                <label class="form-label">
 
-<strong>Delivery Partner</strong>
+                    Delivery Address
 
-<br>
+                </label>
 
-<span id="customerOrderPartner">-</span>
+                <textarea
+                    class="form-control"
+                    rows="2"
+                    id="customerAddress"></textarea>
 
-</div>
+            </div>
 
-<div class="col-md-3">
+            <div class="col-md-3 mb-3">
 
-<strong>Delivery Fee</strong>
+                <label class="form-label">
 
-<br>
+                    Delivery Partner
 
-₱<span id="customerOrderFee">0.00</span>
+                </label>
 
-</div>
+                <select
+                    class="form-select"
+                    id="customerPartner">
 
-</div>
+                    <option value="Walk-in">
+
+                        Walk-in
+
+                    </option>
+
+                    <option value="Grab">
+
+                        Grab
+
+                    </option>
+
+                    <option value="FoodPanda">
+
+                        FoodPanda
+
+                    </option>
+
+                    <option value="In-house">
+
+                        In-house Rider
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="col-md-3 mb-3">
+
+                <label class="form-label">
+
+                    Delivery Fee
+
+                </label>
+
+                <input
+                    type="number"
+                    class="form-control"
+                    id="customerFee"
+                    value="0">
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
         <!-- Categories -->

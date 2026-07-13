@@ -376,79 +376,80 @@ function loadPaymentChart(){
 
     if(!canvas) return;
 
-    const orders = JSON.parse(
+    db.ref("orders").once("value",snapshot=>{
 
-        localStorage.getItem("orders")
+        const payment = {
 
-    ) || [];
+            "Cash":0,
 
-    const payment = {
+            "Credit Card":0,
 
-        "Cash":0,
+            "Debit Card":0,
 
-        "Credit Card":0,
+            "GCash":0,
 
-        "Debit Card":0,
+            "Maya":0,
 
-        "GCash":0,
+            "Bank Transfer":0
 
-        "Maya":0,
+        };
 
-        "Bank Transfer":0
+        snapshot.forEach(child=>{
 
-    };
+            const order = child.val();
 
-    orders.forEach(order=>{
+            if(order.status !== "Paid") return;
 
-        if(order.status !== "Paid") return;
+            if(payment.hasOwnProperty(order.payment)){
 
-        if(payment.hasOwnProperty(order.payment)){
+                payment[order.payment]++;
 
-            payment[order.payment]++;
+            }
+
+        });
+
+        if(
+            window.paymentChart &&
+            typeof window.paymentChart.destroy === "function"
+        ){
+
+            window.paymentChart.destroy();
 
         }
 
-    });
+        window.paymentChart = new Chart(canvas,{
 
-   if(
-    window.paymentChart &&
-    typeof window.paymentChart.destroy === "function"
-){
+            type:"doughnut",
 
-    window.paymentChart.destroy();
+            data:{
 
-}
-    window.paymentChart = new Chart(canvas,{
+                labels:Object.keys(payment),
 
-        type:"doughnut",
+                datasets:[{
 
-        data:{
+                    data:Object.values(payment)
 
-            labels:Object.keys(payment),
+                }]
 
-            datasets:[{
+            },
 
-                data:Object.values(payment)
+            options:{
 
-            }]
+                responsive:true,
 
-        },
+                plugins:{
 
-        options:{
+                    legend:{
 
-            responsive:true,
+                        position:"bottom"
 
-            plugins:{
-
-                legend:{
-
-                    position:"bottom"
+                    }
 
                 }
 
             }
 
-        }
+        });
 
     });
 

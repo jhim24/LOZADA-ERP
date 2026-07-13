@@ -152,7 +152,47 @@ function initLayout(){
     }
 
 }
+// ======================================
+// ACTIVE MENU
+// ======================================
 
+const currentPage = window.location.pathname.split("/").pop();
+
+document.querySelectorAll(".menu a").forEach(link=>{
+
+    const href = link.getAttribute("href");
+
+    if(!href) return;
+
+    if(href.endsWith(currentPage)){
+
+        link.classList.add("active");
+
+        const submenu = link.closest(".submenu");
+
+        if(submenu){
+
+            submenu.style.display = "block";
+
+            const parent = submenu.previousElementSibling;
+
+            if(parent){
+
+                const arrow = parent.querySelector(".submenu-arrow");
+
+                if(arrow){
+
+                    arrow.style.transform = "rotate(180deg)";
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
 // ======================================
 // INITIALIZE
 // ======================================

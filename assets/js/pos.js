@@ -526,7 +526,99 @@ document.addEventListener("click", async function(e){
         return;
 
     }
+// ===============================================
+// ORDER VALIDATION
+// ===============================================
 
+const orderType = document.querySelector(
+
+    'input[name="orderType"]:checked'
+
+).value;
+
+const customerName = document.getElementById("customerName")?.value.trim();
+
+const customerPhone = document.getElementById("customerPhone")?.value.trim();
+
+const customerAddress = document.getElementById("customerAddress")?.value.trim();
+
+// ----------------------
+// DINE-IN
+// ----------------------
+
+if(orderType === "DINE-IN"){
+
+    const table = JSON.parse(
+
+        localStorage.getItem("selectedTable")
+
+    );
+
+    if(!table){
+
+        alert("Please select a table first.");
+
+        return;
+
+    }
+
+}
+
+// ----------------------
+// TAKE OUT
+// ----------------------
+
+if(orderType === "TAKE OUT"){
+
+    if(customerName === ""){
+
+        alert("Customer Name is required.");
+
+        document.getElementById("customerName").focus();
+
+        return;
+
+    }
+
+}
+
+// ----------------------
+// DELIVERY
+// ----------------------
+
+if(orderType === "DELIVERY"){
+
+    if(customerName === ""){
+
+        alert("Customer Name is required.");
+
+        document.getElementById("customerName").focus();
+
+        return;
+
+    }
+
+    if(customerPhone === ""){
+
+        alert("Mobile Number is required.");
+
+        document.getElementById("customerPhone").focus();
+
+        return;
+
+    }
+
+    if(customerAddress === ""){
+
+        alert("Delivery Address is required.");
+
+        document.getElementById("customerAddress").focus();
+
+        return;
+
+    }
+
+}
     const receiptNo = Math.floor(Math.random() * 900000) + 100000;
 
     const grandTotal =

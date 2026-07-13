@@ -31,3 +31,44 @@ function initLayout(){
     }
 
 }
+// ===============================================
+// COLLAPSIBLE SIDEBAR
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const parent = e.target.closest(".menu-parent");
+
+    if(!parent) return;
+
+    e.preventDefault();
+
+    const submenu = parent.nextElementSibling;
+
+    const arrow = parent.querySelector(".submenu-arrow");
+
+    if(!submenu) return;
+
+    if(submenu.style.display === "block"){
+
+        submenu.style.display = "none";
+
+        if(arrow){
+
+            arrow.style.transform = "rotate(0deg)";
+
+        }
+
+    }else{
+
+        submenu.style.display = "block";
+
+        if(arrow){
+
+            arrow.style.transform = "rotate(180deg)";
+
+        }
+
+    }
+
+});

@@ -1742,7 +1742,13 @@ db.ref("orders").once("value").then(snapshot=>{
 
         if(match){
 
-            db.ref("orders/" + child.key).remove();
+           db.ref("orders/" + child.key).update({
+
+    completed: true,
+
+    completedDate: new Date().toISOString()
+
+});
 
         }
 

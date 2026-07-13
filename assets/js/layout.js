@@ -37,37 +37,35 @@ function initLayout(){
     // COLLAPSIBLE SIDEBAR
     // ======================================
 
-  document.querySelectorAll(".menu-parent").forEach(parent=>{
+    document.querySelectorAll(".menu-parent").forEach(parent=>{
 
-    parent.addEventListener("click",function(e){
+        parent.addEventListener("click",function(e){
 
-        e.preventDefault();
+            e.preventDefault();
 
-        const submenu=this.nextElementSibling;
+            const submenu = this.nextElementSibling;
 
-        const arrow=this.querySelector(".submenu-arrow");
+            const arrow = this.querySelector(".submenu-arrow");
 
-        // =====================================
-        // CLOSE OTHER MENUS
-        // =====================================
+            if(!submenu) return;
 
-        document.querySelectorAll(".menu-parent").forEach(item=>{
+            if(submenu.style.display==="block"){
 
-            if(item!==this){
+                submenu.style.display="none";
 
-                const otherSub=item.nextElementSibling;
+                if(arrow){
 
-                const otherArrow=item.querySelector(".submenu-arrow");
-
-                if(otherSub){
-
-                    otherSub.style.display="none";
+                    arrow.style.transform="rotate(0deg)";
 
                 }
 
-                if(otherArrow){
+            }else{
 
-                    otherArrow.style.transform="rotate(0deg)";
+                submenu.style.display="block";
+
+                if(arrow){
+
+                    arrow.style.transform="rotate(180deg)";
 
                 }
 
@@ -75,35 +73,10 @@ function initLayout(){
 
         });
 
-        // =====================================
-        // TOGGLE CURRENT MENU
-        // =====================================
-
-        if(submenu.style.display==="block"){
-
-            submenu.style.display="none";
-
-            if(arrow){
-
-                arrow.style.transform="rotate(0deg)";
-
-            }
-
-        }else{
-
-            submenu.style.display="block";
-
-            if(arrow){
-
-                arrow.style.transform="rotate(180deg)";
-
-            }
-
-        }
-
     });
 
-});
+}
+
 // ======================================
 // INITIALIZE
 // ======================================

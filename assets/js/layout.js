@@ -5,14 +5,20 @@
 
 function initLayout(){
 
-    // Restore sidebar state
+    // ======================================
+    // RESTORE SIDEBAR STATE
+    // ======================================
+
     if(localStorage.getItem("sidebarCollapsed") === "true"){
 
         document.body.classList.add("sidebar-collapsed");
 
     }
 
-    // Toggle sidebar
+    // ======================================
+    // TOGGLE SIDEBAR
+    // ======================================
+
     const btn = document.getElementById("toggleSidebar");
 
     if(btn){
@@ -49,23 +55,57 @@ function initLayout(){
 
             if(!submenu) return;
 
-            if(submenu.style.display==="block"){
+            // Close all other menus
 
-                submenu.style.display="none";
+            document.querySelectorAll(".menu-parent").forEach(item=>{
+
+                if(item !== this){
+
+                    const otherSub = item.nextElementSibling;
+
+                    const otherArrow = item.querySelector(".submenu-arrow");
+
+                    if(otherSub){
+
+                        otherSub.style.display = "none";
+
+                    }
+
+                    if(otherArrow){
+
+                        otherArrow.style.transform = "rotate(0deg)";
+
+                    }
+
+                }
+
+            });
+
+            const menuName = this.querySelector("span").innerText;
+
+            // Toggle current menu
+
+            if(submenu.style.display === "block"){
+
+                submenu.style.display = "none";
+
+                localStorage.removeItem("openMenu");
 
                 if(arrow){
 
-                    arrow.style.transform="rotate(0deg)";
+                    arrow.style.transform = "rotate(0deg)";
 
                 }
 
             }else{
 
-                submenu.style.display="block";
+                submenu.style.display = "block";
+
+                localStorage.setItem("openMenu", menuName);
 
                 if(arrow){
 
-                    arrow.style.transform="rotate(180deg)";
+                    arrow.style.transform = "rotate(180deg)";
 
                 }
 
@@ -74,6 +114,42 @@ function initLayout(){
         });
 
     });
+
+    // ======================================
+    // RESTORE LAST OPEN MENU
+    // ======================================
+
+    const lastMenu = localStorage.getItem("openMenu");
+
+    if(lastMenu){
+
+        document.querySelectorAll(".menu-parent").forEach(parent=>{
+
+            const title = parent.querySelector("span");
+
+            if(title && title.innerText === lastMenu){
+
+                const submenu = parent.nextElementSibling;
+
+                const arrow = parent.querySelector(".submenu-arrow");
+
+                if(submenu){
+
+                    submenu.style.display = "block";
+
+                }
+
+                if(arrow){
+
+                    arrow.style.transform = "rotate(180deg)";
+
+                }
+
+            }
+
+        });
+
+    }
 
 }
 

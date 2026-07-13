@@ -464,67 +464,65 @@ function loadBestSeller(){
 
     if(!tbody) return;
 
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    db.ref("orders").once("value",snapshot=>{
 
-    const products = {};
+        const products = {};
 
-    orders.forEach(order=>{
+        snapshot.forEach(child=>{
 
-        if(order.status !== "Paid") return;
+            const order = child.val();
 
-        if(!order.items) return;
+            if(order.status !== "Paid") return;
 
-        order.items.forEach(item=>{
+            if(!order.items) return;
 
-            if(!products[item.name]){
+            order.items.forEach(item=>{
 
-                products[item.name] = 0;
+                if(!products[item.name]){
 
-            }
+                    products[item.name] = 0;
 
-            products[item.name] += Number(item.qty);
+                }
+
+                products[item.name] += Number(item.qty || 0);
+
+            });
 
         });
 
-    });
+        const ranking = Object.entries(products)
 
-    const ranking = Object.entries(products)
+            .sort((a,b)=>b[1]-a[1])
 
-        .sort((a,b)=>b[1]-a[1])
+            .slice(0,5);
 
-        .slice(0,5);
+        if(ranking.length===0){
 
-    if(ranking.length===0){
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="3" class="text-center">
+                        No Sales Yet
+                    </td>
+                </tr>
+            `;
 
-        tbody.innerHTML = `
-        <tr>
-            <td colspan="3" class="text-center">
-                No Sales Yet
-            </td>
-        </tr>
-        `;
+            return;
 
-        return;
+        }
 
-    }
+        tbody.innerHTML = "";
 
-    tbody.innerHTML = "";
+        ranking.forEach((item,index)=>{
 
-    ranking.forEach((item,index)=>{
+            tbody.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item[0]}</td>
+                    <td>${item[1]}</td>
+                </tr>
+            `;
 
-        tbody.innerHTML += `
-
-        <tr>
-
-            <td>${index+1}</td>
-
-            <td>${item[0]}</td>
-
-            <td>${item[1]}</td>
-
-        </tr>
-
-        `;
+        });
 
     });
 

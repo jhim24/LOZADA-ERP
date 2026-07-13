@@ -284,69 +284,84 @@ function loadSalesChart(){
 
     if(!canvas) return;
 
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    db.ref("orders").once("value",snapshot=>{
 
-    const sales = {};
+        const sales = {};
 
-    orders.forEach(order=>{
+        snapshot.forEach(child=>{
 
-        if(order.status !== "Paid") return;
+            const order = child.val();
 
-        const date = new Date(order.date).toLocaleDateString();
+            if(order.status !== "Paid") return;
 
-        if(!sales[date]){
+            const date = new Date(
 
-            sales[date] = 0;
+                order.completedDate ||
 
-        }
+                order.servedTime ||
 
-        sales[date] += Number(order.total || 0);
+                order.date ||
 
-    });
+                0
 
-    const labels = Object.keys(sales);
+            ).toLocaleDateString();
 
-    const values = Object.values(sales);
+            if(!sales[date]){
 
-   if(
-    window.salesChart &&
-    typeof window.salesChart.destroy === "function"
-){
+                sales[date] = 0;
 
-    window.salesChart.destroy();
+            }
 
-}
-    window.salesChart = new Chart(canvas,{
+            sales[date] += Number(order.total || 0);
 
-        type:"line",
+        });
 
-        data:{
+        const labels = Object.keys(sales);
 
-            labels:labels,
+        const values = Object.values(sales);
 
-            datasets:[{
+        if(
+            window.salesChart &&
+            typeof window.salesChart.destroy === "function"
+        ){
 
-                label:"Daily Sales",
-
-                data:values,
-
-                fill:true,
-
-                tension:.35,
-
-                borderWidth:3
-
-            }]
-
-        },
-
-        options:{
-
-            responsive:true,
-
-            maintainAspectRatio:false
+            window.salesChart.destroy();
 
         }
+
+        window.salesChart = new Chart(canvas,{
+
+            type:"line",
+
+            data:{
+
+                labels:labels,
+
+                datasets:[{
+
+                    label:"Daily Sales",
+
+                    data:values,
+
+                    fill:true,
+
+                    tension:.35,
+
+                    borderWidth:3
+
+                }]
+
+            },
+
+            options:{
+
+                responsive:true,
+
+                maintainAspectRatio:false
+
+            }
+
+        });
 
     });
 

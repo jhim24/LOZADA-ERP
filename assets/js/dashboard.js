@@ -794,103 +794,147 @@ function loadRecentOrders(){
 
 function loadBusinessSummary(){
 
-    const orders = JSON.parse(
-        localStorage.getItem("orders")
-    ) || [];
+    db.ref("orders").once("value",snapshot=>{
 
-    let cash = 0;
+        let cash = 0;
 
-    let card = 0;
+        let card = 0;
 
-    let digital = 0;
+        let digital = 0;
 
-    let transactions = 0;
+        let transactions = 0;
 
-    orders.forEach(order=>{
+        snapshot.forEach(child=>{
 
-        if(order.status !== "Paid") return;
+            const order = child.val();
 
-        transactions++;
+            if(order.status !== "Paid") return;
 
-        switch(order.payment){
+            transactions++;
 
-            case "Cash":
+            switch(order.payment){
 
-                cash += Number(order.total || 0);
+                case "Cash":
 
-                break;
+                    cash += Number(order.total || 0);
 
-            case "Credit Card":
+                    break;
 
-            case "Debit Card":
+                case "Credit Card":
 
-                card += Number(order.total || 0);
+                case "Debit Card":
 
-                break;
+                    card += Number(order.total || 0);
 
-            case "GCash":
+                    break;
 
-            case "Maya":
+                case "GCash":
 
-            case "Bank Transfer":
+                case "Maya":
 
-                digital += Number(order.total || 0);
+                case "Bank Transfer":
 
-                break;
+                    digital += Number(order.total || 0);
 
-        }
+                    break;
+
+            }
+
+        });
+
+        const expenses = 0;
+
+        const netProfit =
+
+            cash +
+
+            card +
+
+            digital -
+
+            expenses;
+
+        const setValue = (id,value)=>{
+
+            const element = document.getElementById(id);
+
+            if(element){
+
+                element.innerHTML = value;
+
+            }
+
+        };
+
+        setValue(
+
+            "dashboardCashSales",
+
+            "₱" + cash.toLocaleString(undefined,{
+
+                minimumFractionDigits:2
+
+            })
+
+        );
+
+        setValue(
+
+            "dashboardCardSales",
+
+            "₱" + card.toLocaleString(undefined,{
+
+                minimumFractionDigits:2
+
+            })
+
+        );
+
+        setValue(
+
+            "dashboardDigitalSales",
+
+            "₱" + digital.toLocaleString(undefined,{
+
+                minimumFractionDigits:2
+
+            })
+
+        );
+
+        setValue(
+
+            "dashboardExpenses",
+
+            "₱" + expenses.toLocaleString(undefined,{
+
+                minimumFractionDigits:2
+
+            })
+
+        );
+
+        setValue(
+
+            "dashboardNetProfit",
+
+            "₱" + netProfit.toLocaleString(undefined,{
+
+                minimumFractionDigits:2
+
+            })
+
+        );
+
+        setValue(
+
+            "dashboardTransactions",
+
+            transactions
+
+        );
 
     });
-
-    const expenses = 0;
-
-    const netProfit =
-        cash +
-        card +
-        digital -
-        expenses;
-
-    const setValue=(id,value)=>{
-
-        const element=document.getElementById(id);
-
-        if(element){
-
-            element.innerHTML=value;
-
-        }
-
-    };
-
-    setValue(
-        "dashboardCashSales",
-        "₱"+cash.toFixed(2)
-    );
-
-    setValue(
-        "dashboardCardSales",
-        "₱"+card.toFixed(2)
-    );
-
-    setValue(
-        "dashboardDigitalSales",
-        "₱"+digital.toFixed(2)
-    );
-
-    setValue(
-        "dashboardExpenses",
-        "₱"+expenses.toFixed(2)
-    );
-
-    setValue(
-        "dashboardNetProfit",
-        "₱"+netProfit.toFixed(2)
-    );
-
-    setValue(
-        "dashboardTransactions",
-        transactions
-    );
 
 }
 // ======================================

@@ -1349,3 +1349,26 @@ body.sidebar-collapsed .sidebar-footer img{
     margin:0;
 
 }
+/* ==========================================
+   ACTIVE MENU
+========================================== */
+
+.menu a.active{
+
+    background:#F59E0B !important;
+
+    color:#111827 !important;
+
+    font-weight:700;
+
+    border-radius:10px;
+
+}
+
+.submenu a.active{
+
+    background:#2563EB !important;
+
+    color:#ffffff !important;
+
+}

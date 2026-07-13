@@ -1740,18 +1740,23 @@ db.ref("orders").once("value").then(snapshot=>{
 
         }
 
-        if(match){
+      if(match){
 
-           db.ref("orders/" + child.key).update({
+    db.ref("orders/" + child.key).update({
 
-    completed: true,
+        status: "Paid",
 
-    completedDate: new Date().toISOString()
+        paymentCompleted: true,
 
-});
+        completed: true,
 
-        }
+        completedDate: new Date().toISOString(),
 
+        dashboardPosted: true
+
+    });
+
+}
     });
 
 });

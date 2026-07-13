@@ -152,7 +152,17 @@ productSnapshot.forEach(child=>{
 
         if(order.status !== "Paid") return;
 
-        const orderDate = new Date(order.date).toDateString();
+       const orderDate = new Date(
+
+    order.completedDate ||
+
+    order.servedTime ||
+
+    order.date ||
+
+    0
+
+).toDateString();
 
         if(orderDate !== today) return;
 

@@ -75,133 +75,200 @@ loadTables("Rooftop");
 
 function initializeTables(){
 
-    let tables = JSON.parse(
+    db.ref("restaurantTables").once("value").then(snapshot=>{
 
-        localStorage.getItem("restaurantTables")
+        // Huwag gumawa ulit kapag may data na
+        if(snapshot.exists()){
 
-    );
+            return;
 
-    if(tables) return;
+        }
 
-    tables = [];
+        const tables = [];
 
-    // Rooftop
+        // ==========================================
+        // ROOFTOP
+        // ==========================================
 
-    for(let i=1;i<=20;i++){
+        for(let i=1;i<=20;i++){
 
-        tables.push({
+            tables.push({
 
-            floor:"Rooftop",
+                floor:"Rooftop",
 
-            name:"Table "+i,
+                name:"Table " + i,
 
-            seats:4,
+                seats:4,
 
-            status:"Available"
+                status:"Available",
+
+                customer:"",
+
+                guests:0,
+
+                server:"",
+
+                orderNo:""
+
+            });
+
+        }
+
+        // ==========================================
+        // MAIN DINING
+        // ==========================================
+
+        for(let i=1;i<=15;i++){
+
+            tables.push({
+
+                floor:"Main Dining",
+
+                name:"Table " + i,
+
+                seats:4,
+
+                status:"Available",
+
+                customer:"",
+
+                guests:0,
+
+                server:"",
+
+                orderNo:""
+
+            });
+
+        }
+
+        // ==========================================
+        // BASEMENT
+        // ==========================================
+
+        for(let i=1;i<=20;i++){
+
+            tables.push({
+
+                floor:"Basement",
+
+                name:"Table " + i,
+
+                seats:4,
+
+                status:"Available",
+
+                customer:"",
+
+                guests:0,
+
+                server:"",
+
+                orderNo:""
+
+            });
+
+        }
+
+        // ==========================================
+        // VIP ROOM
+        // ==========================================
+
+        for(let i=1;i<=4;i++){
+
+            tables.push({
+
+                floor:"VIP Room",
+
+                name:"VIP " + i,
+
+                seats:8,
+
+                status:"Available",
+
+                customer:"",
+
+                guests:0,
+
+                server:"",
+
+                orderNo:""
+
+            });
+
+        }
+
+        // ==========================================
+        // TAKE OUT
+        // ==========================================
+
+        for(let i=1;i<=10;i++){
+
+            tables.push({
+
+                floor:"Take Out",
+
+                name:"Pickup " + String(i).padStart(3,"0"),
+
+                seats:0,
+
+                status:"Available",
+
+                customer:"",
+
+                guests:0,
+
+                server:"",
+
+                orderNo:"",
+
+                type:"TAKE_OUT"
+
+            });
+
+        }
+
+        // ==========================================
+        // DELIVERY
+        // ==========================================
+
+        for(let i=1;i<=10;i++){
+
+            tables.push({
+
+                floor:"Delivery",
+
+                name:"Delivery " + String(i).padStart(3,"0"),
+
+                seats:0,
+
+                status:"Available",
+
+                customer:"",
+
+                guests:0,
+
+                server:"",
+
+                orderNo:"",
+
+                type:"DELIVERY"
+
+            });
+
+        }
+
+        // ==========================================
+        // SAVE TO FIREBASE
+        // ==========================================
+
+        tables.forEach(table=>{
+
+            db.ref("restaurantTables").push(table);
 
         });
-
-    }
-
-    // Main Dining
-
-    for(let i=1;i<=15;i++){
-
-        tables.push({
-
-            floor:"Main Dining",
-
-            name:"Table "+i,
-
-            seats:4,
-
-            status:"Available"
-
-        });
-
-    }
-
-    // Basement
-
-    for(let i=1;i<=20;i++){
-
-        tables.push({
-
-            floor:"Basement",
-
-            name:"Table "+i,
-
-            seats:4,
-
-            status:"Available"
-
-        });
-
-    }
-
-    // VIP
-
-    for(let i=1;i<=4;i++){
-
-        tables.push({
-
-            floor:"VIP Room",
-
-            name:"VIP "+i,
-
-            seats:8,
-
-            status:"Available"
-
-        });
-
-    }
-// ===============================================
-// TAKE OUT
-// ===============================================
-
-for(let i=1;i<=10;i++){
-
-    tables.push({
-
-        floor:"Take Out",
-
-        name:"Pickup "+String(i).padStart(3,"0"),
-
-        seats:0,
-
-        status:"Available"
 
     });
-
-}
-
-// ===============================================
-// DELIVERY
-// ===============================================
-
-for(let i=1;i<=10;i++){
-
-    tables.push({
-
-        floor:"Delivery",
-
-        name:"Delivery "+String(i).padStart(3,"0"),
-
-        seats:0,
-
-        status:"Available"
-
-    });
-
-}
-    localStorage.setItem(
-
-        "restaurantTables",
-
-        JSON.stringify(tables)
-
-    );
 
 }
 // ===============================================

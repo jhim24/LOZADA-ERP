@@ -539,57 +539,117 @@ function loadNotifications(){
 
     list.innerHTML = "";
 
-    const products = JSON.parse(localStorage.getItem("products")) || [];
+    Promise.all([
 
-    const tables = JSON.parse(localStorage.getItem("restaurantTables")) || [];
+        db.ref("products").once("value"),
 
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+        db.ref("restaurantTables").once("value"),
 
-    // LOW STOCK
+        db.ref("orders").once("value")
 
-    products.forEach(product=>{
+    ]).then(([productSnap, tableSnap, orderSnap])=>{
 
-        if(Number(product.stock) <= Number(product.reorderLevel || 10)){
+        // LOW STOCK
+
+        productSnap.forEach(child=>{
+
+            const product = child.val();
+
+            if(
+
+                Number(product.stock) <=
+
+                Number(product.reorderLevel || 10)
+
+            ){
+
+                list.innerHTML += `
+
+                <li class="list-group-item">
+
+                    🔴 Low Stock :
+
+                    <strong>${product.name}</strong>
+
+                </li>
+
+                `;
+
+            }
+
+        });
+
+        // OCCUPIED TABLES
+
+        let occupied = 0;
+
+        tableSnap.forEach(child=>{
+
+            if(child.val().status==="Occupied"){
+
+                occupied++;
+
+            }
+
+        });
+
+        if(occupied){
 
             list.innerHTML += `
+
             <li class="list-group-item">
-                🔴 Low Stock : <strong>${product.name}</strong>
-            </li>`;
+
+                🍽 Occupied Tables : ${occupied}
+
+            </li>
+
+            `;
+
+        }
+
+        // PENDING ORDERS
+
+        let pending = 0;
+
+        orderSnap.forEach(child=>{
+
+            if(child.val().status==="Pending"){
+
+                pending++;
+
+            }
+
+        });
+
+        if(pending){
+
+            list.innerHTML += `
+
+            <li class="list-group-item">
+
+                👨‍🍳 Pending Kitchen Orders : ${pending}
+
+            </li>
+
+            `;
+
+        }
+
+        if(list.innerHTML===""){
+
+            list.innerHTML = `
+
+            <li class="list-group-item text-success">
+
+                ✅ No Notifications
+
+            </li>
+
+            `;
+
         }
 
     });
-
-    // OCCUPIED TABLES
-
-    const occupied = tables.filter(table=>table.status==="Occupied").length;
-
-    if(occupied){
-
-        list.innerHTML += `
-        <li class="list-group-item">
-            🍽 Occupied Tables : ${occupied}
-        </li>`;
-    }
-
-    // PENDING ORDERS
-
-    const pending = orders.filter(order=>order.status==="Pending").length;
-
-    if(pending){
-
-        list.innerHTML += `
-        <li class="list-group-item">
-            👨‍🍳 Pending Kitchen Orders : ${pending}
-        </li>`;
-    }
-
-    if(list.innerHTML===""){
-
-        list.innerHTML=`
-        <li class="list-group-item text-success">
-            ✅ No Notifications
-        </li>`;
-    }
 
 }
 // ======================================

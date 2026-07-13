@@ -1872,15 +1872,21 @@ document.addEventListener("change", function(e){
 
     if(e.target.name !== "orderType") return;
 
-    const dineInfo = document.getElementById("selectedTableInfo");
-
-    const customerInfo = document.getElementById("customerOrderInfo");
-
     const type = e.target.value;
 
-    // ---------------------------------------
-    // SAVE ORDER TYPE
-    // ---------------------------------------
+    const dineInfo = document.getElementById("selectedTableInfo");
+    const customerCard = document.getElementById("customerOrderInfo");
+
+    const address = document.getElementById("customerAddress")
+        .closest(".col-md-6");
+
+    const partner = document.getElementById("customerPartner")
+        .closest(".col-md-3");
+
+    const fee = document.getElementById("customerFee")
+        .closest(".col-md-3");
+
+    // Save Order Type
 
     let customerOrder = JSON.parse(
 
@@ -1898,35 +1904,53 @@ document.addEventListener("change", function(e){
 
     );
 
-    // ---------------------------------------
-    // SHOW / HIDE PANELS
-    // ---------------------------------------
+    document.getElementById("customerOrderType").value = type;
+
+    // =======================================
+    // DINE-IN
+    // =======================================
 
     if(type === "DINE-IN"){
 
         dineInfo.classList.remove("d-none");
 
-        customerInfo.classList.add("d-none");
+        customerCard.classList.add("d-none");
 
     }
 
-    else{
+    // =======================================
+    // TAKE OUT
+    // =======================================
+
+    else if(type === "TAKE OUT"){
 
         dineInfo.classList.add("d-none");
 
-        customerInfo.classList.remove("d-none");
+        customerCard.classList.remove("d-none");
+
+        address.classList.add("d-none");
+
+        partner.classList.add("d-none");
+
+        fee.classList.add("d-none");
 
     }
 
-    // ---------------------------------------
-    // DISPLAY ORDER TYPE
-    // ---------------------------------------
+    // =======================================
+    // DELIVERY
+    // =======================================
 
-    const label = document.getElementById("customerOrderType");
+    else if(type === "DELIVERY"){
 
-    if(label){
+        dineInfo.classList.add("d-none");
 
-        label.innerHTML = type;
+        customerCard.classList.remove("d-none");
+
+        address.classList.remove("d-none");
+
+        partner.classList.remove("d-none");
+
+        fee.classList.remove("d-none");
 
     }
 

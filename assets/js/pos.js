@@ -1852,3 +1852,36 @@ function loadCustomerOrder(){
     });
 
 }
+// ===============================================
+// ORDER TYPE SELECTOR
+// ===============================================
+
+document.addEventListener("change", function(e){
+
+    if(e.target.name !== "orderType") return;
+
+    const dineInfo = document.getElementById("selectedTableInfo");
+
+    const customerInfo = document.getElementById("customerOrderInfo");
+
+    const type = e.target.value;
+
+    if(type === "DINE-IN"){
+
+        dineInfo.classList.remove("d-none");
+
+        customerInfo.classList.add("d-none");
+
+    }
+
+    else{
+
+        dineInfo.classList.add("d-none");
+
+        customerInfo.classList.remove("d-none");
+
+        document.getElementById("customerOrderType").innerText = type;
+
+    }
+
+});

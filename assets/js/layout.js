@@ -22,53 +22,67 @@ function initLayout(){
             document.body.classList.toggle("sidebar-collapsed");
 
             localStorage.setItem(
+
                 "sidebarCollapsed",
+
                 document.body.classList.contains("sidebar-collapsed")
+
             );
 
         };
 
     }
 
+    // ======================================
+    // COLLAPSIBLE SIDEBAR
+    // ======================================
+
+    document.querySelectorAll(".menu-parent").forEach(parent=>{
+
+        parent.addEventListener("click",function(e){
+
+            e.preventDefault();
+
+            const submenu = this.nextElementSibling;
+
+            const arrow = this.querySelector(".submenu-arrow");
+
+            if(!submenu) return;
+
+            if(submenu.style.display==="block"){
+
+                submenu.style.display="none";
+
+                if(arrow){
+
+                    arrow.style.transform="rotate(0deg)";
+
+                }
+
+            }else{
+
+                submenu.style.display="block";
+
+                if(arrow){
+
+                    arrow.style.transform="rotate(180deg)";
+
+                }
+
+            }
+
+        });
+
+    });
+
 }
-// ===============================================
-// COLLAPSIBLE SIDEBAR
-// ===============================================
 
-document.addEventListener("click", function(e){
+// ======================================
+// INITIALIZE
+// ======================================
 
-    const parent = e.target.closest(".menu-parent");
+document.addEventListener("DOMContentLoaded",function(){
 
-    if(!parent) return;
-
-    e.preventDefault();
-
-    const submenu = parent.nextElementSibling;
-
-    const arrow = parent.querySelector(".submenu-arrow");
-
-    if(!submenu) return;
-
-    if(submenu.style.display === "block"){
-
-        submenu.style.display = "none";
-
-        if(arrow){
-
-            arrow.style.transform = "rotate(0deg)";
-
-        }
-
-    }else{
-
-        submenu.style.display = "block";
-
-        if(arrow){
-
-            arrow.style.transform = "rotate(180deg)";
-
-        }
-
-    }
+    initLayout();
 
 });

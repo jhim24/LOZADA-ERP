@@ -918,7 +918,7 @@ async function saveOrder(receiptNo, total){
 
         if(
             customer.orderType === "DELIVERY" ||
-            customer.orderType === "TAKE-OUT"
+           customer.orderType === "TAKE OUT"
         ){
 
             if(

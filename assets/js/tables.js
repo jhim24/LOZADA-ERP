@@ -878,19 +878,27 @@ document.addEventListener("click", function(e){
 
     }
 
-    let tables = JSON.parse(
+  db.ref("restaurantTables").once("value").then(snapshot=>{
 
-        localStorage.getItem("restaurantTables")
+    let exists = false;
 
-    ) || [];
+    snapshot.forEach(child=>{
 
-    const exists = tables.some(table=>
+        const table = child.val();
 
-        table.floor === floor &&
+        if(
 
-        table.name.toLowerCase() === name.toLowerCase()
+            table.floor === floor &&
 
-    );
+            table.name.toLowerCase() === name.toLowerCase()
+
+        ){
+
+            exists = true;
+
+        }
+
+    });
 
     if(exists){
 
@@ -900,7 +908,7 @@ document.addEventListener("click", function(e){
 
     }
 
-    tables.push({
+    return db.ref("restaurantTables").push({
 
         floor: floor,
 
@@ -912,7 +920,7 @@ document.addEventListener("click", function(e){
 
         customer: "",
 
-        guests: "",
+        guests: 0,
 
         server: "",
 
@@ -920,13 +928,7 @@ document.addEventListener("click", function(e){
 
     });
 
-    localStorage.setItem(
-
-        "restaurantTables",
-
-        JSON.stringify(tables)
-
-    );
+}).then(()=>{
 
     bootstrap.Modal.getInstance(
 
@@ -937,6 +939,14 @@ document.addEventListener("click", function(e){
     loadTables(floor);
 
     alert("Table added successfully.");
+
+}).catch(error=>{
+
+    console.error(error);
+
+    alert("Unable to save table.");
+
+});
 
 });
 // ===============================================

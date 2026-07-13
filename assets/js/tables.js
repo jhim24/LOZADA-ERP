@@ -156,7 +156,45 @@ function initializeTables(){
         });
 
     }
+// ===============================================
+// TAKE OUT
+// ===============================================
 
+for(let i=1;i<=10;i++){
+
+    tables.push({
+
+        floor:"Take Out",
+
+        name:"Pickup "+String(i).padStart(3,"0"),
+
+        seats:0,
+
+        status:"Available"
+
+    });
+
+}
+
+// ===============================================
+// DELIVERY
+// ===============================================
+
+for(let i=1;i<=10;i++){
+
+    tables.push({
+
+        floor:"Delivery",
+
+        name:"Delivery "+String(i).padStart(3,"0"),
+
+        seats:0,
+
+        status:"Available"
+
+    });
+
+}
     localStorage.setItem(
 
         "restaurantTables",

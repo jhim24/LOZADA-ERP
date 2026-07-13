@@ -1955,3 +1955,80 @@ document.addEventListener("change", function(e){
     }
 
 });
+// ===============================================
+// CUSTOMER INFORMATION AUTO SAVE
+// ===============================================
+
+document.addEventListener("input", function(e){
+
+    const fields = [
+
+        "customerName",
+
+        "customerPhone",
+
+        "customerAddress",
+
+        "customerFee"
+
+    ];
+
+    if(!fields.includes(e.target.id)) return;
+
+    saveCustomerInformation();
+
+});
+
+document.addEventListener("change", function(e){
+
+    if(e.target.id !== "customerPartner") return;
+
+    saveCustomerInformation();
+
+});
+
+function saveCustomerInformation(){
+
+    let customerOrder = JSON.parse(
+
+        localStorage.getItem("customerOrder")
+
+    ) || {};
+
+    customerOrder.name =
+
+        document.getElementById("customerName").value.trim();
+
+    customerOrder.phone =
+
+        document.getElementById("customerPhone").value.trim();
+
+    customerOrder.address =
+
+        document.getElementById("customerAddress").value.trim();
+
+    customerOrder.partner =
+
+        document.getElementById("customerPartner").value;
+
+    customerOrder.fee =
+
+        Number(
+
+            document.getElementById("customerFee").value || 0
+
+        );
+
+    customerOrder.orderType =
+
+        document.getElementById("customerOrderType").value;
+
+    localStorage.setItem(
+
+        "customerOrder",
+
+        JSON.stringify(customerOrder)
+
+    );
+
+}

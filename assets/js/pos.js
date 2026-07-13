@@ -72,6 +72,18 @@ setReceiptDate();
 loadSelectedTable();
 loadCustomerOrder();
 checkPaymentMode();
+    
+// ===============================================
+// DEFAULT ORDER TYPE
+// ===============================================
+
+document.getElementById("orderDineIn").checked = true;
+
+document.getElementById("selectedTableInfo")
+    .classList.remove("d-none");
+
+document.getElementById("customerOrderInfo")
+    .classList.add("d-none");
 });
 
 // ---------- LIVE CLOCK ----------
@@ -1866,6 +1878,30 @@ document.addEventListener("change", function(e){
 
     const type = e.target.value;
 
+    // ---------------------------------------
+    // SAVE ORDER TYPE
+    // ---------------------------------------
+
+    let customerOrder = JSON.parse(
+
+        localStorage.getItem("customerOrder")
+
+    ) || {};
+
+    customerOrder.orderType = type;
+
+    localStorage.setItem(
+
+        "customerOrder",
+
+        JSON.stringify(customerOrder)
+
+    );
+
+    // ---------------------------------------
+    // SHOW / HIDE PANELS
+    // ---------------------------------------
+
     if(type === "DINE-IN"){
 
         dineInfo.classList.remove("d-none");
@@ -1880,7 +1916,17 @@ document.addEventListener("change", function(e){
 
         customerInfo.classList.remove("d-none");
 
-        document.getElementById("customerOrderType").innerText = type;
+    }
+
+    // ---------------------------------------
+    // DISPLAY ORDER TYPE
+    // ---------------------------------------
+
+    const label = document.getElementById("customerOrderType");
+
+    if(label){
+
+        label.innerHTML = type;
 
     }
 

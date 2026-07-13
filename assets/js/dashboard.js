@@ -623,55 +623,107 @@ function loadRecentOrders(){
 
     if(!tbody) return;
 
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    db.ref("orders").once("value",snapshot=>{
 
-    tbody.innerHTML = "";
+        const orders = [];
 
-    const recent = [...orders].reverse().slice(0,10);
+        snapshot.forEach(child=>{
 
-    if(recent.length===0){
+            orders.push(child.val());
 
-        tbody.innerHTML=`
-        <tr>
-            <td colspan="6" class="text-center">
-                No Orders Yet
-            </td>
-        </tr>
-        `;
+        });
 
-        return;
+        tbody.innerHTML = "";
 
-    }
+        const recent = orders
 
-    recent.forEach(order=>{
+            .sort((a,b)=>{
 
-        tbody.innerHTML += `
+                const dateA = new Date(
 
-        <tr>
+                    a.completedDate ||
 
-            <td>${order.receiptNo}</td>
+                    a.servedTime ||
 
-            <td>${order.customer}</td>
+                    a.date ||
 
-            <td>${order.table}</td>
+                    0
 
-            <td>${order.payment || "-"}</td>
+                );
 
-            <td>₱${Number(order.total).toFixed(2)}</td>
+                const dateB = new Date(
 
-            <td>
+                    b.completedDate ||
 
-                <span class="badge bg-${order.status==="Paid"?"success":"warning"}">
+                    b.servedTime ||
 
-                    ${order.status}
+                    b.date ||
 
-                </span>
+                    0
 
-            </td>
+                );
 
-        </tr>
+                return dateB - dateA;
 
-        `;
+            })
+
+            .slice(0,10);
+
+        if(recent.length===0){
+
+            tbody.innerHTML = `
+
+                <tr>
+
+                    <td colspan="6" class="text-center">
+
+                        No Orders Yet
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+        recent.forEach(order=>{
+
+            tbody.innerHTML += `
+
+                <tr>
+
+                    <td>${order.receiptNo || "-"}</td>
+
+                    <td>${order.customer || order.customerName || "Walk-in"}</td>
+
+                    <td>${order.table || "-"}</td>
+
+                    <td>${order.payment || "-"}</td>
+
+                    <td>₱${Number(order.total || 0).toFixed(2)}</td>
+
+                    <td>
+
+                        <span class="badge bg-${
+                            order.status==="Paid"
+                            ? "success"
+                            : "warning"
+                        }">
+
+                            ${order.status}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
 
     });
 

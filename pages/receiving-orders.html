@@ -567,6 +567,7 @@ document.getElementById("totalSales").innerText="₱"+totalSales.toLocaleString(
 // ======================================
 
 let currentOrderKey = "";
+let currentOrderType = "";
 
 async function acceptOrder(key){
 
@@ -584,13 +585,12 @@ async function acceptOrder(key){
 
     const order = snapshot.val();
 
+    currentOrderType = order.orderType;
+
     const floorNeeded =
-
         order.orderType === "DELIVERY"
-
-        ? "Delivery"
-
-        : "Take Out";
+            ? "Delivery"
+            : "Take Out";
 
     const queueList = document.getElementById("queueList");
 
@@ -603,41 +603,39 @@ async function acceptOrder(key){
         const table = child.val();
 
         if(
-            table.floor !== floorNeeded ||
-            table.status !== "Available"
+            table.floor === floorNeeded &&
+            table.status === "Available"
         ){
 
-            return;
+            queueList.innerHTML += `
+
+            <label class="list-group-item">
+
+                <input
+                class="form-check-input me-2"
+                type="radio"
+                name="queueOption"
+                value="${child.key}">
+
+                <strong>${table.name}</strong>
+
+                <span class="badge bg-success float-end">
+
+                    Available
+
+                </span>
+
+            </label>
+
+            `;
 
         }
 
-        queueList.innerHTML += `
-
-        <label class="list-group-item">
-
-            <input
-            class="form-check-input me-2"
-            type="radio"
-            name="queueOption"
-            value="${child.key}">
-
-            <strong>${table.name}</strong>
-
-            <span class="badge bg-success float-end">
-
-                Available
-
-            </span>
-
-        </label>
-
-        `;
-
     });
 
-    if(queueList.innerHTML===""){
+    if(queueList.innerHTML === ""){
 
-        queueList.innerHTML=`
+        queueList.innerHTML = `
 
         <div class="alert alert-danger">
 

@@ -1002,3 +1002,61 @@ function updateDashboardCards(){
     }
 
 }
+// ===============================================
+// DELETE TABLE
+// ===============================================
+
+function deleteTable(tableKey){
+
+    if(!confirm("Are you sure you want to delete this table?")){
+
+        return;
+
+    }
+
+    db.ref("restaurantTables/" + tableKey)
+    .once("value")
+    .then(snapshot=>{
+
+        if(!snapshot.exists()){
+
+            alert("Table not found.");
+
+            return;
+        }
+
+        const table = snapshot.val();
+
+        if(table.status !== "Available"){
+
+            alert("Only AVAILABLE tables can be deleted.");
+
+            return;
+        }
+
+        return db.ref("restaurantTables/" + tableKey).remove();
+
+    })
+    .then(()=>{
+
+        alert("Table deleted successfully.");
+
+        const activeTab =
+            document.querySelector(".floor-tab.active");
+
+        if(activeTab){
+
+            loadTables(activeTab.dataset.floor);
+
+        }
+
+    })
+    .catch(error=>{
+
+        console.error(error);
+
+        alert("Unable to delete table.");
+
+    });
+
+}

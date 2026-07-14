@@ -441,15 +441,51 @@ async function acceptOnlineOrder(orderId){
 
         });
 
-        if(!selectedTable){
+      if(!selectedTable){
 
-            alert("No available " + floorNeeded + " queue.");
+    alert("No available " + floorNeeded + " queue.");
 
-            return;
+    return;
 
-        }
+}
 
-        alert("Queue Selected : " + selectedTable.name);
+// =====================================
+// OCCUPY SELECTED QUEUE
+// =====================================
+
+await db.ref("restaurantTables/" + selectedKey).update({
+
+    status: "Occupied",
+
+    customer: order.customerName || "",
+
+    guests: 1,
+
+    server: "Online",
+
+    orderNo: orderId
+
+});
+
+// Save selected table for POS
+
+localStorage.setItem("selectedTable", JSON.stringify({
+
+    key: selectedKey,
+
+    floor: selectedTable.floor,
+
+    table: selectedTable.name,
+
+    customer: order.customerName || "",
+
+    guests: 1,
+
+    server: "Online"
+
+}));
+
+alert("Queue Assigned : " + selectedTable.name);
 
     }catch(error){
 

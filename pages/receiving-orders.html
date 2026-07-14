@@ -407,7 +407,7 @@ firebase.initializeApp(firebaseConfig);
 
 const db=firebase.database();
 
-db.ref("orders").on("value",snapshot=>{
+db.ref("onlineOrders").on("value",snapshot=>{
 
 let html="";
 
@@ -422,19 +422,15 @@ let totalSales=0;
 snapshot.forEach(child=>{
 
 const order = child.val();
-
+if(order.status !== "NEW") return;
 // Show NEW orders only
 
 todayOrders++;
 
 totalSales+=Number(order.total||0);
 
-if(order.status==="NEW"){
-
 waitingOrders++;
-
-}
-
+  
 if(order.status==="ACCEPTED"){
 
 acceptedOrders++;

@@ -389,7 +389,35 @@ document.addEventListener("DOMContentLoaded",function(){
 
 function acceptOnlineOrder(orderId){
 
-    alert("Accept Clicked : " + orderId);
+    db.ref("onlineOrders/" + orderId).once("value").then(snapshot=>{
+
+        if(!snapshot.exists()){
+
+            alert("Order not found.");
+
+            return;
+
+        }
+
+        const order = snapshot.val();
+
+        order.status = "Pending";
+
+        order.acceptedAt = Date.now();
+
+        db.ref("orders").push(order).then(()=>{
+
+            db.ref("onlineOrders/" + orderId).update({
+
+                status:"ACCEPTED"
+
+            });
+
+            alert("Order successfully accepted.");
+
+        });
+
+    });
 
 }
 </script>

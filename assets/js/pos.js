@@ -1935,8 +1935,8 @@ function loadCustomerOrder(){
     ) || {};
 const orderNo = table.orderNo || "";
     db.ref("orders").once("value").then(snapshot=>{
-console.log("Selected Table:", table);
-console.log("Order No:", orderNo);
+console.log(JSON.stringify(table, null, 2));
+console.log("OrderNo =", orderNo);
         let found = false;
 
         snapshot.forEach(child=>{

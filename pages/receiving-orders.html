@@ -837,6 +837,123 @@ document.getElementById("btnAssignQueue").onclick = async function(){
     }
 
 };
+  // ======================================
+// ASSIGN QUEUE BUTTON
+// ======================================
+
+document.getElementById("btnAssignQueue").onclick = async function(){
+
+    const selectedQueue = document.querySelector(
+        "input[name='queueOption']:checked"
+    );
+
+    if(!selectedQueue){
+
+        alert("Please select a queue.");
+
+        return;
+
+    }
+
+    try{
+
+        // ===============================
+        // LOAD ORDER
+        // ===============================
+
+        const orderSnapshot = await db.ref(
+            "onlineOrders/" + currentOrderKey
+        ).once("value");
+
+        if(!orderSnapshot.exists()){
+
+            alert("Order not found.");
+
+            return;
+
+        }
+
+        const order = orderSnapshot.val();
+
+        // ===============================
+        // LOAD QUEUE
+        // ===============================
+
+        const queueKey = selectedQueue.value;
+
+        const queueSnapshot = await db.ref(
+            "restaurantTables/" + queueKey
+        ).once("value");
+
+        const queue = queueSnapshot.val();
+
+        // ===============================
+        // OCCUPY QUEUE
+        // ===============================
+
+        await db.ref("restaurantTables/" + queueKey).update({
+
+            status: "Occupied",
+
+            customer: order.customerName || "",
+
+            guests: 1,
+
+            server: "Online",
+
+            orderNo: currentOrderKey
+
+        });
+
+        // ===============================
+        // SAVE ORDER
+        // ===============================
+
+        order.status = "PENDING";
+
+        order.floor = queue.floor;
+
+        order.table = queue.name;
+
+        order.assignedQueue = queue.name;
+
+        order.acceptedDate = new Date().toISOString();
+
+        await db.ref("orders").push(order);
+
+        // ===============================
+        // UPDATE ONLINE ORDER
+        // ===============================
+
+        await db.ref("onlineOrders/" + currentOrderKey).update({
+
+            status: "ACCEPTED",
+
+            assignedQueue: queue.name
+
+        });
+
+        bootstrap.Modal
+            .getInstance(
+                document.getElementById("assignQueueModal")
+            )
+            .hide();
+
+        alert("Queue Assigned Successfully.");
+
+        location.reload();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+};
   function getStatusClass(status){
 
     switch(status){

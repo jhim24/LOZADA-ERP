@@ -562,7 +562,25 @@ document.getElementById("acceptedOrders").innerText=acceptedOrders;
 document.getElementById("totalSales").innerText="₱"+totalSales.toLocaleString();
 
 });
+// ======================================
+// ACCEPT ORDER
+// ======================================
+
+let currentOrderKey = "";
+
 async function acceptOrder(key){
+
+    currentOrderKey = key;
+
+    const modal = new bootstrap.Modal(
+
+        document.getElementById("assignQueueModal")
+
+    );
+
+    modal.show();
+
+}
 
     try{
 

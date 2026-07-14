@@ -459,7 +459,9 @@ document.addEventListener("click", function(e){
         const btn = document.getElementById("btnOpenTable");
 
         btn.dataset.key = tableKey;
+const deleteBtn = document.getElementById("btnDeleteTable");
 
+deleteBtn.dataset.key = tableKey;
         if(table.status === "Available"){
 
             btn.innerHTML = "Open Table";
@@ -1060,3 +1062,26 @@ function deleteTable(tableKey){
     });
 
 }
+// ===============================================
+// DELETE TABLE BUTTON
+// ===============================================
+
+document.addEventListener("click", function(e){
+
+    const btn = e.target.closest("#btnDeleteTable");
+
+    if(!btn) return;
+
+    const tableKey = btn.dataset.key;
+
+    if(!tableKey){
+
+        alert("Please select a table.");
+
+        return;
+
+    }
+
+    deleteTable(tableKey);
+
+});

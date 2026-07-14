@@ -1146,7 +1146,7 @@ function updatePendingOrder(){
     const customerOrder = JSON.parse(
         localStorage.getItem("customerOrder")
     ) || {};
-
+const orderNo = table.orderNo || "";
     db.ref("orders").once("value").then(snapshot=>{
 
         snapshot.forEach(child=>{

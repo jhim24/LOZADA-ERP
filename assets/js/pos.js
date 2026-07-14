@@ -1294,18 +1294,15 @@ let match = false;
 
 if(
     customerOrder.orderType === "DELIVERY" ||
-    customerOrder.orderType === "TAKE-OUT"
+    customerOrder.orderType === "TAKE OUT"
 ){
 
-match =
-(
-    order.orderNo === orderNo ||
-    order.orderNumber === orderNo
-) &&
-(
-    order.status === "PENDING" ||
-    order.status === "Pending"
-);
+    match =
+        order.orderKey === orderNo &&
+        (
+            order.status === "PENDING" ||
+            order.status === "Pending"
+        );
 
 }
 

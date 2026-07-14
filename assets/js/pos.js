@@ -69,8 +69,8 @@ updateClock();
 setInterval(updateClock,1000);
 
 setReceiptDate();
-loadSelectedTable();
 loadCustomerOrder();
+loadSelectedTable();
 checkPaymentMode();
     
 // ===============================================

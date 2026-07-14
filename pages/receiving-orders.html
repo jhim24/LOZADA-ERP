@@ -562,17 +562,57 @@ document.getElementById("acceptedOrders").innerText=acceptedOrders;
 document.getElementById("totalSales").innerText="₱"+totalSales.toLocaleString();
 
 });
-function acceptOrder(key){
+async function acceptOrder(key){
 
-db.ref("orders/"+key).update({
+    try{
 
-status:"ACCEPTED"
+        // ============================
+        // LOAD ONLINE ORDER
+        // ============================
 
-}).then(()=>{
+        const snapshot = await db.ref("onlineOrders/" + key).once("value");
 
-alert("Order Accepted");
+        if(!snapshot.exists()){
 
-});
+            alert("Order not found.");
+
+            return;
+
+        }
+
+        const order = snapshot.val();
+
+        // ============================
+        // SAVE TO ORDERS
+        // ============================
+
+        order.status = "PENDING";
+
+        order.acceptedDate = new Date().toISOString();
+
+        await db.ref("orders").push(order);
+
+        // ============================
+        // UPDATE ONLINE ORDER
+        // ============================
+
+        await db.ref("onlineOrders/" + key).update({
+
+            status:"ACCEPTED"
+
+        });
+
+        alert("Order Accepted Successfully.");
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
 
 }
   function startOrder(type){

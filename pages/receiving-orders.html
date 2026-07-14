@@ -591,7 +591,59 @@ async function acceptOrder(key){
         order.acceptedDate = new Date().toISOString();
 
         await db.ref("orders").push(order);
+// ======================================
+// ASSIGN DELIVERY / TAKE OUT TABLE
+// ======================================
 
+if(order.orderType === "DELIVERY" || order.orderType === "TAKE-OUT"){
+
+    const floorName =
+        order.orderType === "DELIVERY"
+            ? "Delivery"
+            : "Take Out";
+
+    const tableSnapshot =
+        await db.ref("restaurantTables").once("value");
+
+    let tableKey = null;
+    let tableData = null;
+
+    tableSnapshot.forEach(child=>{
+
+        const table = child.val();
+
+        if(
+            !tableKey &&
+            table.floor === floorName &&
+            table.status === "Available"
+        ){
+
+            tableKey = child.key;
+            tableData = table;
+
+        }
+
+    });
+
+    if(tableKey){
+
+        await db.ref("restaurantTables/" + tableKey).update({
+
+            status: "Occupied",
+
+            customer: order.customerName || "",
+
+            guests: 1,
+
+            server: "Online",
+
+            orderNo: key
+
+        });
+
+    }
+
+}
         // ============================
         // UPDATE ONLINE ORDER
         // ============================

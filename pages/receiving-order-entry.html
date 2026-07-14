@@ -485,8 +485,30 @@ localStorage.setItem("selectedTable", JSON.stringify({
 
 }));
 
-alert("Queue Assigned : " + selectedTable.name);
+// =====================================
+// SAVE ORDER TO POS
+// =====================================
 
+order.floor = selectedTable.floor;
+order.table = selectedTable.name;
+order.status = "Pending";
+order.acceptedAt = Date.now();
+
+await db.ref("orders").push(order);
+
+// =====================================
+// UPDATE ONLINE ORDER
+// =====================================
+
+await db.ref("onlineOrders/" + orderId).update({
+
+    status: "ACCEPTED",
+
+    assignedTable: selectedTable.name
+
+});
+
+alert("Queue Assigned : " + selectedTable.name);
     }catch(error){
 
         console.error(error);

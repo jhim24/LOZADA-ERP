@@ -1297,12 +1297,15 @@ if(
     customerOrder.orderType === "TAKE-OUT"
 ){
 
- match =
-    (
-        order.orderNo === orderNo ||
-        order.orderNumber === orderNo
-    ) &&
-    order.status === "PENDING";
+match =
+(
+    order.orderNo === orderNo ||
+    order.orderNumber === orderNo
+) &&
+(
+    order.status === "PENDING" ||
+    order.status === "Pending"
+);
 
 }
 

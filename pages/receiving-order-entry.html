@@ -404,7 +404,7 @@ function acceptOnlineOrder(orderId){
         order.status = "Pending";
 
         order.acceptedAt = Date.now();
-
+        order.queue = queueName;
         db.ref("orders").push(order).then(()=>{
 
            const queueName =

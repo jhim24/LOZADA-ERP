@@ -1955,27 +1955,23 @@ function loadCustomerOrder(){
 
                 info.classList.remove("d-none");
 
-                document.getElementById("customerOrderType").innerHTML =
-                    order.orderType || "-";
+               document.getElementById("customerOrderType").value =
+    order.orderType || "";
 
-                document.getElementById("customerOrderName").innerHTML =
-                    order.customerName || "-";
+document.getElementById("customerName").value =
+    order.customerName || "";
 
-                document.getElementById("customerOrderPhone").innerHTML =
-                    order.customerPhone || "-";
+document.getElementById("customerPhone").value =
+    order.customerPhone || "";
 
-                document.getElementById("customerOrderSource").innerHTML =
-                    order.orderSource || "-";
+document.getElementById("customerAddress").value =
+    order.deliveryAddress || "";
 
-                document.getElementById("customerOrderAddress").innerHTML =
-                    order.deliveryAddress || "-";
+document.getElementById("customerPartner").value =
+    order.deliveryPartner || "Walk-in";
 
-                document.getElementById("customerOrderPartner").innerHTML =
-                    order.deliveryPartner || "-";
-
-                document.getElementById("customerOrderFee").innerHTML =
-                    Number(order.deliveryFee || 0).toFixed(2);
-
+document.getElementById("customerFee").value =
+    Number(order.deliveryFee || 0);
             }
 
         });

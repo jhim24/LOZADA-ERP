@@ -834,9 +834,25 @@ document.getElementById("btnAssignQueue").onclick = async function(){
             )
             .hide();
 
-        alert("Queue Assigned Successfully.");
+       alert("Queue Assigned Successfully.");
 
-        location.reload();
+localStorage.setItem("selectedTable", JSON.stringify({
+
+    key: queueKey,
+
+    floor: queue.floor,
+
+    table: queue.name,
+
+    customer: order.customerName || "",
+
+    guests: 1,
+
+    server: "Online"
+
+}));
+
+window.location.href = "tables.html";
 
     }
 

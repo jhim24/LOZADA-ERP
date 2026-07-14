@@ -822,6 +822,11 @@ document.getElementById("btnAssignQueue").onclick = async function(){
 order.orderKey = newOrderRef.key;
 
 await newOrderRef.set(order);
+  await db.ref("restaurantTables/" + queueKey).update({
+
+    orderNo: newOrderRef.key
+
+});    
 console.log("ORDER SAVED", newOrderRef.key, order);
 
         // ===============================

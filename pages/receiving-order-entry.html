@@ -387,11 +387,17 @@ document.addEventListener("DOMContentLoaded",function(){
 // ACCEPT ONLINE ORDER
 // ======================================
 
-function acceptOnlineOrder(orderId){
+async function acceptOnlineOrder(orderId){
 
-    db.ref("onlineOrders/" + orderId).once("value").then(snapshot=>{
+    try{
 
-        if(!snapshot.exists()){
+        // -----------------------------
+        // LOAD ONLINE ORDER
+        // -----------------------------
+
+        const orderSnapshot = await db.ref("onlineOrders/" + orderId).once("value");
+
+        if(!orderSnapshot.exists()){
 
             alert("Order not found.");
 
@@ -399,56 +405,59 @@ function acceptOnlineOrder(orderId){
 
         }
 
-        const order = snapshot.val();
+        const order = orderSnapshot.val();
 
-        order.status = "Pending";
+        // -----------------------------
+        // FIND AVAILABLE TABLE
+        // -----------------------------
 
-        order.acceptedAt = Date.now();
-        order.queue = queueName;
-        db.ref("orders").push(order).then(()=>{
+        const floorNeeded =
+            order.orderType === "DELIVERY"
+                ? "Delivery"
+                : "Take Out";
 
-           const queueName =
-    order.orderType === "DELIVERY"
-        ? "DEL-" + String(Date.now()).slice(-4)
-        : "TKO-" + String(Date.now()).slice(-4);
+        const tablesSnapshot =
+            await db.ref("restaurantTables").once("value");
 
-// Create Virtual Table
-db.ref("restaurantTables").push({
+        let selectedKey = null;
 
-    floor: order.orderType === "DELIVERY"
-        ? "Delivery"
-        : "Take Out",
+        let selectedTable = null;
 
-    name: queueName,
+        tablesSnapshot.forEach(child=>{
 
-    status: "Occupied",
+            const table = child.val();
 
-    customer: order.customerName,
+            if(
+                !selectedTable &&
+                table.floor === floorNeeded &&
+                table.status === "Available"
+            ){
 
-    guests: 1,
+                selectedKey = child.key;
 
-    server: "Online",
+                selectedTable = table;
 
-    orderNo: orderId,
-
-    orderType: order.orderType
-
-});
-
-// Update Website Order
-db.ref("onlineOrders/" + orderId).update({
-
-    status: "ACCEPTED",
-
-    queue: queueName
-
-});
-
-alert("Order Accepted.\nQueue : " + queueName);
+            }
 
         });
 
-    });
+        if(!selectedTable){
+
+            alert("No available " + floorNeeded + " queue.");
+
+            return;
+
+        }
+
+        alert("Queue Selected : " + selectedTable.name);
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("Unable to accept order.");
+
+    }
 
 }
 </script>

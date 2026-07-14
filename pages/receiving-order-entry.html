@@ -407,13 +407,44 @@ function acceptOnlineOrder(orderId){
 
         db.ref("orders").push(order).then(()=>{
 
-            db.ref("onlineOrders/" + orderId).update({
+           const queueName =
+    order.orderType === "DELIVERY"
+        ? "DEL-" + String(Date.now()).slice(-4)
+        : "TKO-" + String(Date.now()).slice(-4);
 
-                status:"ACCEPTED"
+// Create Virtual Table
+db.ref("restaurantTables").push({
 
-            });
+    floor: order.orderType === "DELIVERY"
+        ? "Delivery"
+        : "Take Out",
 
-            alert("Order successfully accepted.");
+    name: queueName,
+
+    status: "Occupied",
+
+    customer: order.customerName,
+
+    guests: 1,
+
+    server: "Online",
+
+    orderNo: orderId,
+
+    orderType: order.orderType
+
+});
+
+// Update Website Order
+db.ref("onlineOrders/" + orderId).update({
+
+    status: "ACCEPTED",
+
+    queue: queueName
+
+});
+
+alert("Order Accepted.\nQueue : " + queueName);
 
         });
 

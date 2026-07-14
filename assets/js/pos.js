@@ -1935,13 +1935,21 @@ function loadCustomerOrder(){
     ) || {};
 
     db.ref("orders").once("value").then(snapshot=>{
-
+console.log("Selected Table:", table);
+console.log("Order No:", orderNo);
         let found = false;
 
         snapshot.forEach(child=>{
 
             const order = child.val();
-
+console.log("Checking Order:", {
+    firebaseKey: child.key,
+    orderKey: order.orderKey,
+    orderNumber: order.orderNumber,
+    floor: order.floor,
+    table: order.table,
+    status: order.status
+});
             if(
                 order.floor === table.floor &&
                 order.table === table.table &&

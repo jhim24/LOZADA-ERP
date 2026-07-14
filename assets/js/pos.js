@@ -994,7 +994,13 @@ async function saveOrder(receiptNo, total){
     const table = JSON.parse(
         localStorage.getItem("selectedTable")
     ) || {};
+console.log("SAVE ORDER");
+console.log("Selected Table:", table);
 
+if (!table.floor || !table.table) {
+    alert("No table selected.");
+    return;
+}
     const customer = JSON.parse(
         localStorage.getItem("customerOrder")
     ) || {};

@@ -551,7 +551,7 @@ if(orderType === "DINE-IN"){
     const table = JSON.parse(
 
         localStorage.getItem("selectedTable")
-
+        const orderNo = table.orderNo || "";
     );
 
     if(!table){
@@ -1158,9 +1158,9 @@ function updatePendingOrder(){
             if(customerOrder.orderType === "DELIVERY" ||
                customerOrder.orderType === "TAKE-OUT"){
 
-                match =
-                    order.customerName === customerOrder.name &&
-                    order.status === "Pending";
+               match =
+    order.orderNo === orderNo &&
+    order.status === "Pending";
 
             }else{
 

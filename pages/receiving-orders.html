@@ -816,10 +816,12 @@ document.getElementById("btnAssignQueue").onclick = async function(){
 
         order.acceptedDate = new Date().toISOString();
         order.debugSource = "Receiving Orders";
-       const newOrderRef = db.ref("orders").push();
+      const newOrderRef = db.ref("orders").push();
+
+// Save Firebase key inside the order
+order.orderKey = newOrderRef.key;
 
 await newOrderRef.set(order);
-
 console.log("ORDER SAVED", newOrderRef.key, order);
 
         // ===============================

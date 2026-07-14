@@ -1283,17 +1283,45 @@ if(paymentCustomer && customerOrder.name){
 
         const order = child.val();
 
-        if(
-            order.floor === table.floor &&
-            order.table === table.table &&
-            order.status === "Pending"
-        ){
+        let customerOrder = JSON.parse(
 
-            cart = order.items || [];
+    localStorage.getItem("customerOrder")
 
-            renderCart();
+) || {};
 
-        }
+let match = false;
+
+// DELIVERY / TAKE OUT
+
+if(
+    customerOrder.orderType === "DELIVERY" ||
+    customerOrder.orderType === "TAKE-OUT"
+){
+
+    match =
+        order.customerName === customerOrder.name &&
+        order.status === "Pending";
+
+}
+
+// DINE-IN
+
+else{
+
+    match =
+        order.floor === table.floor &&
+        order.table === table.table &&
+        order.status === "Pending";
+
+}
+
+if(match){
+
+    cart = order.items || [];
+
+    renderCart();
+
+}
 
     });
 

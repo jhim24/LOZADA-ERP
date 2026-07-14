@@ -1039,17 +1039,18 @@ function deleteTable(tableKey){
         return db.ref("restaurantTables/" + tableKey).remove();
 
     })
-    .then(()=>{
+   .then(()=>{
 
-        alert("Tabootstrap.Modal
-.getInstance(
-    document.getElementById("tableDetailsModal")
-)
-.hide();ble deleted successfully.");
+    bootstrap.Modal
+    .getInstance(
+        document.getElementById("tableDetailsModal")
+    )
+    .hide();
 
-        const activeTab =
-            document.querySelector(".floor-tab.active");
+    alert("Table deleted successfully.");
 
+    const activeTab =
+        document.querySelector(".floor-tab.active");
        if(activeTab){
 
     loadTables(activeTab.dataset.floor);

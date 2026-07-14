@@ -1933,7 +1933,7 @@ function loadCustomerOrder(){
     const table = JSON.parse(
         localStorage.getItem("selectedTable")
     ) || {};
-
+const orderNo = table.orderNo || "";
     db.ref("orders").once("value").then(snapshot=>{
 console.log("Selected Table:", table);
 console.log("Order No:", orderNo);
@@ -1950,34 +1950,50 @@ console.log("Checking Order:", {
     table: order.table,
     status: order.status
 });
-            if(
-                order.floor === table.floor &&
-                order.table === table.table &&
-                order.status !== "Paid"
-            ){
+           let match = false;
 
-                found = true;
+if(table.orderNo){
 
-                info.classList.remove("d-none");
+    match =
+        order.orderKey === table.orderNo &&
+        (
+            order.status === "PENDING" ||
+            order.status === "Pending"
+        );
 
-               document.getElementById("customerOrderType").value =
-    order.orderType || "";
+}else{
 
-document.getElementById("customerName").value =
-    order.customerName || "";
+    match =
+        order.floor === table.floor &&
+        order.table === table.table &&
+        order.status !== "Paid";
 
-document.getElementById("customerPhone").value =
-    order.customerPhone || "";
+}
 
-document.getElementById("customerAddress").value =
-    order.deliveryAddress || "";
+if(match){
 
-document.getElementById("customerPartner").value =
-    order.deliveryPartner || "Walk-in";
+    found = true;
 
-document.getElementById("customerFee").value =
-    Number(order.deliveryFee || 0);
-            }
+    info.classList.remove("d-none");
+
+    document.getElementById("customerOrderType").value =
+        order.orderType || "";
+
+    document.getElementById("customerName").value =
+        order.customerName || "";
+
+    document.getElementById("customerPhone").value =
+        order.customerPhone || "";
+
+    document.getElementById("customerAddress").value =
+        order.deliveryAddress || "";
+
+    document.getElementById("customerPartner").value =
+        order.deliveryPartner || "Walk-in";
+
+    document.getElementById("customerFee").value =
+        Number(order.deliveryFee || 0);
+}
 
         });
 

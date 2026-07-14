@@ -203,7 +203,148 @@ Proceed
 
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
 <script>
+
+// ======================================
+// FIREBASE
+// ======================================
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyAV9T5w_1azmPHIJcZpraXP06TItj7HEuA",
+
+    authDomain: "papprito-orders.firebaseapp.com",
+
+    databaseURL: "https://papprito-orders-default-rtdb.firebaseio.com",
+
+    projectId: "papprito-orders",
+
+    storageBucket: "papprito-orders.firebasestorage.app",
+
+    messagingSenderId: "831941801424",
+
+    appId: "1:831941801424:web:40a99cdfb312dac2d275d5"
+
+};
+
+if(!firebase.apps.length){
+
+    firebase.initializeApp(firebaseConfig);
+
+}
+
+const db = firebase.database();
+
+// ======================================
+// LOAD ONLINE ORDERS
+// ======================================
+
+function loadOnlineOrders(){
+
+    const container = document.getElementById("onlineOrdersList");
+
+    const badge = document.getElementById("onlineOrderCount");
+
+    db.ref("onlineOrders").on("value",snapshot=>{
+
+        let html = "";
+
+        let total = 0;
+
+        snapshot.forEach(child=>{
+
+            const order = child.val();
+
+            if(order.status !== "NEW") return;
+
+            total++;
+
+            html += `
+
+            <div class="card mb-3 border-primary">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+
+                            <strong>${order.customerName || "-"}</strong><br>
+
+                            ${order.customerPhone || ""}
+
+                        </div>
+
+                        <div class="col-md-2">
+
+                            ${order.orderType || "-"}
+
+                        </div>
+
+                        <div class="col-md-2">
+
+                            ${order.orderSource || "-"}
+
+                        </div>
+
+                        <div class="col-md-2">
+
+                            ₱${Number(order.grandTotal || order.total || 0).toFixed(2)}
+
+                        </div>
+
+                        <div class="col-md-3 text-end">
+
+                            <span class="badge bg-warning">
+
+                                NEW
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+        if(total===0){
+
+            html = `
+
+            <div class="alert alert-success">
+
+                No New Online Orders
+
+            </div>
+
+            `;
+
+        }
+
+        container.innerHTML = html;
+
+        if(badge){
+
+            badge.innerHTML = total;
+
+        }
+
+    });
+
+}
+
+// ======================================
+// MANUAL ORDER
+// ======================================
 
 function selectOrder(type){
 
@@ -221,7 +362,16 @@ function selectOrder(type){
 
 }
 
-</script>
+// ======================================
+// INITIALIZE
+// ======================================
 
+document.addEventListener("DOMContentLoaded",function(){
+
+    loadOnlineOrders();
+
+});
+
+</script>
 </body>
 </html>

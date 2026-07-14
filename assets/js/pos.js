@@ -1205,18 +1205,17 @@ function loadSelectedTable(){
 
     if(!info) return;
 
-    const table = JSON.parse(
+   const table = JSON.parse(
+    localStorage.getItem("selectedTable")
+);
 
-        localStorage.getItem("selectedTable")
+if(!table){
 
-    );
+    return;
 
-    if(!table){
+}
 
-        return;
-
-    }
-
+const orderNo = table.orderNo || "";
     info.classList.remove("d-none");
 
     document.getElementById("selectedFloor").innerHTML =
@@ -1298,9 +1297,12 @@ if(
     customerOrder.orderType === "TAKE-OUT"
 ){
 
-  match =
-    order.orderNo === orderNo &&
-    order.status === "Pending";
+ match =
+    (
+        order.orderNo === orderNo ||
+        order.orderNumber === orderNo
+    ) &&
+    order.status === "PENDING";
 
 }
 

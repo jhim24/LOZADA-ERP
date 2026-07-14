@@ -849,24 +849,22 @@ console.log("ORDER SAVED", newOrderRef.key, order);
 
        alert("Queue Assigned Successfully.");
 
-localStorage.setItem("selectedTable", JSON.stringify({
-
+const selectedTable = {
     key: queueKey,
-
     floor: queue.floor,
-
     table: queue.name,
-
     customer: order.customerName || "",
-
     guests: 1,
-
     server: "Online",
-
     orderNo: newOrderRef.key
+};
 
-}));
+console.log("Saving selectedTable", selectedTable);
 
+localStorage.setItem(
+    "selectedTable",
+    JSON.stringify(selectedTable)
+);
 window.location.href = "tables.html";
 
     }

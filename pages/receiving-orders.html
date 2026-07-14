@@ -572,6 +572,83 @@ async function acceptOrder(key){
 
     currentOrderKey = key;
 
+    const snapshot = await db.ref("onlineOrders/" + key).once("value");
+
+    if(!snapshot.exists()){
+
+        alert("Order not found.");
+
+        return;
+
+    }
+
+    const order = snapshot.val();
+
+    const floorNeeded =
+
+        order.orderType === "DELIVERY"
+
+        ? "Delivery"
+
+        : "Take Out";
+
+    const queueList = document.getElementById("queueList");
+
+    queueList.innerHTML = "";
+
+    const tableSnapshot = await db.ref("restaurantTables").once("value");
+
+    tableSnapshot.forEach(child=>{
+
+        const table = child.val();
+
+        if(
+            table.floor !== floorNeeded ||
+            table.status !== "Available"
+        ){
+
+            return;
+
+        }
+
+        queueList.innerHTML += `
+
+        <label class="list-group-item">
+
+            <input
+            class="form-check-input me-2"
+            type="radio"
+            name="queueOption"
+            value="${child.key}">
+
+            <strong>${table.name}</strong>
+
+            <span class="badge bg-success float-end">
+
+                Available
+
+            </span>
+
+        </label>
+
+        `;
+
+    });
+
+    if(queueList.innerHTML===""){
+
+        queueList.innerHTML=`
+
+        <div class="alert alert-danger">
+
+            No Available Queue
+
+        </div>
+
+        `;
+
+    }
+
     const modal = new bootstrap.Modal(
 
         document.getElementById("assignQueueModal")
@@ -581,7 +658,6 @@ async function acceptOrder(key){
     modal.show();
 
 }
-
     try{
 
         // ============================

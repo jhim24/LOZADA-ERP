@@ -462,6 +462,16 @@ document.addEventListener("click", function(e){
 const deleteBtn = document.getElementById("btnDeleteTable");
 
 deleteBtn.dataset.key = tableKey;
+
+if(table.status === "Available"){
+
+    deleteBtn.style.display = "inline-block";
+
+}else{
+
+    deleteBtn.style.display = "none";
+
+}
         if(table.status === "Available"){
 
             btn.innerHTML = "Open Table";

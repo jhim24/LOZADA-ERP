@@ -1041,7 +1041,11 @@ function deleteTable(tableKey){
     })
     .then(()=>{
 
-        alert("Table deleted successfully.");
+        alert("Tabootstrap.Modal
+.getInstance(
+    document.getElementById("tableDetailsModal")
+)
+.hide();ble deleted successfully.");
 
         const activeTab =
             document.querySelector(".floor-tab.active");

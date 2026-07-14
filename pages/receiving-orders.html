@@ -731,6 +731,112 @@ function readyOrder(key){
     });
 
 }
+  // ======================================
+// ASSIGN QUEUE
+// ======================================
+
+document.getElementById("btnAssignQueue").onclick = async function(){
+
+    const selected = document.querySelector(
+        "input[name='queueOption']:checked"
+    );
+
+    if(!selected){
+
+        alert("Please select a queue.");
+
+        return;
+
+    }
+
+    try{
+
+        const queueKey = selected.value;
+
+        // Load Online Order
+        const orderSnapshot =
+            await db.ref("onlineOrders/" + currentOrderKey).once("value");
+
+        if(!orderSnapshot.exists()){
+
+            alert("Order not found.");
+
+            return;
+
+        }
+
+        const order = orderSnapshot.val();
+
+        // Load Selected Queue
+        const queueSnapshot =
+            await db.ref("restaurantTables/" + queueKey).once("value");
+
+        if(!queueSnapshot.exists()){
+
+            alert("Queue not found.");
+
+            return;
+
+        }
+
+        const queue = queueSnapshot.val();
+
+        // Occupy Queue
+        await db.ref("restaurantTables/" + queueKey).update({
+
+            status: "Occupied",
+
+            customer: order.customerName || "",
+
+            guests: 1,
+
+            server: "Online",
+
+            orderNo: currentOrderKey
+
+        });
+
+        // Prepare Order
+
+        order.status = "PENDING";
+
+        order.floor = queue.floor;
+
+        order.table = queue.name;
+
+        order.acceptedDate = new Date().toISOString();
+
+        // Save Order
+
+        await db.ref("orders").push(order);
+
+        // Update Online Order
+
+        await db.ref("onlineOrders/" + currentOrderKey).update({
+
+            status: "ACCEPTED",
+
+            assignedTable: queue.name
+
+        });
+
+        bootstrap.Modal
+            .getInstance(document.getElementById("assignQueueModal"))
+            .hide();
+
+        alert("Queue Assigned Successfully.");
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(error.message);
+
+    }
+
+};
   function getStatusClass(status){
 
     switch(status){

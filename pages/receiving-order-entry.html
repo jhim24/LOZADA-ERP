@@ -296,15 +296,27 @@ function loadOnlineOrders(){
 
                         </div>
 
-                        <div class="col-md-3 text-end">
+                      <div class="col-md-3 text-end">
 
-                            <span class="badge bg-warning">
+    <span class="badge bg-warning mb-2 d-block">
 
-                                NEW
+        NEW
 
-                            </span>
+    </span>
 
-                        </div>
+    <button
+
+        class="btn btn-success btn-sm"
+
+        onclick="acceptOnlineOrder('${child.key}')">
+
+        <i class="fa-solid fa-check"></i>
+
+        Accept
+
+    </button>
+
+</div>
 
                     </div>
 
@@ -371,7 +383,15 @@ document.addEventListener("DOMContentLoaded",function(){
     loadOnlineOrders();
 
 });
+// ======================================
+// ACCEPT ONLINE ORDER
+// ======================================
 
+function acceptOnlineOrder(orderId){
+
+    alert("Accept Clicked : " + orderId);
+
+}
 </script>
 </body>
 </html>

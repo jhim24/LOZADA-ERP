@@ -766,5 +766,85 @@ function readyOrder(key){
 
 }
 </script>
+  <!-- ======================================
+     ASSIGN QUEUE MODAL
+====================================== -->
+
+<div
+class="modal fade"
+id="assignQueueModal"
+tabindex="-1">
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header bg-primary text-white">
+
+                <h5 class="modal-title">
+
+                    <i class="fa-solid fa-list-check"></i>
+
+                    Select Queue
+
+                </h5>
+
+                <button
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"></button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="mb-3">
+
+                    <strong>
+
+                        Available Queues
+
+                    </strong>
+
+                </div>
+
+                <div
+                id="queueList"
+                class="list-group">
+
+                    <div class="text-center p-4">
+
+                        Loading...
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                class="btn btn-secondary"
+                data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <button
+                class="btn btn-success"
+                id="btnAssignQueue">
+
+                    Assign Queue
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 </body>
 </html>

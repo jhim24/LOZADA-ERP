@@ -816,7 +816,11 @@ document.getElementById("btnAssignQueue").onclick = async function(){
 
         order.acceptedDate = new Date().toISOString();
         order.debugSource = "Receiving Orders";
-        await db.ref("orders").push(order);
+       const newOrderRef = db.ref("orders").push();
+
+await newOrderRef.set(order);
+
+console.log("ORDER SAVED", newOrderRef.key, order);
 
         // ===============================
         // UPDATE ONLINE ORDER

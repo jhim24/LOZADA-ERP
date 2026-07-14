@@ -1046,11 +1046,15 @@ function deleteTable(tableKey){
         const activeTab =
             document.querySelector(".floor-tab.active");
 
-        if(activeTab){
+       if(activeTab){
 
-            loadTables(activeTab.dataset.floor);
+    loadTables(activeTab.dataset.floor);
 
-        }
+}else{
+
+    loadTables("Rooftop");
+
+}
 
     })
     .catch(error=>{

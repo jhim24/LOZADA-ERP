@@ -813,7 +813,7 @@ document.getElementById("btnAssignQueue").onclick = async function(){
         order.assignedQueue = queue.name;
 
         order.acceptedDate = new Date().toISOString();
-
+        order.debugSource = "Receiving Orders";
         await db.ref("orders").push(order);
 
         // ===============================
